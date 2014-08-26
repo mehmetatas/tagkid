@@ -1,0 +1,65 @@
+﻿
+.btn-facebook {
+    background-color: #3b5998;
+    border-color: #3b5998;
+}
+
+.signup-container {
+    position: absolute;
+    top: 50%;
+    margin-top: -265px; /* half of #content height*/
+    left: 0;
+    width: 100%;
+}
+
+.signup-form {
+    width: 360px;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 20px;
+}
+
+    .signup-form .uname,
+    .signup-form .pword,
+    .signup-form .email {
+        background-position: 95% !important;
+        width: 100%;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc;
+        padding: 20px 10px;
+    }
+
+    .signup-form .email {
+        background: #fff url(../img/email.png) no-repeat right;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -moz-border-top-left-radius: 5px;
+        -moz-border-top-right-radius: 5px;
+        border-bottom: none;
+    }
+
+    .signup-form .uname {
+        background: #fff url(../img/user.png) no-repeat right;
+    }
+
+    .signup-form .pword {
+        margin-bottom: 20px;
+        background: #fff url(../img/locked.png) no-repeat right;
+        border-top: none;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-bottom-right-radius: 5px;
+        -moz-border-bottom-left-radius: 5px;
+    }
+    
+    .signup-form .pword.signin {
+        border-top: solid;
+        border-top-width: 1px;
+        border-color: #ccc;
+    }

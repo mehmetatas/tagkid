@@ -1,0 +1,907 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{185A306D-12B2-45CA-A0ED-F4DD934F0272}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TagKid.Web</RootNamespace>
+    <AssemblyName>TagKid.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="www\css\bootstrap.min.css" />
+    <Content Include="www\css\custom.css" />
+    <Content Include="www\css\style.default.css" />
+    <Content Include="www\img\email.png" />
+    <Content Include="www\img\favicon.png" />
+    <Content Include="www\img\locked.png" />
+    <Content Include="www\img\user.png" />
+    <Content Include="www\js\bootstrap.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="www\js\custom.js" />
+    <Content Include="www\js\html5shiv.js" />
+    <Content Include="www\js\jquery-1.10.2.min.js" />
+    <Content Include="www\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="www\js\modernizr.min.js" />
+    <Content Include="www\js\respond.min.js" />
+    <Content Include="www\js\retina.min.js" />
+    <Content Include="www\signin.html" />
+    <Content Include="www\signup.html" />
+    <Content Include="www\template\ajax\accordion.html" />
+    <Content Include="www\template\ajax\panel.html" />
+    <Content Include="www\template\ajax\photo-viewer-rtl.html" />
+    <Content Include="www\template\ajax\photo-viewer.html" />
+    <Content Include="www\template\ajax\remote.html" />
+    <Content Include="www\template\ajax\tabs.html" />
+    <Content Include="www\template\alerts.html" />
+    <Content Include="www\template\blank.html" />
+    <Content Include="www\template\blog-list.html" />
+    <Content Include="www\template\blog-single.html" />
+    <Content Include="www\template\bug-issues.html" />
+    <Content Include="www\template\bug-tracker.html" />
+    <Content Include="www\template\buttons.html" />
+    <Content Include="www\template\calendar.html" />
+    <Content Include="www\template\code-editor.html" />
+    <Content Include="www\template\compose.html" />
+    <Content Include="www\template\css\animate.delay.css" />
+    <Content Include="www\template\css\animate.min.css" />
+    <Content Include="www\template\css\bootstrap-fileupload.min.css" />
+    <Content Include="www\template\css\bootstrap-override-rtl.css" />
+    <Content Include="www\template\css\bootstrap-override.css" />
+    <Content Include="www\template\css\bootstrap-rtl.min.css" />
+    <Content Include="www\template\css\bootstrap-timepicker.min.css" />
+    <Content Include="www\template\css\bootstrap-wysihtml5.css" />
+    <Content Include="www\template\css\bootstrap.css" />
+    <Content Include="www\template\css\bootstrap.min.css" />
+    <Content Include="www\template\css\chosen.css" />
+    <Content Include="www\template\css\codemirror\codemirror.css" />
+    <Content Include="www\template\css\codemirror\index.html" />
+    <Content Include="www\template\css\codemirror\theme\ambiance.css" />
+    <Content Include="www\template\css\codemirror\theme\index.html" />
+    <Content Include="www\template\css\colorpicker.css" />
+    <Content Include="www\template\css\dropzone.css" />
+    <Content Include="www\template\css\font-awesome.css" />
+    <Content Include="www\template\css\font-awesome.min.css" />
+    <Content Include="www\template\css\font.helvetica-neue.css" />
+    <Content Include="www\template\css\font.roboto.css" />
+    <Content Include="www\template\css\fullcalendar.css" />
+    <Content Include="www\template\css\index.html" />
+    <Content Include="www\template\css\isotope.css" />
+    <Content Include="www\template\css\jquery-jvectormap-1.2.2.css" />
+    <Content Include="www\template\css\jquery-ui-1.10.3.css" />
+    <Content Include="www\template\css\jquery.datatables.css" />
+    <Content Include="www\template\css\jquery.gritter.css" />
+    <Content Include="www\template\css\jquery.tagsinput.css" />
+    <Content Include="www\template\css\lato.css" />
+    <Content Include="www\template\css\morris.css" />
+    <Content Include="www\template\css\prettyPhoto.css" />
+    <Content Include="www\template\css\roboto.css" />
+    <Content Include="www\template\css\style.default-rtl.css" />
+    <Content Include="www\template\css\style.default.css" />
+    <Content Include="www\template\css\style.inverse.css" />
+    <Content Include="www\template\css\toggles.css" />
+    <Content Include="www\template\css\weather-icons.min.css" />
+    <Content Include="www\template\css\wysiwyg-color.css" />
+    <Content Include="www\template\email.html" />
+    <Content Include="www\template\extras.html" />
+    <Content Include="www\template\fixed-width-noleft.html" />
+    <Content Include="www\template\fixed-width.html" />
+    <Content Include="www\template\fixed-width2.html" />
+    <Content Include="www\template\fonts\fontawesome-webfont.svg" />
+    <Content Include="www\template\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="www\template\fonts\index.html" />
+    <Content Include="www\template\fonts\lato\index.html" />
+    <Content Include="www\template\fonts\lato\Lato-Bla-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-BlaIta-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-Bol-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-BolIta-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-Hai-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-HaiIta-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-Lig-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-LigIta-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-Reg-webfont.svg" />
+    <Content Include="www\template\fonts\lato\Lato-RegIta-webfont.svg" />
+    <Content Include="www\template\fonts\lato\SIL Open Font License 1.1.txt" />
+    <Content Include="www\template\fonts\roboto\Google Android License.txt" />
+    <Content Include="www\template\fonts\roboto\index.html" />
+    <Content Include="www\template\fonts\roboto\Roboto-Black-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-BlackItalic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-Bold-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensed-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensedItalic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldItalic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-Condensed-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-CondensedItalic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-Italic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-Light-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-LightItalic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-Medium-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-MediumItalic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-Regular-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-Thin-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\Roboto-ThinItalic-webfont.svg" />
+    <Content Include="www\template\fonts\roboto\roboto.css" />
+    <Content Include="www\template\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="www\template\form-layouts.html" />
+    <Content Include="www\template\form-validation.html" />
+    <Content Include="www\template\form-wizards.html" />
+    <Content Include="www\template\general-forms.html" />
+    <Content Include="www\template\graphs.html" />
+    <Content Include="www\template\horizontal-menu.html" />
+    <Content Include="www\template\horizontal-menu2.html" />
+    <Content Include="www\template\icons.html" />
+    <Content Include="www\template\images\calendar-arrow.png" />
+    <Content Include="www\template\images\chosen-sprite%402x.png" />
+    <Content Include="www\template\images\chosen-sprite.png" />
+    <Content Include="www\template\images\close-white.png" />
+    <Content Include="www\template\images\colorpicker\blank.gif" />
+    <Content Include="www\template\images\colorpicker\colorpicker_background.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_hex.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_hsb_b.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_hsb_h.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_hsb_s.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_indic.gif" />
+    <Content Include="www\template\images\colorpicker\colorpicker_overlay.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_rgb_b.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_rgb_g.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_rgb_r.png" />
+    <Content Include="www\template\images\colorpicker\colorpicker_select.gif" />
+    <Content Include="www\template\images\colorpicker\colorpicker_submit.png" />
+    <Content Include="www\template\images\colorpicker\custom_background.png" />
+    <Content Include="www\template\images\colorpicker\custom_hex.png" />
+    <Content Include="www\template\images\colorpicker\custom_hsb_b.png" />
+    <Content Include="www\template\images\colorpicker\custom_hsb_h.png" />
+    <Content Include="www\template\images\colorpicker\custom_hsb_s.png" />
+    <Content Include="www\template\images\colorpicker\custom_indic.gif" />
+    <Content Include="www\template\images\colorpicker\custom_rgb_b.png" />
+    <Content Include="www\template\images\colorpicker\custom_rgb_g.png" />
+    <Content Include="www\template\images\colorpicker\custom_rgb_r.png" />
+    <Content Include="www\template\images\colorpicker\custom_submit.png" />
+    <Content Include="www\template\images\colorpicker\index.html" />
+    <Content Include="www\template\images\colorpicker\select.png" />
+    <Content Include="www\template\images\colorpicker\select2.png" />
+    <Content Include="www\template\images\colorpicker\slider.png" />
+    <Content Include="www\template\images\dropdown-arrow.png" />
+    <Content Include="www\template\images\favicon.png" />
+    <Content Include="www\template\images\hormenu.jpg" />
+    <Content Include="www\template\images\icon-search%402x.png" />
+    <Content Include="www\template\images\icon-search.png" />
+    <Content Include="www\template\images\index.html" />
+    <Content Include="www\template\images\is-document.png" />
+    <Content Include="www\template\images\is-money.png" />
+    <Content Include="www\template\images\is-user.png" />
+    <Content Include="www\template\images\loaders\index.html" />
+    <Content Include="www\template\images\loaders\loader1.gif" />
+    <Content Include="www\template\images\loaders\loader10.gif" />
+    <Content Include="www\template\images\loaders\loader11.gif" />
+    <Content Include="www\template\images\loaders\loader12.gif" />
+    <Content Include="www\template\images\loaders\loader13.gif" />
+    <Content Include="www\template\images\loaders\loader14.gif" />
+    <Content Include="www\template\images\loaders\loader15.gif" />
+    <Content Include="www\template\images\loaders\loader16.gif" />
+    <Content Include="www\template\images\loaders\loader17.gif" />
+    <Content Include="www\template\images\loaders\loader18.gif" />
+    <Content Include="www\template\images\loaders\loader19.gif" />
+    <Content Include="www\template\images\loaders\loader2.gif" />
+    <Content Include="www\template\images\loaders\loader20.gif" />
+    <Content Include="www\template\images\loaders\loader21.gif" />
+    <Content Include="www\template\images\loaders\loader22.gif" />
+    <Content Include="www\template\images\loaders\loader23.gif" />
+    <Content Include="www\template\images\loaders\loader24.gif" />
+    <Content Include="www\template\images\loaders\loader25.gif" />
+    <Content Include="www\template\images\loaders\loader26.gif" />
+    <Content Include="www\template\images\loaders\loader27.gif" />
+    <Content Include="www\template\images\loaders\loader28.gif" />
+    <Content Include="www\template\images\loaders\loader29.gif" />
+    <Content Include="www\template\images\loaders\loader3.gif" />
+    <Content Include="www\template\images\loaders\loader30.gif" />
+    <Content Include="www\template\images\loaders\loader4.gif" />
+    <Content Include="www\template\images\loaders\loader5.gif" />
+    <Content Include="www\template\images\loaders\loader6.gif" />
+    <Content Include="www\template\images\loaders\loader7.gif" />
+    <Content Include="www\template\images\loaders\loader8.gif" />
+    <Content Include="www\template\images\loaders\loader9.gif" />
+    <Content Include="www\template\images\locked.png" />
+    <Content Include="www\template\images\minus%402x.png" />
+    <Content Include="www\template\images\minus.png" />
+    <Content Include="www\template\images\photos\blog1.jpg" />
+    <Content Include="www\template\images\photos\blog2.jpg" />
+    <Content Include="www\template\images\photos\blog3.jpg" />
+    <Content Include="www\template\images\photos\blog4.jpg" />
+    <Content Include="www\template\images\photos\index.html" />
+    <Content Include="www\template\images\photos\loggeduser.png" />
+    <Content Include="www\template\images\photos\media-audio.png" />
+    <Content Include="www\template\images\photos\media-doc.png" />
+    <Content Include="www\template\images\photos\media1.jpg" />
+    <Content Include="www\template\images\photos\media2.png" />
+    <Content Include="www\template\images\photos\media3.png" />
+    <Content Include="www\template\images\photos\media4.png" />
+    <Content Include="www\template\images\photos\media5.png" />
+    <Content Include="www\template\images\photos\media6.png" />
+    <Content Include="www\template\images\photos\media7.png" />
+    <Content Include="www\template\images\photos\photo1%402x.png" />
+    <Content Include="www\template\images\photos\photo1.png" />
+    <Content Include="www\template\images\photos\photo2.png" />
+    <Content Include="www\template\images\photos\photo3.png" />
+    <Content Include="www\template\images\photos\photo4.jpg" />
+    <Content Include="www\template\images\photos\profile-1.png" />
+    <Content Include="www\template\images\photos\profilepic1%402x.png" />
+    <Content Include="www\template\images\photos\profilepic1.png" />
+    <Content Include="www\template\images\photos\user1.png" />
+    <Content Include="www\template\images\photos\user2.png" />
+    <Content Include="www\template\images\photos\user3.png" />
+    <Content Include="www\template\images\photos\user4.png" />
+    <Content Include="www\template\images\photos\user5.png" />
+    <Content Include="www\template\images\photos\userprofile%402x.png" />
+    <Content Include="www\template\images\photos\userprofile.png" />
+    <Content Include="www\template\images\plus%402x.png" />
+    <Content Include="www\template\images\plus-white%402x.png" />
+    <Content Include="www\template\images\plus-white.png" />
+    <Content Include="www\template\images\plus.png" />
+    <Content Include="www\template\images\prettyphoto\default_thumb.png" />
+    <Content Include="www\template\images\prettyphoto\index.html" />
+    <Content Include="www\template\images\prettyphoto\loader.gif" />
+    <Content Include="www\template\images\prettyphoto\sprite.png" />
+    <Content Include="www\template\images\prettyphoto\sprite_next.png" />
+    <Content Include="www\template\images\prettyphoto\sprite_prev.png" />
+    <Content Include="www\template\images\prettyphoto\sprite_x.png" />
+    <Content Include="www\template\images\prettyphoto\sprite_y.png" />
+    <Content Include="www\template\images\screen.png" />
+    <Content Include="www\template\images\sort_asc.png" />
+    <Content Include="www\template\images\sort_asc_disabled.png" />
+    <Content Include="www\template\images\sort_both.png" />
+    <Content Include="www\template\images\sort_desc.png" />
+    <Content Include="www\template\images\sort_desc_disabled.png" />
+    <Content Include="www\template\images\spritemap%402x.png" />
+    <Content Include="www\template\images\spritemap.png" />
+    <Content Include="www\template\images\themeforest.png" />
+    <Content Include="www\template\images\themepixels.png" />
+    <Content Include="www\template\images\uploadfile%402x.png" />
+    <Content Include="www\template\images\uploadfile.png" />
+    <Content Include="www\template\images\user.png" />
+    <Content Include="www\template\index.html" />
+    <Content Include="www\template\invoice.html" />
+    <Content Include="www\template\js\bootstrap-fileupload.min.js" />
+    <Content Include="www\template\js\bootstrap-timepicker.min.js" />
+    <Content Include="www\template\js\bootstrap-wizard.min.js" />
+    <Content Include="www\template\js\bootstrap-wysihtml5.js" />
+    <Content Include="www\template\js\bootstrap.js" />
+    <Content Include="www\template\js\bootstrap.min.js" />
+    <Content Include="www\template\js\charts.js" />
+    <Content Include="www\template\js\chosen.jquery.min.js" />
+    <Content Include="www\template\js\ckeditor\adapters\jquery.js" />
+    <Content Include="www\template\js\ckeditor\build-config.js" />
+    <Content Include="www\template\js\ckeditor\ckeditor.js" />
+    <Content Include="www\template\js\ckeditor\config.js" />
+    <Content Include="www\template\js\ckeditor\contents.css" />
+    <Content Include="www\template\js\ckeditor\index.html" />
+    <Content Include="www\template\js\ckeditor\lang\af.js" />
+    <Content Include="www\template\js\ckeditor\lang\ar.js" />
+    <Content Include="www\template\js\ckeditor\lang\bg.js" />
+    <Content Include="www\template\js\ckeditor\lang\bn.js" />
+    <Content Include="www\template\js\ckeditor\lang\bs.js" />
+    <Content Include="www\template\js\ckeditor\lang\ca.js" />
+    <Content Include="www\template\js\ckeditor\lang\cs.js" />
+    <Content Include="www\template\js\ckeditor\lang\cy.js" />
+    <Content Include="www\template\js\ckeditor\lang\da.js" />
+    <Content Include="www\template\js\ckeditor\lang\de.js" />
+    <Content Include="www\template\js\ckeditor\lang\el.js" />
+    <Content Include="www\template\js\ckeditor\lang\en-au.js" />
+    <Content Include="www\template\js\ckeditor\lang\en-ca.js" />
+    <Content Include="www\template\js\ckeditor\lang\en-gb.js" />
+    <Content Include="www\template\js\ckeditor\lang\en.js" />
+    <Content Include="www\template\js\ckeditor\lang\eo.js" />
+    <Content Include="www\template\js\ckeditor\lang\es.js" />
+    <Content Include="www\template\js\ckeditor\lang\et.js" />
+    <Content Include="www\template\js\ckeditor\lang\eu.js" />
+    <Content Include="www\template\js\ckeditor\lang\fa.js" />
+    <Content Include="www\template\js\ckeditor\lang\fi.js" />
+    <Content Include="www\template\js\ckeditor\lang\fo.js" />
+    <Content Include="www\template\js\ckeditor\lang\fr-ca.js" />
+    <Content Include="www\template\js\ckeditor\lang\fr.js" />
+    <Content Include="www\template\js\ckeditor\lang\gl.js" />
+    <Content Include="www\template\js\ckeditor\lang\gu.js" />
+    <Content Include="www\template\js\ckeditor\lang\he.js" />
+    <Content Include="www\template\js\ckeditor\lang\hi.js" />
+    <Content Include="www\template\js\ckeditor\lang\hr.js" />
+    <Content Include="www\template\js\ckeditor\lang\hu.js" />
+    <Content Include="www\template\js\ckeditor\lang\id.js" />
+    <Content Include="www\template\js\ckeditor\lang\is.js" />
+    <Content Include="www\template\js\ckeditor\lang\it.js" />
+    <Content Include="www\template\js\ckeditor\lang\ja.js" />
+    <Content Include="www\template\js\ckeditor\lang\ka.js" />
+    <Content Include="www\template\js\ckeditor\lang\km.js" />
+    <Content Include="www\template\js\ckeditor\lang\ko.js" />
+    <Content Include="www\template\js\ckeditor\lang\ku.js" />
+    <Content Include="www\template\js\ckeditor\lang\lt.js" />
+    <Content Include="www\template\js\ckeditor\lang\lv.js" />
+    <Content Include="www\template\js\ckeditor\lang\mk.js" />
+    <Content Include="www\template\js\ckeditor\lang\mn.js" />
+    <Content Include="www\template\js\ckeditor\lang\ms.js" />
+    <Content Include="www\template\js\ckeditor\lang\nb.js" />
+    <Content Include="www\template\js\ckeditor\lang\nl.js" />
+    <Content Include="www\template\js\ckeditor\lang\no.js" />
+    <Content Include="www\template\js\ckeditor\lang\pl.js" />
+    <Content Include="www\template\js\ckeditor\lang\pt-br.js" />
+    <Content Include="www\template\js\ckeditor\lang\pt.js" />
+    <Content Include="www\template\js\ckeditor\lang\ro.js" />
+    <Content Include="www\template\js\ckeditor\lang\ru.js" />
+    <Content Include="www\template\js\ckeditor\lang\si.js" />
+    <Content Include="www\template\js\ckeditor\lang\sk.js" />
+    <Content Include="www\template\js\ckeditor\lang\sl.js" />
+    <Content Include="www\template\js\ckeditor\lang\sq.js" />
+    <Content Include="www\template\js\ckeditor\lang\sr-latn.js" />
+    <Content Include="www\template\js\ckeditor\lang\sr.js" />
+    <Content Include="www\template\js\ckeditor\lang\sv.js" />
+    <Content Include="www\template\js\ckeditor\lang\th.js" />
+    <Content Include="www\template\js\ckeditor\lang\tr.js" />
+    <Content Include="www\template\js\ckeditor\lang\ug.js" />
+    <Content Include="www\template\js\ckeditor\lang\uk.js" />
+    <Content Include="www\template\js\ckeditor\lang\vi.js" />
+    <Content Include="www\template\js\ckeditor\lang\zh-cn.js" />
+    <Content Include="www\template\js\ckeditor\lang\zh.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="www\template\js\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="www\template\js\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="www\template\js\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="www\template\js\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="www\template\js\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="www\template\js\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="www\template\js\ckeditor\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="www\template\js\ckeditor\plugins\icons.png" />
+    <Content Include="www\template\js\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="www\template\js\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="www\template\js\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="www\template\js\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="www\template\js\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="www\template\js\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="www\template\js\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="www\template\js\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="www\template\js\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="www\template\js\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="www\template\js\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="www\template\js\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="www\template\js\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="www\template\js\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="www\template\js\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="www\template\js\ckeditor\samples\ajax.html" />
+    <Content Include="www\template\js\ckeditor\samples\api.html" />
+    <Content Include="www\template\js\ckeditor\samples\appendto.html" />
+    <Content Include="www\template\js\ckeditor\samples\assets\inlineall\logo.png" />
+    <Content Include="www\template\js\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="www\template\js\ckeditor\samples\assets\sample.css" />
+    <Content Include="www\template\js\ckeditor\samples\assets\sample.jpg" />
+    <Content Include="www\template\js\ckeditor\samples\assets\uilanguages\languages.js" />
+    <Content Include="www\template\js\ckeditor\samples\datafiltering.html" />
+    <Content Include="www\template\js\ckeditor\samples\divreplace.html" />
+    <Content Include="www\template\js\ckeditor\samples\index.html" />
+    <Content Include="www\template\js\ckeditor\samples\inlineall.html" />
+    <Content Include="www\template\js\ckeditor\samples\inlinebycode.html" />
+    <Content Include="www\template\js\ckeditor\samples\inlinetextarea.html" />
+    <Content Include="www\template\js\ckeditor\samples\jquery.html" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\dialog\assets\my_dialog.js" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\dialog\dialog.html" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\enterkey\enterkey.html" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\htmlwriter\outputforflash.html" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\htmlwriter\outputhtml.html" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\magicline\magicline.html" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\toolbar\toolbar.html" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\wysiwygarea\fullpage.html" />
+    <Content Include="www\template\js\ckeditor\samples\readonly.html" />
+    <Content Include="www\template\js\ckeditor\samples\replacebyclass.html" />
+    <Content Include="www\template\js\ckeditor\samples\replacebycode.html" />
+    <Content Include="www\template\js\ckeditor\samples\sample.css" />
+    <Content Include="www\template\js\ckeditor\samples\sample.js" />
+    <Content Include="www\template\js\ckeditor\samples\tabindex.html" />
+    <Content Include="www\template\js\ckeditor\samples\uicolor.html" />
+    <Content Include="www\template\js\ckeditor\samples\uilanguages.html" />
+    <Content Include="www\template\js\ckeditor\samples\xhtmlstyle.html" />
+    <Content Include="www\template\js\ckeditor\skins\moono\dialog.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\dialog_opera.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\editor.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="www\template\js\ckeditor\skins\moono\icons.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\close.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="www\template\js\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\dialog.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\dialog_ie.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\dialog_ie7.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\dialog_ie8.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\dialog_iequirks.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\dialog_opera.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\editor.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\editor_gecko.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\editor_ie.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\editor_ie7.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\editor_ie8.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\editor_iequirks.css" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\icons.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\icons_hidpi.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\arrow.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\close.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\hidpi\close.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\hidpi\lock-open.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\hidpi\lock.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\hidpi\refresh.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\lock-open.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\lock.png" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\images\refresh.png" />
+    <Content Include="www\template\js\ckeditor\styles.js" />
+    <Content Include="www\template\js\codemirror\codemirror.js" />
+    <Content Include="www\template\js\codemirror\formatting.js" />
+    <Content Include="www\template\js\codemirror\index.html" />
+    <Content Include="www\template\js\codemirror\mode\index.html" />
+    <Content Include="www\template\js\codemirror\mode\javascript.js" />
+    <Content Include="www\template\js\codemirror\mode\php.js" />
+    <Content Include="www\template\js\codemirror\mode\python.js" />
+    <Content Include="www\template\js\codemirror\mode\xml.js" />
+    <Content Include="www\template\js\colorpicker.js" />
+    <Content Include="www\template\js\custom.js" />
+    <Content Include="www\template\js\dashboard.js" />
+    <Content Include="www\template\js\dropzone.min.js" />
+    <Content Include="www\template\js\flot\flot.categories.min.js" />
+    <Content Include="www\template\js\flot\flot.crosshair.min.js" />
+    <Content Include="www\template\js\flot\flot.min.js" />
+    <Content Include="www\template\js\flot\flot.pie.min.js" />
+    <Content Include="www\template\js\flot\flot.resize.min.js" />
+    <Content Include="www\template\js\flot\flot.symbol.min.js" />
+    <Content Include="www\template\js\flot\index.html" />
+    <Content Include="www\template\js\fullcalendar.min.js" />
+    <Content Include="www\template\js\gmaps.js" />
+    <Content Include="www\template\js\holder.js" />
+    <Content Include="www\template\js\html5shiv.js" />
+    <Content Include="www\template\js\index.html" />
+    <Content Include="www\template\js\jquery-1.10.2.min.js" />
+    <Content Include="www\template\js\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="www\template\js\jquery-jvectormap-us-aea-en.js" />
+    <Content Include="www\template\js\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="www\template\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="www\template\js\jquery-ui-1.10.3.min.js" />
+    <Content Include="www\template\js\jquery.autogrow-textarea.js" />
+    <Content Include="www\template\js\jquery.cookies.js" />
+    <Content Include="www\template\js\jquery.datatables.min.js" />
+    <Content Include="www\template\js\jquery.gritter.min.js" />
+    <Content Include="www\template\js\jquery.maskedinput.min.js" />
+    <Content Include="www\template\js\jquery.mousewheel.js" />
+    <Content Include="www\template\js\jquery.prettyPhoto.js" />
+    <Content Include="www\template\js\jquery.sparkline.min.js" />
+    <Content Include="www\template\js\jquery.tagsinput.min.js" />
+    <Content Include="www\template\js\jquery.ui.touch-punch.min.js" />
+    <Content Include="www\template\js\jquery.validate.min.js" />
+    <Content Include="www\template\js\masonry.pkgd.min.js" />
+    <Content Include="www\template\js\modernizr.min.js" />
+    <Content Include="www\template\js\morris.min.js" />
+    <Content Include="www\template\js\raphael-2.1.0.min.js" />
+    <Content Include="www\template\js\respond.min.js" />
+    <Content Include="www\template\js\retina.min.js" />
+    <Content Include="www\template\js\toggles.min.js" />
+    <Content Include="www\template\js\wysihtml5-0.3.0.min.js" />
+    <Content Include="www\template\layouts.html" />
+    <Content Include="www\template\locked.html" />
+    <Content Include="www\template\maps.html" />
+    <Content Include="www\template\media-manager.html" />
+    <Content Include="www\template\modals.html" />
+    <Content Include="www\template\notfound.html" />
+    <Content Include="www\template\people-directory.html" />
+    <Content Include="www\template\profile.html" />
+    <Content Include="www\template\read.html" />
+    <Content Include="www\template\rtl\alerts.html" />
+    <Content Include="www\template\rtl\blank.html" />
+    <Content Include="www\template\rtl\blog-list.html" />
+    <Content Include="www\template\rtl\blog-single.html" />
+    <Content Include="www\template\rtl\bug-issues.html" />
+    <Content Include="www\template\rtl\bug-tracker.html" />
+    <Content Include="www\template\rtl\buttons.html" />
+    <Content Include="www\template\rtl\calendar.html" />
+    <Content Include="www\template\rtl\code-editor.html" />
+    <Content Include="www\template\rtl\email.html" />
+    <Content Include="www\template\rtl\extras.html" />
+    <Content Include="www\template\rtl\form-layouts.html" />
+    <Content Include="www\template\rtl\form-validation.html" />
+    <Content Include="www\template\rtl\form-wizards.html" />
+    <Content Include="www\template\rtl\general-forms.html" />
+    <Content Include="www\template\rtl\graphs.html" />
+    <Content Include="www\template\rtl\icons.html" />
+    <Content Include="www\template\rtl\index.html" />
+    <Content Include="www\template\rtl\invoice.html" />
+    <Content Include="www\template\rtl\locked.html" />
+    <Content Include="www\template\rtl\maps.html" />
+    <Content Include="www\template\rtl\media-manager.html" />
+    <Content Include="www\template\rtl\modals.html" />
+    <Content Include="www\template\rtl\notfound.html" />
+    <Content Include="www\template\rtl\people-directory.html" />
+    <Content Include="www\template\rtl\profile.html" />
+    <Content Include="www\template\rtl\read.html" />
+    <Content Include="www\template\rtl\search-results.html" />
+    <Content Include="www\template\rtl\signin.html" />
+    <Content Include="www\template\rtl\signup.html" />
+    <Content Include="www\template\rtl\sliders.html" />
+    <Content Include="www\template\rtl\tables.html" />
+    <Content Include="www\template\rtl\tabs-accordions.html" />
+    <Content Include="www\template\rtl\timeline.html" />
+    <Content Include="www\template\rtl\typography.html" />
+    <Content Include="www\template\rtl\view-issue.html" />
+    <Content Include="www\template\rtl\widgets.html" />
+    <Content Include="www\template\rtl\wysiwyg.html" />
+    <Content Include="www\template\search-results.html" />
+    <Content Include="www\template\signin.html" />
+    <Content Include="www\template\signup.html" />
+    <Content Include="www\template\sliders.html" />
+    <Content Include="www\template\tables.html" />
+    <Content Include="www\template\tabs-accordions.html" />
+    <Content Include="www\template\timeline.html" />
+    <Content Include="www\template\typography.html" />
+    <Content Include="www\template\view-issue.html" />
+    <Content Include="www\template\widgets.html" />
+    <Content Include="www\template\wysiwyg.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\SignUpModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="www\template\fonts\fontawesome-webfont.eot" />
+    <Content Include="www\template\fonts\fontawesome-webfont.ttf" />
+    <Content Include="www\template\fonts\fontawesome-webfont.woff" />
+    <Content Include="www\template\fonts\FontAwesome.otf" />
+    <Content Include="www\template\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="www\template\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="www\template\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="www\template\fonts\lato\Lato-Bla-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-Bla-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-Bla-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-BlaIta-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-BlaIta-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-BlaIta-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-Bol-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-Bol-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-Bol-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-BolIta-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-BolIta-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-BolIta-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-Hai-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-Hai-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-Hai-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-HaiIta-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-HaiIta-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-HaiIta-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-Lig-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-Lig-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-Lig-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-LigIta-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-LigIta-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-LigIta-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-Reg-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-Reg-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-Reg-webfont.woff" />
+    <Content Include="www\template\fonts\lato\Lato-RegIta-webfont.eot" />
+    <Content Include="www\template\fonts\lato\Lato-RegIta-webfont.ttf" />
+    <Content Include="www\template\fonts\lato\Lato-RegIta-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Black-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Black-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Black-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-BlackItalic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-BlackItalic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-BlackItalic-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Bold-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Bold-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Bold-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensed-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensed-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensed-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensedItalic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensedItalic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldCondensedItalic-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldItalic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldItalic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-BoldItalic-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Condensed-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Condensed-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Condensed-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-CondensedItalic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-CondensedItalic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-CondensedItalic-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Italic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Italic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Italic-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Light-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Light-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Light-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-LightItalic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-LightItalic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-LightItalic-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Medium-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Medium-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Medium-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-MediumItalic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-MediumItalic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-MediumItalic-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Regular-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Regular-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Regular-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-Thin-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-Thin-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-Thin-webfont.woff" />
+    <Content Include="www\template\fonts\roboto\Roboto-ThinItalic-webfont.eot" />
+    <Content Include="www\template\fonts\roboto\Roboto-ThinItalic-webfont.ttf" />
+    <Content Include="www\template\fonts\roboto\Roboto-ThinItalic-webfont.woff" />
+    <Content Include="www\template\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="www\template\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="www\template\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="www\template\images\colorpicker\.DS_Store" />
+    <Content Include="www\template\images\colorpicker\Thumbs.db" />
+    <Content Include="www\template\js\ckeditor\LICENSE.md" />
+    <Content Include="www\template\js\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="www\template\js\ckeditor\plugins\scayt\README.md" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="www\template\js\ckeditor\plugins\wsc\README.md" />
+    <Content Include="www\template\js\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="www\template\js\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="www\template\js\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="www\template\js\ckeditor\skins\moono\readme.md" />
+    <Content Include="www\template\js\ckeditor\skins\themepixels\readme.md" />
+    <Content Include="www\template\js\codemirror\.DS_Store" />
+    <Content Include="www\template\less\addons.less" />
+    <Content Include="www\template\less\dashboard.less" />
+    <Content Include="www\template\less\email.less" />
+    <Content Include="www\template\less\forms.less" />
+    <Content Include="www\template\less\general.less" />
+    <Content Include="www\template\less\headerpanel.less" />
+    <Content Include="www\template\less\horizontal-menu.less" />
+    <Content Include="www\template\less\leftpanel-collapse.less" />
+    <Content Include="www\template\less\leftpanel.less" />
+    <Content Include="www\template\less\mainpanel.less" />
+    <Content Include="www\template\less\media-queries.less" />
+    <Content Include="www\template\less\pages.less" />
+    <Content Include="www\template\less\rightpanel.less" />
+    <Content Include="www\template\less\style.default.less" />
+    <Content Include="www\template\less\table.less" />
+    <Content Include="www\template\less\ui-elements.less" />
+    <Content Include="www\template\less\variables.less" />
+    <Content Include="www\template\rtl\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="www\template\files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Taga.Core\Taga.Core.csproj">
+      <Project>{57206f02-5147-464f-93d1-f7705c2d9932}</Project>
+      <Name>Taga.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TagKid.Lib\TagKid.Lib.csproj">
+      <Project>{a7a98564-fb0e-421b-a011-0d13fd8a20f9}</Project>
+      <Name>TagKid.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53523</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53523/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
