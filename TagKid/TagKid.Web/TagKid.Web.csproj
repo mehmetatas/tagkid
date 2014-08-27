@@ -74,8 +74,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="www\app\app.js" />
+    <Content Include="www\css\animations.css" />
     <Content Include="www\css\bootstrap.min.css" />
     <Content Include="www\css\custom.css" />
+    <Content Include="www\css\font-awesome.min.css" />
     <Content Include="www\css\style.default.css" />
     <Content Include="www\img\email.png" />
     <Content Include="www\img\favicon.png" />

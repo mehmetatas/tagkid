@@ -1,29 +1,19 @@
-﻿var testApp = angular.module('testApp', ['ngRoute', 'ngAnimate']);
+﻿var testApp = angular.module('testApp', ['ngRoute', 'ngAnimate', 'ngTouch']);
 
 // ROUTING ===============================================
 // set our routing for this application
 // each route will pull in a different controller
 testApp.config(function ($routeProvider) {
     $routeProvider
-    	// home page
     	.when('/', {
-    	    templateUrl: 'templates/test.html',
-    	    controller: 'testController'
+    	    templateUrl: 'templates/signup.html',
+    	    controller: 'signupController'
     	})
-
-    	// contact page
     	.when('/signin', {
     	    templateUrl: 'templates/signin.html',
     	    controller: 'signinController'
     	})
-
-    	// about page
-    	.when('/signup', {
-    	    templateUrl: 'templates/signup.html',
-    	    controller: 'signupController'
-    	})
 		.otherwise({redirectTo: '/'});
-
 });
 
 
@@ -41,15 +31,23 @@ testApp.controller('testController', function ($scope, $location) {
 });
 
 // about page controller
-testApp.controller('signinController', function ($scope) {
-    $scope.pageClass = 'page-about';
+testApp.controller('signinController', function ($scope, $location) {
+    $scope.pageClass = 'signin';
 	$scope.btnClicked = function(){
 		console.log("ali");
 		$scope.name = "ali";
 	};
+
+	$scope.onSignUpClick = function () {
+	    $location.path("/");
+    };
 });
 
 // contact page controller
-testApp.controller('signupController', function ($scope) {
-    $scope.pageClass = 'page-contact';
+testApp.controller('signupController', function ($scope, $location) {
+    $scope.pageClass = 'signup';
+    
+    $scope.onSignInClick = function () {
+        $location.path("/signin");
+    };
 });

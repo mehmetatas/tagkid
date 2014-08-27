@@ -14,7 +14,8 @@
 
 .signup-form {
     width: 360px;
-    max-width: 95%;
+    height: 530px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding: 20px 20px;
@@ -60,49 +61,63 @@
         -moz-border-bottom-right-radius: 5px;
         -moz-border-bottom-left-radius: 5px;
     }
-    
-    .signup-form .pword.signin {
-        border-top: solid;
-        border-top-width: 1px;
-        border-color: #ccc;
-    }
-	
-	
-	/* adasdasdasdasdasasdasdada */
-	
+
+        .signup-form .pword.signin {
+            border-top: solid;
+            border-top-width: 1px;
+            border-color: #ccc;
+        }
+
+
+/* adasdasdasdasdasasdasdada */
+
 /* BASE STYLES
 ============================================================================= */
-html         { overflow-y:hidden; }
-.page        { 
-	bottom:0; 
-	padding-top:200px;
-	position:absolute; 
-	text-align:center;
-	top:0;  
-	width:100%; 
+.ng-leave {
+    z-index: 9999;
 }
 
-.page h1 	{ font-size:60px; }
-.page a     { margin-top:50px; }
-#about      { color:#333; position:absolute; text-align:center; top:50px; width:100%; }
-
-
-.page.ng-leave 	{ z-index:9999; }
-.page.ng-enter 	{ z-index:8888; }
-
-
-.ng-leave         {
-	-webkit-transform-origin: 50% 50%;
-	transform-origin: 50% 50%;
-	-webkit-animation: flipOutRight .5s both ease-in;
-	animation: flipOutRight .5s both ease-in;
+.ng-enter {
+    z-index: 8888;
 }
 
-.ng-enter 		{  
-	-webkit-transform-origin: 50% 50%;
-	transform-origin: 50% 50%;
-	-webkit-animation: flipInLeft .5s both ease-out;
-	animation: flipInLeft .5s both ease-out; 	
-	-webkit-animation-delay: .5s;
-	animation-delay: .5s;
+
+/*.ng-leave {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation: flipOutRight .5s both ease-in;
+    animation: flipOutRight .5s both ease-in;
+}
+
+.ng-enter {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation: flipInLeft .5s both ease-out;
+    animation: flipInLeft .5s both ease-out;
+    -webkit-animation-delay: .5s;
+    animation-delay: .5s;
+}*/
+
+.signup.ng-leave {
+	-webkit-animation: moveToLeft .6s ease both;
+	animation: moveToLeft .6s ease both;
+    -webkit-animation-delay: .01s;
+	animation-delay: .01s;
+}
+
+.signin.ng-enter {
+	-webkit-animation: moveFromRight .6s ease both;
+	animation: moveFromRight .6s ease both;	
+}
+
+.signin.ng-leave {
+	-webkit-animation: moveToRight .6s ease both;
+	animation: moveToRight .6s ease both;
+    	-webkit-animation-delay: .01s;
+	animation-delay: .01s;
+}
+
+.signup.ng-enter {
+	-webkit-animation: moveFromLeft .6s ease both;
+	animation: moveFromLeft .6s ease both;
 }
