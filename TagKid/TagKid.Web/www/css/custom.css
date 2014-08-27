@@ -66,3 +66,43 @@
         border-top-width: 1px;
         border-color: #ccc;
     }
+	
+	
+	/* adasdasdasdasdasasdasdada */
+	
+/* BASE STYLES
+============================================================================= */
+html         { overflow-y:hidden; }
+.page        { 
+	bottom:0; 
+	padding-top:200px;
+	position:absolute; 
+	text-align:center;
+	top:0;  
+	width:100%; 
+}
+
+.page h1 	{ font-size:60px; }
+.page a     { margin-top:50px; }
+#about      { color:#333; position:absolute; text-align:center; top:50px; width:100%; }
+
+
+.page.ng-leave 	{ z-index:9999; }
+.page.ng-enter 	{ z-index:8888; }
+
+
+.ng-leave         {
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-animation: flipOutRight .5s both ease-in;
+	animation: flipOutRight .5s both ease-in;
+}
+
+.ng-enter 		{  
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-animation: flipInLeft .5s both ease-out;
+	animation: flipInLeft .5s both ease-out; 	
+	-webkit-animation-delay: .5s;
+	animation-delay: .5s;
+}
