@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Exceptions\ExceptionExtensions.cs" />
     <Compile Include="Exceptions\SystemException.cs" />
     <Compile Include="Exceptions\TagKidException.cs" />
     <Compile Include="Exceptions\UserException.cs" />

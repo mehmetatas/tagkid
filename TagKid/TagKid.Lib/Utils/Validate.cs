@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using TagKid.Lib.Exceptions;
 
 namespace TagKid.Lib.Utils
@@ -7,7 +10,8 @@ namespace TagKid.Lib.Utils
     {
         public static void StringLength(string key, string value, int maxLength, int minLength = 0, bool trim = true)
         {
-            if (value == null) {
+            if (value == null)
+            {
                 if (minLength == -1) // allows null
                     return;
                 throw new UserException("{0} cannot be empty", key);
@@ -21,6 +25,22 @@ namespace TagKid.Lib.Utils
 
             if (value.Length > maxLength)
                 throw new UserException("{0} cannot be more than {1} characters", key, maxLength);
+        }
+
+        public static string EncryptPwd(string pwd)
+        {
+            return BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(pwd))).Replace("-", String.Empty);
+        }
+
+        public static void IsEmail(string email)
+        {
+            var isEmail = Regex.IsMatch(email,
+                @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                RegexOptions.IgnoreCase);
+
+            if (!isEmail)
+                throw new UserException("{0} is not a valid email address!", email);
         }
 
         public static void Equals(string key, object value, object expectedValue)

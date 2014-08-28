@@ -82,7 +82,7 @@
 }
 
 
-/*.ng-leave {
+.ng-leave {
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
     -webkit-animation: flipOutRight .5s both ease-in;
@@ -96,9 +96,9 @@
     animation: flipInLeft .5s both ease-out;
     -webkit-animation-delay: .5s;
     animation-delay: .5s;
-}*/
+}
 
-.signup.ng-leave {
+/*.signup.ng-leave {
 	-webkit-animation: moveToLeft .6s ease both;
 	animation: moveToLeft .6s ease both;
     -webkit-animation-delay: .01s;
@@ -120,4 +120,4 @@
 .signup.ng-enter {
 	-webkit-animation: moveFromLeft .6s ease both;
 	animation: moveFromLeft .6s ease both;
-}
+}*/

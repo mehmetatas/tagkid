@@ -7,6 +7,7 @@
 *.sln.docstates
 
 template
+deploy
 
 # Build results
 [Dd]ebug/
