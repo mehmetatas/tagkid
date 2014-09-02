@@ -145,6 +145,8 @@ namespace Taga.Core.DynamicProxy
             IL.BeginCatchBlock(typeof(Exception));          // catch 
             IL.Emit(OpCodes.Stloc_S, ex);                   // (Exception ex) {
             InvokeOnError(ex);                              //     _callHandler.AfterCall(obj, methodInfo, args);
+            IL.Emit(OpCodes.Ldloc, ex);         //     push ex
+            IL.Emit(OpCodes.Throw);                         //     throw;
             IL.EndExceptionBlock();                         // }
         }
 
