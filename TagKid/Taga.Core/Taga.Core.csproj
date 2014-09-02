@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,18 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\CallContext.cs" />
     <Compile Include="DynamicProxy\CallHandlerMethodBuilder.cs" />
     <Compile Include="DynamicProxy\CallHandlerMethodImplementor.cs" />
     <Compile Include="DynamicProxy\CallHandlerMethodOverrider.cs" />
     <Compile Include="DynamicProxy\ICallHandler.cs" />
     <Compile Include="DynamicProxy\InterceptAttribute.cs" />
+    <Compile Include="DynamicProxy\NullCallHandler.cs" />
     <Compile Include="DynamicProxy\Proxy.cs" />
     <Compile Include="DynamicProxy\ReflectionExtensions.cs" />
+    <Compile Include="IoC\IServiceProvider.cs" />
+    <Compile Include="IoC\ServiceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Base\Repository.cs" />
+    <Compile Include="Repository\Base\UnitOfWork.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IPage.cs" />
     <Compile Include="Repository\ISql.cs" />
-    <Compile Include="Repository\SqlBuilder.cs" />
+    <Compile Include="Repository\ISqlBuilder.cs" />
+    <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\Base\SqlBuilder.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

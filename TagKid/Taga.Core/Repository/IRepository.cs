@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Taga.Core.Repository
 {
-    public interface IRepository : IDisposable
+    public interface IRepository
     {
         void Save<T>(T entity) where T : class, new();
 

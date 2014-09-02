@@ -11,6 +11,10 @@ testApp.config(function ($routeProvider) {
     	    templateUrl: 'templates/signin.html',
     	    controller: 'signinController'
     	})
+    	.when('/signup', {
+    	    templateUrl: 'templates/signup.html',
+    	    controller: 'signupController'
+    	})
 		.otherwise({ redirectTo: '/' });
 });
 
@@ -25,7 +29,7 @@ testApp.controller('signinController', function ($scope, $location, $http) {
     };
 
     $scope.onSignUpClick = function () {
-        $location.path("/");
+        $location.path("/signup");
     };
 
     $scope.onSignInEmailClick = function () {
@@ -109,4 +113,8 @@ testApp.controller('signupController', function ($scope, $location, $http) {
             alert('error');
         });
     };
+});
+
+testApp.controller('wallController', function ($scope) {
+    $scope.pageClass = 'wall';
 });

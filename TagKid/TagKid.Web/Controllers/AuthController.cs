@@ -1,14 +1,29 @@
 ﻿using System;
 using System.Web.Http;
+using Taga.Core.IoC;
 using TagKid.Lib.Entities;
 using TagKid.Lib.Exceptions;
-using TagKid.Lib.Service;
+using TagKid.Lib.Services;
 using TagKid.Web.Models;
 
 namespace TagKid.Web.Controllers
 {
     public class AuthController : ApiController
     {
+        private readonly IAuthService _authService;
+
+        public AuthController()
+        {
+            try
+            {
+                _authService = ServiceProvider.Provider.GetOrCreate<IAuthService>();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.GetMessage());
+            }
+        }
+
         [HttpPost]
         [ActionName("signup_email")]
         public Response SignUpWithEmail([FromBody]SignUpRequest request)
@@ -57,9 +72,7 @@ namespace TagKid.Web.Controllers
         {
             try
             {
-                var svc = new TagKidService();
-
-                svc.LoginUser(request.EmailOrUsername, request.Password);
+                _authService.SignIn(request.EmailOrUsername, request.Password);
 
                 return new Response
                 {
@@ -99,13 +112,11 @@ namespace TagKid.Web.Controllers
         }
 
         [NonAction]
-        private static Response RegisterUser(SignUpRequest model)
+        private Response RegisterUser(SignUpRequest model)
         {
             try
             {
-                var svc = new TagKidService();
-
-                svc.RegisterUser(new User
+                _authService.SignUp(new User
                 {
                     Email = model.Email,
                     FacebookId = model.FacebookId,

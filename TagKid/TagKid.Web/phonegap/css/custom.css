@@ -68,8 +68,16 @@
             border-color: #ccc;
         }
 
+/* NAV BAR
+============================================================================= */
+.tk-navbar {
+    height: 50px;
+    background-color: #00ced1;
+}
 
-/* adasdasdasdasdasasdasdada */
+.tk-content {
+
+}
 
 /* BASE STYLES
 ============================================================================= */

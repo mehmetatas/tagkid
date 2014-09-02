@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Security;
+using System.Security.Permissions;
 
 namespace Taga.Core.DynamicProxy
 {
@@ -17,6 +19,9 @@ namespace Taga.Core.DynamicProxy
 
         static Proxy()
         {
+            //The type initializer for threw an exception.Request for the permission of type 'System.Security.Permissions.FileIOPermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' failed
+
+
             AssemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 new AssemblyName("Taga.Core.DynamicProxy.Proxies"),
                 AssemblyBuilderAccess.Run);
@@ -44,10 +49,15 @@ namespace Taga.Core.DynamicProxy
             return interfaceTypes.Aggregate(key, (current, interfaceType) => current + "__" + interfaceType.FullName + "__");
         }
 
-        public static TBase Of<TBase>(ICallHandler callHandler, params Type[] interfaceTypes) where TBase : class
+        public static Type TypeOf<TBase>(params Type[] interfaceTypes) where TBase : class
         {
             var builder = new Proxy(typeof(TBase), interfaceTypes);
-            var type = builder.BuildProxyType();
+            return builder.BuildProxyType();
+        }
+
+        public static TBase Of<TBase>(ICallHandler callHandler, params Type[] interfaceTypes) where TBase : class
+        {
+            var type = TypeOf<TBase>(interfaceTypes);
             return (TBase)Activator.CreateInstance(type, callHandler);
         }
 

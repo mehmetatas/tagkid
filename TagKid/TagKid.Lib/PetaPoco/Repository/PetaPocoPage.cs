@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Taga.Core.Repository;
 
-namespace TagKid.Lib.PetaPoco
+namespace TagKid.Lib.PetaPoco.Repository
 {
-    class PetaPocoPageAdapter<T> : IPage<T>
+    class PetaPocoPage<T> : IPage<T>
     {
         private readonly Page<T> _page;
 
-        public PetaPocoPageAdapter(Page<T> petaPocoPage)
+        public PetaPocoPage(Page<T> petaPocoPage)
         {
             _page = petaPocoPage;
         }
