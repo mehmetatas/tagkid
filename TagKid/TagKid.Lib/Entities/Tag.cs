@@ -2,27 +2,24 @@
 
 namespace TagKid.Lib.Entities
 {
-    [TableName("categories")]
+    [TableName("tags")]
     [PrimaryKey("id", autoIncrement = true)]
     [ExplicitColumns]
-    public class Category
+    public class Tag
     {
         [Column("id")]
         public long Id { get; set; }
 
-        [Column("user_id")]
-        public long UserId { get; set; }
-
         [Column("name")]
         public string Name { get; set; }
+
+        [Column("hint")]
+        public string Hint { get; set; }
 
         [Column("description")]
         public string Description { get; set; }
 
-        [Column("access_level")]
-        public AccessLevel AccessLevel { get; set; }
-
         [Column("status")]
-        public CategoryStatus Status { get; set; }
+        public TagStatus Status { get; set; }
     }
 }

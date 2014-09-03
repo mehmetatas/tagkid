@@ -18,6 +18,9 @@ namespace TagKid.Lib.Entities
 
         [Column("email")]
         public string Email { get; set; }
+
+        [Column("profile_image_url")]
+        public string ProfileImageUrl { get; set; }
         
         [Column("password")]
         public string Password { get; set; }
@@ -25,16 +28,10 @@ namespace TagKid.Lib.Entities
         [Column("facebook_id")]
         public string FacebookId { get; set; }
 
+        [Column("type")]
+        public UserType Type { get; set; }
+
         [Column("status")]
         public UserStatus Status { get; set; }
-    }
-
-    public enum UserStatus
-    {
-        Active,
-        Passive,
-        WaitingActivation,
-        Banned,
-        Deleted
     }
 }

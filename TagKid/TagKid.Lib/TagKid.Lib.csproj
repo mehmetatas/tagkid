@@ -30,9 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.4.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\ConfirmationCode.cs" />
+    <Compile Include="Entities\Enums.cs" />
+    <Compile Include="Entities\Login.cs" />
+    <Compile Include="Entities\Post.cs" />
+    <Compile Include="Entities\PostTag.cs" />
+    <Compile Include="Entities\Tag.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Exceptions\ExceptionExtensions.cs" />
     <Compile Include="Exceptions\SystemException.cs" />
@@ -57,14 +68,21 @@
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\Impl\AuthService.cs" />
     <Compile Include="Services\ITagKidService.cs" />
+    <Compile Include="Services\Models\Response.cs" />
+    <Compile Include="Services\Models\Auth\SignInRequest.cs" />
+    <Compile Include="Services\Models\Auth\SignUpRequest.cs" />
     <Compile Include="Utils\Db.cs" />
     <Compile Include="Utils\Validate.cs" />
+    <Compile Include="Validation\SignUpValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Taga.Core\Taga.Core.csproj">
       <Project>{57206f02-5147-464f-93d1-f7705c2d9932}</Project>
       <Name>Taga.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

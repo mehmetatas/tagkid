@@ -334,12 +334,39 @@ namespace TagKid.Tests.Core
         }
 
         [TestMethod]
-        public void TestUpdate()
+        public void TestUpdate() 
         {
             var builder = new MockSqlBuilder();
             builder.Update("TEST");
             var sql = builder.Build();
             Assert.AreEqual("UPDATE TEST", sql.Query);
+        }
+
+        [TestMethod]
+        public void TestGroupBy()
+        {
+            var builder = new MockSqlBuilder();
+            builder.GroupBy("TEST1", "TEST2", "TEST3");
+            var sql = builder.Build();
+            Assert.AreEqual(" GROUP BY TEST1,TEST2,TEST3", sql.Query);
+        }
+
+        [TestMethod]
+        public void TestOrderBy()
+        {
+            var builder = new MockSqlBuilder();
+            builder.OrderBy("TEST");
+            var sql = builder.Build();
+            Assert.AreEqual(" ORDER BY TEST", sql.Query);
+        }
+
+        [TestMethod]
+        public void TestDesc()
+        {
+            var builder = new MockSqlBuilder();
+            builder.Desc();
+            var sql = builder.Build();
+            Assert.AreEqual(" DESC", sql.Query);
         }
     }
 }

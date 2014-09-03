@@ -31,7 +31,7 @@ namespace TagKid.Lib.Services.Impl
                     throw new UserException("User {0} already exists!", user.Username);
                 if (existing.Status == UserStatus.Passive)
                     throw new UserException("User {0} is passive!", user.Username);
-                if (existing.Status == UserStatus.WaitingActivation)
+                if (existing.Status == UserStatus.AwaitingActivation)
                     throw new UserException("User {0} has not been actived yet!", user.Username);
                 if (existing.Status == UserStatus.Banned)
                     throw new UserException("User {0} is banned!", user.Username);
@@ -39,7 +39,7 @@ namespace TagKid.Lib.Services.Impl
 
             existing =
                 _repo.Get<User>(Db.Sql("select * from users where email = @0",
-                    user.Email, UserStatus.Active, UserStatus.Passive, UserStatus.WaitingActivation));
+                    user.Email, UserStatus.Active, UserStatus.Passive, UserStatus.AwaitingActivation));
 
             if (existing != null)
             {
@@ -47,7 +47,7 @@ namespace TagKid.Lib.Services.Impl
                     throw new UserException("Email {0} already exists!", user.Email);
                 if (existing.Status == UserStatus.Passive)
                     throw new UserException("Email {0} is passive!", user.Email);
-                if (existing.Status == UserStatus.WaitingActivation)
+                if(existing.Status == UserStatus.AwaitingActivation)
                     throw new UserException("Email {0} has not been actived yet!", user.Email);
                 if (existing.Status == UserStatus.Banned)
                     throw new UserException("Email {0} is banned!", user.Email);

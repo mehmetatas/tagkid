@@ -208,5 +208,22 @@ namespace Taga.Core.Repository.Base
             return Column(columnName)
                   .Between(minParam, maxParam);
         }
+        
+        public ISqlBuilder GroupBy(params string[] columnNames)
+        {
+            return Append(" GROUP BY")
+                .Column(String.Join(",", columnNames));
+        }
+
+        public ISqlBuilder OrderBy(string columnName)
+        {
+            return Append(" ORDER BY")
+                .Column(columnName);
+        }
+
+        public ISqlBuilder Desc()
+        {
+            return Append(" DESC");
+        }
     }
 }

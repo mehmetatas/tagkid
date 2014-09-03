@@ -48,5 +48,9 @@ namespace Taga.Core.Repository
 
         ISqlBuilder Between(object minParam, object maxParam);
         ISqlBuilder Between(string columnName, object minParam, object maxParam);
+        
+        ISqlBuilder GroupBy(params string[] columnNames);
+        ISqlBuilder OrderBy(string columnName);
+        ISqlBuilder Desc();
     }
 }
