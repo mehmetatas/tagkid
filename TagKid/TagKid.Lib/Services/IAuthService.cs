@@ -1,15 +1,11 @@
-﻿using TagKid.Lib.Entities;
+﻿using TagKid.Lib.Models.Messages;
 
 namespace TagKid.Lib.Services
 {
     public interface IAuthService : ITagKidService
     {
-        void SignUp(User user);
+        SignUpResponse SignUp(SignUpRequest request);
 
-        User SignIn(string emailOrUsername, string password);
-        
-        void SignUpWithFacebook(User user, string facebookAccessToken);
-
-        User SignInWithFacebook(string facebookId, string facebookAccessToken);
+        void SignIn(SignInRequest request);
     }
 }

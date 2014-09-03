@@ -89,4 +89,26 @@ namespace TagKid.Lib.Entities
         PasswordRecovery,
         AccountReactivation
     }
+
+    public enum NotificationType
+    {
+        Like,
+        Retag,
+        Comment,
+        PrivateMessage
+    }
+
+    public enum NotificationStatus
+    {
+        Unread,
+        Read,
+        Deleted
+    }
+
+    public enum PrivateMessageStatus
+    {
+        Unread,
+        Read,
+        Deleted
+    }
 }

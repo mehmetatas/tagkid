@@ -111,9 +111,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Response.cs" />
-    <Compile Include="Models\SignInRequest.cs" />
-    <Compile Include="Models\SignUpRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

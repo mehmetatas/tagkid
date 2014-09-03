@@ -38,10 +38,10 @@ namespace TagKid.Lib.PetaPoco.Repository
             return _db.Fetch<T>(ppSql.Sql);
         }
 
-        public override IPage<T> Page<T>(int page, int pageSize, ISql sql)
+        public override IPage<T> Page<T>(int pageIndex, int pageSize, ISql sql)
         {
             var ppSql = (PetaPocoSql)sql;
-            var petaPocoPage = _db.Page<T>(page, pageSize, ppSql.Sql);
+            var petaPocoPage = _db.Page<T>(pageIndex, pageSize, ppSql.Sql);
             return new PetaPocoPage<T>(petaPocoPage);
         }
     }

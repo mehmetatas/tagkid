@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using Taga.Core.IoC;
-using TagKid.Lib.Entities;
 using TagKid.Lib.Exceptions;
+using TagKid.Lib.Models.Messages;
 using TagKid.Lib.Services;
-using TagKid.Web.Models;
 
 namespace TagKid.Web.Controllers
 {
@@ -39,8 +38,8 @@ namespace TagKid.Web.Controllers
         {
             return new Response
             {
-                Code = -1,
-                Message = "signup_facebook not implemented!"
+                ResponseCode = -1,
+                ResponseMessage = "signup_facebook not implemented!"
             };
         }
 
@@ -50,8 +49,8 @@ namespace TagKid.Web.Controllers
         {
             return new Response
             {
-                Code = -1,
-                Message = "check_email not implemented!"
+                ResponseCode = -1,
+                ResponseMessage = "check_email not implemented!"
             };
         }
 
@@ -61,8 +60,8 @@ namespace TagKid.Web.Controllers
         {
             return new Response
             {
-                Code = -1,
-                Message = "check_username not implemented!"
+                ResponseCode = -1,
+                ResponseMessage = "check_username not implemented!"
             };
         }
 
@@ -72,19 +71,19 @@ namespace TagKid.Web.Controllers
         {
             try
             {
-                _authService.SignIn(request.EmailOrUsername, request.Password);
+                _authService.SignIn(request);
 
                 return new Response
                 {
-                    Message = "Registration OK!"
+                    ResponseMessage = "Registration OK!"
                 };
             }
             catch (Exception ex)
             {
                 return new Response
                 {
-                    Code = -1,
-                    Message = ex.GetMessage()
+                    ResponseCode = -1,
+                    ResponseMessage = ex.GetMessage()
                 };
             }
         }
@@ -95,8 +94,8 @@ namespace TagKid.Web.Controllers
         {
             return new Response
             {
-                Code = -1,
-                Message = "signin_facebook not implemented!"
+                ResponseCode = -1,
+                ResponseMessage = "signin_facebook not implemented!"
             };
         }
 
@@ -106,36 +105,29 @@ namespace TagKid.Web.Controllers
         {
             return new Response
             {
-                Code = -1,
-                Message = "forgot_password not implemented!"
+                ResponseCode = -1,
+                ResponseMessage = "forgot_password not implemented!"
             };
         }
 
         [NonAction]
-        private Response RegisterUser(SignUpRequest model)
+        private Response RegisterUser(SignUpRequest request)
         {
             try
             {
-                _authService.SignUp(new User
-                {
-                    Email = model.Email,
-                    FacebookId = model.FacebookId,
-                    FullName = model.FullName,
-                    Username = model.Username,
-                    Password = model.Password
-                });
+                _authService.SignUp(request);
 
                 return new Response
                 {
-                    Message = "Registration OK!"
+                    ResponseMessage = "Registration OK!"
                 };
             }
             catch (Exception ex)
             {
                 return new Response
                 {
-                    Code = -1,
-                    Message = ex.Message
+                    ResponseCode = -1,
+                    ResponseMessage = ex.Message
                 };
             }
         }

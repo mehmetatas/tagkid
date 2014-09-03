@@ -2,7 +2,7 @@
 
 namespace TagKid.Lib.Services
 {
-    public interface ITagKidService : IDisposable
+    public interface ITagKidService
     {
     }
 }

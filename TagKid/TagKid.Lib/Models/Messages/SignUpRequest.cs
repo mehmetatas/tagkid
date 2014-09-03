@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TagKid.Web.Models
+namespace TagKid.Lib.Models.Messages
 {
     [DataContract]
-    public class SignUpRequest
+    public class SignUpRequest : Request
     {
         [DataMember(Name = "username")]
         public string Username { get; set; }
@@ -14,10 +14,10 @@ namespace TagKid.Web.Models
         [DataMember(Name = "password")]
         public string Password { get; set; }
 
-        [DataMember(Name = "facebook_id")]
+        [DataMember(Name = "facebookId")]
         public string FacebookId { get; set; }
 
-        [DataMember(Name = "facebook_token")]
+        [DataMember(Name = "facebookToken")]
         public string FacebookToken { get; set; }
 
         [DataMember(Name = "fullname")]

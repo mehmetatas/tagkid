@@ -12,6 +12,6 @@ namespace Taga.Core.Repository
 
         List<T> Select<T>(ISql sql) where T : class, new();
 
-        IPage<T> Page<T>(int page, int pageSize, ISql sql);
+        IPage<T> Page<T>(int pageIndex, int pageSize, ISql sql);
     }
 }

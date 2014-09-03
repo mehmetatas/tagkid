@@ -1,7 +1,7 @@
 ﻿using Taga.Core.DynamicProxy;
-using Taga.Core.Repository;
 using TagKid.Lib.Entities;
 using TagKid.Lib.Exceptions;
+using TagKid.Lib.Models.Messages;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Services.Impl
@@ -9,88 +9,62 @@ namespace TagKid.Lib.Services.Impl
     [Intercept]
     public class AuthService : IAuthService
     {
-        private readonly IRepository _repo;
-        private readonly IUnitOfWork _uow;
-
-        public AuthService()
+        public virtual SignUpResponse SignUp(SignUpRequest request)
         {
-            _uow = Db.UnitOfWork();
-            _repo = Db.Repository();
-        }
-
-        public virtual void SignUp(User user)
-        {
-            Check(user);
-
-            var existing =
-                _repo.Get<User>(Db.Sql("select * from users where username = @0", user.Username));
-
-            if (existing != null)
+            using (var uow = Db.UnitOfWork())
             {
-                if (existing.Status == UserStatus.Active)
-                    throw new UserException("User {0} already exists!", user.Username);
-                if (existing.Status == UserStatus.Passive)
-                    throw new UserException("User {0} is passive!", user.Username);
-                if (existing.Status == UserStatus.AwaitingActivation)
-                    throw new UserException("User {0} has not been actived yet!", user.Username);
-                if (existing.Status == UserStatus.Banned)
-                    throw new UserException("User {0} is banned!", user.Username);
+                Validate(request);
+
+                var userRepo = Db.UserRepository();
+
+                var existing = userRepo.GetByUsername(request.Username);
+                if (existing != null)
+                    ValidateStatus(existing.Status, request.Username, "User");
+
+                existing = userRepo.GetByEmail(request.Email);
+                if (existing != null)
+                    ValidateStatus(existing.Status, request.Email, "Email");
+
+                var user = new User
+                {
+                    Username = request.Username,
+                    Password = request.Password,
+                    Email = request.Email,
+                    FullName = request.FullName,
+                    FacebookId = request.FacebookId,
+                    ProfileImageUrl = "",
+                    Type = UserType.User,
+                    Status = UserStatus.Active
+                };
+
+                userRepo.Save(user);
+
+                uow.Save();
             }
 
-            existing =
-                _repo.Get<User>(Db.Sql("select * from users where email = @0",
-                    user.Email, UserStatus.Active, UserStatus.Passive, UserStatus.AwaitingActivation));
-
-            if (existing != null)
-            {
-                if (existing.Status == UserStatus.Active)
-                    throw new UserException("Email {0} already exists!", user.Email);
-                if (existing.Status == UserStatus.Passive)
-                    throw new UserException("Email {0} is passive!", user.Email);
-                if(existing.Status == UserStatus.AwaitingActivation)
-                    throw new UserException("Email {0} has not been actived yet!", user.Email);
-                if (existing.Status == UserStatus.Banned)
-                    throw new UserException("Email {0} is banned!", user.Email);
-            }
-
-            user.Status = UserStatus.Active;
-            _repo.Save(user);
-
-            _uow.Save();
+            return new SignUpResponse();
         }
 
-        public virtual User SignIn(string emailOrUsername, string password)
-        {
-            var user =
-                _repo.Get<User>(Db.Sql("select * from users where email = @0 or username = @1", emailOrUsername, emailOrUsername));
-
-            if (user == null || user.Password != password)
-                throw new UserException("Login failed!");
-
-            return user;
-        }
-
-        public virtual void SignUpWithFacebook(User user, string facebookAccessToken)
+        public virtual void SignIn(SignInRequest request)
         {
             throw new System.NotImplementedException();
         }
 
-        public virtual User SignInWithFacebook(string facebookId, string facebookAccessToken)
+        private void ValidateStatus(UserStatus status, string fieldValue, string fieldName)
+        {
+            if (status == UserStatus.Active)
+                throw new UserException("{0} {1} already exists!", fieldName, fieldValue);
+            if (status == UserStatus.Passive)
+                throw new UserException("{0} {1} is passive!", fieldName, fieldValue);
+            if (status == UserStatus.AwaitingActivation)
+                throw new UserException("{0} {1} has not been actived yet!", fieldName, fieldValue);
+            if (status == UserStatus.Banned)
+                throw new UserException("{0} {1} is banned!", fieldName, fieldValue);
+        }
+
+        private void Validate(SignUpRequest request)
         {
             throw new System.NotImplementedException();
-        }
-
-        public virtual void Dispose()
-        {
-            _uow.Dispose();
-        }
-
-        private static void Check(User user)
-        {
-            Validate.IsEmail(user.Email);
-            Validate.StringLength("Username", user.Username, 30, 3);
-            Validate.StringLength("Fullname", user.FullName, 30, 3);
-            Validate.StringLength("Password", user.Password, 16, 6);
         }
     }
 }

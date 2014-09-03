@@ -1,5 +1,6 @@
 ﻿using Taga.Core.IoC;
 using Taga.Core.Repository;
+using TagKid.Lib.Repositories;
 
 namespace TagKid.Lib.Utils
 {
@@ -7,22 +8,72 @@ namespace TagKid.Lib.Utils
     {
         public static IUnitOfWork UnitOfWork()
         {
-            return ServiceProvider.Provider.GetOrCreate<IUnitOfWork>();
+            return GetOrCreate<IUnitOfWork>();
         }
 
         public static IRepository Repository()
         {
-            return ServiceProvider.Provider.GetOrCreate<IRepository>();
+            return GetOrCreate<IRepository>();
         }
 
         public static ISqlBuilder SqlBuilder()
         {
-            return ServiceProvider.Provider.GetOrCreate<ISqlBuilder>();
+            return GetOrCreate<ISqlBuilder>();
         }
 
         public static ISql Sql(string sql, params object[] parameters)
         {
             return SqlBuilder().Append(sql, parameters).Build();
+        }
+
+        public static IUserRepository UserRepository()
+        {
+            return GetOrCreate<IUserRepository>();
+        }
+
+        public static ICategoryRepository CategoryRepository()
+        {
+            return GetOrCreate<ICategoryRepository>();
+        }
+
+        public static ICommentRepository CommentRepository()
+        {
+            return GetOrCreate<ICommentRepository>();
+        }
+
+        public static IConfirmationCodeRepository ConfirmationCodeRepository()
+        {
+            return GetOrCreate<IConfirmationCodeRepository>();
+        }
+
+        public static ILoginRepository LoginRepository()
+        {
+            return GetOrCreate<ILoginRepository>();
+        }
+
+        public static INotificationRepository NotificationRepository()
+        {
+            return GetOrCreate<INotificationRepository>();
+        }
+
+        public static IPostRepository PostRepository()
+        {
+            return GetOrCreate<IPostRepository>();
+        }
+
+        public static IPrivateMessageRepository PrivateMessageRepository()
+        {
+            return GetOrCreate<IPrivateMessageRepository>();
+        }
+
+        public static ITagRepository TagRepository()
+        {
+            return GetOrCreate<ITagRepository>();
+        }
+
+        private static T GetOrCreate<T>()
+        {
+            return ServiceProvider.Provider.GetOrCreate<T>();
         }
     }
 }

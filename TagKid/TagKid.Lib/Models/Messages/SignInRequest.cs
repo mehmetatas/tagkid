@@ -1,20 +1,20 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TagKid.Lib.Services.Models.Auth
+namespace TagKid.Lib.Models.Messages
 {
     [DataContract]
-    public class SignInRequest
+    public class SignInRequest : Request
     {
-        [DataMember(Name = "email_or_username")]
+        [DataMember(Name = "emailOrUsername")]
         public string EmailOrUsername { get; set; }
 
         [DataMember(Name = "password")]
         public string Password { get; set; }
 
-        [DataMember(Name = "facebook_id")]
+        [DataMember(Name = "facebookId")]
         public string FacebookId { get; set; }
 
-        [DataMember(Name = "facebook_token")]
+        [DataMember(Name = "facebookToken")]
         public string FacebookToken { get; set; }
     }
 }
