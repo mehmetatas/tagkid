@@ -61,6 +61,15 @@
     <Compile Include="Repository\ISqlBuilder.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Repository\Base\SqlBuilder.cs" />
+    <Compile Include="Repository\Linq\ExpressionToSql.cs" />
+    <Compile Include="Repository\Linq\Extensions.cs" />
+    <Compile Include="Repository\Linq\ICrudRepository.cs" />
+    <Compile Include="Repository\Linq\ILinqQuery.cs" />
+    <Compile Include="Repository\Linq\ILinqQueryBuilder.cs" />
+    <Compile Include="Repository\Linq\LinqSqlQuery.cs" />
+    <Compile Include="Repository\Linq\Sql.cs" />
+    <Compile Include="Repository\Linq\SqlExpressionVisitor.cs" />
+    <Compile Include="Repository\Linq\User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

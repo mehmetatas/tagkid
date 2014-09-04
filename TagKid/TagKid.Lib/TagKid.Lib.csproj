@@ -63,6 +63,7 @@
     <Compile Include="Models\Entities\UserModel.cs" />
     <Compile Include="Models\Messages\SignUpResponse.cs" />
     <Compile Include="PetaPoco\PetaPoco.cs" />
+    <Compile Include="PetaPoco\Repository\PetaPocoCrudRepository.cs" />
     <Compile Include="PetaPoco\Repository\PetaPocoPage.cs" />
     <Compile Include="PetaPoco\Repository\PetaPocoSql.cs" />
     <Compile Include="PetaPoco\Repository\PetaPocoSqlBuilder.cs" />

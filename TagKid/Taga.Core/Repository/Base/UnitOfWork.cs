@@ -39,7 +39,7 @@ namespace Taga.Core.Repository.Base
             }
         }
 
-        internal static IUnitOfWork Current
+        public static IUnitOfWork Current
         {
             get { return Stack.Peek(); }
         }
