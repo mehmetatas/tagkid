@@ -1,7 +1,9 @@
 ﻿using System.Web.Http;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
+using Taga.Core.Repository.Sql;
 using TagKid.Lib.PetaPoco.Repository;
+using TagKid.Lib.PetaPoco.Repository.Sql;
 using TagKid.Lib.Services;
 using TagKid.Lib.Services.Impl;
 
@@ -21,7 +23,7 @@ namespace TagKid.Web
             var prov = ServiceProvider.Provider;
 
             prov.RegisterProxy<IAuthService, AuthService>();
-            prov.RegisterProxy<IRepository, PetaPocoRepository>();
+            prov.RegisterProxy<ISqlRepository, PetaPocoSqlRepository>();
             prov.RegisterProxy<IUnitOfWork, PetaPocoUnitOfWork>();
             prov.RegisterProxy<ISqlBuilder, PetaPocoSqlBuilder>();
         }

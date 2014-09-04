@@ -53,6 +53,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\Mock\MockLinqQuery.cs" />
+    <Compile Include="Core\Mock\MockLinqQueryBuilder.cs" />
+    <Compile Include="Core\Mock\MockLinqRepository.cs" />
+    <Compile Include="Core\Mock\MockPage.cs" />
     <Compile Include="Core\Mock\MockSql.cs" />
     <Compile Include="Core\Mock\MockSqlBuilder.cs" />
     <Compile Include="Core\SqlBuilderTests.cs" />

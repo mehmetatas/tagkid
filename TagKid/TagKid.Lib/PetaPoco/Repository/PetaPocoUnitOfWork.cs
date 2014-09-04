@@ -2,7 +2,7 @@
 
 namespace TagKid.Lib.PetaPoco.Repository
 {
-    public class PetaPocoUnitOfWork : UnitOfWork
+    public class PetaPocoUnitOfWork : UnitOfWorkBase
     {
         private readonly Database _db;
 

@@ -1,5 +1,5 @@
-﻿using Taga.Core.Repository;
-using Taga.Core.Repository.Base;
+﻿using Taga.Core.Repository.Sql;
+using Taga.Core.Repository.Sql.Base;
 
 namespace TagKid.Tests.Core.Mock
 {

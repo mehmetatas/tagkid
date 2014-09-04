@@ -3,9 +3,9 @@ using Taga.Core.Context;
 
 namespace Taga.Core.Repository.Base
 {
-    public abstract class UnitOfWork : IUnitOfWork
+    public abstract class UnitOfWorkBase : IUnitOfWork
     {
-        protected UnitOfWork()
+        protected UnitOfWorkBase()
         {
             Push(this);
         }

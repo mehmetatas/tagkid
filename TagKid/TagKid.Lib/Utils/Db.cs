@@ -1,5 +1,7 @@
 ﻿using Taga.Core.IoC;
 using Taga.Core.Repository;
+using Taga.Core.Repository.Linq;
+using Taga.Core.Repository.Sql;
 using TagKid.Lib.Repositories;
 
 namespace TagKid.Lib.Utils
@@ -11,11 +13,16 @@ namespace TagKid.Lib.Utils
             return GetOrCreate<IUnitOfWork>();
         }
 
-        public static IRepository Repository()
+        public static ISqlRepository SqlRepository()
         {
-            return GetOrCreate<IRepository>();
+            return GetOrCreate<ISqlRepository>();
         }
 
+        public static ILinqRepository LinqRepository()
+        {
+            return GetOrCreate<ILinqRepository>();
+        }
+        
         public static ISqlBuilder SqlBuilder()
         {
             return GetOrCreate<ISqlBuilder>();
