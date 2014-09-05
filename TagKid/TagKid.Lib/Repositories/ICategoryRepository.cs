@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Taga.Core.Repository;
 using TagKid.Lib.Entities;
 
 namespace TagKid.Lib.Repositories
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> GetByUserId(long userId);
+        IPage<Category> GetByUserId(long userId, int pageIndex, int pageSize);
 
         Category GetById(long categoryId);
 

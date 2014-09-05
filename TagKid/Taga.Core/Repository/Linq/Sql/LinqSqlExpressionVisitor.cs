@@ -11,7 +11,7 @@ namespace Taga.Core.Repository.Linq.Sql
         private LinqSqlQuery _sql;
         private readonly StringBuilder _whereBuilder;
         private readonly ILinqSqlSchemaSolver _sqlSchemaSolver;
-        
+
         public LinqSqlExpressionVisitor(ILinqSqlSchemaSolver sqlSchemaSolver)
         {
             _whereBuilder = new StringBuilder();
@@ -100,10 +100,19 @@ namespace Taga.Core.Repository.Linq.Sql
 
         protected override Expression VisitMember(MemberExpression node)
         {
-            if (node.Expression != null && node.Expression.NodeType == ExpressionType.Parameter)
+            if (node.Expression != null)
             {
-                _whereBuilder.Append(GetColumnName(node.Member));
-                return node;
+                if (node.Expression.NodeType == ExpressionType.Parameter)
+                {
+                    _whereBuilder.Append(GetColumnName(node.Member));
+                    return node;
+                }
+                
+                if (node.Expression.NodeType == ExpressionType.Constant)
+                {
+                    VisitConstant((ConstantExpression)node.Expression);
+                    return node;
+                }
             }
 
             throw new NotSupportedException(String.Format("The member '{0}' is not supported", node.Member.Name));

@@ -1,16 +1,13 @@
-﻿using Taga.Core.DynamicProxy;
+﻿using System;
 
 namespace Taga.Core.IoC
 {
     public interface IServiceProvider
     {
-        void Register<TInterface, TClass>()
-            where TClass : class, TInterface;
+        void Register(Type interfaceType, Type classType, object singleton = null);
 
-        void RegisterProxy<TInterface, TClass>(ICallHandler callHandler = null)
-            where TClass : class, TInterface;
-
-        void RegisterSingleton<TInterface>(TInterface singleton);
+        void Register<TInterface, TClass>(TClass singleton = null)
+            where TClass : class, TInterface, new();
 
         TInterface GetOrCreate<TInterface>();
     }

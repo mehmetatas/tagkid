@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Taga.Core.Context;
 
 namespace Taga.Core.Repository.Base
@@ -41,7 +42,12 @@ namespace Taga.Core.Repository.Base
 
         public static IUnitOfWork Current
         {
-            get { return Stack.Peek(); }
+            get
+            {
+                if (Stack.Count == 0)
+                    throw new InvalidOperationException("No UnitOfWork is available!");
+                return Stack.Peek();
+            }
         }
 
         private static void Push(IUnitOfWork uow)

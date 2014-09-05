@@ -1,9 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TagKid.Tests.Core.Mock;
 
 namespace TagKid.Tests.Core
@@ -334,7 +329,7 @@ namespace TagKid.Tests.Core
         }
 
         [TestMethod]
-        public void TestUpdate() 
+        public void TestUpdate()
         {
             var builder = new MockSqlBuilder();
             builder.Update("TEST");
@@ -355,18 +350,64 @@ namespace TagKid.Tests.Core
         public void TestOrderBy()
         {
             var builder = new MockSqlBuilder();
-            builder.OrderBy("TEST");
+            builder.OrderBy("TEST", true);
             var sql = builder.Build();
-            Assert.AreEqual(" ORDER BY TEST", sql.Query);
+            Assert.AreEqual(" ORDER BY TEST DESC", sql.Query);
         }
 
         [TestMethod]
-        public void TestDesc()
+        public void TestStartsWithColumn()
         {
             var builder = new MockSqlBuilder();
-            builder.Desc();
+            builder.StartsWith("TEST", "VALUE");
             var sql = builder.Build();
-            Assert.AreEqual(" DESC", sql.Query);
+            Assert.AreEqual(" TEST LIKE @0", sql.Query);
+            Assert.AreEqual(1, sql.Parameters.Length);
+            Assert.AreEqual("VALUE%", sql.Parameters[0]);
+        }
+
+        [TestMethod]
+        public void TestEndsWithColumn()
+        {
+            var builder = new MockSqlBuilder();
+            builder.EndsWith("TEST", "VALUE");
+            var sql = builder.Build();
+            Assert.AreEqual(" TEST LIKE @0", sql.Query);
+            Assert.AreEqual(1, sql.Parameters.Length);
+            Assert.AreEqual("%VALUE", sql.Parameters[0]);
+        }
+
+        [TestMethod]
+        public void TestContainsColumn()
+        {
+            var builder = new MockSqlBuilder();
+            builder.Contains("TEST", "VALUE");
+            var sql = builder.Build();
+            Assert.AreEqual(" TEST LIKE @0", sql.Query);
+            Assert.AreEqual(1, sql.Parameters.Length);
+            Assert.AreEqual("%VALUE%", sql.Parameters[0]);
+        }
+
+        [TestMethod]
+        public void TestInColumn()
+        {
+            var builder = new MockSqlBuilder();
+            builder.In("TEST", "VALUE1", "VALUE2", "VALUE3");
+            var sql = builder.Build();
+            Assert.AreEqual(" TEST IN (@0,@1,@2)", sql.Query);
+            Assert.AreEqual(3, sql.Parameters.Length);
+            Assert.AreEqual("VALUE1", sql.Parameters[0]);
+            Assert.AreEqual("VALUE2", sql.Parameters[1]);
+            Assert.AreEqual("VALUE3", sql.Parameters[2]);
+        }
+
+        [TestMethod]
+        public void TestLeftJoin()
+        {
+            var builder = new MockSqlBuilder();
+            builder.LeftJoin("TEST T2", "T2.COL2", "T1.COL1");
+            var sql = builder.Build();
+            Assert.AreEqual(" LEFT JOIN TEST T2 ON T2.COL2 = T1.COL1", sql.Query);
         }
     }
 }

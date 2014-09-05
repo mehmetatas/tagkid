@@ -7,10 +7,17 @@ namespace TagKid.Tests.Core.Mock
 {
     class MockLinqQuery<TEntity> : ILinqQuery
     {
-        public List<Expression<Func<TEntity, bool>>> WhereExpressions = new List<Expression<Func<TEntity, bool>>>();
-        public List<OrderByExpression<TEntity, dynamic>> OrderByExpressions = new List<OrderByExpression<TEntity, dynamic>>();
-        public int PageIndex;
-        public int PageSize;
+        public MockLinqQuery()
+        {
+            WhereExpressions = new List<Expression<Func<TEntity, bool>>>();
+            OrderByExpressions = new List<OrderByExpression<TEntity, dynamic>>();
+        }
+
+        public List<Expression<Func<TEntity, bool>>> WhereExpressions { get; private set; }
+        public List<OrderByExpression<TEntity, dynamic>> OrderByExpressions { get; private set; }
+
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
     }
 
     class OrderByExpression<TEntity, TProp>

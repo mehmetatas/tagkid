@@ -1,21 +1,17 @@
 ﻿using Taga.Core.Repository;
 using TagKid.Lib.Entities;
+using TagKid.Lib.Entities.Filters;
+using TagKid.Lib.Entities.Views;
 
 namespace TagKid.Lib.Repositories
 {
     public interface IPostRepository
     {
-        Post GetById(long postId);
+        PostView GetById(long postId);
 
-        IPage<Post> GetForUserId(long userId, int pageIndex, int pageSize);
+        IPage<PostView> GetForUserId(long userId, int pageIndex, int pageSize);
 
-        IPage<Post> SearchByUserId(long userId, int pageIndex, int pageSize);
-
-        IPage<Post> SearchByCategoryId(long categoryId, int pageIndex, int pageSize);
-
-        IPage<Post> SearchByTagIds(long[] tagIds, int pageIndex, int pageSize);
-
-        IPage<Post> SearchByTitle(string title, int pageIndex, int pageSize);
+        IPage<PostView> Search(PostFilter filter);
 
         void Save(Post post);
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using Taga.Core.Repository;
+﻿using Taga.Core.Repository;
 using Taga.Core.Repository.Linq;
 using TagKid.Lib.Entities;
 using TagKid.Lib.Utils;
@@ -10,32 +9,27 @@ namespace TagKid.Lib.Repositories.Impl
     {
         public User GetById(long id)
         {
-            var repo = Db.LinqRepository();
-            return repo.FirstOrDefault<User>(u => u.Id == id);
+            return Db.LinqRepository().FirstOrDefault<User>(u => u.Id == id);
         }
 
         public User GetByEmail(string email)
         {
-            var repo = Db.LinqRepository();
-            return repo.FirstOrDefault<User>(u => u.Email == email);
+            return Db.LinqRepository().FirstOrDefault<User>(u => u.Email == email);
         }
 
         public User GetByUsername(string username)
         {
-            var repo = Db.LinqRepository();
-            return repo.FirstOrDefault<User>(u => u.Username == username);
+            return Db.LinqRepository().FirstOrDefault<User>(u => u.Username == username);
         }
 
         public void Save(User user)
         {
-            var repo = Db.LinqRepository();
-            repo.Save(user);
+            Db.LinqRepository().Save(user);
         }
 
         public IPage<User> Search(string usernameOrFullname, int pageIndex, int pageSize)
         {
-            var repo = Db.LinqRepository();
-            return repo.Query<User>(
+            return Db.LinqRepository().Query<User>(
                 u => u.Username.Contains(usernameOrFullname) || u.FullName.Contains(usernameOrFullname),
                 pageIndex, pageSize);
         }

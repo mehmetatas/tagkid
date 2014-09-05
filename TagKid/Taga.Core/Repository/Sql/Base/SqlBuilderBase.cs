@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Taga.Core.Repository.Sql.Base
@@ -13,6 +14,11 @@ namespace Taga.Core.Repository.Sql.Base
         {
             _query = new StringBuilder();
             _parameters = new List<object>();
+        }
+
+        public int ParamCount
+        {
+            get { return _parameters.Count; }
         }
 
         public ISql Build()
@@ -54,9 +60,15 @@ namespace Taga.Core.Repository.Sql.Base
             return Append(String.Format("DELETE FROM {0}", tableName));
         }
 
+        public ISqlBuilder Where()
+        {
+            return Append(" WHERE");
+        }
+
         public ISqlBuilder Where(string columnName)
         {
-            return Append(String.Format(" WHERE {0}", columnName));
+            return Where()
+                .Column(columnName);
         }
 
         public ISqlBuilder Column(string columnName)
@@ -208,22 +220,84 @@ namespace Taga.Core.Repository.Sql.Base
             return Column(columnName)
                   .Between(minParam, maxParam);
         }
-        
+
         public ISqlBuilder GroupBy(params string[] columnNames)
         {
             return Append(" GROUP BY")
                 .Column(String.Join(",", columnNames));
         }
 
-        public ISqlBuilder OrderBy(string columnName)
+        public ISqlBuilder OrderBy(string columnName, bool desc)
         {
-            return Append(" ORDER BY")
+            Append(" ORDER BY")
                 .Column(columnName);
+
+            if (desc)
+                Append(" DESC");
+
+            return this;
         }
 
-        public ISqlBuilder Desc()
+        public ISqlBuilder StartsWith(string value)
         {
-            return Append(" DESC");
+            return Append(" LIKE")
+                .Param(String.Format("{0}%", value));
+        }
+
+        public ISqlBuilder StartsWith(string columnName, string value)
+        {
+            return Column(columnName)
+                .StartsWith(value);
+        }
+
+        public ISqlBuilder EndsWith(string value)
+        {
+            return Append(" LIKE")
+                .Param(String.Format("%{0}", value));
+        }
+
+        public ISqlBuilder EndsWith(string columnName, string value)
+        {
+            return Column(columnName)
+                .EndsWith(value);
+        }
+
+        public ISqlBuilder Contains(string value)
+        {
+            return Append(" LIKE")
+                .Param(String.Format("%{0}%", value));
+        }
+
+        public ISqlBuilder Contains(string columnName, string value)
+        {
+            return Column(columnName)
+                .Contains(value);
+        }
+
+
+        public ISqlBuilder In(params object[] parameters)
+        {
+            return Append(" IN (")
+                .Append(String.Join(",", Enumerable.Range(ParamCount, parameters.Length).Select(i => String.Format("@{0}", i))))
+                .Append(")", parameters);
+
+        }
+
+        public ISqlBuilder In(string columnName, params object[] parameters)
+        {
+            return Column(columnName)
+                .In(parameters);
+        }
+
+        public ISqlBuilder Join(string otherTable, string otherTableColumn, string thisTableColumn)
+        {
+            return Append(String.Format(" JOIN {0} ON {1} = {2}", otherTable, otherTableColumn, thisTableColumn));
+        }
+
+        public ISqlBuilder LeftJoin(string otherTable, string otherTableColumn, string thisTableColumn)
+        {
+            return Append(" LEFT")
+                .Join(otherTable, otherTableColumn, thisTableColumn);
         }
     }
 }

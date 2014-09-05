@@ -22,10 +22,10 @@ namespace TagKid.Web
         {
             var prov = ServiceProvider.Provider;
 
-            prov.RegisterProxy<IAuthService, AuthService>();
-            prov.RegisterProxy<ISqlRepository, PetaPocoSqlRepository>();
-            prov.RegisterProxy<IUnitOfWork, PetaPocoUnitOfWork>();
-            prov.RegisterProxy<ISqlBuilder, PetaPocoSqlBuilder>();
+            prov.Register<IAuthService, AuthService>();
+            prov.Register<ISqlRepository, PetaPocoSqlRepository>();
+            prov.Register<IUnitOfWork, PetaPocoUnitOfWork>();
+            prov.Register<ISqlBuilder, PetaPocoSqlBuilder>();
         }
     }
 }

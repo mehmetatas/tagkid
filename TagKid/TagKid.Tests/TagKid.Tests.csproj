@@ -59,11 +59,15 @@
     <Compile Include="Core\Mock\MockPage.cs" />
     <Compile Include="Core\Mock\MockSql.cs" />
     <Compile Include="Core\Mock\MockSqlBuilder.cs" />
+    <Compile Include="Core\Mock\MockTable.cs" />
+    <Compile Include="Core\ServiceProviderTests.cs" />
     <Compile Include="Core\SqlBuilderTests.cs" />
+    <Compile Include="Lib\Repository\PostRepositoryTests.cs" />
     <Compile Include="Lib\ValidationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

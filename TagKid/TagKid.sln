@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagKid.Web", "TagKid.Web\Ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagKid.Tests", "TagKid.Tests\TagKid.Tests.csproj", "{B9A6DA30-925B-4BAE-84E3-E98D3BA59F95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagKid.ConsoleApp", "TagKid.ConsoleApp\TagKid.ConsoleApp.csproj", "{BEFF827F-C349-4984-A458-FAF66EF66D6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B9A6DA30-925B-4BAE-84E3-E98D3BA59F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9A6DA30-925B-4BAE-84E3-E98D3BA59F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9A6DA30-925B-4BAE-84E3-E98D3BA59F95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEFF827F-C349-4984-A458-FAF66EF66D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEFF827F-C349-4984-A458-FAF66EF66D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEFF827F-C349-4984-A458-FAF66EF66D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEFF827F-C349-4984-A458-FAF66EF66D6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

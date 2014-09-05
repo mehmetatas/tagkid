@@ -82,5 +82,10 @@ namespace TagKid.Lib.Utils
         {
             return ServiceProvider.Provider.GetOrCreate<T>();
         }
+
+        internal static ILinqQueryBuilder<T> LinqQueryBuilder<T>()
+        {
+            return GetOrCreate<ILinqQueryBuilder<T>>();
+        }
     }
 }

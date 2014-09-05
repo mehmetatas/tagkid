@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Taga.Core.DynamicProxy;
 
 namespace Taga.Core.IoC
 {
@@ -8,70 +7,70 @@ namespace Taga.Core.IoC
     {
         public static IServiceProvider Provider = new ServiceProvider();
 
-        private readonly Dictionary<Type, Func<object>> _services = new Dictionary<Type, Func<object>>();
+        private readonly Dictionary<Type, ServiceInfo> _services = new Dictionary<Type, ServiceInfo>();
 
         private ServiceProvider()
         {
-            RegisterSingleton(NullCallHandler.Instance);
+
         }
 
-        public void Register<TInterface, TClass>() where TClass : class, TInterface
+        public void Register(Type interfaceType, Type classType, object singleton = null)
         {
-            var interfaceType = typeof(TInterface);
-            var classType = typeof(TClass);
-
-            Func<object> func = () => Activator.CreateInstance(classType);
-
-            Register(interfaceType, classType, func);
-        }
-
-        public void RegisterProxy<TInterface, TClass>(ICallHandler callHandler = null) where TClass : class, TInterface
-        {
-            var interfaceType = typeof(TInterface);
-            var classType = typeof(TClass);
-
-            if (callHandler == null)
-                callHandler = GetOrCreate<ICallHandler>();
-
-            //Func<object> func = () => Proxy.Of<TClass>(callHandler);
-            Func<object> func = () => Activator.CreateInstance(classType);
-
-            Register(interfaceType, classType, func);
-        }
-
-        public void RegisterSingleton<TInterface>(TInterface singleton)
-        {
-            if (singleton == null)
-                throw new ArgumentNullException("singleton");
-
-            var interfaceType = typeof(TInterface);
-            var classType = singleton.GetType();
-
-            Func<object> func = () => singleton;
-
-            Register(interfaceType, classType, func);
-        }
-
-        private void Register(Type interfaceType, Type classType, Func<object> func)
-        {
-            if (!interfaceType.IsInterface)
-                throw new InvalidOperationException(String.Format("{0} must be an interface type", interfaceType));
-
-            if (!classType.IsClass)
-                throw new InvalidOperationException(String.Format("{0} must be a class type", classType));
+            var info = new ServiceInfo
+            {
+                SingletonInstance = singleton,
+                ServiceType = classType
+            };
 
             if (_services.ContainsKey(interfaceType))
-                _services[interfaceType] = func;
+                _services[interfaceType] = info;
             else
-                _services.Add(interfaceType, func);
+                _services.Add(interfaceType, info);
+        }
+
+        public void Register<TInterface, TClass>(TClass singleton = null) where TClass : class, TInterface, new()
+        {
+            Register(typeof(TInterface), typeof(TClass), singleton);
         }
 
         public TInterface GetOrCreate<TInterface>()
         {
             var interfaceType = typeof(TInterface);
-            if (_services.ContainsKey(interfaceType))
-                return (TInterface)_services[interfaceType]();
-            throw new InvalidOperationException(String.Format("No implementations registered for {0}", interfaceType));
+
+            Type genericArgType = null;
+            if (!_services.ContainsKey(interfaceType))
+            {
+                if (interfaceType.IsGenericType)
+                {
+                    genericArgType = interfaceType.GetGenericArguments()[0];
+                    interfaceType = interfaceType.GetGenericTypeDefinition();
+                }
+
+                if (!_services.ContainsKey(interfaceType))
+                    throw new InvalidOperationException("No service registered for: " + interfaceType);
+            }
+
+            var info = _services[interfaceType];
+
+            if  (info.IsSingleton)
+                return (TInterface)info.SingletonInstance;
+
+            if (genericArgType == null)
+                return (TInterface)Activator.CreateInstance(info.ServiceType);
+
+            var genericType = info.ServiceType.MakeGenericType(genericArgType);
+            return (TInterface)Activator.CreateInstance(genericType);
+        }
+    }
+
+    public class ServiceInfo
+    {
+        public Type ServiceType { get; set; }
+        public object SingletonInstance { get; set; }
+
+        public bool IsSingleton
+        {
+            get { return SingletonInstance != null; }
         }
     }
 }
