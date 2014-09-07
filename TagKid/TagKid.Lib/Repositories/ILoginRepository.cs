@@ -5,7 +5,7 @@ namespace TagKid.Lib.Repositories
 {
     public interface ILoginRepository
     {
-        IPage<Login> GetByUserId(long userId, bool onlyFailed, int pageIndex, int pageSize);
+        IPage<Login> GetLogins(string username, string email, bool onlyFailed, int pageIndex, int pageSize);
 
         Login GetLastSuccessfulLogin(long userId);
 

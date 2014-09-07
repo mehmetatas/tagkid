@@ -2,9 +2,9 @@
 
 namespace TagKid.Lib.Entities.Views
 {
-    [TableName("post_search_view")]
+    [TableName("comment_view")]
     [ExplicitColumns]
-    public class PostView : Post
+    public class CommentView : Comment
     {
         [Column("fullname")]
         public string FullName { get; set; }
@@ -14,11 +14,5 @@ namespace TagKid.Lib.Entities.Views
 
         [Column("profile_image_url")]
         public string ProfileImageUrl { get; set; }
-
-        [Column("category_name")]
-        public string CategoryName { get; set; }
-
-        [Column("category_access_level")]
-        public AccessLevel CategoryAccessLevel { get; set; }
     }
 }

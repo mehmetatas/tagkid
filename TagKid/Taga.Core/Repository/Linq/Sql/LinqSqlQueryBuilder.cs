@@ -32,7 +32,7 @@ namespace Taga.Core.Repository.Linq.Sql
 
         public ILinqQueryBuilder<TEntity> OrderBy(Expression<Func<TEntity, dynamic>> expression, bool desc)
         {
-            var memberExpression = (MemberExpression)expression.Body;
+            var memberExpression = (MemberExpression)((UnaryExpression)expression.Body).Operand;
 
             var order = desc ? "DESC" : "ASC";
 

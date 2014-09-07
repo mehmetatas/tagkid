@@ -38,6 +38,7 @@
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.5.4.0.0\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -62,7 +63,8 @@
     <Compile Include="Core\Mock\MockTable.cs" />
     <Compile Include="Core\ServiceProviderTests.cs" />
     <Compile Include="Core\SqlBuilderTests.cs" />
-    <Compile Include="Lib\Repository\PostRepositoryTests.cs" />
+    <Compile Include="Lib\ExpressionTests.cs" />
+    <Compile Include="Lib\Repository\RepositoryTests.cs" />
     <Compile Include="Lib\ValidationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

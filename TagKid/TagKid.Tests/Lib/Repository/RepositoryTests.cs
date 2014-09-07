@@ -15,17 +15,19 @@ using TagKid.Lib.Repositories.Impl;
 namespace TagKid.Tests.Lib.Repository
 {
     [TestClass]
-    public class PostRepositoryTests
+    public class RepositoryTests
     {
         [TestInitialize]
         public void Init()
         {
             var prov = ServiceProvider.Provider;
             prov.Register<ISqlRepository, PetaPocoSqlRepository>();
+            prov.Register<ILinqRepository, PetaPocoLinqRepository>();
             prov.Register<IUnitOfWork, PetaPocoUnitOfWork>();
             prov.Register<ISqlBuilder, PetaPocoSqlBuilder>();
             prov.Register<IPostRepository, PostRepository>();
             prov.Register<ILoginRepository, LoginRepository>();
+            prov.Register<ICommentRepository, CommentRepository>();
             prov.Register<ILinqSqlSchemaSolver, PetaPocoSqlSchemaSolver>();
             prov.Register(typeof(ILinqQueryBuilder<>), typeof(LinqSqlQueryBuilder<>));
         }
@@ -74,14 +76,39 @@ namespace TagKid.Tests.Lib.Repository
         [TestMethod]
         public void TestGetLastSuccessfulLogins()
         {
-            using (var uow = ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
+            using (ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
             {
                 var repo = ServiceProvider.Provider.GetOrCreate<ILoginRepository>();
-
                 repo.GetLastSuccessfulLogin(1);
-
-                uow.Save();
             }
+        }
+
+        [TestMethod]
+        public void TestGetLogins()
+        {
+            using (ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
+            {
+                var repo = ServiceProvider.Provider.GetOrCreate<ILoginRepository>();
+                repo.GetLogins("username", "email", true, 1, 10);
+            }
+        }
+
+        [TestMethod]
+        public void TestGetComments()
+        {
+            using (ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
+            {
+                var repo = ServiceProvider.Provider.GetOrCreate<ICommentRepository>();
+                repo.GetByPostId(1, 1, 10);
+            }
+        }
+        
+        [TestMethod]
+        public void TestDynamicAnonymous()
+        {
+            object o = new { X = 3 };
+            dynamic d = o;
+            Assert.AreEqual(3, d.X);
         }
     }
 }

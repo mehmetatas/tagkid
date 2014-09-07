@@ -34,6 +34,7 @@
       <HintPath>..\packages\FluentValidation.5.4.0.0\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -58,6 +59,7 @@
     <Compile Include="Entities\PrivateMessage.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Views\CommentView.cs" />
     <Compile Include="Entities\Views\PostView.cs" />
     <Compile Include="Entities\Views\UserTagsView.cs" />
     <Compile Include="Exceptions\ExceptionExtensions.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Repositories\IConfirmationCodeRepository.cs" />
     <Compile Include="Repositories\ILoginRepository.cs" />
     <Compile Include="Repositories\Impl\CategoryRepository.cs" />
+    <Compile Include="Repositories\Impl\CommentRepository.cs" />
     <Compile Include="Repositories\Impl\ConfirmationCodeRepository.cs" />
     <Compile Include="Repositories\Impl\LoginRepository.cs" />
     <Compile Include="Repositories\Impl\PostRepository.cs" />
@@ -110,9 +113,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

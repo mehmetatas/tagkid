@@ -83,14 +83,24 @@ namespace Taga.Core.Repository.Linq.Sql
                 _whereBuilder.Append(" NULL");
                 return node;
             }
+            
+            var type = node.Value.GetType();
 
-            switch (Type.GetTypeCode(node.Value.GetType()))
+            switch (Type.GetTypeCode(type))
             {
                 case TypeCode.Object:
-                    throw new NotSupportedException(String.Format("The constant for '{0}' is not supported", node.Value));
-
+                    if (type.IsNested && type.Name.Contains("DisplayClass"))
+                    {
+                        _whereBuilder.AppendFormat(" @{0}", _sql.Parameters.Count);
+                        _sql.Parameters.Add(type.GetFields()[0].GetValue(node.Value));
+                    }
+                    else 
+                    { 
+                        throw new NotSupportedException(String.Format("The constant for '{0}' is not supported", node.Value));
+                    }
+                    break;
                 default:
-                    _whereBuilder.AppendFormat(" @P_{0}", _sql.Parameters.Count);
+                    _whereBuilder.AppendFormat(" @{0}", _sql.Parameters.Count);
                     _sql.Parameters.Add(node.Value);
                     break;
             }
@@ -269,7 +279,7 @@ namespace Taga.Core.Repository.Linq.Sql
             var newArrExpression = (NewArrayExpression)expression.Arguments[1];
             var values = newArrExpression.Expressions.Select(exp => ((ConstantExpression)exp).Value).ToArray();
 
-            _whereBuilder.AppendFormat(" {0}{1} IN ({2})", columnName, not, String.Join(",", Enumerable.Range(0, values.Length).Select(i => String.Format("@P_{0}", i + _sql.Parameters.Count))));
+            _whereBuilder.AppendFormat(" {0}{1} IN ({2})", columnName, not, String.Join(",", Enumerable.Range(0, values.Length).Select(i => String.Format("@{0}", i + _sql.Parameters.Count))));
             _sql.Parameters.AddRange(values);
             return true;
         }
