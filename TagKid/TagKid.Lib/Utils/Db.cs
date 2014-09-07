@@ -1,12 +1,11 @@
 ﻿using Taga.Core.IoC;
 using Taga.Core.Repository;
-using Taga.Core.Repository.Linq;
 using Taga.Core.Repository.Sql;
 using TagKid.Lib.Repositories;
 
 namespace TagKid.Lib.Utils
 {
-    class Db
+    static class Db
     {
         public static IUnitOfWork UnitOfWork()
         {
@@ -18,10 +17,10 @@ namespace TagKid.Lib.Utils
             return GetOrCreate<ISqlRepository>();
         }
 
-        public static ILinqRepository LinqRepository()
-        {
-            return GetOrCreate<ILinqRepository>();
-        }
+        //public static ILinqRepository LinqRepository()
+        //{
+        //    return GetOrCreate<ILinqRepository>();
+        //}
         
         public static ISqlBuilder SqlBuilder()
         {
@@ -83,9 +82,9 @@ namespace TagKid.Lib.Utils
             return ServiceProvider.Provider.GetOrCreate<T>();
         }
 
-        internal static ILinqQueryBuilder<T> LinqQueryBuilder<T>()
-        {
-            return GetOrCreate<ILinqQueryBuilder<T>>();
-        }
+        //internal static ILinqQueryBuilder<T> LinqQueryBuilder<T>()
+        //{
+        //    return GetOrCreate<ILinqQueryBuilder<T>>();
+        //}
     }
 }

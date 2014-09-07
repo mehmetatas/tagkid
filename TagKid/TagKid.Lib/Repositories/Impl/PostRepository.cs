@@ -1,9 +1,9 @@
 ﻿using System;
 using Taga.Core.Repository;
-using Taga.Core.Repository.Linq;
-using TagKid.Lib.Entities;
-using TagKid.Lib.Entities.Filters;
-using TagKid.Lib.Entities.Views;
+using Taga.Core.Repository.Sql;
+using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Entities.Views;
+using TagKid.Lib.Models.Filters;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
@@ -12,7 +12,10 @@ namespace TagKid.Lib.Repositories.Impl
     {
         public PostView GetById(long postId)
         {
-            return Db.LinqRepository().FirstOrDefault<PostView>(p => p.Id == postId);
+            return Db.SqlRepository().FirstOrDefault<PostView>(Db.SqlBuilder()
+                .SelectAllFrom<PostView>()
+                .Where("id").EqualsParam(postId)
+                .Build());
         }
 
         public IPage<PostView> GetForUserId(long userId, int pageIndex, int pageSize)
@@ -74,14 +77,18 @@ namespace TagKid.Lib.Repositories.Impl
 
             sqlBuilder.OrderBy("p.publish_date", true);
 
-            var sql = sqlBuilder.Build();
-
-            return Db.SqlRepository().Page<PostView>(filter.PageIndex, filter.PageSize, sql);
+            return Db.SqlRepository().ExecuteQuery<PostView>(sqlBuilder.Build(), filter.PageIndex, filter.PageSize);
         }
 
-        public void Save(Post post)
+        public void Save(Post post, params Tag[] tags)
         {
-            Db.LinqRepository().Save(post);
+            Db.SqlRepository().Save(post);
+
+            foreach (var tag in tags)
+            {
+                Db.SqlRepository().Save(new PostTag { PostId = post.Id, TagId = tag.Id });
+                Db.SqlRepository().Save(new TagPost { PostId = post.Id, TagId = tag.Id });
+            }
         }
     }
 }

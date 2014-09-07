@@ -1,5 +1,5 @@
 ﻿
-namespace TagKid.Lib.Entities
+namespace TagKid.Lib.Models.Entities
 {
     public enum UserStatus
     {

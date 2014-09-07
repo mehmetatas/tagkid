@@ -1,7 +1,7 @@
 ﻿using Taga.Core.DynamicProxy;
-using TagKid.Lib.Entities;
+using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Exceptions;
-using TagKid.Lib.Models.Messages;
+using TagKid.Lib.Models.DTO.Messages;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Services.Impl
@@ -30,7 +30,7 @@ namespace TagKid.Lib.Services.Impl
                     Username = request.Username,
                     Password = request.Password,
                     Email = request.Email,
-                    FullName = request.FullName,
+                    Fullname = request.Fullname,
                     FacebookId = request.FacebookId,
                     ProfileImageUrl = "",
                     Type = UserType.User,

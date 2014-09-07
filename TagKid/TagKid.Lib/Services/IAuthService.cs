@@ -1,4 +1,4 @@
-﻿using TagKid.Lib.Models.Messages;
+﻿using TagKid.Lib.Models.DTO.Messages;
 
 namespace TagKid.Lib.Services
 {

@@ -28,11 +28,6 @@ namespace Taga.Core.IoC
                 _services.Add(interfaceType, info);
         }
 
-        public void Register<TInterface, TClass>(TClass singleton = null) where TClass : class, TInterface, new()
-        {
-            Register(typeof(TInterface), typeof(TClass), singleton);
-        }
-
         public TInterface GetOrCreate<TInterface>()
         {
             var interfaceType = typeof(TInterface);

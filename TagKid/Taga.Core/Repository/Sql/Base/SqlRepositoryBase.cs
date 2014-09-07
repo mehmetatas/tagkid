@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Taga.Core.Repository.Base;
+﻿using Taga.Core.Repository.Base;
 
 namespace Taga.Core.Repository.Sql.Base
 {
@@ -12,16 +11,12 @@ namespace Taga.Core.Repository.Sql.Base
             UnitOfWork = UnitOfWorkBase.Current;
         }
 
-        public abstract void Save<T>(T entity) where T : class, new();
+        public abstract void Save<T>(T entity);
 
-        public abstract void Delete<T>(T entity) where T : class, new();
+        public abstract void Delete<T>(T entity);
 
-        public abstract T Get<T>(ISql sql);
+        public abstract IPage<T> ExecuteQuery<T>(ISql sql, int pageIndex = 1, int pageSize = 1000);
 
-        public abstract T Scalar<T>(ISql sql);
-
-        public abstract List<T> Select<T>(ISql sql) where T : class, new();
-
-        public abstract IPage<T> Page<T>(int page, int pageSize, ISql sql);
+        public abstract int ExecuteNonQuery<T>(ISql sql);
     }
 }

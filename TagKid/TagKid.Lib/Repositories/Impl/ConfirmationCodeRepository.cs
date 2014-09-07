@@ -1,5 +1,5 @@
-﻿using Taga.Core.Repository.Linq;
-using TagKid.Lib.Entities;
+﻿using Taga.Core.Repository.Sql;
+using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
@@ -8,12 +8,14 @@ namespace TagKid.Lib.Repositories.Impl
     {
         public ConfirmationCode GetById(long id)
         {
-            return Db.LinqRepository().FirstOrDefault<ConfirmationCode>(cc => cc.Id == id);
+            return Db.SqlRepository().FirstOrDefault<ConfirmationCode>(Db.SqlBuilder()
+
+                .Build());
         }
 
         public void Save(ConfirmationCode confirmationCode)
         {
-            Db.LinqRepository().Save(confirmationCode);
+            Db.SqlRepository().Save(confirmationCode);
         }
     }
 }

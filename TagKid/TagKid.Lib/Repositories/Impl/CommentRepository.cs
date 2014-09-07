@@ -1,6 +1,7 @@
 ﻿using Taga.Core.Repository;
-using TagKid.Lib.Entities;
-using TagKid.Lib.Entities.Views;
+using Taga.Core.Repository.Sql;
+using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Entities.Views;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
@@ -9,15 +10,18 @@ namespace TagKid.Lib.Repositories.Impl
     {
         public IPage<CommentView> GetByPostId(long postId, int pageIndex, int pageSize)
         {
-            return Db.LinqRepository().Query(Db.LinqQueryBuilder<CommentView>()
-                .Where(c => c.PostId == postId)
-                .OrderBy(c => c.Id, true)
-                .Page(pageIndex, pageSize));
+            return Db.SqlRepository().ExecuteQuery<CommentView>(Db.SqlBuilder()
+                .SelectAllFrom<CommentView>()
+                .Where()
+                .Equals("post_id", postId)
+                .OrderBy("id", true)
+                .Build(),
+                pageIndex, pageSize);
         }
 
         public void Save(Comment comment)
         {
-            Db.LinqRepository().Save(comment);
+            Db.SqlRepository().Save(comment);
         }
     }
 }

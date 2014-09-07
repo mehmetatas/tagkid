@@ -23,16 +23,6 @@ namespace Taga.Core.Repository.Linq
             return sb.Remove(sb.Length - length, length);
         }
 
-        public static bool In<T>(this T value, params T[] values)
-        {
-            return values.Contains(value);
-        }
-
-        public static bool Between<T>(this T value, T min, T max) where T : IComparable
-        {
-            return value.CompareTo(min) > -1 && value.CompareTo(max) < 1;
-        }
-
         public static IPage<TEntity> Query<TEntity>(this ILinqRepository repo, Expression<Func<TEntity, bool>> whereExpression, int pageIndex, int pageSize)
         {
             var sqlQuery = new LinqSqlQueryBuilder<TEntity>();

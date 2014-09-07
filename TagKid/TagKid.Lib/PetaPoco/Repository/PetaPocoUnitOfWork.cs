@@ -11,6 +11,13 @@ namespace TagKid.Lib.PetaPoco.Repository
             get { return _db; }
         }
 
+        static PetaPocoUnitOfWork()
+        {
+            var mapper = new TagKidMapper();
+            foreach (var type in mapper.Types)
+                Mappers.Register(type, mapper);
+        }
+
         public PetaPocoUnitOfWork()
         {
             _db = new Database("tagkid");

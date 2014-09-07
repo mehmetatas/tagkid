@@ -1,6 +1,6 @@
 ﻿using Taga.Core.Repository;
-using TagKid.Lib.Entities;
-using TagKid.Lib.Entities.Views;
+using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Entities.Views;
 
 namespace TagKid.Lib.Repositories
 {

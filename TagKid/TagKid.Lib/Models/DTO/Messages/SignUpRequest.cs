@@ -1,12 +1,15 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TagKid.Lib.Models.Messages
+namespace TagKid.Lib.Models.DTO.Messages
 {
     [DataContract]
-    public class SignInRequest : Request
+    public class SignUpRequest : Request
     {
-        [DataMember(Name = "emailOrUsername")]
-        public string EmailOrUsername { get; set; }
+        [DataMember(Name = "username")]
+        public string Username { get; set; }
+
+        [DataMember(Name = "email")]
+        public string Email { get; set; }
 
         [DataMember(Name = "password")]
         public string Password { get; set; }
@@ -16,5 +19,8 @@ namespace TagKid.Lib.Models.Messages
 
         [DataMember(Name = "facebookToken")]
         public string FacebookToken { get; set; }
+
+        [DataMember(Name = "fullname")]
+        public string Fullname { get; set; }
     }
 }

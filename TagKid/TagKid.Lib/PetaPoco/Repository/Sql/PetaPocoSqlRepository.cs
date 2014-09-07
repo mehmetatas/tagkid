@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Taga.Core.DynamicProxy;
+﻿using Taga.Core.DynamicProxy;
 using Taga.Core.Repository;
 using Taga.Core.Repository.Sql;
 using Taga.Core.Repository.Sql.Base;
@@ -26,29 +25,17 @@ namespace TagKid.Lib.PetaPoco.Repository.Sql
             _db.Delete(entity);
         }
 
-        public override T Get<T>(ISql sql)
-        {
-            var ppSql = (PetaPocoSql)sql;
-            return _db.SingleOrDefault<T>(ppSql.Sql);
-        }
-
-        public override T Scalar<T>(ISql sql)
-        {
-            var ppSql = (PetaPocoSql)sql;
-            return _db.ExecuteScalar<T>(ppSql.Sql);
-        }
-
-        public override List<T> Select<T>(ISql sql)
-        {
-            var ppSql = (PetaPocoSql)sql;
-            return _db.Fetch<T>(ppSql.Sql);
-        }
-
-        public override IPage<T> Page<T>(int pageIndex, int pageSize, ISql sql)
+        public override IPage<T> ExecuteQuery<T>(ISql sql, int pageIndex = 1, int pageSize = 1000)
         {
             var ppSql = (PetaPocoSql)sql;
             var petaPocoPage = _db.Page<T>(pageIndex, pageSize, ppSql.Sql);
             return new PetaPocoPage<T>(petaPocoPage);
+        }
+
+        public override int ExecuteNonQuery<T>(ISql sql)
+        {
+            var ppSql = (PetaPocoSql)sql;
+            return _db.Execute(ppSql.Sql);
         }
     }
 }

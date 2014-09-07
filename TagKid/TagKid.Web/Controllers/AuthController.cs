@@ -2,7 +2,7 @@
 using System.Web.Http;
 using Taga.Core.IoC;
 using TagKid.Lib.Exceptions;
-using TagKid.Lib.Models.Messages;
+using TagKid.Lib.Models.DTO.Messages;
 using TagKid.Lib.Services;
 
 namespace TagKid.Web.Controllers
@@ -27,7 +27,7 @@ namespace TagKid.Web.Controllers
         [ActionName("signup_email")]
         public Response SignUpWithEmail([FromBody]SignUpRequest request)
         {
-            request.FullName = request.Username;
+            request.Fullname = request.Username;
             request.FacebookId = String.Empty;
             return RegisterUser(request);
         }

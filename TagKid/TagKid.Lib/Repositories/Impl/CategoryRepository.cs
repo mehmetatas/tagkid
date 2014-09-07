@@ -1,6 +1,6 @@
 ﻿using Taga.Core.Repository;
-using Taga.Core.Repository.Linq;
-using TagKid.Lib.Entities;
+using Taga.Core.Repository.Sql;
+using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
@@ -9,17 +9,23 @@ namespace TagKid.Lib.Repositories.Impl
     {
         public IPage<Category> GetByUserId(long userId, int pageIndex, int pageSize)
         {
-            return Db.LinqRepository().Query<Category>(cat => cat.UserId == userId, pageIndex, pageSize);
+            return Db.SqlRepository().ExecuteQuery<Category>(Db.SqlBuilder()
+                .SelectAllFrom<Category>()
+                .Where("user_id").EqualsParam(userId)
+                .Build(), pageIndex, pageSize);
         }
 
         public Category GetById(long categoryId)
         {
-            return Db.LinqRepository().FirstOrDefault<Category>(cat => cat.Id == categoryId);
+            return Db.SqlRepository().FirstOrDefault<Category>(Db.SqlBuilder()
+                .SelectAllFrom<Category>()
+                .Where("id").EqualsParam(categoryId)
+                .Build());
         }
 
         public void Save(Category category)
         {
-            Db.LinqRepository().Save(category);
+            Db.SqlRepository().Save(category);
         }
     }
 }

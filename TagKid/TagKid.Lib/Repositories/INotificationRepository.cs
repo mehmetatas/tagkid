@@ -1,11 +1,12 @@
 ﻿using Taga.Core.Repository;
-using TagKid.Lib.Entities;
+using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Entities.Views;
 
 namespace TagKid.Lib.Repositories
 {
     public interface INotificationRepository
     {
-        IPage<Notification> GetByToUserId(long toUserId, bool onlyUnread, int pageIndex, int pageSize);
+        IPage<NotificationView> GetByToUserId(long toUserId, bool onlyUnread, int pageIndex, int pageSize);
 
         void Save(Notification notification);
     }

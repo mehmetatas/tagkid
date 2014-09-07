@@ -1,3 +1,7 @@
+using System;
+using System.Linq.Expressions;
+using Taga.Core.IoC;
+
 namespace Taga.Core.Repository.Sql
 {
     public interface ISqlBuilder
@@ -5,7 +9,7 @@ namespace Taga.Core.Repository.Sql
         int ParamCount { get; }
 
         ISql Build();
-        
+
         ISqlBuilder Append(string sql, params object[] parameters);
 
         ISqlBuilder SelectAllFrom(string tableName);
@@ -14,7 +18,7 @@ namespace Taga.Core.Repository.Sql
 
         ISqlBuilder Update(string tableName);
         ISqlBuilder DeleteFrom(string tableName);
-        
+
         ISqlBuilder Column(string columnName);
         ISqlBuilder Param(object param);
 
@@ -51,9 +55,9 @@ namespace Taga.Core.Repository.Sql
 
         ISqlBuilder Between(object minParam, object maxParam);
         ISqlBuilder Between(string columnName, object minParam, object maxParam);
-        
+
         ISqlBuilder GroupBy(params string[] columnNames);
-        ISqlBuilder OrderBy(string columnName, bool desc);
+        ISqlBuilder OrderBy(string columnName, bool desc = false);
 
         ISqlBuilder StartsWith(string value);
         ISqlBuilder StartsWith(string columnName, string value);
@@ -67,5 +71,29 @@ namespace Taga.Core.Repository.Sql
 
         ISqlBuilder Join(string otherTable, string otherTableColumn, string thisTableColumn);
         ISqlBuilder LeftJoin(string otherTable, string otherTableColumn, string thisTableColumn);
+    }
+
+    public static class SqlBuilderExtensions
+    {
+        private readonly static IMapper Mapper = ServiceProvider.Provider.GetOrCreate<IMapper>();
+
+        public static ISqlBuilder Select<T>(this ISqlBuilder builder, Expression<Func<T, dynamic>> propExpression, object value) where T : class,new()
+        {
+            var tableName = Mapper.GetTableName<T>();
+            var columnName = Mapper.GetColumnName(propExpression);
+            return builder.SelectAllFrom(tableName).Where(columnName).EqualsParam(value);
+        }
+
+        public static ISqlBuilder SelectAllFrom<T>(this ISqlBuilder builder) where T : class,new()
+        {
+            var tableName = Mapper.GetTableName<T>();
+            return builder.SelectAllFrom(tableName);
+        }
+
+        public static ISqlBuilder Column<T>(this ISqlBuilder builder, Expression<Func<T, dynamic>> propExpression) where T : class,new()
+        {
+            var columnName = Mapper.GetColumnName(propExpression);
+            return builder.Column(columnName);
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Taga.Core.Repository;
-using TagKid.Lib.Entities;
-using TagKid.Lib.Entities.Filters;
-using TagKid.Lib.Entities.Views;
+using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Entities.Views;
+using TagKid.Lib.Models.Filters;
 
 namespace TagKid.Lib.Repositories
 {
@@ -13,6 +13,6 @@ namespace TagKid.Lib.Repositories
 
         IPage<PostView> Search(PostFilter filter);
 
-        void Save(Post post);
+        void Save(Post post, params Tag[] tags);
     }
 }

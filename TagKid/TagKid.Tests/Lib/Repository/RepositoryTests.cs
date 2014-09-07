@@ -1,16 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
-using Taga.Core.Repository.Linq;
-using Taga.Core.Repository.Linq.Sql;
 using Taga.Core.Repository.Sql;
-using TagKid.Lib.Entities;
-using TagKid.Lib.Entities.Filters;
+using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Filters;
+using TagKid.Lib.PetaPoco;
 using TagKid.Lib.PetaPoco.Repository;
-using TagKid.Lib.PetaPoco.Repository.Linq;
 using TagKid.Lib.PetaPoco.Repository.Sql;
 using TagKid.Lib.Repositories;
 using TagKid.Lib.Repositories.Impl;
+using IMapper = Taga.Core.Repository.IMapper;
 
 namespace TagKid.Tests.Lib.Repository
 {
@@ -22,20 +21,20 @@ namespace TagKid.Tests.Lib.Repository
         {
             var prov = ServiceProvider.Provider;
             prov.Register<ISqlRepository, PetaPocoSqlRepository>();
-            prov.Register<ILinqRepository, PetaPocoLinqRepository>();
             prov.Register<IUnitOfWork, PetaPocoUnitOfWork>();
             prov.Register<ISqlBuilder, PetaPocoSqlBuilder>();
             prov.Register<IPostRepository, PostRepository>();
             prov.Register<ILoginRepository, LoginRepository>();
             prov.Register<ICommentRepository, CommentRepository>();
-            prov.Register<ILinqSqlSchemaSolver, PetaPocoSqlSchemaSolver>();
-            prov.Register(typeof(ILinqQueryBuilder<>), typeof(LinqSqlQueryBuilder<>));
+            prov.Register<INotificationRepository, NotificationRepository>();
+            prov.Register<IPrivateMessageRepository, PrivateMessageRepository>();
+            prov.Register<IMapper, TagKidMapper>(new TagKidMapper());
         }
 
         [TestMethod]
         public void TestSearch()
         {
-            using (var uow = ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
+            using (ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
             {
                 var repo = ServiceProvider.Provider.GetOrCreate<IPostRepository>();
 
@@ -50,15 +49,13 @@ namespace TagKid.Tests.Lib.Repository
                     CategoryAccessLevels = new[] { AccessLevel.Public, AccessLevel.Protected },
                     PostAccessLevels = new[] { AccessLevel.Public, AccessLevel.Protected }
                 });
-
-                uow.Save();
             }
         }
 
         [TestMethod]
         public void TestLike()
         {
-            using (var uow = ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
+            using (ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
             {
                 var repo = ServiceProvider.Provider.GetOrCreate<IPostRepository>();
 
@@ -68,8 +65,6 @@ namespace TagKid.Tests.Lib.Repository
                     PageSize = 10,
                     Title = "Token"
                 });
-
-                uow.Save();
             }
         }
 
@@ -101,6 +96,32 @@ namespace TagKid.Tests.Lib.Repository
                 var repo = ServiceProvider.Provider.GetOrCreate<ICommentRepository>();
                 repo.GetByPostId(1, 1, 10);
             }
+        }
+
+        [TestMethod]
+        public void GetNotifications()
+        {
+            using (ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
+            {
+                var repo = ServiceProvider.Provider.GetOrCreate<INotificationRepository>();
+                repo.GetByToUserId(1, false, 1, 10);
+            }
+        }
+
+        [TestMethod]
+        public void GetPrivateMessages()
+        {
+            using (ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
+            {
+                var repo = ServiceProvider.Provider.GetOrCreate<IPrivateMessageRepository>();
+                repo.GetMessages(1, 2, 1, 10);
+            }
+        }
+
+        [TestMethod]
+        public void FillTestData()
+        {
+
         }
         
         [TestMethod]

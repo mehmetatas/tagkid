@@ -45,38 +45,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\Comment.cs" />
-    <Compile Include="Entities\ConfirmationCode.cs" />
-    <Compile Include="Entities\Enums.cs" />
-    <Compile Include="Entities\Filters\BaseFilter.cs" />
-    <Compile Include="Entities\Filters\PostFilter.cs" />
-    <Compile Include="Entities\Login.cs" />
-    <Compile Include="Entities\Notification.cs" />
-    <Compile Include="Entities\Post.cs" />
-    <Compile Include="Entities\TagPost.cs" />
-    <Compile Include="Entities\PostTag.cs" />
-    <Compile Include="Entities\PrivateMessage.cs" />
-    <Compile Include="Entities\Tag.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\Views\CommentView.cs" />
-    <Compile Include="Entities\Views\PostView.cs" />
-    <Compile Include="Entities\Views\UserTagsView.cs" />
+    <Compile Include="Models\Entities\Category.cs" />
+    <Compile Include="Models\Entities\Comment.cs" />
+    <Compile Include="Models\Entities\ConfirmationCode.cs" />
+    <Compile Include="Models\Entities\Enums.cs" />
+    <Compile Include="Models\Entities\Views\NotificationView.cs" />
+    <Compile Include="Models\Entities\Views\PrivateMessageView.cs" />
+    <Compile Include="Models\Filters\BaseFilter.cs" />
+    <Compile Include="Models\Filters\PostFilter.cs" />
+    <Compile Include="Models\Entities\Login.cs" />
+    <Compile Include="Models\Entities\Notification.cs" />
+    <Compile Include="Models\Entities\Post.cs" />
+    <Compile Include="Models\Entities\TagPost.cs" />
+    <Compile Include="Models\Entities\PostTag.cs" />
+    <Compile Include="Models\Entities\PrivateMessage.cs" />
+    <Compile Include="Models\Entities\Tag.cs" />
+    <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="Models\Entities\Views\CommentView.cs" />
+    <Compile Include="Models\Entities\Views\PostView.cs" />
+    <Compile Include="Models\Entities\Views\UserTagsView.cs" />
     <Compile Include="Exceptions\ExceptionExtensions.cs" />
     <Compile Include="Exceptions\SystemException.cs" />
     <Compile Include="Exceptions\TagKidException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
-    <Compile Include="Models\Messages\Request.cs" />
-    <Compile Include="Models\Entities\UserModel.cs" />
-    <Compile Include="Models\Messages\SignUpResponse.cs" />
+    <Compile Include="Models\DTO\Messages\Request.cs" />
+    <Compile Include="Models\DTO\UserModel.cs" />
+    <Compile Include="Models\DTO\Messages\SignUpResponse.cs" />
     <Compile Include="PetaPoco\CreateTableUtil.cs" />
+    <Compile Include="PetaPoco\Mapping.cs" />
     <Compile Include="PetaPoco\PetaPoco.cs" />
-    <Compile Include="PetaPoco\Repository\Linq\PetaPocoLinqRepository.cs" />
-    <Compile Include="PetaPoco\Repository\Linq\PetaPocoSqlSchemaSolver.cs" />
     <Compile Include="PetaPoco\Repository\PetaPocoPage.cs" />
     <Compile Include="PetaPoco\Repository\Sql\PetaPocoSql.cs" />
     <Compile Include="PetaPoco\Repository\Sql\PetaPocoSqlBuilder.cs" />
     <Compile Include="PetaPoco\Repository\PetaPocoUnitOfWork.cs" />
+    <Compile Include="PetaPoco\TagKidMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PetaPoco\Repository\Sql\PetaPocoSqlRepository.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
@@ -87,7 +89,9 @@
     <Compile Include="Repositories\Impl\CommentRepository.cs" />
     <Compile Include="Repositories\Impl\ConfirmationCodeRepository.cs" />
     <Compile Include="Repositories\Impl\LoginRepository.cs" />
+    <Compile Include="Repositories\Impl\NotificationRepository.cs" />
     <Compile Include="Repositories\Impl\PostRepository.cs" />
+    <Compile Include="Repositories\Impl\PrivateMessageRepository.cs" />
     <Compile Include="Repositories\Impl\TagRepository.cs" />
     <Compile Include="Repositories\Impl\UserRepository.cs" />
     <Compile Include="Repositories\INotificationRepository.cs" />
@@ -99,11 +103,12 @@
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\Impl\AuthService.cs" />
     <Compile Include="Services\ITagKidService.cs" />
-    <Compile Include="Models\Messages\Response.cs" />
-    <Compile Include="Models\Messages\SignInRequest.cs" />
-    <Compile Include="Models\Messages\SignUpRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Response.cs" />
+    <Compile Include="Models\DTO\Messages\SignInRequest.cs" />
+    <Compile Include="Models\DTO\Messages\SignUpRequest.cs" />
     <Compile Include="Utils\Db.cs" />
     <Compile Include="Utils\Validate.cs" />
+    <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\SignUpValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,9 +116,6 @@
       <Project>{57206f02-5147-464f-93d1-f7705c2d9932}</Project>
       <Name>Taga.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

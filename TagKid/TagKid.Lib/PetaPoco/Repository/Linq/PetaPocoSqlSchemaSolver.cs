@@ -8,12 +8,12 @@ namespace TagKid.Lib.PetaPoco.Repository.Linq
     {
         public string GetTableName(Type entityType)
         {
-            return TableInfo.FromPoco(entityType).TableName;
+            return Mappers.GetMapper(entityType).GetTableInfo(entityType).TableName;
         }
 
         public string GetColumnName(PropertyInfo propInfo)
         {
-            return ColumnInfo.FromProperty(propInfo).ColumnName;
+            return Mappers.GetMapper(propInfo.ReflectedType).GetColumnInfo(propInfo).ColumnName;
         }
     }
 }

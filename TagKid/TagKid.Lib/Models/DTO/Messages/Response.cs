@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TagKid.Lib.Models.Messages
+namespace TagKid.Lib.Models.DTO.Messages
 {
     [DataContract]
     public class Response

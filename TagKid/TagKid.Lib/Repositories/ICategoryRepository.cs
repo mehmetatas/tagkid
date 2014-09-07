@@ -1,5 +1,5 @@
 ﻿using Taga.Core.Repository;
-using TagKid.Lib.Entities;
+using TagKid.Lib.Models.Entities;
 
 namespace TagKid.Lib.Repositories
 {
