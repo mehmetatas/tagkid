@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Web;
 using System.Web.Http;
+using Taga.Core.DynamicProxy;
 using Taga.Core.IoC;
 using TagKid.Lib.Exceptions;
 using TagKid.Lib.Models.DTO.Messages;
@@ -7,6 +9,7 @@ using TagKid.Lib.Services;
 
 namespace TagKid.Web.Controllers
 {
+    [Intercept]
     public class AuthController : ApiController
     {
         private readonly IAuthService _authService;
@@ -25,16 +28,15 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("signup_email")]
-        public Response SignUpWithEmail([FromBody]SignUpRequest request)
+        public virtual Response SignUpWithEmail([FromBody]SignUpRequest request)
         {
-            request.Fullname = request.Username;
             request.FacebookId = String.Empty;
             return RegisterUser(request);
         }
 
         [HttpPost]
         [ActionName("signup_facebook")]
-        public Response SignUpWithFacebook([FromBody]SignUpRequest request)
+        public virtual Response SignUpWithFacebook([FromBody]SignUpRequest request)
         {
             return new Response
             {
@@ -45,7 +47,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("check_email")]
-        public Response CheckEmail([FromBody]string email)
+        public virtual Response CheckEmail([FromBody]string email)
         {
             return new Response
             {
@@ -56,7 +58,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("check_username")]
-        public Response CheckUsername([FromBody]string username)
+        public virtual Response CheckUsername([FromBody]string username)
         {
             return new Response
             {
@@ -67,16 +69,11 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("signin_email")]
-        public Response SignInWithEmail([FromBody]SignInRequest request)
+        public virtual Response SignInWithEmail([FromBody]SignInRequest request)
         {
             try
             {
-                _authService.SignIn(request);
-
-                return new Response
-                {
-                    ResponseMessage = "Registration OK!"
-                };
+                return _authService.SignIn(request);
             }
             catch (Exception ex)
             {
@@ -90,7 +87,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("signin_facebook")]
-        public Response SignInWithFacebook([FromBody]SignInRequest request)
+        public virtual Response SignInWithFacebook([FromBody]SignInRequest request)
         {
             return new Response
             {
@@ -101,12 +98,38 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("forgot_password")]
-        public Response ForgotPassword([FromBody]string emailOrUsername)
+        public virtual Response ForgotPassword([FromBody]string emailOrUsername)
         {
             return new Response
             {
                 ResponseCode = -1,
                 ResponseMessage = "forgot_password not implemented!"
+            };
+        }
+
+        [HttpPost]
+        [ActionName("validate_auth_cookie")]
+        public virtual Response ValidateAuthCookie()
+        {
+            if (HttpContext.Current.Request.Cookies["authToken"] != null &&
+                HttpContext.Current.Request.Cookies["authTokenId"] != null)
+            {
+                var authToken = HttpContext.Current.Request.Cookies["authToken"].Value;
+                long authTokenId;
+                
+                if (!String.IsNullOrEmpty(authToken) && 
+                    Int64.TryParse(HttpContext.Current.Request.Cookies["authTokenId"].Value, out authTokenId))
+                {
+                    return _authService.SignInWithToken(authTokenId, authToken);
+                } 
+                
+            }
+
+            return new SignInResponse
+            {
+                ResponseCode = -1,
+                AuthToken = null,
+                RequestToken = null
             };
         }
 
@@ -119,7 +142,7 @@ namespace TagKid.Web.Controllers
 
                 return new Response
                 {
-                    ResponseMessage = "Registration OK!"
+                    ResponseMessage = "Signup OK!"
                 };
             }
             catch (Exception ex)

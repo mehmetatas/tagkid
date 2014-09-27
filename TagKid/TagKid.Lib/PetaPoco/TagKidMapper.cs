@@ -23,6 +23,7 @@ namespace TagKid.Lib.PetaPoco
             Map<Login>();
             Map<ConfirmationCode>();
             Map<PrivateMessage>();
+            Map<Token>();
 
             Map<PostView>("post_search_view");
             Map<UserTagsView>("user_tags_view");

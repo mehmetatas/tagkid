@@ -16,11 +16,6 @@ namespace TagKid.Lib.Utils
         {
             return GetOrCreate<ISqlRepository>();
         }
-
-        //public static ILinqRepository LinqRepository()
-        //{
-        //    return GetOrCreate<ILinqRepository>();
-        //}
         
         public static ISqlBuilder SqlBuilder()
         {
@@ -77,14 +72,14 @@ namespace TagKid.Lib.Utils
             return GetOrCreate<ITagRepository>();
         }
 
+        public static ITokenRepository TokenRepository()
+        {
+            return GetOrCreate<ITokenRepository>();
+        }
+
         private static T GetOrCreate<T>()
         {
             return ServiceProvider.Provider.GetOrCreate<T>();
         }
-
-        //internal static ILinqQueryBuilder<T> LinqQueryBuilder<T>()
-        //{
-        //    return GetOrCreate<ILinqQueryBuilder<T>>();
-        //}
     }
 }

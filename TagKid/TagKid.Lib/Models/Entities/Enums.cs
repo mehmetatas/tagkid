@@ -13,7 +13,8 @@ namespace TagKid.Lib.Models.Entities
     public enum LoginType
     {
         Email,
-        Facebook
+        Facebook,
+        Cookie
     }
 
     public enum LoginResult
@@ -23,6 +24,8 @@ namespace TagKid.Lib.Models.Entities
         InvalidEmail,
         InvalidPassword,
         InvalidFacebookToken,
+        InvalidCookieToken,
+        ExpiredCookieToken,
         SystemError
     }
 
@@ -110,5 +113,11 @@ namespace TagKid.Lib.Models.Entities
         Unread,
         Read,
         Deleted
+    }
+
+    public enum TokenType
+    {
+        Auth,
+        Request
     }
 }

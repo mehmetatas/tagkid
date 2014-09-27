@@ -6,6 +6,8 @@ namespace TagKid.Lib.Services
     {
         SignUpResponse SignUp(SignUpRequest request);
 
-        void SignIn(SignInRequest request);
+        SignInResponse SignIn(SignInRequest request);
+
+        SignInResponse SignInWithToken(long tokenId, string guid);
     }
 }

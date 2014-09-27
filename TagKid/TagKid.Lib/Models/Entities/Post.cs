@@ -20,6 +20,8 @@ namespace TagKid.Lib.Models.Entities
 
         public string Title { get; set; }
 
+        public string ContentCode { get; set; }
+
         public string Content { get; set; }
 
         public string QuoteAuthor { get; set; }

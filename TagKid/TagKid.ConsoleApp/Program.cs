@@ -9,7 +9,7 @@ namespace TagKid.ConsoleApp
         {
             try
             {
-                CreateTableUtil.GenerateCreateTableSql("TagKid.Lib.dll", "TagKid.Lib.Entities");
+                CreateTableUtil.GenerateCreateTableSql("TagKid.Lib.dll", "TagKid.Lib.Models.Entities");
 
                 Console.WriteLine("OK!");
             }

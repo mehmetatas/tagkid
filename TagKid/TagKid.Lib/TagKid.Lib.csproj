@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DTO\Messages\SignInResponse.cs" />
+    <Compile Include="Models\Entities\Token.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
     <Compile Include="Models\Entities\ConfirmationCode.cs" />
@@ -69,7 +71,7 @@
     <Compile Include="Exceptions\TagKidException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Models\DTO\Messages\Request.cs" />
-    <Compile Include="Models\DTO\UserModel.cs" />
+    <Compile Include="Models\DTO\PublicUserModel.cs" />
     <Compile Include="Models\DTO\Messages\SignUpResponse.cs" />
     <Compile Include="PetaPoco\CreateTableUtil.cs" />
     <Compile Include="PetaPoco\Mapping.cs" />
@@ -93,11 +95,13 @@
     <Compile Include="Repositories\Impl\PostRepository.cs" />
     <Compile Include="Repositories\Impl\PrivateMessageRepository.cs" />
     <Compile Include="Repositories\Impl\TagRepository.cs" />
+    <Compile Include="Repositories\Impl\TokenRepository.cs" />
     <Compile Include="Repositories\Impl\UserRepository.cs" />
     <Compile Include="Repositories\INotificationRepository.cs" />
     <Compile Include="Repositories\IPostRepository.cs" />
     <Compile Include="Repositories\IPrivateMessageRepository.cs" />
     <Compile Include="Repositories\ITagRepository.cs" />
+    <Compile Include="Repositories\ITokenRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Services\IApiService.cs" />
     <Compile Include="Services\IAuthService.cs" />
@@ -108,8 +112,12 @@
     <Compile Include="Models\DTO\Messages\SignUpRequest.cs" />
     <Compile Include="Utils\Db.cs" />
     <Compile Include="Utils\Validate.cs" />
-    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\Extensions\DefaultValidatorExtensions.cs" />
+    <Compile Include="Validation\Extensions\TrimmedLengthValidator.cs" />
+    <Compile Include="Validation\SignInValidator.cs" />
     <Compile Include="Validation\SignUpValidator.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
+    <Compile Include="Validation\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Taga.Core\Taga.Core.csproj">

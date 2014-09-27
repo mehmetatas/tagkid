@@ -17,10 +17,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public Category GetById(long categoryId)
         {
-            return Db.SqlRepository().FirstOrDefault<Category>(Db.SqlBuilder()
-                .SelectAllFrom<Category>()
-                .Where("id").EqualsParam(categoryId)
-                .Build());
+            return Db.SqlRepository().FirstOrDefault<Category>(cat => cat.Id, categoryId);
         }
 
         public void Save(Category category)

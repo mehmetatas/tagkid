@@ -1,19 +1,30 @@
 ﻿using FluentValidation;
-using TagKid.Lib.Models.Entities;
+using System;
+using TagKid.Lib.Models.DTO.Messages;
+using TagKid.Lib.Validation.Extensions;
 
 namespace TagKid.Lib.Validation
 {
-    public class SignUpValidator : AbstractValidator<User>
+    public class SignUpValidator : AbstractValidator<SignUpRequest>
     {
-        public SignUpValidator() 
+        public SignUpValidator()
         {
-            RuleFor(u => u.Username)
+            RuleFor(r => r.Username)
                 .Cascade(CascadeMode.Continue)
-                .NotEmpty().WithMessage("Empty")
-                .Length(3, 20).WithMessage("Invalid Length");
+                .TrimmedLength(3, 20).WithMessage("Username must be 3-20 characters long");
 
-            RuleFor(u => u.Email)
-                .EmailAddress().WithMessage("Invalid Email");
+            RuleFor(r => r.Email)
+                .Cascade(CascadeMode.Continue)
+                .TrimmedLength(5, 100)
+                .EmailAddress()
+                .When(r => String.IsNullOrWhiteSpace(r.FacebookId))
+                .WithMessage("Invalid Email");
+
+            RuleFor(r => r.Password)
+                .Cascade(CascadeMode.Continue)
+                .Length(6, 16)
+                .When(r => String.IsNullOrWhiteSpace(r.FacebookId))
+                .WithMessage("Password must be 6-16 characters long");
         }
     }
 }

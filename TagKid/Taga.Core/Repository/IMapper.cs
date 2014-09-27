@@ -21,7 +21,15 @@ namespace Taga.Core.Repository
         public static string GetColumnName<T>(this IMapper mapper, Expression<Func<T, dynamic>> propExpression)
             where T : class, new()
         {
-            var pi = (PropertyInfo) ((MemberExpression) propExpression.Body).Member;
+            PropertyInfo pi;
+            
+            if (propExpression.Body is MemberExpression)
+                pi = (PropertyInfo) ((MemberExpression) propExpression.Body).Member;
+            else if (propExpression.Body is UnaryExpression)
+                pi = (PropertyInfo) ((MemberExpression) ((UnaryExpression)propExpression.Body).Operand).Member;
+            else
+                throw new SystemException("Unsupported expression type: " + propExpression.Body.GetType());
+
             return mapper.GetColumnName(pi);
         }
     }

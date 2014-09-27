@@ -9,6 +9,12 @@ namespace TagKid.Lib.Models.DTO.Messages
         public int ResponseCode { get; set; }
 
         [DataMember(Name = "responseMessage")]
-        public string ResponseMessage { get; set; }   
+        public string ResponseMessage { get; set; }
+
+        [DataMember(Name = "requestTokenId")]
+        public long RequestTokenId { get; set; }
+
+        [DataMember(Name = "requestToken")]
+        public string RequestToken { get; set; }
     }
 }

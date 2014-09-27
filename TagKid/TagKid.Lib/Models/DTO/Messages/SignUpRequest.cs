@@ -19,8 +19,5 @@ namespace TagKid.Lib.Models.DTO.Messages
 
         [DataMember(Name = "facebookToken")]
         public string FacebookToken { get; set; }
-
-        [DataMember(Name = "fullname")]
-        public string Fullname { get; set; }
     }
 }

@@ -4,8 +4,8 @@
 testApp.config(function ($routeProvider) {
     $routeProvider
     	.when('/', {
-    	    templateUrl: 'templates/signup.html',
-    	    controller: 'signupController'
+    	    templateUrl: 'templates/wall.html',
+    	    controller: 'wallController'
     	})
     	.when('/signin', {
     	    templateUrl: 'templates/signin.html',
@@ -34,15 +34,15 @@ testApp.controller('signinController', function ($scope, $location, $http) {
 
     $scope.onSignInEmailClick = function () {
         $http.post('/api/auth/signin_email', {
-            email_or_username: $scope.email_or_username,
+            emailOrUsername: $scope.email_or_username,
             password: $scope.password
         }).success(function (resp) {
             if (resp.code == 0)
                 alert('success');
             else
-                alert(resp.message);
-        }).error(function () {
-            alert('error');
+                alert(resp.responseMessage);
+        }).error(function (err) {
+            alert(err);
         });
     };
 
@@ -55,9 +55,9 @@ testApp.controller('signinController', function ($scope, $location, $http) {
             if (resp.code == 0)
                 alert('success');
             else
-                alert(resp.message);
-        }).error(function () {
-            alert('error');
+                alert(resp.responseMessage);
+        }).error(function (err) {
+            alert(err);
         });
     };
 
@@ -70,9 +70,9 @@ testApp.controller('signinController', function ($scope, $location, $http) {
             if (resp.code == 0)
                 alert('success');
             else
-                alert(resp.message);
-        }).error(function () {
-            alert('error');
+                alert(resp.responseMessage);
+        }).error(function (err) {
+            alert(err);
         });
     };
 });
@@ -93,9 +93,9 @@ testApp.controller('signupController', function ($scope, $location, $http) {
             if (resp.code == 0)
                 alert('success');
             else
-                alert(resp.message);
-        }).error(function () {
-            alert('error');
+                alert(resp.responseMessage);
+        }).error(function (err) {
+            alert(err);
         });
     };
 
@@ -108,9 +108,9 @@ testApp.controller('signupController', function ($scope, $location, $http) {
             if (resp.code == 0)
                 alert('success');
             else
-                alert(resp.message);
-        }).error(function () {
-            alert('error');
+                alert(resp.responseMessage);
+        }).error(function (err) {
+            alert(err);
         });
     };
 });
