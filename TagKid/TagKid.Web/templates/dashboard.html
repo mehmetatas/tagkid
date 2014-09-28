@@ -6,12 +6,12 @@
             </div>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search Tag">
+                    <input type="text" class="form-control" placeholder="Search Tag" ng-model="tagFilter">
                 </div>
-                <button type="submit" class="btn btn-default">Search</button>
+                <button type="submit" class="btn btn-default" ng-click="searchTags()">Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-2x fa-plus-square"></i></a></li>
+                <li><a href="#" ng-click="openNewPostModal()"><i class="fa fa-2x fa-plus-square"></i></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-2x fa-gear"></i></a>
                     <ul class="dropdown-menu" role="menu">
@@ -25,8 +25,13 @@
     </nav>
 </div>
 
+<div ng-repeat="tag in tagSearchResults">
+    {{tag.id}}<br> {{tag.name}}<br> {{tag.hint}}<br> {{tag.description}}
+    <hr>
+</div>
+
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-large">
         <div class="modal-content">
             <div class="modal-header">
@@ -34,17 +39,25 @@
                 <h4 class="modal-title" id="myModalLabel">New Post</h4>
             </div>
             <div class="modal-body">
-                <div id="editor-edit" class="container-fluid">
+                <div id="editor-edit" ng-show="visibleTab == 'editor'">
                     <div class="row">
-                        <div class="col-md-6">
-                            <textarea class="tg-input"></textarea>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input class="tg-input-title" type="text" placeholder="Title (Optional)" ng-model="post.title" />
+                            <textarea class="tg-input" placeholder="Write your post here" ng-paste="format()" ng-change="format()" ng-keyup="format()" ng-model="post.contentCode"></textarea>
+
+                            <div class="tag-search">
+                                <span class="tags" ng-repeat="tag in post.tags">
+                                    <span><span>{{tag.name}}</span><i class="fa fa-times" ng-click="removeTag(tag)"></i></span>
+                                </span>
+                                <input type="text" class="tag-input" maxlength="37" placeholder="Tag" ng-disabled="post.tags.length >= 5" ng-show="post.tags.length < 5" />
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="tg-preview"></div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="tg-preview" ng-bind-html="post.content"></div>
                         </div>
                     </div>
                 </div>
-                <div id="editor-help" class="container-fluid">
+                <div id="editor-help" ng-show="visibleTab == 'help'">
                     <table class="table">
                         <tr>
                             <th>What</th>
@@ -178,14 +191,14 @@
             <div class="modal-footer">
                 <div class="editor-tab-buttons btn-group pull-left" data-toggle="buttons">
                     <label class="btn btn-primary active">
-                        <input type="radio" name="editor-tab-button" id="editor-tab-button-edit" data-tab="#editor-edit" checked="checked"> Edit
+                        <input type="radio" name="editor-tab-button" value="editor"> Edit
                     </label>
                     <label class="btn btn-primary">
-                        <input type="radio" name="editor-tab-button" id="editor-tab-button-help" data-tab="#editor-help" />Help
+                        <input type="radio" name="editor-tab-button" value="help" />Help
                     </label>
                 </div>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Post</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" ng-click="savePost()">Post</button>
             </div>
         </div>
     </div>

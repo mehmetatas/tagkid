@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace TagKid.Lib.Models.Entities
 {
     public class Tag
@@ -12,5 +14,15 @@ namespace TagKid.Lib.Models.Entities
         public string Description { get; set; }
 
         public TagStatus Status { get; set; }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode() + Hint.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0} ({1}): {2}", Name, Hint, Description);
+        }
     }
 }

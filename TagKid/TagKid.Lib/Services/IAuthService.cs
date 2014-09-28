@@ -9,5 +9,7 @@ namespace TagKid.Lib.Services
         SignInResponse SignIn(SignInRequest request);
 
         SignInResponse SignInWithToken(long tokenId, string guid);
+
+        void ValidateRequest(Request request);
     }
 }

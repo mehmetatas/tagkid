@@ -1,4 +1,4 @@
-﻿var tagkidApp = angular.module('tagkidApp', ['ngRoute', 'ngAnimate', 'ngTouch']);
+﻿var tagkidApp = angular.module('tagkidApp', ['ngRoute', 'ngAnimate', 'ngTouch', 'ngSanitize']);
 
 // ROUTING ===============================================
 tagkidApp.config(function ($routeProvider, $locationProvider) {

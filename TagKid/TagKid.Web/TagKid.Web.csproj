@@ -122,7 +122,8 @@
     <Content Include="res\css\font-awesome-4.2.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="res\js\app\tg-editor.js" />
-    <Content Include="res\js\jquery.autogrowtextarea.min.js" />
+    <Content Include="res\js\jquery.autosize.js" />
+    <Content Include="res\js\jquery.elastic.source.js" />
     <Content Include="res\js\respond.min.js" />
     <Content Include="templates\index.html" />
     <Content Include="res\img\photos\blog1.jpg" />
@@ -179,10 +180,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\ControllerUtils.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

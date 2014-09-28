@@ -3,8 +3,7 @@
 namespace TagKid.Lib.Models.DTO.Messages
 {
     [DataContract]
-    public abstract class Request
+    public class PostResponse : Response
     {
-        public RequestContext Context { get; set; }
     }
 }

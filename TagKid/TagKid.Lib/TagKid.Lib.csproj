@@ -45,7 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Cache\TagCache.cs" />
+    <Compile Include="Cache\TagNameCache.cs" />
+    <Compile Include="Exceptions\SecurityException.cs" />
+    <Compile Include="Models\DTO\Messages\PostRequest.cs" />
+    <Compile Include="Models\DTO\Messages\PostResponse.cs" />
     <Compile Include="Models\DTO\Messages\SignInResponse.cs" />
+    <Compile Include="Models\DTO\Messages\TagSearchRequest.cs" />
+    <Compile Include="Models\DTO\Messages\TagSearchResponse.cs" />
+    <Compile Include="Models\DTO\RequestContext.cs" />
+    <Compile Include="Models\DTO\TagModel.cs" />
     <Compile Include="Models\Entities\Token.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
@@ -106,11 +116,16 @@
     <Compile Include="Services\IApiService.cs" />
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\Impl\AuthService.cs" />
+    <Compile Include="Services\Impl\PostService.cs" />
+    <Compile Include="Services\Impl\TagService.cs" />
+    <Compile Include="Services\IPostService.cs" />
     <Compile Include="Services\ITagKidService.cs" />
     <Compile Include="Models\DTO\Messages\Response.cs" />
     <Compile Include="Models\DTO\Messages\SignInRequest.cs" />
     <Compile Include="Models\DTO\Messages\SignUpRequest.cs" />
+    <Compile Include="Services\ITagService.cs" />
     <Compile Include="Utils\Db.cs" />
+    <Compile Include="Utils\EditorUtils.cs" />
     <Compile Include="Utils\Validate.cs" />
     <Compile Include="Validation\Extensions\DefaultValidatorExtensions.cs" />
     <Compile Include="Validation\Extensions\TrimmedLengthValidator.cs" />

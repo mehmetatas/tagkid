@@ -62,6 +62,7 @@
     <Compile Include="Core\SqlBuilderTests.cs" />
     <Compile Include="Lib\ExpressionTests.cs" />
     <Compile Include="Lib\Repository\RepositoryTests.cs" />
+    <Compile Include="Lib\Search\SearchTests.cs" />
     <Compile Include="Lib\ValidationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

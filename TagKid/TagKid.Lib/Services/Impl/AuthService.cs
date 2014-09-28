@@ -1,9 +1,9 @@
 ﻿using System;
 using Taga.Core.DynamicProxy;
-using TagKid.Lib.Models.DTO;
-using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Exceptions;
+using TagKid.Lib.Models.DTO;
 using TagKid.Lib.Models.DTO.Messages;
+using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Utils;
 using TagKid.Lib.Validation;
 
@@ -101,13 +101,23 @@ namespace TagKid.Lib.Services.Impl
 
                 Db.TokenRepository().Save(authToken);
 
+                var requestToken = new Token
+                {
+                    Expires = DateTime.Now.AddDays(1),
+                    Guid = Guid.NewGuid(),
+                    Type = TokenType.Request,
+                    UserId = user.Id
+                };
+                Db.TokenRepository().Save(requestToken);
+
                 uow.Save();
 
                 response = new SignInResponse
                 {
                     AuthTokenId = authToken.Id,
                     AuthToken = authToken.Guid.ToString(),
-                    RequestToken = Guid.NewGuid().ToString(),
+                    RequestToken = requestToken.Guid.ToString(),
+                    RequestTokenId = requestToken.Id,
                     User = new PublicUserModel(user),
                     UserId = user.Id
                 };
@@ -116,18 +126,18 @@ namespace TagKid.Lib.Services.Impl
             return response;
         }
 
-        public SignInResponse SignInWithToken(long tokenId, string guid)
+        public virtual SignInResponse SignInWithToken(long tokenId, string guid)
         {
             var login = new Login { Date = DateTime.Now, Type = LoginType.Cookie };
             SignInResponse response;
 
             using (var uow = Db.UnitOfWork())
             {
-                var token = Db.TokenRepository().GetById(tokenId);
+                var authToken = Db.TokenRepository().GetById(tokenId);
 
-                login.UserId = token == null ? 0 : token.UserId;
+                login.UserId = authToken == null ? 0 : authToken.UserId;
 
-                if (token == null || token.Guid.ToString() != guid || token.Type != TokenType.Auth)
+                if (authToken == null || authToken.Guid.ToString() != guid || authToken.Type != TokenType.Auth)
                 {
                     login.Result = LoginResult.InvalidCookieToken;
 
@@ -136,7 +146,7 @@ namespace TagKid.Lib.Services.Impl
                     throw new UserException("Invalid cookie token!");
                 }
 
-                if (DateTime.Now > token.Expires)
+                if (DateTime.Now > authToken.Expires)
                 {
                     login.Result = LoginResult.ExpiredCookieToken;
                     Db.LoginRepository().Save(login);
@@ -144,7 +154,7 @@ namespace TagKid.Lib.Services.Impl
                     throw new UserException("Expired cookie token!");
                 }
 
-                var user = Db.UserRepository().GetById(token.UserId);
+                var user = Db.UserRepository().GetById(authToken.UserId);
 
                 if (user == null)
                 {
@@ -159,17 +169,27 @@ namespace TagKid.Lib.Services.Impl
                 login.Result = LoginResult.Successful;
                 Db.LoginRepository().Save(login);
 
-                token.Expires = DateTime.Now.AddDays(7);
+                authToken.Expires = DateTime.Now.AddDays(7);
 
-                Db.TokenRepository().Save(token);
+                Db.TokenRepository().Save(authToken);
+
+                var requestToken = new Token
+                {
+                    Expires = DateTime.Now.AddDays(1),
+                    Guid = Guid.NewGuid(),
+                    Type = TokenType.Request,
+                    UserId = user.Id
+                };
+                Db.TokenRepository().Save(requestToken);
 
                 uow.Save();
 
                 response = new SignInResponse
                 {
-                    AuthTokenId = token.Id,
-                    AuthToken = token.Guid.ToString(),
-                    RequestToken = Guid.NewGuid().ToString(),
+                    AuthTokenId = authToken.Id,
+                    AuthToken = authToken.Guid.ToString(),
+                    RequestToken = requestToken.Guid.ToString(),
+                    RequestTokenId = requestToken.Id,
                     User = new PublicUserModel(user),
                     UserId = user.Id
                 };
@@ -178,16 +198,82 @@ namespace TagKid.Lib.Services.Impl
             return response;
         }
 
+        public virtual void ValidateRequest(Request request)
+        {
+            if (request.Context.RequestToken.Id < 1 ||
+                request.Context.RequestToken.Guid.Equals(Guid.Empty))
+                throw new SecurityException("No request token!");
+
+            if (request.Context.AuthToken.Id < 1 ||
+                request.Context.AuthToken.Guid.Equals(Guid.Empty))
+                throw new SecurityException("No auth token!");
+            
+            using (var uow = Db.UnitOfWork())
+            {
+                // Validate tokens
+                var authToken = ValidateToken(request.Context.AuthToken);
+                var requestToken = ValidateToken(request.Context.RequestToken);
+
+                // Validate user
+                var user = Db.UserRepository().GetById(authToken.UserId);
+                if (user.Status != UserStatus.Active)
+                    throw new SecurityException("User is not active!");
+
+                // Update request token
+                requestToken.UsedTime = DateTime.Now;
+                requestToken.Expires = DateTime.Now;
+                Db.TokenRepository().Save(requestToken);
+
+                // Create new request token
+                var newRequestToken = new Token
+                {
+                    Expires = DateTime.Now.AddDays(1),
+                    Guid = Guid.NewGuid(),
+                    Type = TokenType.Request,
+                    UserId = user.Id
+                };
+                Db.TokenRepository().Save(newRequestToken);
+
+                // Save Changes to db
+                uow.Save();
+
+                // Update request context
+                request.Context.User = user;
+                request.Context.AuthToken = authToken;
+                request.Context.RequestToken = requestToken;
+                request.Context.NewRequestToken = newRequestToken;
+            }
+        }
+
+        private Token ValidateToken(Token token)
+        {
+            var dbToken = Db.TokenRepository().GetById(token.Id);
+
+            if (dbToken == null)
+                throw new SecurityException(token.Type + " token not found!");
+
+            if (!dbToken.Guid.Equals(token.Guid))
+                throw new SecurityException(token.Type + " token not match!");
+
+            if (dbToken.Type != token.Type)
+                throw new SecurityException(token.Type + " token type not match!");
+
+            if (dbToken.Expires < DateTime.Now)
+                throw new SecurityException(token.Type + " token expired!");
+
+            return dbToken;
+        }
+
         private void ValidateStatus(UserStatus status, string fieldValue, string fieldName, bool isSignUp)
         {
             if (isSignUp && status == UserStatus.Active)
                 throw new ValidationException("{0} {1} already exists!", fieldName, fieldValue);
             if (status == UserStatus.Passive)
-                throw new ValidationException("{0} {1} is passive!", fieldName, fieldValue);
+                throw new SecurityException("{0} {1} is passive!", fieldName, fieldValue);
             if (status == UserStatus.AwaitingActivation)
-                throw new ValidationException("{0} {1} has not been actived yet!", fieldName, fieldValue);
+                throw new SecurityException("{0} {1} has not been actived yet!", fieldName, fieldValue);
             if (status == UserStatus.Banned)
-                throw new ValidationException("{0} {1} is banned!", fieldName, fieldValue);
+                throw new SecurityException("{0} {1} is banned!", fieldName, fieldValue);
         }
     }
 }

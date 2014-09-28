@@ -1,25 +1,49 @@
 ﻿tgEditor = {
-    $input: null,
-    $preview: null,
-    init: function (editorSelector, previewDivSelector) {
-        tgEditor.$input = $(editorSelector);
-        tgEditor.$preview = $(previewDivSelector);
-
-        $(editorSelector).autoGrow();
-
+    init: function () {
         var timeout;
-        $(editorSelector).on('keyup change', function () {
+        $(window).resize(function () {
             if (timeout)
                 clearTimeout(timeout);
 
-            timeout = setTimeout(tgEditor.format, 500);
+            timeout = setTimeout(tgEditor.init, 100);
         });
 
+        tgEditor.resize();
         tgEditor.format();
     },
+    resize: function () {
+        var dh = $('.tg-input-title').height() + $('.tag-search').height() + 40; // 40 => padding: 10px
+
+        var modalContentHeight = $('.modal-content').height();
+        var modalHeaderHeight = $('.modal-header').height();
+        var modalFooterHeight = $('.modal-footer').height();
+        var modalBodyHeight = modalContentHeight - (modalHeaderHeight + modalFooterHeight) - 110;
+
+        $('.modal-body')
+            .height(modalBodyHeight);
+
+        var editorMaxHeight = modalBodyHeight - dh;
+
+        $('#editor-help')
+             .css('height', modalBodyHeight + 'px');
+
+        $('.tg-preview')
+            .css('height', modalBodyHeight + 'px');
+
+        $('.tg-input')
+            .css('max-height', editorMaxHeight + 'px')
+            .css('-webkit-transition', 'height 0.2s')
+            .css('-moz-transition', 'height 0.2s')
+            .css('transition', 'height 0.2s')
+            .autosize();
+    },
     format: function () {
-        var html = tgEditor.toHtml(tgEditor.$input.val());
-        tgEditor.$preview.html(html);
+        var code = tagkid.context.$scope.post.contentCode;
+        var html = tgEditor.toHtml(code);
+        tagkid.context.$scope.post.content = html;
+
+        //var html = tgEditor.toHtml($('.tg-input').val());
+        //$('.tg-preview').html(html);
     },
     toHtml: function (text) {
         var html = '';

@@ -41,12 +41,16 @@ tagkid = {
         },
         requestToken: function (value) {
             return tagkid.cookies.cookie('requestToken', value, 1);
+        },
+        requestTokenId: function (value) {
+            return tagkid.cookies.cookie('requestTokenId', value, 1);
         }
     },
     redirectToDashboard: function (resp) {
         tagkid.cookies.authToken(resp.authToken);
         tagkid.cookies.authTokenId(resp.authTokenId);
         tagkid.cookies.requestToken(resp.requestToken);
+        tagkid.cookies.requestTokenId(resp.requestTokenId);
 
         tagkid.context.authService.user = resp.user;
         tagkid.context.$scope.user = resp.user;
@@ -82,9 +86,13 @@ tagkid = {
         tagkid.cookies.authToken(null);
         tagkid.cookies.authTokenId(null);
         tagkid.cookies.requestToken(null);
+        tagkid.cookies.requestTokenId(null);
         tagkid.context.authService.user = null;
         tagkid.context.$scope.user = null;
         tagkid.location("/");
+    },
+    loadDashboard: function() {
+        alert('load dashboard');
     }
 };
 

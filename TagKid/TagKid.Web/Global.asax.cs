@@ -35,7 +35,10 @@ namespace TagKid.Web
             prov.Register<ISqlBuilder, PetaPocoSqlBuilder>();
 
             prov.Register<IAuthService, AuthService>();
+            prov.Register<IPostService, PostService>();
+            prov.Register<ITagService, TagService>();
 
+            prov.Register<ITagRepository, TagRepository>();
             prov.Register<IUserRepository, UserRepository>();
             prov.Register<ILoginRepository, LoginRepository>();
             prov.Register<IPostRepository, PostRepository>();
