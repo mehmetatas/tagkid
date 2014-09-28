@@ -175,8 +175,22 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
                 }
             }
         })
+        .on('keydown', function (e) {
+            var $element = $(this);
+
+            if (e.keyCode == 8) { // backspace
+                if ($element.val().length == 0 && $scope.post.tags.length > 0) {
+                    $scope.post.tags.splice($scope.post.tags.length - 1, 1);
+                    $scope.$apply();
+
+                    tgEditor.resize();
+                    return;
+                }
+            }
+        })
         .on('change keyup paste', function (e) {
             var $element = $(this);
+
             setTimeout(function () {
                 var text = $element.val();
                 text = text.toLowerCase();

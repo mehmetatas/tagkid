@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Utils;
@@ -9,6 +10,7 @@ namespace TagKid.Lib.Cache
 {
     public class TagNameCache
     {
+        private static readonly CultureInfo EnGb = new CultureInfo("en-GB");
         public static TagNameCache Instance = new TagNameCache();
 
         private readonly TagSearchNode _cache;
@@ -31,7 +33,7 @@ namespace TagKid.Lib.Cache
 
         public IEnumerable<Tag> Search(string filter, int max = 20)
         {
-            return _cache.Search(filter, max);
+            return _cache.Search(filter.ToLower(EnGb), max);
         }
     }
 

@@ -46,10 +46,11 @@
                             <textarea class="tg-input" placeholder="Write your post here" ng-paste="format()" ng-change="format()" ng-keyup="format()" ng-model="post.contentCode"></textarea>
 
                             <div class="tag-search">
+                                <span>Tags: </span>
                                 <span class="tags" ng-repeat="tag in post.tags">
                                     <span><span>{{tag.name}}</span><i class="fa fa-times" ng-click="removeTag(tag)"></i></span>
                                 </span>
-                                <input type="text" class="tag-input" maxlength="37" placeholder="Tag" ng-disabled="post.tags.length >= 5" ng-show="post.tags.length < 5" />
+                                <input type="text" class="tag-input" maxlength="37" ng-disabled="post.tags.length >= 5" ng-show="post.tags.length < 5" />
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">

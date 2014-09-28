@@ -12,7 +12,7 @@
         tgEditor.format();
     },
     resize: function () {
-        var dh = $('.tg-input-title').height() + $('.tag-search').height() + 40; // 40 => padding: 10px
+        var dh = $('.tg-input-title').height() + $('.tag-search').height() + 30; // 40 => padding: 10px
 
         var modalContentHeight = $('.modal-content').height();
         var modalHeaderHeight = $('.modal-header').height();
