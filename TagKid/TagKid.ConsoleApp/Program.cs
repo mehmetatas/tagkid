@@ -83,8 +83,8 @@ namespace TagKid.ConsoleApp
                     catch (Exception ex)
                     {
                         Console.WriteLine("FATAL: " + ex.GetMessage());
-                        if (retry-- == 0)
-                            break;
+                        if (retry-- > 0)
+                            arr = new StackExchange.StacMan.Tag[100];
                     }
                 } while (arr != null && arr.Length == pageSize);
 
