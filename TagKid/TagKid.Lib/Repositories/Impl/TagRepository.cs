@@ -21,11 +21,28 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IPage<Tag> Search(string name, int pageIndex, int pageSize)
         {
-            return Db.SqlRepository().ExecuteQuery<Tag>(Db.SqlBuilder()
-                .SelectAllFrom<Tag>()
-                .Where("name").Contains(name)
-                .Build(),
-                pageIndex, pageSize);
+            return Db.SqlRepository().ExecuteQuery<Tag>(Db.Sql(@"
+select *,
+    case
+        when name like @0 then INSTR(name, @1)
+        when hint like @0 then INSTR(hint, @1) + 25
+        when description like @0 then INSTR(description, @1) + 75
+    end as priority
+from
+    tags
+where
+    name like @0
+    or hint like @0
+    or description like @0
+order by priority, name", "%" + name + "%", name), pageIndex, pageSize);
+
+
+            //return Db.SqlRepository().ExecuteQuery<Tag>(Db.SqlBuilder()
+            //    .SelectAllFrom<Tag>()
+            //    .Where("name")
+            //    .Contains(name)
+            //    .Build(),
+            //    pageIndex, pageSize);
         }
 
         public IEnumerable<Tag> GetPostTags(long postId)

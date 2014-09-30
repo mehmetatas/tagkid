@@ -4,18 +4,37 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using TagKid.Lib.Models.Entities;
+using TagKid.Lib.PetaPoco;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Cache
 {
     public class TagNameCache
     {
-        private static readonly CultureInfo EnGb = new CultureInfo("en-GB");
         public static TagNameCache Instance = new TagNameCache();
+
+        private TagNameCache()
+        {
+
+        }
+
+        public IEnumerable<Tag> Search(string filter, int max = 10)
+        {
+            using (Db.UnitOfWork())
+            {
+                return Db.TagRepository().Search(filter, 1, max).Items;
+            }
+        }
+    }
+
+    public class TagNameCache2
+    {
+        private static readonly CultureInfo EnGb = new CultureInfo("en-GB");
+        public static TagNameCache2 Instance = new TagNameCache2();
 
         private readonly TagSearchNode _cache;
 
-        private TagNameCache()
+        private TagNameCache2()
         {
             IEnumerable<Tag> tags;
             using (Db.UnitOfWork())
@@ -31,7 +50,7 @@ namespace TagKid.Lib.Cache
             }
         }
 
-        public IEnumerable<Tag> Search(string filter, int max = 20)
+        public IEnumerable<Tag> Search(string filter, int max = 10)
         {
             return _cache.Search(filter.ToLower(EnGb), max);
         }

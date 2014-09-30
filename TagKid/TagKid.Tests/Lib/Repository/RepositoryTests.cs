@@ -38,7 +38,7 @@ namespace TagKid.Tests.Lib.Repository
         [TestMethod]
         public void TestTagCache()
         {
-            var node = TagNameCache.Instance;
+            var node = TagNameCache2.Instance;
 
             var res = node.Search("");
             Assert.AreEqual(12, res.Count());

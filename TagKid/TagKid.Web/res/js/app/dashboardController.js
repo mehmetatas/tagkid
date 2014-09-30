@@ -9,7 +9,7 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
     $scope.tagFilter = '';
 
     $scope.tagSearchResults = [];
-        
+
     $scope.post = {
         content: '',
         /* PostRequest */
@@ -105,7 +105,7 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
             }
         }
 
-        setTimeout(function() {
+        setTimeout(function () {
             tgEditor.resize();
             $('.tag-input').focus();
         }, 100);
@@ -120,24 +120,23 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
         });
     });
 
-    var allowedChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-';
+    var allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890-.+#';
 
     $('.tag-input')
         .keypress(function (e) {
             var code = e.keyCode;
             if (e.charCode && code == 0)
                 code = e.charCode;
-            var c = String.fromCharCode(code);
+            var c = String.fromCharCode(code).toLowerCase();
 
             var $element = $(this);
 
             var caretPos = $element.getCaretPosition();
 
-            var text = $element.val();
+            var text = $element.val().toLowerCase();
             if (code == 13) {
-                text = $element.val().toLowerCase();
-
-                while (text.charAt(text.length - 1) == '-')
+                while (text.charAt(text.length - 1) == '-' ||
+                       text.charAt(text.length - 1) == '.')
                     text = text.substr(0, text.length - 1);
 
                 for (var i = 0; i < text.length; i++) {
@@ -153,6 +152,8 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
                     $element.val('');
 
                     tgEditor.resize();
+                } else {
+                    $element.val(text);
                 }
 
                 e.preventDefault();
@@ -169,10 +170,11 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
                 if (c === '-') {
                     if (caretPos == 0 || text.charAt(caretPos - 1) == c || text.charAt(caretPos) == c)
                         e.preventDefault();
-                } else if (c === '.') {
-                    if (text.charAt(caretPos - 1) == c || text.charAt(caretPos) == c)
-                        e.preventDefault();
                 }
+                //else if (c === '.') {
+                //    if (text.charAt(caretPos - 1) == c || text.charAt(caretPos) == c)
+                //        e.preventDefault();
+                //}
             }
         })
         .on('keydown', function (e) {
@@ -202,13 +204,31 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
                     }
                 }
 
-                while (text.charAt(0) == '-') {
-                    text = text.substr(1);
-                }
+                var len;
 
-                while (text.indexOf('--') > -1) {
-                    text = text.replace(/--/g, '-');
-                }
+                do {
+                    len = text.length;
+
+                    while (text.charAt(0) == '-') {
+                        text = text.substr(1);
+                    }
+
+                    while (text.indexOf('--') > -1) {
+                        text = text.replace(/--/g, '-');
+                    }
+
+                    //while (text.indexOf('\.\.') > -1) {
+                    //    text = text.replace(/\.\./g, '.');
+                    //}
+
+                    //while (text.indexOf('\.-') > -1) {
+                    //    text = text.replace(/\.-/g, '');
+                    //}
+
+                    //while (text.indexOf('-\.-') > -1) {
+                    //    text = text.replace(/-\.-/g, '-');
+                    //}
+                } while (len != text.length);
 
                 if (text !== $element.val()) {
                     var caretPos = $element.getCaretPosition();
