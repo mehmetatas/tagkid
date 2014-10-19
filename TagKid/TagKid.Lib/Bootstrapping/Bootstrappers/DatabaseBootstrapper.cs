@@ -13,6 +13,7 @@ namespace TagKid.Lib.Bootstrapping.Bootstrappers
     {
         public void Bootstrap(IServiceProvider prov)
         {
+            prov.Register<ITransactionalUnitOfWork, NHUnitOfWork>();
             prov.Register<IUnitOfWork, NHUnitOfWork>();
             prov.Register<IRepository, NHRepository>();
 

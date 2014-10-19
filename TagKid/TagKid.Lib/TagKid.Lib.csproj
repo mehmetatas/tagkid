@@ -67,6 +67,7 @@
     <Compile Include="Models\DTO\Messages\PostRequest.cs" />
     <Compile Include="Models\DTO\Messages\PostResponse.cs" />
     <Compile Include="Models\DTO\Messages\SignInResponse.cs" />
+    <Compile Include="Models\DTO\Messages\SignUpUserModel.cs" />
     <Compile Include="Models\DTO\Messages\TagSearchRequest.cs" />
     <Compile Include="Models\DTO\Messages\TagSearchResponse.cs" />
     <Compile Include="Models\RequestContext.cs" />
