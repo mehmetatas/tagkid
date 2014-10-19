@@ -4,44 +4,44 @@ namespace TagKid.Lib.Models.Entities
 {
     public class Post
     {
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
-        public long UserId { get; set; }
+        public virtual long UserId { get; set; }
 
-        public long CategoryId { get; set; }
+        public virtual long CategoryId { get; set; }
 
-        public long RetaggedPostId { get; set; }
+        public virtual long RetaggedPostId { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public virtual DateTime CreateDate { get; set; }
 
-        public DateTime PublishDate { get; set; }
+        public virtual DateTime PublishDate { get; set; }
 
-        public DateTime UpdateDate { get; set; }
+        public virtual DateTime UpdateDate { get; set; }
 
-        public string Title { get; set; }
+        public virtual string Title { get; set; }
 
-        public string ContentCode { get; set; }
+        public virtual string ContentCode { get; set; }
 
-        public string Content { get; set; }
+        public virtual string Content { get; set; }
 
-        public string QuoteAuthor { get; set; }
+        public virtual string QuoteAuthor { get; set; }
 
-        public string QuoteText { get; set; }
+        public virtual string QuoteText { get; set; }
 
-        public string MediaEmbedUrl { get; set; }
+        public virtual string MediaEmbedUrl { get; set; }
 
-        public string LinkTitle { get; set; }
+        public virtual string LinkTitle { get; set; }
 
-        public string LinkDescription { get; set; }
+        public virtual string LinkDescription { get; set; }
 
-        public string LinkImageUrl { get; set; }
+        public virtual string LinkImageUrl { get; set; }
 
-        public string LinkUrl { get; set; }
+        public virtual string LinkUrl { get; set; }
 
-        public PostType Type { get; set; }
+        public virtual PostType Type { get; set; }
 
-        public AccessLevel AccessLevel { get; set; }
+        public virtual AccessLevel AccessLevel { get; set; }
 
-        public PostStatus Status { get; set; }
+        public virtual PostStatus Status { get; set; }
     }
 }

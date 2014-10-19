@@ -47,20 +47,20 @@ tagkid = {
         }
     },
     redirectToDashboard: function (resp) {
-        tagkid.cookies.authToken(resp.authToken);
-        tagkid.cookies.authTokenId(resp.authTokenId);
-        tagkid.cookies.requestToken(resp.requestToken);
-        tagkid.cookies.requestTokenId(resp.requestTokenId);
+        tagkid.cookies.authToken(resp.AuthToken);
+        tagkid.cookies.authTokenId(resp.AuthTokenId);
+        tagkid.cookies.requestToken(resp.RequestToken);
+        tagkid.cookies.requestTokenId(resp.RequestTokenId);
 
-        tagkid.context.authService.user = resp.user;
-        tagkid.context.$scope.user = resp.user;
+        tagkid.context.authService.user = resp.User;
+        tagkid.context.$scope.user = resp.User;
         tagkid.location("/dashboard");
     },
     redirectToDashboardIfLoggedIn: function () {
         if (tagkid.cookies.authToken() && tagkid.cookies.authTokenId()) {
             tagkid.post('/api/auth/validate_auth_cookie')
             .success(function (resp) {
-                if (resp.responseCode == 0) {
+                if (resp.ResponseCode == 0) {
                     tagkid.redirectToDashboard(resp);
                 } else {
                     tagkid.location("/");

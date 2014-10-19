@@ -2,7 +2,7 @@
 
 namespace TagKid.Lib.Repositories
 {
-    public interface IConfirmationCodeRepository
+    public interface IConfirmationCodeRepository : ITagKidRepository
     {
         ConfirmationCode GetById(long id);
 

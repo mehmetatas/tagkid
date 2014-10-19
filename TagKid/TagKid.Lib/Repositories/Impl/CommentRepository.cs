@@ -1,27 +1,30 @@
-﻿using Taga.Core.Repository;
-using Taga.Core.Repository.Sql;
+﻿using System.Linq;
+using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Models.Entities.Views;
-using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
 {
     public class CommentRepository : ICommentRepository
     {
+        private readonly IRepository _repository;
+
+        public CommentRepository(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public IPage<CommentView> GetByPostId(long postId, int pageIndex, int pageSize)
         {
-            return Db.SqlRepository().ExecuteQuery<CommentView>(Db.SqlBuilder()
-                .SelectAllFrom<CommentView>()
-                .Where()
-                .Equals("post_id", postId)
-                .OrderBy("id", true)
-                .Build(),
-                pageIndex, pageSize);
+            return _repository.Query<CommentView>()
+                .Where(cv => cv.PostId == postId)
+                .OrderByDescending(cv => cv.Id)
+                .Page(pageIndex, pageSize);
         }
 
         public void Save(Comment comment)
         {
-            Db.SqlRepository().Save(comment);
+            _repository.Save(comment);
         }
     }
 }

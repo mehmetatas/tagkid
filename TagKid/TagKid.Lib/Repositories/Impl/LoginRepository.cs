@@ -1,44 +1,42 @@
-﻿using Taga.Core.Repository;
-using Taga.Core.Repository.Sql;
+﻿using System.Linq;
+using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
-using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
 {
     public class LoginRepository : ILoginRepository
     {
+        private readonly IRepository _repository;
+
+        public LoginRepository(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public IPage<Login> GetLogins(string username, string email, bool onlyFailed, int pageIndex, int pageSize)
         {
-            var sqlBuilder = Db.SqlBuilder();
-
-            sqlBuilder.SelectAllFrom("logins")
-                .Where().Equals("username", username)
-                .Or().Equals("email", email);
+            var query = _repository.Query<Login>()
+                .Where(l => l.Username == username || l.Email == email);
 
             if (onlyFailed)
-                sqlBuilder.And().Append("(")
-                    .NotEquals("result", LoginResult.Successful)
-                    .Or().NotEquals("result", LoginResult.SystemError)
-                    .Append(")");
+            {
+                query = query.Where(l => l.Result != LoginResult.Successful || l.Result != LoginResult.SystemError);
+            }
 
-            return Db.SqlRepository().ExecuteQuery<Login>(sqlBuilder.Build(), pageIndex, pageSize);
+            return query.Page(pageIndex, pageSize);
         }
 
         public Login GetLastSuccessfulLogin(long userId)
         {
-            var builder = Db.SqlBuilder();
-
-            builder.SelectAllFrom<Login>()
-                .Where("user_id").EqualsParam(userId)
-                .And("result").EqualsParam(LoginResult.Successful)
-                .OrderBy("id", true);
-
-            return Db.SqlRepository().FirstOrDefault<Login>(builder.Build());
+            return _repository.Query<Login>()
+                .Where(l => l.UserId == userId && l.Result == LoginResult.Successful)
+                .OrderByDescending(l => l.Id)
+                .FirstOrDefault();
         }
 
         public void Save(Login login)
         {
-            Db.SqlRepository().Save(login);
+            _repository.Save(login);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ninject;
+using System;
 
 namespace Taga.Core.IoC
 {
@@ -7,65 +7,28 @@ namespace Taga.Core.IoC
     {
         public static IServiceProvider Provider = new ServiceProvider();
 
-        private readonly Dictionary<Type, ServiceInfo> _services = new Dictionary<Type, ServiceInfo>();
+        private readonly IKernel _kernel = new StandardKernel();
 
         private ServiceProvider()
         {
 
         }
 
-        public void Register(Type interfaceType, Type classType, object singleton = null)
+        public IServiceProvider Register(Type serviceType, Type classType, object singleton = null)
         {
-            var info = new ServiceInfo
-            {
-                SingletonInstance = singleton,
-                ServiceType = classType
-            };
+            var bind = _kernel.Bind(serviceType);
 
-            if (_services.ContainsKey(interfaceType))
-                _services[interfaceType] = info;
+            if (singleton == null)
+                bind.To(classType);
             else
-                _services.Add(interfaceType, info);
+                bind.ToConstant(singleton);
+
+            return this;
         }
 
-        public TInterface GetOrCreate<TInterface>()
+        public object GetOrCreate(Type serviceType)
         {
-            var interfaceType = typeof(TInterface);
-
-            Type genericArgType = null;
-            if (!_services.ContainsKey(interfaceType))
-            {
-                if (interfaceType.IsGenericType)
-                {
-                    genericArgType = interfaceType.GetGenericArguments()[0];
-                    interfaceType = interfaceType.GetGenericTypeDefinition();
-                }
-
-                if (!_services.ContainsKey(interfaceType))
-                    throw new InvalidOperationException("No service registered for: " + interfaceType);
-            }
-
-            var info = _services[interfaceType];
-
-            if  (info.IsSingleton)
-                return (TInterface)info.SingletonInstance;
-
-            if (genericArgType == null)
-                return (TInterface)Activator.CreateInstance(info.ServiceType);
-
-            var genericType = info.ServiceType.MakeGenericType(genericArgType);
-            return (TInterface)Activator.CreateInstance(genericType);
-        }
-    }
-
-    public class ServiceInfo
-    {
-        public Type ServiceType { get; set; }
-        public object SingletonInstance { get; set; }
-
-        public bool IsSingleton
-        {
-            get { return SingletonInstance != null; }
+            return _kernel.Get(serviceType);
         }
     }
 }

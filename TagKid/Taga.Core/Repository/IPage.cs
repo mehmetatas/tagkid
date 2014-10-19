@@ -6,11 +6,11 @@ namespace Taga.Core.Repository
     {
         long CurrentPage { get; }
 
+        long PageSize { get; }
+
         long TotalPages { get;}
 
         long TotalCount { get; }
-
-        long PageSize { get; }
 
         List<T> Items { get; }
     }

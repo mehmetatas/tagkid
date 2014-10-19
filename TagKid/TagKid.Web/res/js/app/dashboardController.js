@@ -42,15 +42,15 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
     $scope.searchTags = function () {
         $scope.tagSearchResults = [];
         $http.post('/api/post/search_tags', {
-            filter: $scope.tagFilter
+            Filter: $scope.tagFilter
         })
        .success(function (resp) {
-           if (resp.responseCode == 0) {
-               for (var i = 0; i < resp.tags.length; i++)
-                   $scope.tagSearchResults.push(resp.tags[i]);
+           if (resp.ResponseCode == 0) {
+               for (var i = 0; i < resp.Tags.length; i++)
+                   $scope.tagSearchResults.push(resp.Tags[i]);
                $scope.$apply();
            } else {
-               alert(resp.responseMessage);
+               alert(resp.ResponseMessage);
            }
        }).error(function (err) {
            alert(err);
@@ -61,29 +61,29 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
         var post = $scope.post;
 
         $http.post('/api/post/save_post', {
-            contentCode: post.contentCode,
-            title: post.title,
-            tags: post.tags,
-            categoryId: post.categoryId,
-            id: post.id,
-            retaggedPostId: post.retaggedPostId,
-            quoteAuthor: post.quoteAuthor,
-            quoteText: post.quoteText,
-            mediaEmbedUrl: post.mediaEmbedUrl,
-            linkTitle: post.linkTitle,
-            linkDescription: post.linkDescription,
-            linkImageUrl: post.linkImageUrl,
-            linkUrl: post.linkUrl,
-            status: post.status,
-            type: post.type,
-            accessLevel: post.accessLevel
+            ContentCode: post.contentCode,
+            Title: post.title,
+            Tags: post.tags,
+            CategoryId: post.categoryId,
+            Id: post.id,
+            RetaggedPostId: post.retaggedPostId,
+            QuoteAuthor: post.quoteAuthor,
+            QuoteText: post.quoteText,
+            MediaEmbedUrl: post.mediaEmbedUrl,
+            LinkTitle: post.linkTitle,
+            LinkDescription: post.linkDescription,
+            LinkImageUrl: post.linkImageUrl,
+            LinkUrl: post.linkUrl,
+            Status: post.status,
+            Type: post.type,
+            AccessLevel: post.accessLevel
         })
         .success(function (resp) {
-            if (resp.responseCode == 0) {
+            if (resp.ResponseCode == 0) {
                 $('#newPostModal').modal('hide');
                 tagkid.loadDashboard();
             } else {
-                alert(resp.responseMessage);
+                alert(resp.ResponseMessage);
             }
         }).error(function (err) {
             alert(err);
@@ -147,7 +147,7 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
                 }
 
                 if (text.length > 0) {
-                    $scope.post.tags.push({ id: 1, name: text });
+                    $scope.post.tags.push({ id: 0, name: text });
                     $scope.$apply();
                     $element.val('');
 

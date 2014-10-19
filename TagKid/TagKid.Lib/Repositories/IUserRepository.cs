@@ -3,7 +3,7 @@ using TagKid.Lib.Models.Entities;
 
 namespace TagKid.Lib.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : ITagKidRepository
     {
         User GetById(long id);
 

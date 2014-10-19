@@ -1,31 +1,34 @@
-﻿using Taga.Core.Repository;
+﻿using System.Linq;
+using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Models.Entities.Views;
-using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
 {
     public class NotificationRepository : INotificationRepository
     {
+        private readonly IRepository _repository;
+
+        public NotificationRepository(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public IPage<NotificationView> GetByToUserId(long toUserId, bool onlyUnread, int pageIndex, int pageSize)
         {
-            var statusArr = onlyUnread
-                ? new object[] { NotificationStatus.Unread }
-                : new object[] { NotificationStatus.Unread, NotificationStatus.Read };
+            var query = _repository.Query<NotificationView>()
+                .Where(nv => nv.ToUserId == toUserId);
 
-            var sqlBuilder = Db.SqlBuilder();
+            query = onlyUnread 
+                ? query.Where(nv => nv.Status == NotificationStatus.Unread) 
+                : query.Where(nv => nv.Status != NotificationStatus.Deleted);
 
-            sqlBuilder.SelectAllFrom("notification_view")
-                .Where()
-                .Equals("to_user_id", toUserId)
-                .And().In("status", statusArr);
-
-            return Db.SqlRepository().ExecuteQuery<NotificationView>(sqlBuilder.Build(), pageIndex, pageSize);
+            return query.Page(pageIndex, pageSize);
         }
 
         public void Save(Notification notification)
         {
-            Db.SqlRepository().Save(notification);
+            _repository.Save(notification);
         }
     }
 }

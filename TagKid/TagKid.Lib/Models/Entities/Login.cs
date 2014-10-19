@@ -4,20 +4,20 @@ namespace TagKid.Lib.Models.Entities
 {
     public class Login
     {
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
-        public long UserId { get; set; }
+        public virtual long UserId { get; set; }
 
-        public DateTime Date { get; set; }
+        public virtual DateTime Date { get; set; }
 
-        public string Username { get; set; }
+        public virtual string Username { get; set; }
 
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
-        public string FacebookId { get; set; }
+        public virtual string FacebookId { get; set; }
 
-        public LoginType Type { get; set; }
+        public virtual LoginType Type { get; set; }
 
-        public LoginResult Result { get; set; }
+        public virtual LoginResult Result { get; set; }
     }
 }

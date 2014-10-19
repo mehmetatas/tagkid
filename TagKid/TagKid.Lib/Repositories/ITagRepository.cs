@@ -4,7 +4,7 @@ using TagKid.Lib.Models.Entities;
 
 namespace TagKid.Lib.Repositories
 {
-    public interface ITagRepository
+    public interface ITagRepository : ITagKidRepository
     {
         IEnumerable<Tag> GetAll();
 

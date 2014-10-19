@@ -1,29 +1,32 @@
-﻿using Taga.Core.Repository;
+﻿using System.Linq;
+using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Models.Entities.Views;
-using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
 {
     public class PrivateMessageRepository : IPrivateMessageRepository
     {
+        private readonly IRepository _repository;
+
+        public PrivateMessageRepository(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public IPage<PrivateMessageView> GetMessages(long user1, long user2, int pageIndex, int pageSize)
         {
-            var sqlBuilder = Db.SqlBuilder();
-
-            sqlBuilder.SelectAllFrom("private_message_view")
-                .Where()
-                .Append(" (").Equals("from_user_id", user1).And().Equals("to_user_id", user2).Append(")")
-                .Or()
-                .Append(" (").Equals("from_user_id", user2).And().Equals("to_user_id", user1).Append(")")
-                .OrderBy("message_date", true);
-
-            return Db.SqlRepository().ExecuteQuery<PrivateMessageView>(sqlBuilder.Build(), pageIndex, pageSize);
+            return _repository.Query<PrivateMessageView>()
+                .Where(pm =>
+                    (pm.FromUserId == user1 && pm.ToUserId == user2) ||
+                    (pm.FromUserId == user2 && pm.ToUserId == user1))
+                .OrderByDescending(pm => pm.MessageDate)
+                .Page(pageIndex, pageSize);
         }
 
         public void Save(PrivateMessage privateMessage)
         {
-            Db.SqlRepository().Save(privateMessage);
+            _repository.Save(privateMessage);
         }
     }
 }

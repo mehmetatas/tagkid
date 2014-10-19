@@ -1,40 +1,47 @@
-﻿using Taga.Core.Repository;
-using Taga.Core.Repository.Sql;
+﻿using System.Linq;
+using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
-using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
 {
     public class UserRepository : IUserRepository
     {
+        private readonly IRepository _repository;
+
+        public UserRepository(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public User GetById(long id)
         {
-            return Db.SqlRepository().FirstOrDefault<User>(u => u.Id, id);
+            return _repository.Query<User>()
+                .FirstOrDefault(u => u.Id == id);
         }
 
         public User GetByEmail(string email)
         {
-            return Db.SqlRepository().FirstOrDefault<User>(u => u.Email, email);
+            return _repository.Query<User>()
+                .FirstOrDefault(u => u.Email == email);
         }
 
         public User GetByUsername(string username)
         {
-            return Db.SqlRepository().FirstOrDefault<User>(u => u.Username, username);
+            return _repository.Query<User>()
+                .FirstOrDefault(u => u.Username == username);
         }
 
         public void Save(User user)
         {
-            Db.SqlRepository().Save(user);
+            _repository.Save(user);
         }
 
         public IPage<User> Search(string usernameOrFullname, int pageIndex, int pageSize)
         {
-            return Db.SqlRepository().ExecuteQuery<User>(Db.SqlBuilder()
-                .SelectAllFrom<User>()
-                .Where("username").Contains(usernameOrFullname)
-                .Or("fullname").Contains(usernameOrFullname)
-                .Build(),
-                pageIndex, pageSize);
+            return _repository.Query<User>()
+                .Where(u => u.Username.Contains(usernameOrFullname) || u.Fullname.Contains(usernameOrFullname))
+                .OrderBy(u => u.Username)
+                .Page(pageIndex, pageSize);
         }
     }
 }

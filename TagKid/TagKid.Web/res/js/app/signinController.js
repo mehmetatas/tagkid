@@ -14,13 +14,13 @@ tagkidApp.controller('signinController', function ($scope, $http, $location, aut
 
     $scope.onSignInEmailClick = function () {
         $http.post('/api/auth/signin_email', {
-            emailOrUsername: $scope.email_or_username,
-            password: $scope.password
+            EmailOrUsername: $scope.email_or_username,
+            Password: $scope.password
         }).success(function (resp) {
-            if (resp.responseCode == 0) {
+            if (resp.ResponseCode == 0) {
                 tagkid.redirectToDashboard(resp);
             } else {
-                alert(resp.responseMessage);
+                alert(resp.ResponseMessage);
             }
         }).error(function (err) {
             alert(err);
@@ -29,32 +29,21 @@ tagkidApp.controller('signinController', function ($scope, $http, $location, aut
 
     $scope.onSignInFacebookClick = function () {
         $http.post('/api/auth/signin_facebook', {
-            email: $scope.email,
-            username: $scope.username,
-            password: $scope.password
+            Email: $scope.email,
+            Username: $scope.username,
+            Password: $scope.password
         }).success(function (resp) {
-            if (resp.responseCode == 0)
+            if (resp.ResponseCode == 0)
                 alert('success');
             else
-                alert(resp.responseMessage);
+                alert(resp.ResponseMessage);
         }).error(function (err) {
             alert(err);
         });
     };
 
     $scope.onForgotPasswordClick = function () {
-        $http.post('/api/auth/forgot_password', {
-            email: $scope.email,
-            username: $scope.username,
-            password: $scope.password
-        }).success(function (resp) {
-            if (resp.responseCode == 0)
-                alert('success');
-            else
-                alert(resp.responseMessage);
-        }).error(function (err) {
-            alert(err);
-        });
+        alert("not implemented!");
     };
 
     tagkid.redirectToDashboardIfLoggedIn();

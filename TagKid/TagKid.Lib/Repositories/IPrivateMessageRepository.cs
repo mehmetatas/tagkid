@@ -4,7 +4,7 @@ using TagKid.Lib.Models.Entities.Views;
 
 namespace TagKid.Lib.Repositories
 {
-    public interface IPrivateMessageRepository
+    public interface IPrivateMessageRepository : ITagKidRepository
     {
         IPage<PrivateMessageView> GetMessages(long user1, long user2, int pageIndex, int pageSize); 
 

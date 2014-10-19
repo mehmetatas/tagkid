@@ -2,67 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using Taga.Core.Repository;
-using Taga.Core.Repository.Sql;
 using TagKid.Lib.Models.Entities;
-using TagKid.Lib.Models.Entities.Views;
-using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
 {
     public class TagRepository : ITagRepository
     {
+        private readonly IRepository _repository;
+
+        public TagRepository(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public IEnumerable<Tag> GetAll()
         {
-            return Db.SqlRepository().List<Tag>(Db.SqlBuilder()
-                .SelectAllFrom("tags")
-                .OrderBy("name")
-                .Build());
+            return _repository.Query<Tag>()
+                .OrderBy(t => t.Name)
+                .ToList();
         }
 
         public IPage<Tag> Search(string name, int pageIndex, int pageSize)
         {
-            return Db.SqlRepository().ExecuteQuery<Tag>(Db.Sql(@"
-select *,
-    case
-        when name like @0 then INSTR(name, @1)
-        when hint like @0 then INSTR(hint, @1) + 25
-        when description like @0 then INSTR(description, @1) + 75
-    end as priority
-from
-    tags
-where
-    name like @0
-    or hint like @0
-    or description like @0
-order by priority, name", "%" + name + "%", name), pageIndex, pageSize);
-
-
-            //return Db.SqlRepository().ExecuteQuery<Tag>(Db.SqlBuilder()
-            //    .SelectAllFrom<Tag>()
-            //    .Where("name")
-            //    .Contains(name)
-            //    .Build(),
-            //    pageIndex, pageSize);
+            return _repository.Query<Tag>()
+                .Where(t => t.Name.Contains(name))
+                .OrderByDescending(t => t.Count)
+                .Page(pageSize, pageIndex);
         }
 
         public IEnumerable<Tag> GetPostTags(long postId)
         {
-            return Db.SqlRepository().List<Tag>(Db.SqlBuilder()
-                .SelectAllFrom("tags").Where("id")
-                .Append("in (select tag_id from post_tags where post_id = @0)", postId)
-                .Build());
+            throw new NotImplementedException();
         }
 
         public IDictionary<Tag, int> GetUserTagCounts(long userId)
         {
-            var userTags = Db.SqlRepository().List<UserTagsView>(
-                Db.Sql(@"select tv.*, t.name from user_tags_view tv
-                    join tags t on t.id = tag_id
-                    where user_id = @0
-                    order by tag_count desc",
-                    userId));
-
-            return userTags.ToDictionary(k => k as Tag, v => v.TagCount);
+            throw new NotImplementedException();
         }
 
         public IDictionary<Tag, int> GetCategoryTagCounts(long userId)
@@ -72,7 +47,7 @@ order by priority, name", "%" + name + "%", name), pageIndex, pageSize);
 
         public void Save(Tag tag)
         {
-            Db.SqlRepository().Save(tag);
+            _repository.Save(tag);
         }
     }
 }

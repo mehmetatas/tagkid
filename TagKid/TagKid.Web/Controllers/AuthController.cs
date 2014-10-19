@@ -30,7 +30,6 @@ namespace TagKid.Web.Controllers
         [ActionName("signup_email")]
         public virtual Response SignUpWithEmail([FromBody]SignUpRequest request)
         {
-            request.FacebookId = String.Empty;
             return RegisterUser(request);
         }
 

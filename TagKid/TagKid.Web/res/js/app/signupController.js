@@ -10,14 +10,14 @@ tagkidApp.controller('signupController', function ($scope, $http, $location, aut
 
     $scope.onSignUpEmailClick = function () {
         $http.post('/api/auth/signup_email', {
-            email: $scope.email,
-            username: $scope.username,
-            password: $scope.password
+            Email: $scope.email,
+            Username: $scope.username,
+            Password: $scope.password
         }).success(function (resp) {
-            if (resp.responseCode == 0)
+            if (resp.ResponseCode == 0)
                 alert('success');
             else
-                alert(resp.responseMessage);
+                alert(resp.ResponseMessage);
         }).error(function (err) {
             alert(err);
         });
@@ -25,14 +25,14 @@ tagkidApp.controller('signupController', function ($scope, $http, $location, aut
 
     $scope.onSignUpFacebookClick = function () {
         $http.post('/api/auth/signup_facebook', {
-            email: $scope.email,
-            username: $scope.username,
-            password: $scope.password
+            Email: $scope.email,
+            Username: $scope.username,
+            Password: $scope.password
         }).success(function (resp) {
-            if (resp.responseCode == 0)
+            if (resp.ResponseCode == 0)
                 alert('success');
             else
-                alert(resp.responseMessage);
+                alert(resp.ResponseMessage);
         }).error(function (err) {
             alert(err);
         });

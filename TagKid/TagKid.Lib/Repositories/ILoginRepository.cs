@@ -3,7 +3,7 @@ using TagKid.Lib.Models.Entities;
 
 namespace TagKid.Lib.Repositories
 {
-    public interface ILoginRepository
+    public interface ILoginRepository : ITagKidRepository
     {
         IPage<Login> GetLogins(string username, string email, bool onlyFailed, int pageIndex, int pageSize);
 

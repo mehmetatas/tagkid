@@ -5,15 +5,12 @@ namespace TagKid.Lib.Models.Entities
 {
     public class Tag
     {
-        public long Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Hint { get; set; }
-
-        public string Description { get; set; }
-
-        public TagStatus Status { get; set; }
+        public virtual long Id { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Hint { get; set; }
+        public virtual string Description { get; set; }
+        public virtual long Count { get; set; }
+        public virtual TagStatus Status { get; set; }
 
         public override int GetHashCode()
         {

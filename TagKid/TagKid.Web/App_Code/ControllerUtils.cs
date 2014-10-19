@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 using Taga.Core.IoC;
-using TagKid.Lib.Models.DTO;
+using TagKid.Lib.Models;
 using TagKid.Lib.Models.DTO.Messages;
 using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Services;

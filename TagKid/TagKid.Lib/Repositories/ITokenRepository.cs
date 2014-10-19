@@ -2,7 +2,7 @@
 
 namespace TagKid.Lib.Repositories
 {
-    public interface ITokenRepository
+    public interface ITokenRepository : ITagKidRepository
     {
         Token GetById(long tokenId);
 

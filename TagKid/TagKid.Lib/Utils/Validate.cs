@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
 using TagKid.Lib.Exceptions;
 
@@ -25,11 +23,6 @@ namespace TagKid.Lib.Utils
 
             if (value.Length > maxLength)
                 throw new UserException("{0} cannot be more than {1} characters", key, maxLength);
-        }
-
-        public static string EncryptPwd(string pwd)
-        {
-            return BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(pwd))).Replace("-", String.Empty);
         }
 
         public static void IsEmail(string email)

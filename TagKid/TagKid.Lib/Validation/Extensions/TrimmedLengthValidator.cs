@@ -17,11 +17,11 @@ namespace TagKid.Lib.Validation.Extensions
         public TrimmedLengthValidator(int min, int max, Expression<Func<string>> errorMessageResourceSelector)
             : base(errorMessageResourceSelector)
         {
-            Max = max;
-            Min = min;
-
             if (max != -1 && max < min)
                 throw new ArgumentOutOfRangeException("max", "Max should be larger than min.");
+
+            Max = max;
+            Min = min;
         }
 
         protected override bool IsValid(PropertyValidatorContext context)

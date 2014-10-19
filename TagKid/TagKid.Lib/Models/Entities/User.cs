@@ -4,24 +4,22 @@ namespace TagKid.Lib.Models.Entities
 {
     public class User
     {
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
-        public string Fullname { get; set; }
+        public virtual string Fullname { get; set; }
 
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
-        public string Username { get; set; }
+        public virtual string Username { get; set; }
 
-        public string Password { get; set; }
+        public virtual string Password { get; set; }
 
-        public DateTime JoinDate { get; set; }
-
-        public string ProfileImageUrl { get; set; }
+        public virtual DateTime JoinDate { get; set; }
         
-        public string FacebookId { get; set; }
+        public virtual string FacebookId { get; set; }
 
-        public UserType Type { get; set; }
+        public virtual UserType Type { get; set; }
 
-        public UserStatus Status { get; set; }
+        public virtual UserStatus Status { get; set; }
     }
 }

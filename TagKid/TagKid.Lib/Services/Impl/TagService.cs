@@ -1,8 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Taga.Core.DynamicProxy;
-using TagKid.Lib.Cache;
+using TagKid.Lib.Database;
 using TagKid.Lib.Models.DTO;
 using TagKid.Lib.Models.DTO.Messages;
+using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Repositories;
+using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Services.Impl
 {
@@ -11,11 +15,16 @@ namespace TagKid.Lib.Services.Impl
     {
         public TagSearchResponse Search(TagSearchRequest request)
         {
+            List<Tag> tags;
+            using (var db = new TagKidDb())
+            {
+                var repo = db.GetRepository<ITagRepository>();
+                tags = repo.Search(request.Filter, 1, 10).Items;
+            }
+
             return new TagSearchResponse
             {
-                Tags = TagNameCache.Instance.Search(request.Filter)
-                    .Select(t => new TagModel(t))
-                    .ToArray()
+                Tags = tags.Select(t => t.ToModel()).ToArray()
             };
         }
     }

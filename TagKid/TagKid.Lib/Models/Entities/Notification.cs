@@ -4,20 +4,20 @@ namespace TagKid.Lib.Models.Entities
 {
     public class Notification
     {
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
-        public long ToUserId { get; set; }
+        public virtual long ToUserId { get; set; }
 
-        public long FromUserId { get; set; }
+        public virtual long FromUserId { get; set; }
 
-        public long PostId { get; set; }
+        public virtual long PostId { get; set; }
 
-        public DateTime ActionDate { get; set; }
+        public virtual DateTime ActionDate { get; set; }
 
-        public string Message { get; set; }
+        public virtual string Message { get; set; }
 
-        public NotificationType Type { get; set; }
+        public virtual NotificationType Type { get; set; }
 
-        public NotificationStatus Status { get; set; }
+        public virtual NotificationStatus Status { get; set; }
     }
 }

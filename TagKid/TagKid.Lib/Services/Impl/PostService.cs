@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Taga.Core.DynamicProxy;
+using TagKid.Lib.Database;
 using TagKid.Lib.Models.DTO.Messages;
 using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Repositories;
 using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Services.Impl
@@ -53,12 +55,23 @@ namespace TagKid.Lib.Services.Impl
             {
                 Id = t.Id,
                 Name = t.Name
-            });
+            }).ToArray();
 
-            using (var uow = Db.UnitOfWork())
+            using (var db = new TagKidDb())
             {
-                Db.PostRepository().Save(post, tags.ToArray());
-                uow.Save();
+                var postRepo = db.GetRepository<IPostRepository>();
+                var tagRepo = db.GetRepository<ITagRepository>();
+
+                foreach (var tag in tags.Where(t => t.Id < 1))
+                {
+                    tag.Hint = tag.Name;
+                    tag.Description = tag.Name;
+                    tag.Count = 1;
+                    tagRepo.Save(tag);
+                }
+
+                postRepo.Save(post, tags);
+                db.Save();
             }
 
             return new PostResponse();

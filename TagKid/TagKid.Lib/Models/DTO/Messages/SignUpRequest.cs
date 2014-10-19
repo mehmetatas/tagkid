@@ -1,23 +1,17 @@
-﻿using System.Runtime.Serialization;
-
+﻿
 namespace TagKid.Lib.Models.DTO.Messages
 {
-    [DataContract]
     public class SignUpRequest : Request
     {
-        [DataMember(Name = "username")]
-        public string Username { get; set; }
-
-        [DataMember(Name = "email")]
-        public string Email { get; set; }
-
-        [DataMember(Name = "password")]
-        public string Password { get; set; }
-
-        [DataMember(Name = "facebookId")]
-        public string FacebookId { get; set; }
-
-        [DataMember(Name = "facebookToken")]
+        public SignUpUserModel User { get; set; }
         public string FacebookToken { get; set; }
+    }
+
+    public class SignUpUserModel
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string FacebookId { get; set; }
     }
 }

@@ -1,19 +1,27 @@
-﻿using Taga.Core.Repository.Sql;
+﻿using System.Linq;
+using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
-using TagKid.Lib.Utils;
 
 namespace TagKid.Lib.Repositories.Impl
 {
     public class TokenRepository : ITokenRepository
     {
+        private readonly IRepository _repository;
+
+        public TokenRepository(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public Token GetById(long tokenId)
         {
-            return Db.SqlRepository().FirstOrDefault<Token>(t => t.Id, tokenId);
+            return _repository.Query<Token>()
+                .FirstOrDefault(t => t.Id == tokenId);
         }
 
         public void Save(Token token)
         {
-            Db.SqlRepository().Save(token);
+            _repository.Save(token);
         }
     }
 }

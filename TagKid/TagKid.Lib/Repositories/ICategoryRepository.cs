@@ -3,7 +3,7 @@ using TagKid.Lib.Models.Entities;
 
 namespace TagKid.Lib.Repositories
 {
-    public interface ICategoryRepository
+    public interface ICategoryRepository : ITagKidRepository
     {
         IPage<Category> GetByUserId(long userId, int pageIndex, int pageSize);
 

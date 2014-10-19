@@ -5,7 +5,7 @@ using TagKid.Lib.Models.Filters;
 
 namespace TagKid.Lib.Repositories
 {
-    public interface IPostRepository
+    public interface IPostRepository : ITagKidRepository
     {
         PostView GetById(long postId);
 
