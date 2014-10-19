@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 
 namespace Taga.Core.DynamicProxy
 {
-    static class ReflectionExtensions
+    internal static class ReflectionExtensions
     {
         public static bool HasDefaultConstructor(this Type type)
         {
@@ -43,8 +43,7 @@ namespace Taga.Core.DynamicProxy
                 if (property != null)
                     mi = property;
             }
-            return mi.GetCustomAttributes(typeof(TAttribute), false).Any();
+            return mi.GetCustomAttributes(typeof (TAttribute), false).Any();
         }
     }
 }
-

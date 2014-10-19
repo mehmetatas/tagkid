@@ -6,7 +6,7 @@ namespace Taga.Core.DynamicProxy
     internal class CallHandlerMethodImplementor : CallHandlerMethodBuilder
     {
         internal CallHandlerMethodImplementor(TypeBuilder typeBuilder, MethodInfo methodInfo,
-                                              FieldBuilder callHandlerFieldBuilder)
+            FieldBuilder callHandlerFieldBuilder)
             : base(typeBuilder, methodInfo, callHandlerFieldBuilder)
         {
         }

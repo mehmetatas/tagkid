@@ -48,7 +48,7 @@ namespace TagKid.Lib.Services.Impl
 
         public virtual SignInResponse SignIn(SignInRequest request)
         {
-            var login = new Login { Date = DateTime.Now };
+            var login = new Login {Date = DateTime.Now};
             SignInResponse response;
 
             Validator.Validate(request);
@@ -129,7 +129,7 @@ namespace TagKid.Lib.Services.Impl
 
         public virtual SignInResponse SignInWithToken(long tokenId, string guid)
         {
-            var login = new Login { Date = DateTime.Now, Type = LoginType.Cookie };
+            var login = new Login {Date = DateTime.Now, Type = LoginType.Cookie};
             SignInResponse response;
 
             using (var db = new TagKidDb())
@@ -220,7 +220,7 @@ namespace TagKid.Lib.Services.Impl
 
                 // Validate tokens
                 var authToken = ValidateToken(
-                    request.Context.AuthToken, 
+                    request.Context.AuthToken,
                     tokenRepo.GetById(request.Context.AuthToken.Id));
 
                 var requestToken = ValidateToken(

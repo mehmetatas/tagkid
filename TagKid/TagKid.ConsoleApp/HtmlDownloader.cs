@@ -13,10 +13,6 @@ namespace TagKid.ConsoleApp
         private readonly string _referer;
         private readonly string _userAgent;
 
-        public Encoding Encoding { get; set; }
-        public WebHeaderCollection Headers { get; set; }
-        public Uri Url { get; set; }
-
         public HtmlDownloader(string url)
             : this(url, null, null)
         {
@@ -30,9 +26,18 @@ namespace TagKid.ConsoleApp
             _referer = referer;
         }
 
+        public Encoding Encoding { get; set; }
+        public WebHeaderCollection Headers { get; set; }
+        public Uri Url { get; set; }
+
+        public string HtmlContent { get; private set; }
+
+        public bool IsImage { get; private set; }
+        public bool IsHtml { get; private set; }
+
         public void GetHtml()
         {
-            var request = (HttpWebRequest)WebRequest.Create(Url);
+            var request = (HttpWebRequest) WebRequest.Create(Url);
             if (!string.IsNullOrEmpty(_referer))
                 request.Referer = _referer;
             if (!string.IsNullOrEmpty(_userAgent))
@@ -41,18 +46,13 @@ namespace TagKid.ConsoleApp
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
             request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
 
-            using (var response = (HttpWebResponse)request.GetResponse())
+            using (var response = (HttpWebResponse) request.GetResponse())
             {
                 Headers = response.Headers;
                 Url = response.ResponseUri;
                 ProcessContent(response);
             }
         }
-
-        public string HtmlContent { get; private set; }
-
-        public bool IsImage { get; private set; }
-        public bool IsHtml { get; private set; }
 
         private void ProcessContent(HttpWebResponse response)
         {
@@ -67,7 +67,9 @@ namespace TagKid.ConsoleApp
             var memStream = new MemoryStream();
             int bytesRead;
             var buffer = new byte[1024];
-            for (bytesRead = s.Read(buffer, 0, buffer.Length); bytesRead > 0; bytesRead = s.Read(buffer, 0, buffer.Length))
+            for (bytesRead = s.Read(buffer, 0, buffer.Length);
+                bytesRead > 0;
+                bytesRead = s.Read(buffer, 0, buffer.Length))
             {
                 memStream.Write(buffer, 0, bytesRead);
             }
@@ -100,7 +102,7 @@ namespace TagKid.ConsoleApp
                 var m = Regex.Match(response.ContentType, @";\s*charset\s*=\s*(?<charset>.*)", RegexOptions.IgnoreCase);
                 if (m.Success)
                 {
-                    charset = m.Groups["charset"].Value.Trim(new[] { '\'', '"' });
+                    charset = m.Groups["charset"].Value.Trim(new[] {'\'', '"'});
                 }
             }
             else
@@ -121,7 +123,9 @@ namespace TagKid.ConsoleApp
 
         private string CheckMetaCharSetAndReEncode(Stream memStream, string html)
         {
-            var m = new Regex(@"<meta\s+.*?charset\s*=\s*(?<charset>[A-Za-z0-9_-]+)", RegexOptions.Singleline | RegexOptions.IgnoreCase).Match(html);
+            var m =
+                new Regex(@"<meta\s+.*?charset\s*=\s*(?<charset>[A-Za-z0-9_-]+)",
+                    RegexOptions.Singleline | RegexOptions.IgnoreCase).Match(html);
             if (m.Success)
             {
                 var charset = m.Groups["charset"].Value.ToLower();

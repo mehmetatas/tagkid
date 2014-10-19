@@ -6,7 +6,7 @@ namespace TagKid.Lib.Repositories
 {
     public interface ICommentRepository : ITagKidRepository
     {
-        IPage<CommentView> GetByPostId(long postId, int pageIndex, int pageSize); 
+        IPage<CommentView> GetByPostId(long postId, int pageIndex, int pageSize);
 
         void Save(Comment comment);
     }

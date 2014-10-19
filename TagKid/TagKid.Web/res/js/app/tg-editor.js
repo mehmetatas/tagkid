@@ -1,7 +1,7 @@
 ﻿tgEditor = {
-    init: function () {
+    init: function() {
         var timeout;
-        $(window).resize(function () {
+        $(window).resize(function() {
             if (timeout)
                 clearTimeout(timeout);
 
@@ -11,7 +11,7 @@
         tgEditor.resize();
         tgEditor.format();
     },
-    resize: function () {
+    resize: function() {
         var dh = $('.tg-input-title').height() + $('.tag-search').height() + 30; // 40 => padding: 10px
 
         var modalContentHeight = $('.modal-content').height();
@@ -25,7 +25,7 @@
         var editorMaxHeight = modalBodyHeight - dh;
 
         $('#editor-help')
-             .css('height', modalBodyHeight + 'px');
+            .css('height', modalBodyHeight + 'px');
 
         $('.tg-preview')
             .css('height', modalBodyHeight + 'px');
@@ -37,7 +37,7 @@
             .css('transition', 'height 0.2s')
             .autosize();
     },
-    format: function () {
+    format: function() {
         var code = tagkid.context.$scope.post.contentCode;
         var html = tgEditor.toHtml(code);
         tagkid.context.$scope.post.content = html;
@@ -45,7 +45,7 @@
         //var html = tgEditor.toHtml($('.tg-input').val());
         //$('.tg-preview').html(html);
     },
-    toHtml: function (text) {
+    toHtml: function(text) {
         var html = '';
         var linkText = '';
 
@@ -75,8 +75,7 @@
             if (c == '[' && !inPre) {
                 if (inLink) {
                     linkText += c;
-                }
-                else {
+                } else {
                     if (i < text.length - 1) {
                         var nextChar = text.charAt(i + 1);
                         if (nextChar == c) {
@@ -88,16 +87,15 @@
                     inLink = true;
                     linkText = '';
                 }
-            }
-            else if (c == ']' && !inPre) {
+            } else if (c == ']' && !inPre) {
                 if (inLink) {
                     inLink = false;
                     var index = linkText.lastIndexOf('|');
 
                     if (index < 1) {
                         html += '<img class="img-responsive" src="'
-                               + linkText.trim()
-                               + '" />';
+                            + linkText.trim()
+                            + '" />';
                     } else {
                         var href = linkText.substr(index + 1);
 
@@ -115,17 +113,14 @@
                 } else {
                     html += c;
                 }
-            }
-            else if (inLink) {
+            } else if (inLink) {
                 if (replace[c])
                     linkText += replace[c];
                 else
                     linkText += c;
-            }
-            else if (replace[c]) {
+            } else if (replace[c]) {
                 html += replace[c];
-            }
-            else if (tagBuilders[c]) {
+            } else if (tagBuilders[c]) {
                 if (c == '`')
                     inPre = !inPre;
 
@@ -156,7 +151,7 @@ function TagBuilder(htmlTag) {
     var count = 0;
     var tag = htmlTag;
 
-    this.build = function () {
+    this.build = function() {
         if (count == 0) {
             count = 1;
             return '<' + tag + '>';
@@ -164,5 +159,5 @@ function TagBuilder(htmlTag) {
             count = 0;
             return '</' + tag + '>';
         }
-    }
+    };
 }

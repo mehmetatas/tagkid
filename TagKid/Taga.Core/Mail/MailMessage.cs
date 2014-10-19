@@ -1,5 +1,4 @@
-﻿
-namespace Taga.Core.Mail
+﻿namespace Taga.Core.Mail
 {
     public class MailMessage
     {

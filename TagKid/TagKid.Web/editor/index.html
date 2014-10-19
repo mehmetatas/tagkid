@@ -1,19 +1,19 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-    <link href="../res/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../res/css/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="../res/js/jquery-1.10.2.min.js"></script>
-    <script src="../res/js/bootstrap.min.js"></script>
-</head>
-<body>
+    <head>
+        <title></title>
+        <link href="../res/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="../res/css/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+        <script src="../res/js/jquery-1.10.2.min.js"></script>
+        <script src="../res/js/bootstrap.min.js"></script>
+    </head>
+    <body>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="tg-editor">
-                    <textarea class="tg-input">*bold* _underline_ -strike- /italic/
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="tg-editor">
+                        <textarea class="tg-input">*bold* _underline_ -strike- /italic/
 
 *-_/all combined/_-*
 
@@ -34,68 +34,118 @@ To use asterisk (**), dash (--), underscore(__), slash (//) and bracket ([[) reg
         _a[2] = _a[0] - 5;
     }
 </script>`</textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tg-preview"></div>
+                </div>
+                <div class="col-md-4">
+                    <textarea disabled="disabled" class="tg-code"></textarea>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="tg-preview"></div>
-            </div>
-            <div class="col-md-4">
-                <textarea disabled="disabled" class="tg-code"></textarea>
-            </div>
         </div>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            var timeout;
-            $('.tg-input').on('keyup change', function () {
-                if (timeout)
-                    clearTimeout(timeout);
+        <script type="text/javascript">
+            $(function() {
+                var timeout;
+                $('.tg-input').on('keyup change', function() {
+                    if (timeout)
+                        clearTimeout(timeout);
 
-                timeout = setTimeout(format, 500);
+                    timeout = setTimeout(format, 500);
+                });
+
+                format();
             });
 
-            format();
-        });
+            function format() {
+                var html = toHtml($('.tg-input').val());
+                $('.tg-preview').html(html);
+                $('.tg-code').val(html);
+            }
 
-        function format() {
-            var html = toHtml($('.tg-input').val());
-            $('.tg-preview').html(html);
-            $('.tg-code').val(html);
-        }
+            function toHtml(text) {
+                var html = '';
+                var linkText = '';
 
-        function toHtml(text) {
-            var html = '';
-            var linkText = '';
+                var replace = {
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '&': '&amp;',
+                    '\n': '<br/>',
+                    '\t': '&nbsp;&nbsp;&nbsp;&nbsp;',
+                    '\r': ''
+                };
 
-            var replace = {
-                '<': '&lt;',
-                '>': '&gt;',
-                '&': '&amp;',
-                '\n': '<br/>',
-                '\t': '&nbsp;&nbsp;&nbsp;&nbsp;',
-                '\r': ''
-            };
+                var tagBuilders = {
+                    '/': new TagBuilder('i'),
+                    '*': new TagBuilder('b'),
+                    '_': new TagBuilder('u'),
+                    '-': new TagBuilder('s'),
+                    '`': new TagBuilder('pre')
+                };
 
-            var tagBuilders = {
-                '/': new TagBuilder('i'),
-                '*': new TagBuilder('b'),
-                '_': new TagBuilder('u'),
-                '-': new TagBuilder('s'),
-                '`': new TagBuilder('pre')
-            };
+                var inPre = false;
+                var inLink = false;
 
-            var inPre = false;
-            var inLink = false;
+                for (var i = 0; i < text.length; i++) {
+                    var c = text.charAt(i);
 
-            for (var i = 0; i < text.length; i++) {
-                var c = text.charAt(i);
+                    if (c == '[' && !inPre) {
+                        if (inLink) {
+                            linkText += c;
+                        } else {
+                            if (i < text.length - 1) {
+                                var nextChar = text.charAt(i + 1);
+                                if (nextChar == c) {
+                                    html += c;
+                                    i++;
+                                    continue;
+                                }
+                            }
+                            inLink = true;
+                            linkText = '';
+                        }
+                    } else if (c == ']' && !inPre) {
+                        if (inLink) {
+                            inLink = false;
+                            var index = linkText.lastIndexOf('|');
 
-                if (c == '[' && !inPre) {
-                    if (inLink) {
-                        linkText += c;
-                    }
-                    else {
-                        if (i < text.length - 1) {
+                            if (index < 1) {
+                                html += '<img class="img-responsive" src="'
+                                    + linkText.trim()
+                                    + '" />';
+                            } else {
+                                var href = linkText.substr(index + 1);
+
+                                if (href.indexOf('http://') != 0 &&
+                                    href.indexOf('https://') != 0) {
+                                    href = 'http://' + href.trim();
+                                }
+
+                                html += '<a href="'
+                                    + href
+                                    + '" target="_blank">'
+                                    + linkText.substr(0, index).trim()
+                                    + '</a>';
+                            }
+                        } else {
+                            html += c;
+                        }
+                    } else if (inLink) {
+                        if (replace[c])
+                            linkText += replace[c];
+                        else
+                            linkText += c;
+                    } else if (replace[c]) {
+                        html += replace[c];
+                    } else if (tagBuilders[c]) {
+                        if (c == '`')
+                            inPre = !inPre;
+
+                        if (inPre && c != '`') {
+                            html += c;
+                            continue;
+                        } else if (i < text.length - 1) {
                             var nextChar = text.charAt(i + 1);
                             if (nextChar == c) {
                                 html += c;
@@ -103,112 +153,56 @@ To use asterisk (**), dash (--), underscore(__), slash (//) and bracket ([[) reg
                                 continue;
                             }
                         }
-                        inLink = true;
-                        linkText = '';
-                    }
-                }
-                else if (c == ']' && !inPre) {
-                    if (inLink) {
-                        inLink = false;
-                        var index = linkText.lastIndexOf('|');
 
-                        if (index < 1) {
-                            html += '<img class="img-responsive" src="'
-                                   + linkText.trim()
-                                   + '" />';
-                        } else {
-                            var href = linkText.substr(index + 1);
+                        html += tagBuilders[c].build();
 
-                            if (href.indexOf('http://') != 0 &&
-                                href.indexOf('https://') != 0) {
-                                href = 'http://' + href.trim();
-                            }
-
-                            html += '<a href="'
-                                + href
-                                + '" target="_blank">'
-                                + linkText.substr(0, index).trim()
-                                + '</a>';
-                        }
                     } else {
                         html += c;
                     }
                 }
-                else if (inLink) {
-                    if (replace[c])
-                        linkText += replace[c];
-                    else
-                        linkText += c;
-                }
-                else if (replace[c]) {
-                    html += replace[c];
-                }
-                else if (tagBuilders[c]) {
-                    if (c == '`')
-                        inPre = !inPre;
 
-                    if (inPre && c != '`') {
-                        html += c;
-                        continue;
-                    } else if (i < text.length - 1) {
-                        var nextChar = text.charAt(i + 1);
-                        if (nextChar == c) {
-                            html += c;
-                            i++;
-                            continue;
-                        }
+                return html;
+            }
+
+            function TagBuilder(htmlTag) {
+                var count = 0;
+                var tag = htmlTag;
+
+                this.build = function() {
+                    if (count == 0) {
+                        count = 1;
+                        return '<' + tag + '>';
+                    } else {
+                        count = 0;
+                        return '</' + tag + '>';
                     }
+                };
+            }
+        </script>
 
-                    html += tagBuilders[c].build();
+        <style type="text/css">
+            .tg-editor { }
 
-                } else {
-                    html += c;
-                }
+            .tg-input {
+                height: 600px;
+                padding: 10px;
+                position: relative;
+                width: 100%;
             }
 
-            return html;
-        }
-
-        function TagBuilder(htmlTag) {
-            var count = 0;
-            var tag = htmlTag;
-
-            this.build = function () {
-                if (count == 0) {
-                    count = 1;
-                    return '<' + tag + '>';
-                } else {
-                    count = 0;
-                    return '</' + tag + '>';
-                }
+            .tg-preview {
+                border: solid 1px;
+                padding: 10px;
+                position: relative;
+                width: 100%;
             }
-        }
-    </script>
 
-    <style type="text/css">
-        .tg-editor {
-        }
-
-        .tg-input {
-            padding: 10px;
-            position: relative;
-            width: 100%;
-            height: 600px;
-        }
-
-        .tg-preview {
-            padding: 10px;
-            position: relative;
-            width: 100%;
-            border: solid 1px;
-        }
-
-        .tg-code {
-            padding: 10px;
-            position: relative;
-            width: 100%;
-            height: 600px;
-        }
-    </style>
-</body>
+            .tg-code {
+                height: 600px;
+                padding: 10px;
+                position: relative;
+                width: 100%;
+            }
+        </style>
+    </body>
 </html>

@@ -1,5 +1,4 @@
 ﻿using System.Web;
-
 using NetCallContext = System.Runtime.Remoting.Messaging.CallContext;
 
 namespace Taga.Core.Context
@@ -10,7 +9,7 @@ namespace Taga.Core.Context
         {
             var res = Get(key);
             if (res is T)
-                return (T)res;
+                return (T) res;
             return default(T);
         }
 
@@ -20,8 +19,8 @@ namespace Taga.Core.Context
                 return NetCallContext.GetData(key);
 
             return HttpContext.Current.Items.Contains(key)
-                       ? HttpContext.Current.Items[key]
-                       : null;
+                ? HttpContext.Current.Items[key]
+                : null;
         }
 
         public static void Set(string key, object value)

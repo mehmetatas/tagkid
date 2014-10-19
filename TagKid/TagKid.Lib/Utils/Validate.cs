@@ -44,7 +44,8 @@ namespace TagKid.Lib.Utils
                 throw new UserException("{0} must be {1}", key, expectedValue);
         }
 
-        public static void Range<T>(string key, T value, T min, T max, bool gte = true, bool lte = true) where T : IComparable
+        public static void Range<T>(string key, T value, T min, T max, bool gte = true, bool lte = true)
+            where T : IComparable
         {
             if (gte && value.CompareTo(min) == -1)
                 throw new UserException("{0} must be greater than or equal to {1}", key, min);

@@ -2,7 +2,7 @@
 
 namespace TagKid.Lib.NHibernate
 {
-    interface INHUnitOfWork
+    internal interface INHUnitOfWork
     {
         ISession Session { get; }
     }

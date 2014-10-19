@@ -1,5 +1,4 @@
-﻿
-namespace TagKid.Lib.Repositories
+﻿namespace TagKid.Lib.Repositories
 {
     public interface IRepositoryProvider
     {

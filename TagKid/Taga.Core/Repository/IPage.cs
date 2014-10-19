@@ -8,7 +8,7 @@ namespace Taga.Core.Repository
 
         long PageSize { get; }
 
-        long TotalPages { get;}
+        long TotalPages { get; }
 
         long TotalCount { get; }
 

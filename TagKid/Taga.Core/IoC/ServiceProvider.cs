@@ -1,5 +1,5 @@
-﻿using Ninject;
-using System;
+﻿using System;
+using Ninject;
 
 namespace Taga.Core.IoC
 {
@@ -11,7 +11,6 @@ namespace Taga.Core.IoC
 
         private ServiceProvider()
         {
-
         }
 
         public IServiceProvider Register(Type serviceType, Type classType, object singleton = null)

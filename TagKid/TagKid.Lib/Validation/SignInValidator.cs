@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using System;
+﻿using System;
+using FluentValidation;
 using TagKid.Lib.Models.DTO.Messages;
 
 namespace TagKid.Lib.Validation

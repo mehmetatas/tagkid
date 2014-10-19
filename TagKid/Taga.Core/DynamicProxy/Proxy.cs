@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Security;
-using System.Security.Permissions;
 
 namespace Taga.Core.DynamicProxy
 {
@@ -46,19 +44,20 @@ namespace Taga.Core.DynamicProxy
         private static string GetTypeKey(Type baseType, IEnumerable<Type> interfaceTypes)
         {
             var key = "__" + baseType.FullName;
-            return interfaceTypes.Aggregate(key, (current, interfaceType) => current + "__" + interfaceType.FullName + "__");
+            return interfaceTypes.Aggregate(key,
+                (current, interfaceType) => current + "__" + interfaceType.FullName + "__");
         }
 
         public static Type TypeOf<TBase>(params Type[] interfaceTypes) where TBase : class
         {
-            var builder = new Proxy(typeof(TBase), interfaceTypes);
+            var builder = new Proxy(typeof (TBase), interfaceTypes);
             return builder.BuildProxyType();
         }
 
         public static TBase Of<TBase>(ICallHandler callHandler, params Type[] interfaceTypes) where TBase : class
         {
             var type = TypeOf<TBase>(interfaceTypes);
-            return (TBase)Activator.CreateInstance(type, callHandler);
+            return (TBase) Activator.CreateInstance(type, callHandler);
         }
 
         public static object Of(ICallHandler callHandler, Type[] interfaceTypes)
@@ -70,10 +69,12 @@ namespace Taga.Core.DynamicProxy
 
         #endregion
 
-        private TypeBuilder _typeBuilder;
-        private FieldBuilder _callHandlerFieldBuilder;
         private readonly Type _baseClassType;
         private readonly Type[] _interfaceTypes;
+        private FieldBuilder _callHandlerFieldBuilder;
+        private TypeBuilder _typeBuilder;
+
+        private string _typeName;
 
         private Proxy(Type baseClassType, Type[] interfaceTypes)
         {
@@ -85,14 +86,15 @@ namespace Taga.Core.DynamicProxy
                 _interfaceTypes = interfaceTypes;
 
             if (baseClassType == null)
-                _baseClassType = typeof(object);
-            else if (!baseClassType.IsClass || baseClassType.IsAbstract || baseClassType.IsGenericType || baseClassType.IsSealed || !baseClassType.IsPublic || !baseClassType.HasDefaultConstructor())
-                throw new InvalidOperationException("Base Class Type must be a public, non-sealed, non-abstract, non-generic class with a public default constructor");
+                _baseClassType = typeof (object);
+            else if (!baseClassType.IsClass || baseClassType.IsAbstract || baseClassType.IsGenericType ||
+                     baseClassType.IsSealed || !baseClassType.IsPublic || !baseClassType.HasDefaultConstructor())
+                throw new InvalidOperationException(
+                    "Base Class Type must be a public, non-sealed, non-abstract, non-generic class with a public default constructor");
             else
                 _baseClassType = baseClassType;
         }
 
-        private string _typeName;
         private string TypeName
         {
             get { return _typeName ?? (_typeName = BuildTypeName()); }
@@ -105,7 +107,8 @@ namespace Taga.Core.DynamicProxy
             if (_baseClassType != null)
                 typeName += _baseClassType.Name + "__";
 
-            typeName = _interfaceTypes.Aggregate(typeName, (current, interfaceType) => current + (interfaceType.Name + "__"));
+            typeName = _interfaceTypes.Aggregate(typeName,
+                (current, interfaceType) => current + (interfaceType.Name + "__"));
 
             return typeName + "Proxy__";
         }
@@ -146,13 +149,14 @@ namespace Taga.Core.DynamicProxy
         private void DefineCallHandlerField()
         {
             // private ICallHandler _callHandler;
-            _callHandlerFieldBuilder = _typeBuilder.DefineField("_callHandler", typeof(ICallHandler), FieldAttributes.Private);
+            _callHandlerFieldBuilder = _typeBuilder.DefineField("_callHandler", typeof (ICallHandler),
+                FieldAttributes.Private);
         }
 
         private void BuildConstructor()
         {
-            var constructorBuilder = DeclareContsructor();   // public ProxyClass(ICallHandler callHandler)
-            ImplementConstructor(constructorBuilder);       // : base() { this._callHandler = callHandler; }
+            var constructorBuilder = DeclareContsructor(); // public ProxyClass(ICallHandler callHandler)
+            ImplementConstructor(constructorBuilder); // : base() { this._callHandler = callHandler; }
         }
 
         private void OverrideBase()
@@ -176,7 +180,7 @@ namespace Taga.Core.DynamicProxy
             var constructorBuilder = _typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
                 CallingConventions.HasThis,
-                new[] { typeof(ICallHandler) });
+                new[] {typeof (ICallHandler)});
             return constructorBuilder;
         }
 
@@ -193,14 +197,16 @@ namespace Taga.Core.DynamicProxy
             // set _callHandler
             il.Emit(OpCodes.Ldarg_0); // push this
             il.Emit(OpCodes.Ldarg_1); // push callHandler argument
-            il.Emit(OpCodes.Stfld, _callHandlerFieldBuilder); // this._callHandler = callHandler, pop this, pop callhandler argument
+            il.Emit(OpCodes.Stfld, _callHandlerFieldBuilder);
+            // this._callHandler = callHandler, pop this, pop callhandler argument
 
             il.Emit(OpCodes.Ret); // exit ctor
         }
 
         private void BuildMethod(MethodInfo mi)
         {
-            var methodBuilder = CallHandlerMethodBuilder.GetInstance(_typeBuilder, mi, _callHandlerFieldBuilder);
+            var methodBuilder = CallHandlerMethodBuilder.GetInstance(_typeBuilder, mi,
+                _callHandlerFieldBuilder);
             methodBuilder.Build();
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TagKid.Lib.Services
+﻿namespace TagKid.Lib.Services
 {
     public interface ITagKidService
     {

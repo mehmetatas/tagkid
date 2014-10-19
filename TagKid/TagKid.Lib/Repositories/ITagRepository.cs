@@ -14,7 +14,7 @@ namespace TagKid.Lib.Repositories
 
         IDictionary<Tag, int> GetUserTagCounts(long userId);
 
-        IDictionary<Tag, int> GetCategoryTagCounts(long userId); 
+        IDictionary<Tag, int> GetCategoryTagCounts(long userId);
 
         void Save(Tag tag);
     }

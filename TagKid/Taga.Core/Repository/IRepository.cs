@@ -8,10 +8,12 @@ namespace Taga.Core.Repository
         void Save<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
         IQueryable<T> Query<T>() where T : class;
-        IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false) where T : class;
+
+        IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false)
+            where T : class;
     }
 
-    class Page<T> : IPage<T>
+    internal class Page<T> : IPage<T>
     {
         public long CurrentPage { get; set; }
 
@@ -42,9 +44,9 @@ namespace Taga.Core.Repository
         {
             var totalCount = query.Count();
 
-            var pageCount = (totalCount - 1) / pageSize + 1;
+            var pageCount = (totalCount - 1)/pageSize + 1;
 
-            var items = query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var items = query.Skip((pageIndex - 1)*pageSize).Take(pageSize).ToList();
 
             return new Page<T>
             {

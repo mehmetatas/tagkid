@@ -24,7 +24,7 @@ namespace Taga.Core.Mapping
         }
     }
 
-    class MappingRuleChain<TSource, TTarget> : IMappingRuleChain<TSource, TTarget>
+    internal class MappingRuleChain<TSource, TTarget> : IMappingRuleChain<TSource, TTarget>
         where TSource : class
         where TTarget : class
     {

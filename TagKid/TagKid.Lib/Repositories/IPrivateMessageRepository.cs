@@ -6,7 +6,7 @@ namespace TagKid.Lib.Repositories
 {
     public interface IPrivateMessageRepository : ITagKidRepository
     {
-        IPage<PrivateMessageView> GetMessages(long user1, long user2, int pageIndex, int pageSize); 
+        IPage<PrivateMessageView> GetMessages(long user1, long user2, int pageIndex, int pageSize);
 
         void Save(PrivateMessage privateMessage);
     }

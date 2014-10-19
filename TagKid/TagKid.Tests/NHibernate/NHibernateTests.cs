@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
-using System.Linq;
 using Taga.Core.IoC;
-using Taga.Core.Repository;
 using TagKid.Lib.Bootstrapping;
 using TagKid.Lib.Models.Entities;
 using TagKid.Lib.NHibernate;
@@ -49,7 +46,7 @@ namespace TagKid.Tests.NHibernate
 
                 var repo = new NHRepository();
 
-                repo.Save(new TagPost { TagId = 1, PostId = 1 });
+                repo.Save(new TagPost {TagId = 1, PostId = 1});
 
                 uow.Save();
             }

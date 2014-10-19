@@ -21,7 +21,6 @@ namespace Taga.Core.Repository.Base
 
         protected virtual void OnDispose()
         {
-
         }
 
         #region Stack

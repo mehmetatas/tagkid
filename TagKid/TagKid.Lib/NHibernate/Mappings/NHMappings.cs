@@ -3,6 +3,7 @@ using TagKid.Lib.Models.Entities.Views;
 
 namespace TagKid.Lib.NHibernate.Mappings
 {
+
     #region Tables
 
     public class UserMap : NHAutoMap<User>
@@ -26,7 +27,6 @@ namespace TagKid.Lib.NHibernate.Mappings
         public PostTagMap()
             : base(idProperty: "PostId")
         {
-
         }
     }
 
@@ -35,7 +35,6 @@ namespace TagKid.Lib.NHibernate.Mappings
         public TagPostMap()
             : base(idProperty: "TagId")
         {
-
         }
     }
 

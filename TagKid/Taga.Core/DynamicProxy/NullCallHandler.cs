@@ -5,7 +5,7 @@ namespace Taga.Core.DynamicProxy
 {
     public class NullCallHandler : ICallHandler
     {
-        public readonly static ICallHandler Instance = new NullCallHandler();
+        public static readonly ICallHandler Instance = new NullCallHandler();
 
         private NullCallHandler()
         {
@@ -18,12 +18,10 @@ namespace Taga.Core.DynamicProxy
 
         public void AfterCall(object obj, MethodInfo mi, object[] args, object returnValue)
         {
-            
         }
 
         public void OnError(object obj, MethodInfo mi, object[] args, Exception exception)
         {
-            
         }
     }
 }

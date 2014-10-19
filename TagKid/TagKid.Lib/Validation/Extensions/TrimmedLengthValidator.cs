@@ -1,18 +1,16 @@
-﻿using FluentValidation.Resources;
-using FluentValidation.Validators;
-using System;
+﻿using System;
 using System.Linq.Expressions;
+using FluentValidation.Resources;
+using FluentValidation.Validators;
 
 namespace TagKid.Lib.Validation.Extensions
 {
-    class TrimmedLengthValidator : PropertyValidator, ILengthValidator
+    internal class TrimmedLengthValidator : PropertyValidator, ILengthValidator
     {
-        public int Min { get; private set; }
-        public int Max { get; private set; }
-
         public TrimmedLengthValidator(int min, int max)
             : this(min, max, () => Messages.length_error)
-        { }
+        {
+        }
 
         public TrimmedLengthValidator(int min, int max, Expression<Func<string>> errorMessageResourceSelector)
             : base(errorMessageResourceSelector)
@@ -24,6 +22,9 @@ namespace TagKid.Lib.Validation.Extensions
             Min = min;
         }
 
+        public int Min { get; private set; }
+        public int Max { get; private set; }
+
         protected override bool IsValid(PropertyValidatorContext context)
         {
             if (context.PropertyValue == null)
@@ -33,7 +34,9 @@ namespace TagKid.Lib.Validation.Extensions
 
             if (length < Min || (length > Max && Max != -1))
             {
-                context.MessageFormatter.AppendArgument("MinLength", Min).AppendArgument("MaxLength", Max).AppendArgument("TotalLength", length);
+                context.MessageFormatter.AppendArgument("MinLength", Min)
+                    .AppendArgument("MaxLength", Max)
+                    .AppendArgument("TotalLength", length);
                 return false;
             }
             return true;

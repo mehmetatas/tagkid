@@ -28,14 +28,14 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("signup_email")]
-        public virtual Response SignUpWithEmail([FromBody]SignUpRequest request)
+        public virtual Response SignUpWithEmail([FromBody] SignUpRequest request)
         {
             return RegisterUser(request);
         }
 
         [HttpPost]
         [ActionName("signup_facebook")]
-        public virtual Response SignUpWithFacebook([FromBody]SignUpRequest request)
+        public virtual Response SignUpWithFacebook([FromBody] SignUpRequest request)
         {
             return new Response
             {
@@ -46,7 +46,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("check_email")]
-        public virtual Response CheckEmail([FromBody]string email)
+        public virtual Response CheckEmail([FromBody] string email)
         {
             return new Response
             {
@@ -57,7 +57,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("check_username")]
-        public virtual Response CheckUsername([FromBody]string username)
+        public virtual Response CheckUsername([FromBody] string username)
         {
             return new Response
             {
@@ -68,7 +68,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("signin_email")]
-        public virtual Response SignInWithEmail([FromBody]SignInRequest request)
+        public virtual Response SignInWithEmail([FromBody] SignInRequest request)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("signin_facebook")]
-        public virtual Response SignInWithFacebook([FromBody]SignInRequest request)
+        public virtual Response SignInWithFacebook([FromBody] SignInRequest request)
         {
             return new Response
             {
@@ -97,7 +97,7 @@ namespace TagKid.Web.Controllers
 
         [HttpPost]
         [ActionName("forgot_password")]
-        public virtual Response ForgotPassword([FromBody]string emailOrUsername)
+        public virtual Response ForgotPassword([FromBody] string emailOrUsername)
         {
             return new Response
             {
@@ -115,13 +115,12 @@ namespace TagKid.Web.Controllers
             {
                 var authToken = HttpContext.Current.Request.Cookies["authToken"].Value;
                 long authTokenId;
-                
-                if (!String.IsNullOrEmpty(authToken) && 
+
+                if (!String.IsNullOrEmpty(authToken) &&
                     Int64.TryParse(HttpContext.Current.Request.Cookies["authTokenId"].Value, out authTokenId))
                 {
                     return _authService.SignInWithToken(authTokenId, authToken);
-                } 
-                
+                }
             }
 
             return new SignInResponse

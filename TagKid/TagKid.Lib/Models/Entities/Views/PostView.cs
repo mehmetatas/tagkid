@@ -1,5 +1,4 @@
-﻿
-namespace TagKid.Lib.Models.Entities.Views
+﻿namespace TagKid.Lib.Models.Entities.Views
 {
     public class PostView : Post
     {

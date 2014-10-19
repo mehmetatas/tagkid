@@ -1,5 +1,4 @@
-﻿
-namespace TagKid.Lib.Models.DTO.Messages
+﻿namespace TagKid.Lib.Models.DTO.Messages
 {
     public class SignInRequest : Request
     {

@@ -1,8 +1,8 @@
-﻿using FluentNHibernate.Mapping;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Text;
+using FluentNHibernate.Mapping;
 
 namespace TagKid.Lib.NHibernate.Mappings
 {
@@ -12,7 +12,7 @@ namespace TagKid.Lib.NHibernate.Mappings
 
         public NHAutoMap(string tableName = null, string idProperty = "Id")
         {
-            var type = typeof(T);
+            var type = typeof (T);
 
             if (tableName == null)
                 tableName = GetTableName();
@@ -23,9 +23,9 @@ namespace TagKid.Lib.NHibernate.Mappings
             {
                 var parameter = Expression.Parameter(type, "entity");
                 var property = Expression.Property(parameter, propInf);
-                var body = Expression.Convert(property, typeof(object));
-                var funcType = typeof(Func<T, object>);
-                var lambda = (Expression<Func<T, object>>)Expression.Lambda(funcType, body, parameter);
+                var body = Expression.Convert(property, typeof (object));
+                var funcType = typeof (Func<T, object>);
+                var lambda = (Expression<Func<T, object>>) Expression.Lambda(funcType, body, parameter);
 
                 if (propInf.Name == idProperty)
                 {
@@ -46,7 +46,7 @@ namespace TagKid.Lib.NHibernate.Mappings
 
         private static string GetTableName()
         {
-            var type = typeof(T);
+            var type = typeof (T);
 
             var tableName = ToDbName(type.Name);
 

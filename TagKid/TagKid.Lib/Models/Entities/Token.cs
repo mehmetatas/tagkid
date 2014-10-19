@@ -13,7 +13,7 @@ namespace TagKid.Lib.Models.Entities
         public virtual DateTime Expires { get; set; }
 
         public virtual DateTime UsedTime { get; set; }
-        
+
         public virtual TokenType Type { get; set; }
     }
 }

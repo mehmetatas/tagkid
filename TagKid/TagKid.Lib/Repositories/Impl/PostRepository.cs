@@ -38,8 +38,8 @@ namespace TagKid.Lib.Repositories.Impl
 
             foreach (var tag in tags)
             {
-                _repository.Save(new PostTag { PostId = post.Id, TagId = tag.Id });
-                _repository.Save(new TagPost { PostId = post.Id, TagId = tag.Id });
+                _repository.Save(new PostTag {PostId = post.Id, TagId = tag.Id});
+                _repository.Save(new TagPost {PostId = post.Id, TagId = tag.Id});
             }
         }
     }

@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using NHibernate;
 using NHibernate.Linq;
-using System.Collections.Generic;
-using System.Linq;
-using NHibernate.Transform;
 using Taga.Core.Repository;
 using Taga.Core.Repository.Base;
 
@@ -16,7 +15,7 @@ namespace TagKid.Lib.NHibernate
 
         public NHRepository()
         {
-            var uow = (INHUnitOfWork)UnitOfWork.Current;
+            var uow = (INHUnitOfWork) UnitOfWork.Current;
             _session = uow.Session;
         }
 
@@ -35,12 +34,13 @@ namespace TagKid.Lib.NHibernate
             return _session.Query<T>();
         }
 
-        public IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false) where T : class
+        public IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false)
+            where T : class
         {
             var command = CreateSqlCommand(spNameOrSql, args, rawSql);
 
             var query = _session.CreateSQLQuery(command);
-            query.AddEntity(typeof(T));
+            query.AddEntity(typeof (T));
 
             if (args != null)
             {

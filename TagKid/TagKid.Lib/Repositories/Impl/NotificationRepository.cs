@@ -19,8 +19,8 @@ namespace TagKid.Lib.Repositories.Impl
             var query = _repository.Query<NotificationView>()
                 .Where(nv => nv.ToUserId == toUserId);
 
-            query = onlyUnread 
-                ? query.Where(nv => nv.Status == NotificationStatus.Unread) 
+            query = onlyUnread
+                ? query.Where(nv => nv.Status == NotificationStatus.Unread)
                 : query.Where(nv => nv.Status != NotificationStatus.Deleted);
 
             return query.Page(pageIndex, pageSize);

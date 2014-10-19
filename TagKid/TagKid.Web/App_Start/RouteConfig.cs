@@ -9,12 +9,8 @@ namespace TagKid.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Index",
-                url: "{*.}",
-                defaults: new { controller = "Home", action = "Index" }
-            );
+            routes.MapRoute("Index", "{*.}", new {controller = "Home", action = "Index"}
+                );
         }
     }
 }
-

@@ -1,20 +1,22 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using HtmlAgilityPack;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
 using TagKid.Lib.Bootstrapping;
 using TagKid.Lib.Exceptions;
+using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Repositories;
-using Tag = TagKid.Lib.Models.Entities.Tag;
+using IServiceProvider = Taga.Core.IoC.IServiceProvider;
 
 namespace TagKid.ConsoleApp
 {
-    class Program
+    internal class Program
     {
-        static Taga.Core.IoC.IServiceProvider prov = ServiceProvider.Provider;
-        static void Main(string[] args)
+        private static readonly IServiceProvider prov = ServiceProvider.Provider;
+
+        private static void Main(string[] args)
         {
             try
             {
@@ -119,14 +121,14 @@ namespace TagKid.ConsoleApp
                     var name = ss[1].Replace("\"", "");
                     var count = Convert.ToInt64(ss[2].Replace("\"", ""));
 
-                    var tag = new Tag { Name = name, Count = count };
+                    var tag = new Tag {Name = name, Count = count};
 
                     tag.Hint = tag.Name + " - Hint";
                     tag.Description = tag.Name + " - Description";
 
                     repo.Save(tag);
 
-                    if (--i % 100 == 0)
+                    if (--i%100 == 0)
                         Console.WriteLine(i);
                 }
 
@@ -161,7 +163,7 @@ namespace TagKid.ConsoleApp
 
             foreach (var tag in existingTags)
             {
-                if (++i % 100 == 0)
+                if (++i%100 == 0)
                     Console.WriteLine(i);
 
                 try

@@ -2,7 +2,6 @@
 using System.Linq;
 using Taga.Core.DynamicProxy;
 using TagKid.Lib.Database;
-using TagKid.Lib.Models.DTO;
 using TagKid.Lib.Models.DTO.Messages;
 using TagKid.Lib.Models.Entities;
 using TagKid.Lib.Repositories;

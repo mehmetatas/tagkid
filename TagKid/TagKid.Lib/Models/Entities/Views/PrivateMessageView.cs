@@ -1,5 +1,4 @@
-﻿
-namespace TagKid.Lib.Models.Entities.Views
+﻿namespace TagKid.Lib.Models.Entities.Views
 {
     public class PrivateMessageView : PrivateMessage
     {
@@ -8,7 +7,7 @@ namespace TagKid.Lib.Models.Entities.Views
         public virtual string FromUsername { get; set; }
 
         public virtual string FromProfileImageUrl { get; set; }
-        
+
         public virtual string ToFullname { get; set; }
 
         public virtual string ToUsername { get; set; }

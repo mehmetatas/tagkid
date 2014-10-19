@@ -1,5 +1,5 @@
 ﻿
-tagkidApp.controller('dashboardController', function ($scope, $http, $location, authService) {
+tagkidApp.controller('dashboardController', function($scope, $http, $location, authService) {
     tagkid.setContext($scope, $http, $location, authService);
 
     $scope.pageClass = 'dashboard';
@@ -31,72 +31,70 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
         accessLevel: 0
     };
 
-    $scope.onSignOutClick = function () {
+    $scope.onSignOutClick = function() {
         tagkid.signout();
     };
 
-    $scope.format = function () {
+    $scope.format = function() {
         tgEditor.format();
     };
 
-    $scope.searchTags = function () {
+    $scope.searchTags = function() {
         $scope.tagSearchResults = [];
         $http.post('/api/post/search_tags', {
-            Filter: $scope.tagFilter
-        })
-       .success(function (resp) {
-           if (resp.ResponseCode == 0) {
-               for (var i = 0; i < resp.Tags.length; i++)
-                   $scope.tagSearchResults.push(resp.Tags[i]);
-               $scope.$apply();
-           } else {
-               alert(resp.ResponseMessage);
-           }
-       }).error(function (err) {
-           alert(err);
-       });
-    }
-
-    $scope.savePost = function () {
+                Filter: $scope.tagFilter
+            })
+            .success(function(resp) {
+                if (resp.ResponseCode == 0) {
+                    for (var i = 0; i < resp.Tags.length; i++)
+                        $scope.tagSearchResults.push(resp.Tags[i]);
+                    $scope.$apply();
+                } else {
+                    alert(resp.ResponseMessage);
+                }
+            }).error(function(err) {
+                alert(err);
+            });
+    };
+    $scope.savePost = function() {
         var post = $scope.post;
 
         $http.post('/api/post/save_post', {
-            ContentCode: post.contentCode,
-            Title: post.title,
-            Tags: post.tags,
-            CategoryId: post.categoryId,
-            Id: post.id,
-            RetaggedPostId: post.retaggedPostId,
-            QuoteAuthor: post.quoteAuthor,
-            QuoteText: post.quoteText,
-            MediaEmbedUrl: post.mediaEmbedUrl,
-            LinkTitle: post.linkTitle,
-            LinkDescription: post.linkDescription,
-            LinkImageUrl: post.linkImageUrl,
-            LinkUrl: post.linkUrl,
-            Status: post.status,
-            Type: post.type,
-            AccessLevel: post.accessLevel
-        })
-        .success(function (resp) {
-            if (resp.ResponseCode == 0) {
-                $('#newPostModal').modal('hide');
-                tagkid.loadDashboard();
-            } else {
-                alert(resp.ResponseMessage);
-            }
-        }).error(function (err) {
-            alert(err);
-        });
-    }
-
-    $scope.openNewPostModal = function () {
-        $('#newPostModal').modal('show').on('shown.bs.modal', function (e) {
+                ContentCode: post.contentCode,
+                Title: post.title,
+                Tags: post.tags,
+                CategoryId: post.categoryId,
+                Id: post.id,
+                RetaggedPostId: post.retaggedPostId,
+                QuoteAuthor: post.quoteAuthor,
+                QuoteText: post.quoteText,
+                MediaEmbedUrl: post.mediaEmbedUrl,
+                LinkTitle: post.linkTitle,
+                LinkDescription: post.linkDescription,
+                LinkImageUrl: post.linkImageUrl,
+                LinkUrl: post.linkUrl,
+                Status: post.status,
+                Type: post.type,
+                AccessLevel: post.accessLevel
+            })
+            .success(function(resp) {
+                if (resp.ResponseCode == 0) {
+                    $('#newPostModal').modal('hide');
+                    tagkid.loadDashboard();
+                } else {
+                    alert(resp.ResponseMessage);
+                }
+            }).error(function(err) {
+                alert(err);
+            });
+    };
+    $scope.openNewPostModal = function() {
+        $('#newPostModal').modal('show').on('shown.bs.modal', function(e) {
             tgEditor.init();
         });
     };
 
-    $scope.removeTag = function (tag) {
+    $scope.removeTag = function(tag) {
         var tags = $scope.post.tags;
         for (var i = 0; i < tags.length; i++) {
             if (tags[i].name == tag.name) {
@@ -105,14 +103,13 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
             }
         }
 
-        setTimeout(function () {
+        setTimeout(function() {
             tgEditor.resize();
             $('.tag-input').focus();
         }, 100);
-    }
-
-    $('.editor-tab-buttons input').on('change', function () {
-        $('.editor-tab-buttons input').each(function () {
+    };
+    $('.editor-tab-buttons input').on('change', function() {
+        $('.editor-tab-buttons input').each(function() {
             if ($(this).is(':checked')) {
                 $scope.visibleTab = $(this).val();
                 $scope.$apply();
@@ -123,7 +120,7 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
     var allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890-.+#';
 
     $('.tag-input')
-        .keypress(function (e) {
+        .keypress(function(e) {
             var code = e.keyCode;
             if (e.charCode && code == 0)
                 code = e.charCode;
@@ -136,7 +133,7 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
             var text = $element.val().toLowerCase();
             if (code == 13) {
                 while (text.charAt(text.length - 1) == '-' ||
-                       text.charAt(text.length - 1) == '.')
+                    text.charAt(text.length - 1) == '.')
                     text = text.substr(0, text.length - 1);
 
                 for (var i = 0; i < text.length; i++) {
@@ -177,7 +174,7 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
                 //}
             }
         })
-        .on('keydown', function (e) {
+        .on('keydown', function(e) {
             var $element = $(this);
 
             if (e.keyCode == 8) { // backspace
@@ -190,10 +187,10 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
                 }
             }
         })
-        .on('change keyup paste', function (e) {
+        .on('change keyup paste', function(e) {
             var $element = $(this);
 
-            setTimeout(function () {
+            setTimeout(function() {
                 var text = $element.val();
                 text = text.toLowerCase();
 
@@ -242,9 +239,8 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
 });
 
 
-
-(function ($) {
-    $.fn.getCaretPosition = function () {
+(function($) {
+    $.fn.getCaretPosition = function() {
         var input = this.get(0);
 
         if (!input)
@@ -262,7 +258,7 @@ tagkidApp.controller('dashboardController', function ($scope, $http, $location, 
         return -1;
     };
 
-    $.fn.setCaretPosition = function (caretPos) {
+    $.fn.setCaretPosition = function(caretPos) {
         var input = this.get(0);
 
         if (!input)

@@ -15,7 +15,7 @@ namespace TagKid.Lib.Models.Entities
         public virtual string Password { get; set; }
 
         public virtual DateTime JoinDate { get; set; }
-        
+
         public virtual string FacebookId { get; set; }
 
         public virtual UserType Type { get; set; }

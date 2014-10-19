@@ -140,8 +140,8 @@ namespace TagKid.Lib.Utils
 
         private class TagBuilder
         {
-            private int _count;
             private readonly string _tag;
+            private int _count;
 
             public TagBuilder(string htmlTag)
             {
@@ -156,11 +156,8 @@ namespace TagKid.Lib.Utils
                     _count = 1;
                     return "<" + _tag + ">";
                 }
-                else
-                {
-                    _count = 0;
-                    return "</" + _tag + ">";
-                }
+                _count = 0;
+                return "</" + _tag + ">";
             }
         }
     }

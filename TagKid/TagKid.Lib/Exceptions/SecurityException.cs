@@ -2,7 +2,7 @@
 
 namespace TagKid.Lib.Exceptions
 {
-    public class SecurityException: TagKidException
+    public class SecurityException : TagKidException
     {
         public SecurityException(string message, params object[] args)
             : base(message, args)

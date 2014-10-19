@@ -1,5 +1,4 @@
-﻿
-namespace TagKid.Lib.Models.DTO
+﻿namespace TagKid.Lib.Models.DTO
 {
     public class TagModel
     {

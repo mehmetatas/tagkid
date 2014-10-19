@@ -16,7 +16,7 @@ namespace TagKid.Lib.Cache
                     Load();
 
                 if (_hashtable.ContainsKey(key))
-                    return (TValue)_hashtable[key];
+                    return (TValue) _hashtable[key];
                 return default(TValue);
             }
             set

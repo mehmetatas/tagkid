@@ -5,20 +5,20 @@ tagkid = {
         $location: null,
         authService: null
     },
-    setContext: function ($scope, $http, $location, authService) {
+    setContext: function($scope, $http, $location, authService) {
         tagkid.context.$scope = $scope;
         tagkid.context.$http = $http;
         tagkid.context.$location = $location;
         tagkid.context.authService = authService;
     },
-    location: function (path) {
+    location: function(path) {
         tagkid.context.$location.path(path);
     },
     post: function(url, data) {
         return tagkid.context.$http.post(url, data);
     },
     cookies: {
-        cookie: function (name, value, expireDays) {
+        cookie: function(name, value, expireDays) {
             if (typeof (value) === 'undefined') {
                 return $.cookie(name);
             } else {
@@ -33,20 +33,20 @@ tagkid = {
                 return null;
             }
         },
-        authToken: function (value) {
+        authToken: function(value) {
             return tagkid.cookies.cookie('authToken', value);
         },
-        authTokenId: function (value) {
+        authTokenId: function(value) {
             return tagkid.cookies.cookie('authTokenId', value);
         },
-        requestToken: function (value) {
+        requestToken: function(value) {
             return tagkid.cookies.cookie('requestToken', value, 1);
         },
-        requestTokenId: function (value) {
+        requestTokenId: function(value) {
             return tagkid.cookies.cookie('requestTokenId', value, 1);
         }
     },
-    redirectToDashboard: function (resp) {
+    redirectToDashboard: function(resp) {
         tagkid.cookies.authToken(resp.AuthToken);
         tagkid.cookies.authTokenId(resp.AuthTokenId);
         tagkid.cookies.requestToken(resp.RequestToken);
@@ -56,21 +56,21 @@ tagkid = {
         tagkid.context.$scope.user = resp.User;
         tagkid.location("/dashboard");
     },
-    redirectToDashboardIfLoggedIn: function () {
+    redirectToDashboardIfLoggedIn: function() {
         if (tagkid.cookies.authToken() && tagkid.cookies.authTokenId()) {
             tagkid.post('/api/auth/validate_auth_cookie')
-            .success(function (resp) {
-                if (resp.ResponseCode == 0) {
-                    tagkid.redirectToDashboard(resp);
-                } else {
+                .success(function(resp) {
+                    if (resp.ResponseCode == 0) {
+                        tagkid.redirectToDashboard(resp);
+                    } else {
+                        tagkid.location("/");
+                    }
+                }).error(function(err) {
                     tagkid.location("/");
-                }
-            }).error(function (err) {
-                tagkid.location("/");
-            });
+                });
         }
     },
-    ensureLoggedIn: function () {
+    ensureLoggedIn: function() {
         if (!tagkid.cookies.authToken() || !tagkid.cookies.authTokenId()) {
             tagkid.location("/");
             return;
@@ -82,7 +82,7 @@ tagkid = {
             tagkid.redirectToDashboardIfLoggedIn();
         }
     },
-    signout: function () {
+    signout: function() {
         tagkid.cookies.authToken(null);
         tagkid.cookies.authTokenId(null);
         tagkid.cookies.requestToken(null);
@@ -96,10 +96,10 @@ tagkid = {
     }
 };
 
-$(window).load(function () {
+$(window).load(function() {
     // Page Preloader
     $('#status').fadeOut();
-    $('#preloader').delay(350).fadeOut(function () {
+    $('#preloader').delay(350).fadeOut(function() {
         $('body').delay(350).css({ 'overflow': 'visible' });
     });
 });

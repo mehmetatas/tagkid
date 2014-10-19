@@ -14,7 +14,7 @@ namespace TagKid.Web
         {
             var cookies = HttpContext.Current.Request.Cookies;
 
-            var authToken = cookies.GetValue("authToken") ?? Guid.Empty.ToString();
+            string authToken = cookies.GetValue("authToken") ?? Guid.Empty.ToString();
             var authTokenId = cookies.GetValue("authTokenId") ?? "-1";
             var requestToken = cookies.GetValue("requestToken") ?? Guid.Empty.ToString();
             var requestTokenId = cookies.GetValue("requestTokenId") ?? "-1";

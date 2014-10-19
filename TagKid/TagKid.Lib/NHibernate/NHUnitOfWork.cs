@@ -1,5 +1,5 @@
-﻿using NHibernate;
-using System.Data;
+﻿using System.Data;
+using NHibernate;
 using Taga.Core.Repository;
 using Taga.Core.Repository.Base;
 
@@ -10,15 +10,15 @@ namespace TagKid.Lib.NHibernate
         private readonly ISession _session;
         private ITransaction _transaction;
 
-        ISession INHUnitOfWork.Session
-        {
-            get { return _session; }
-        }
-
         public NHUnitOfWork(ISessionFactory sessionFactory)
         {
             _session = sessionFactory.OpenSession();
             _session.FlushMode = FlushMode.Never;
+        }
+
+        ISession INHUnitOfWork.Session
+        {
+            get { return _session; }
         }
 
         public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)

@@ -7,9 +7,8 @@ namespace TagKid.Lib.Database
 {
     public class TagKidDb : IUnitOfWork, IRepositoryProvider
     {
-        private readonly IUnitOfWork _unitOfWork;
-
         private readonly Hashtable _repositories;
+        private readonly IUnitOfWork _unitOfWork;
 
         public TagKidDb()
         {
@@ -21,7 +20,7 @@ namespace TagKid.Lib.Database
         {
             var type = typeof (TRepository);
             if (_repositories.Contains(type))
-                return (TRepository)_repositories[type];
+                return (TRepository) _repositories[type];
 
             var repository = ServiceProvider.Provider.GetOrCreate<TRepository>();
             _repositories.Add(type, repository);
