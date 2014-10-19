@@ -19,6 +19,8 @@ namespace TagKid.Lib.Services.Impl
 
             using (var db = new TagKidDb())
             {
+                db.BeginTransaction();
+
                 var userRepo = db.GetRepository<IUserRepository>();
 
                 var reqUser = request.User;
@@ -55,6 +57,8 @@ namespace TagKid.Lib.Services.Impl
 
             using (var db = new TagKidDb())
             {
+                db.BeginTransaction();
+
                 login.Type = LoginType.Email;
                 login.FacebookId = String.Empty;
 
@@ -134,6 +138,8 @@ namespace TagKid.Lib.Services.Impl
 
             using (var db = new TagKidDb())
             {
+                db.BeginTransaction();
+
                 var userRepo = db.GetRepository<IUserRepository>();
                 var loginRepo = db.GetRepository<ILoginRepository>();
                 var tokenRepo = db.GetRepository<ITokenRepository>();
@@ -215,6 +221,8 @@ namespace TagKid.Lib.Services.Impl
 
             using (var db = new TagKidDb())
             {
+                db.BeginTransaction();
+
                 var userRepo = db.GetRepository<IUserRepository>();
                 var tokenRepo = db.GetRepository<ITokenRepository>();
 

@@ -59,6 +59,8 @@ namespace TagKid.Lib.Services.Impl
 
             using (var db = new TagKidDb())
             {
+                db.BeginTransaction();
+
                 var postRepo = db.GetRepository<IPostRepository>();
                 var tagRepo = db.GetRepository<ITagRepository>();
 
@@ -71,6 +73,7 @@ namespace TagKid.Lib.Services.Impl
                 }
 
                 postRepo.Save(post, tags);
+
                 db.Save();
             }
 

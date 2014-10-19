@@ -1,18 +1,19 @@
 ﻿using System.Collections;
+using System.Data;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
 using TagKid.Lib.Repositories;
 
 namespace TagKid.Lib.Database
 {
-    public class TagKidDb : IUnitOfWork, IRepositoryProvider
+    public class TagKidDb : ITransactionalUnitOfWork, IRepositoryProvider
     {
         private readonly Hashtable _repositories;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ITransactionalUnitOfWork _unitOfWork;
 
         public TagKidDb()
         {
-            _unitOfWork = ServiceProvider.Provider.GetOrCreate<IUnitOfWork>();
+            _unitOfWork = ServiceProvider.Provider.GetOrCreate<ITransactionalUnitOfWork>();
             _repositories = new Hashtable();
         }
 
@@ -27,9 +28,19 @@ namespace TagKid.Lib.Database
             return repository;
         }
 
+        public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            _unitOfWork.BeginTransaction(isolationLevel);
+        }
+
         public virtual void Save()
         {
             _unitOfWork.Save();
+        }
+
+        public virtual void RollbackTransaction()
+        {
+            _unitOfWork.RollbackTransaction();
         }
 
         public virtual void Dispose()
