@@ -17,7 +17,10 @@ namespace Taga.Core.IoC
                 {
                     _provider = value;
                 }
-                throw new ServiceProviderAlreadySetException(_provider.GetType());
+                else
+                {
+                    throw new ServiceProviderAlreadySetException(_provider.GetType());
+                }
             }
         }
     }

@@ -1,7 +1,9 @@
 ﻿using System;
 using Ninject;
+using Taga.Core.IoC;
+using IServiceProvider = Taga.Core.IoC.IServiceProvider;
 
-namespace Taga.Core.IoC
+namespace Taga.IoC.Ninject
 {
     public class NinjectServiceProvider : IServiceProvider
     {

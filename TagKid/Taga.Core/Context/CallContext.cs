@@ -5,32 +5,14 @@ namespace Taga.Core.Context
 {
     public static class CallContext
     {
-        public static T Get<T>(string key)
+        public static ICallContext Current
         {
-            var res = Get(key);
-            if (res is T)
-                return (T) res;
-            return default(T);
-        }
-
-        public static object Get(string key)
-        {
-            if (HttpContext.Current == null)
-                return RuntimeContext.GetData(key);
-
-            return HttpContext.Current.Items.Contains(key)
-                ? HttpContext.Current.Items[key]
-                : null;
-        }
-
-        public static void Set(string key, object value)
-        {
-            if (HttpContext.Current == null)
-                RuntimeContext.SetData(key, value);
-            else if (HttpContext.Current.Items.Contains(key))
-                HttpContext.Current.Items[key] = value;
-            else
-                HttpContext.Current.Items.Add(key, value);
+            get
+            {
+                return HttpContext.Current == null
+                    ? RuntimeContext.Instance
+                    : WebCallContext.Instance;
+            }
         }
     }
 }

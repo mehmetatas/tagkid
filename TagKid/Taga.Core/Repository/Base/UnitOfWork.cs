@@ -29,11 +29,11 @@ namespace Taga.Core.Repository.Base
         {
             get
             {
-                var uowStack = CallContext.Get<Stack<IUnitOfWork>>("UnitOfWorkStack");
+                var uowStack = CallContext.Current.Get<Stack<IUnitOfWork>>("UnitOfWorkStack");
                 if (uowStack == null)
                 {
                     uowStack = new Stack<IUnitOfWork>();
-                    CallContext.Set("UnitOfWorkStack", uowStack);
+                    CallContext.Current["UnitOfWorkStack"] = uowStack;
                 }
                 return uowStack;
             }

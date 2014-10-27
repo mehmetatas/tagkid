@@ -33,19 +33,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -61,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\CallContext.cs" />
+    <Compile Include="Context\ICallContext.cs" />
+    <Compile Include="Context\RuntimeContext.cs" />
+    <Compile Include="Context\WebCallContext.cs" />
     <Compile Include="DynamicProxy\CallHandlerMethodBuilder.cs" />
     <Compile Include="DynamicProxy\CallHandlerMethodImplementor.cs" />
     <Compile Include="DynamicProxy\CallHandlerMethodOverrider.cs" />
@@ -75,15 +65,12 @@
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="IoC\InvalidSingletonTypeException.cs" />
     <Compile Include="IoC\IServiceProvider.cs" />
-    <Compile Include="IoC\NinjectServiceProvider.cs" />
     <Compile Include="IoC\ServiceProvider.cs" />
     <Compile Include="IoC\ServiceProviderAlreadySet.cs" />
     <Compile Include="Json\IJsonSerializer.cs" />
-    <Compile Include="Json\NewtonsoftJsonSerializer.cs" />
     <Compile Include="Mail\IMailSender.cs" />
     <Compile Include="Mail\MailMessage.cs" />
     <Compile Include="Mapping\IMapper.cs" />
-    <Compile Include="Mapping\Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ITransactionalUnitOfWork.cs" />
@@ -96,9 +83,6 @@
     <Compile Include="Rest\RouteResolver.cs" />
     <Compile Include="Rest\ServiceConfig.cs" />
     <Compile Include="Rest\ServiceMapping.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

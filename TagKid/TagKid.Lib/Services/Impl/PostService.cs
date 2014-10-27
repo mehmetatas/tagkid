@@ -57,7 +57,7 @@ namespace TagKid.Lib.Services.Impl
                 Name = t.Name
             }).ToArray();
 
-            using (var db = new TagKidDb())
+            using (var db = TagKidDb.Transactional())
             {
                 db.BeginTransaction();
 

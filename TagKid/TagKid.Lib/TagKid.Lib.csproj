@@ -162,6 +162,18 @@
       <Project>{57206f02-5147-464f-93d1-f7705c2d9932}</Project>
       <Name>Taga.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Taga.IoC.Ninject\Taga.IoC.Ninject.csproj">
+      <Project>{F8D70A49-69E7-4EBF-9B55-66F19827118C}</Project>
+      <Name>Taga.IoC.Ninject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taga.Json.Newtonsoft\Taga.Json.Newtonsoft.csproj">
+      <Project>{3DD5124F-DD57-4538-BC50-3375ECA17BEC}</Project>
+      <Name>Taga.Json.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taga.Mapping.AutoMapper\Taga.Mapping.AutoMapper.csproj">
+      <Project>{16DEF608-1021-4A43-AE4D-88446A83F84D}</Project>
+      <Name>Taga.Mapping.AutoMapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

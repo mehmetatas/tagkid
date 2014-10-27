@@ -1,4 +1,5 @@
 ﻿using Taga.Core.IoC;
+using Taga.IoC.Ninject;
 using TagKid.Lib.Bootstrapping.Bootstrappers;
 
 namespace TagKid.Lib.Bootstrapping
