@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Entities.Views;
 
 namespace TagKid.Lib.Repositories
 {
@@ -10,7 +11,7 @@ namespace TagKid.Lib.Repositories
 
         IPage<Tag> Search(string name, int pageIndex, int pageSize);
 
-        IEnumerable<Tag> GetPostTags(long postId);
+        IList<PostTagView> GetPostTags(params long[] postId);
 
         IDictionary<Tag, int> GetUserTagCounts(long userId);
 

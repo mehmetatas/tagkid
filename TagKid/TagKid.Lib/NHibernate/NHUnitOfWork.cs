@@ -13,7 +13,6 @@ namespace TagKid.Lib.NHibernate
         public NHUnitOfWork(ISessionFactory sessionFactory)
         {
             _session = sessionFactory.OpenSession();
-            _session.FlushMode = FlushMode.Never;
         }
 
         ISession INHUnitOfWork.Session
@@ -23,7 +22,6 @@ namespace TagKid.Lib.NHibernate
 
         public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
-            //_session.FlushMode = FlushMode.Commit;
             _transaction = _session.BeginTransaction(isolationLevel);
         }
 

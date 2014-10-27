@@ -16,7 +16,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IPage<PrivateMessageView> GetMessages(long user1, long user2, int pageIndex, int pageSize)
         {
-            return _repository.Query<PrivateMessageView>()
+            return _repository.Select<PrivateMessageView>()
                 .Where(pm =>
                     (pm.FromUserId == user1 && pm.ToUserId == user2) ||
                     (pm.FromUserId == user2 && pm.ToUserId == user1))

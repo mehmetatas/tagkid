@@ -69,8 +69,17 @@ namespace TagKid.Lib.NHibernate.Mappings
     public class PostViewMap : NHAutoMap<PostView>
     {
         public PostViewMap()
-            : base("post_search_view")
+            : base("vw_posts")
         {
+        }
+    }
+
+    public class PostTagViewMap : NHAutoMap<PostTagView>
+    {
+        public PostTagViewMap()
+            : base("vw_post_tags")
+        {
+
         }
     }
 

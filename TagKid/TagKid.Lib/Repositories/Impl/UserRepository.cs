@@ -15,19 +15,19 @@ namespace TagKid.Lib.Repositories.Impl
 
         public User GetById(long id)
         {
-            return _repository.Query<User>()
+            return _repository.Select<User>()
                 .FirstOrDefault(u => u.Id == id);
         }
 
         public User GetByEmail(string email)
         {
-            return _repository.Query<User>()
+            return _repository.Select<User>()
                 .FirstOrDefault(u => u.Email == email);
         }
 
         public User GetByUsername(string username)
         {
-            return _repository.Query<User>()
+            return _repository.Select<User>()
                 .FirstOrDefault(u => u.Username == username);
         }
 
@@ -38,7 +38,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IPage<User> Search(string usernameOrFullname, int pageIndex, int pageSize)
         {
-            return _repository.Query<User>()
+            return _repository.Select<User>()
                 .Where(u => u.Username.Contains(usernameOrFullname) || u.Fullname.Contains(usernameOrFullname))
                 .OrderBy(u => u.Username)
                 .Page(pageIndex, pageSize);

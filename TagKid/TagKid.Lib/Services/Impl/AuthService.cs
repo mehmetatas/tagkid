@@ -17,7 +17,7 @@ namespace TagKid.Lib.Services.Impl
         {
             Validator.Validate(request);
 
-            using (var db = new TagKidDb())
+            using (var db = TagKidDb.Transactional())
             {
                 db.BeginTransaction();
 
@@ -55,7 +55,7 @@ namespace TagKid.Lib.Services.Impl
 
             Validator.Validate(request);
 
-            using (var db = new TagKidDb())
+            using (var db = TagKidDb.Transactional())
             {
                 db.BeginTransaction();
 
@@ -136,7 +136,7 @@ namespace TagKid.Lib.Services.Impl
             var login = new Login {Date = DateTime.Now, Type = LoginType.Cookie};
             SignInResponse response;
 
-            using (var db = new TagKidDb())
+            using (var db = TagKidDb.Transactional())
             {
                 db.BeginTransaction();
 
@@ -219,7 +219,7 @@ namespace TagKid.Lib.Services.Impl
                 request.Context.AuthToken.Guid.Equals(Guid.Empty))
                 throw new SecurityException("No auth token!");
 
-            using (var db = new TagKidDb())
+            using (var db = TagKidDb.Transactional())
             {
                 db.BeginTransaction();
 

@@ -16,7 +16,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IPage<NotificationView> GetByToUserId(long toUserId, bool onlyUnread, int pageIndex, int pageSize)
         {
-            var query = _repository.Query<NotificationView>()
+            var query = _repository.Select<NotificationView>()
                 .Where(nv => nv.ToUserId == toUserId);
 
             query = onlyUnread

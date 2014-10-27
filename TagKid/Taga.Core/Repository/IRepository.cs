@@ -7,7 +7,7 @@ namespace Taga.Core.Repository
     {
         void Save<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
-        IQueryable<T> Query<T>() where T : class;
+        IQueryable<T> Select<T>() where T : class;
 
         IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false)
             where T : class;

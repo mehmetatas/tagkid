@@ -78,7 +78,7 @@ namespace TagKid.Tests.NHibernate
             {
                 var repo = new NHRepository();
 
-                user = repo.Query<User>().FirstOrDefault(u => u.Id == user.Id);
+                user = repo.Select<User>().FirstOrDefault(u => u.Id == user.Id);
             }
 
             Assert.AreEqual(username, user.Username);
@@ -118,7 +118,7 @@ namespace TagKid.Tests.NHibernate
             {
                 var repo = new NHRepository();
 
-                user = repo.Query<User>().FirstOrDefault(u => u.Username == user.Username);
+                user = repo.Select<User>().FirstOrDefault(u => u.Username == user.Username);
             }
 
             Assert.IsNull(user);
@@ -146,7 +146,7 @@ namespace TagKid.Tests.NHibernate
             {
                 var repo = new NHRepository();
 
-                user = repo.Query<User>().FirstOrDefault(u => u.Id == user.Id);
+                user = repo.Select<User>().FirstOrDefault(u => u.Id == user.Id);
             }
 
             Assert.AreEqual("username", user.Username);
@@ -158,7 +158,7 @@ namespace TagKid.Tests.NHibernate
             using (new NHUnitOfWork(_sessionFactory))
             {
                 var repo = new NHRepository();
-                var users = repo.Query<User>().Where(u => u.Username.StartsWith("M"));
+                var users = repo.Select<User>().Where(u => u.Username.StartsWith("M"));
 
                 //var users = repo.ExecSql<User>("select * from users where username like :p_name",
                 //    new Dictionary<string, object>

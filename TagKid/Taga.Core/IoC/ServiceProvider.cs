@@ -1,33 +1,24 @@
-﻿using System;
-using Ninject;
-
+﻿
 namespace Taga.Core.IoC
 {
-    public class ServiceProvider : IServiceProvider
+    public static class ServiceProvider
     {
-        public static IServiceProvider Provider = new ServiceProvider();
+        private static IServiceProvider _provider;
 
-        private readonly IKernel _kernel = new StandardKernel();
-
-        private ServiceProvider()
+        public static IServiceProvider Provider
         {
-        }
-
-        public IServiceProvider Register(Type serviceType, Type classType, object singleton = null)
-        {
-            var bind = _kernel.Bind(serviceType);
-
-            if (singleton == null)
-                bind.To(classType);
-            else
-                bind.ToConstant(singleton);
-
-            return this;
-        }
-
-        public object GetOrCreate(Type serviceType)
-        {
-            return _kernel.Get(serviceType);
+            get
+            {
+                return _provider;
+            }
+            set
+            {
+                if (_provider == null)
+                {
+                    _provider = value;
+                }
+                throw new ServiceProviderAlreadySetException(_provider.GetType());
+            }
         }
     }
 }

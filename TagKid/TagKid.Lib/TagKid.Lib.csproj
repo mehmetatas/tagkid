@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\Bootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrappers\ControllerBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\DatabaseBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\RepositoryBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\MappingBootstrapper.cs" />
@@ -62,7 +63,13 @@
     <Compile Include="Bootstrapping\Bootstrappers\StartupBootstrapper.cs" />
     <Compile Include="Bootstrapping\IBootstrapper.cs" />
     <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Database\IReadonlyDb.cs" />
+    <Compile Include="Database\IReadWriteDb.cs" />
+    <Compile Include="Database\ITransactionalDb.cs" />
+    <Compile Include="Database\ReadonlyDb.cs" />
+    <Compile Include="Database\ReadWriteDb.cs" />
     <Compile Include="Database\TagKidDb.cs" />
+    <Compile Include="Database\TransactionalReadWriteDb.cs" />
     <Compile Include="Exceptions\SecurityException.cs" />
     <Compile Include="Models\DTO\Messages\PostRequest.cs" />
     <Compile Include="Models\DTO\Messages\PostResponse.cs" />
@@ -70,6 +77,7 @@
     <Compile Include="Models\DTO\Messages\SignUpUserModel.cs" />
     <Compile Include="Models\DTO\Messages\TagSearchRequest.cs" />
     <Compile Include="Models\DTO\Messages\TagSearchResponse.cs" />
+    <Compile Include="Models\Entities\Views\PostTagView.cs" />
     <Compile Include="Models\RequestContext.cs" />
     <Compile Include="Models\DTO\TagModel.cs" />
     <Compile Include="Models\Entities\Token.cs" />

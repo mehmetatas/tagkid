@@ -15,7 +15,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public Token GetById(long tokenId)
         {
-            return _repository.Query<Token>()
+            return _repository.Select<Token>()
                 .FirstOrDefault(t => t.Id == tokenId);
         }
 

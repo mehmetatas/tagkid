@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Taga.Core</RootNamespace>
     <AssemblyName>Taga.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper">
@@ -37,13 +39,20 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,8 +69,17 @@
     <Compile Include="DynamicProxy\NullCallHandler.cs" />
     <Compile Include="DynamicProxy\Proxy.cs" />
     <Compile Include="DynamicProxy\ReflectionExtensions.cs" />
+    <Compile Include="Exceptions\CoreException.cs" />
+    <Compile Include="Exceptions\ExceptionExtensions.cs" />
+    <Compile Include="Exceptions\TagaException.cs" />
+    <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="IoC\InvalidSingletonTypeException.cs" />
     <Compile Include="IoC\IServiceProvider.cs" />
+    <Compile Include="IoC\NinjectServiceProvider.cs" />
     <Compile Include="IoC\ServiceProvider.cs" />
+    <Compile Include="IoC\ServiceProviderAlreadySet.cs" />
+    <Compile Include="Json\IJsonSerializer.cs" />
+    <Compile Include="Json\NewtonsoftJsonSerializer.cs" />
     <Compile Include="Mail\IMailSender.cs" />
     <Compile Include="Mail\MailMessage.cs" />
     <Compile Include="Mapping\IMapper.cs" />
@@ -72,6 +90,12 @@
     <Compile Include="Repository\Base\UnitOfWork.cs" />
     <Compile Include="Repository\IPage.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Rest\GenericApiHandler.cs" />
+    <Compile Include="Rest\HttpMethodType.cs" />
+    <Compile Include="Rest\MethodMapping.cs" />
+    <Compile Include="Rest\RouteResolver.cs" />
+    <Compile Include="Rest\ServiceConfig.cs" />
+    <Compile Include="Rest\ServiceMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

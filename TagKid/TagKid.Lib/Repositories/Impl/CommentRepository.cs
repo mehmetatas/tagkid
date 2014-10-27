@@ -16,7 +16,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IPage<CommentView> GetByPostId(long postId, int pageIndex, int pageSize)
         {
-            return _repository.Query<CommentView>()
+            return _repository.Select<CommentView>()
                 .Where(cv => cv.PostId == postId)
                 .OrderByDescending(cv => cv.Id)
                 .Page(pageIndex, pageSize);

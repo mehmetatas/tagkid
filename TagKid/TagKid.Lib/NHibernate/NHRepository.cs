@@ -29,7 +29,7 @@ namespace TagKid.Lib.NHibernate
             _session.Delete(entity);
         }
 
-        public IQueryable<T> Query<T>() where T : class
+        public IQueryable<T> Select<T>() where T : class
         {
             return _session.Query<T>();
         }

@@ -6,8 +6,6 @@
 
         public virtual string Username { get; set; }
 
-        public virtual string ProfileImageUrl { get; set; }
-
         public virtual string CategoryName { get; set; }
 
         public virtual AccessLevel CategoryAccessLevel { get; set; }

@@ -7,6 +7,8 @@ namespace TagKid.Lib.Bootstrapping
     {
         public static void StartApp()
         {
+            ServiceProvider.Provider = new NinjectServiceProvider();
+
             Bootstrap(
                 new StartupBootstrapper(),
                 new DatabaseBootstrapper(),

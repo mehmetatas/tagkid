@@ -11,15 +11,20 @@ namespace Taga.Core.IoC
 
     public static class ServiceProviderExtensions
     {
-        public static void Register<TInterface, TClass>(this IServiceProvider prov, TClass singleton = null)
+        public static IServiceProvider Register<TInterface, TClass>(this IServiceProvider prov)
             where TClass : class, TInterface
         {
-            prov.Register(typeof (TInterface), typeof (TClass), singleton);
+            return prov.Register(typeof(TInterface), typeof(TClass));
+        }
+
+        public static IServiceProvider RegisterSingleton<TInterface>(this IServiceProvider prov, TInterface singleton)
+        {
+            return prov.Register(typeof(TInterface), singleton.GetType(), singleton);
         }
 
         public static TInterface GetOrCreate<TInterface>(this IServiceProvider prov)
         {
-            return (TInterface) prov.GetOrCreate(typeof (TInterface));
+            return (TInterface)prov.GetOrCreate(typeof(TInterface));
         }
     }
 }

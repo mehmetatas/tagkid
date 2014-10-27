@@ -15,7 +15,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IPage<Login> GetLogins(string username, string email, bool onlyFailed, int pageIndex, int pageSize)
         {
-            var query = _repository.Query<Login>()
+            var query = _repository.Select<Login>()
                 .Where(l => l.Username == username || l.Email == email);
 
             if (onlyFailed)
@@ -28,7 +28,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public Login GetLastSuccessfulLogin(long userId)
         {
-            return _repository.Query<Login>()
+            return _repository.Select<Login>()
                 .Where(l => l.UserId == userId && l.Result == LoginResult.Successful)
                 .OrderByDescending(l => l.Id)
                 .FirstOrDefault();

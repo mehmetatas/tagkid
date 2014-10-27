@@ -15,7 +15,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public ConfirmationCode GetById(long id)
         {
-            return _repository.Query<ConfirmationCode>().FirstOrDefault(cc => cc.Id == id);
+            return _repository.Select<ConfirmationCode>().FirstOrDefault(cc => cc.Id == id);
         }
 
         public void Save(ConfirmationCode confirmationCode)

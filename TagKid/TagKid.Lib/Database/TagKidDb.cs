@@ -1,51 +1,28 @@
-﻿using System.Collections;
-using System.Data;
-using Taga.Core.IoC;
+﻿using Taga.Core.IoC;
 using Taga.Core.Repository;
-using TagKid.Lib.Repositories;
 
 namespace TagKid.Lib.Database
 {
-    public class TagKidDb : ITransactionalUnitOfWork, IRepositoryProvider
+    public static class TagKidDb
     {
-        private readonly Hashtable _repositories;
-        private readonly ITransactionalUnitOfWork _unitOfWork;
-
-        public TagKidDb()
+        private static ITransactionalUnitOfWork CreateUnitOfWork()
         {
-            _unitOfWork = ServiceProvider.Provider.GetOrCreate<ITransactionalUnitOfWork>();
-            _repositories = new Hashtable();
+            return ServiceProvider.Provider.GetOrCreate<ITransactionalUnitOfWork>();
         }
 
-        public virtual TRepository GetRepository<TRepository>() where TRepository : ITagKidRepository
+        public static IReadonlyDb Readonly()
         {
-            var type = typeof (TRepository);
-            if (_repositories.Contains(type))
-                return (TRepository) _repositories[type];
-
-            var repository = ServiceProvider.Provider.GetOrCreate<TRepository>();
-            _repositories.Add(type, repository);
-            return repository;
+            return new ReadonlyDb(CreateUnitOfWork());
         }
 
-        public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        public static IReadWriteDb ReadWrite()
         {
-            _unitOfWork.BeginTransaction(isolationLevel);
+            return new ReadWriteDb(CreateUnitOfWork());
         }
 
-        public virtual void Save()
+        public static ITransactionalDb Transactional()
         {
-            _unitOfWork.Save();
-        }
-
-        public virtual void RollbackTransaction()
-        {
-            _unitOfWork.RollbackTransaction();
-        }
-
-        public virtual void Dispose()
-        {
-            _unitOfWork.Dispose();
+            return new TransactionalReadWriteDb(CreateUnitOfWork());
         }
     }
 }

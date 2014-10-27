@@ -15,7 +15,7 @@ namespace TagKid.Lib.Services.Impl
         public TagSearchResponse Search(TagSearchRequest request)
         {
             List<Tag> tags;
-            using (var db = new TagKidDb())
+            using (var db = TagKidDb.Readonly())
             {
                 var repo = db.GetRepository<ITagRepository>();
                 tags = repo.Search(request.Filter, 1, 10).Items;

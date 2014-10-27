@@ -15,14 +15,14 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IPage<Category> GetByUserId(long userId, int pageIndex, int pageSize)
         {
-            return _repository.Query<Category>()
+            return _repository.Select<Category>()
                 .Where(c => c.UserId == userId)
                 .Page(pageIndex, pageSize);
         }
 
         public Category GetById(long categoryId)
         {
-            return _repository.Query<Category>().FirstOrDefault(cat => cat.Id == categoryId);
+            return _repository.Select<Category>().FirstOrDefault(cat => cat.Id == categoryId);
         }
 
         public void Save(Category category)

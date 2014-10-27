@@ -18,7 +18,7 @@ namespace TagKid.Lib.Repositories.Impl
 
         public PostView GetById(long postId)
         {
-            return _repository.Query<PostView>()
+            return _repository.Select<PostView>()
                 .FirstOrDefault(p => p.Id == postId);
         }
 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Taga.Core.Repository;
 using TagKid.Lib.Models.Entities;
+using TagKid.Lib.Models.Entities.Views;
 
 namespace TagKid.Lib.Repositories.Impl
 {
@@ -17,22 +19,24 @@ namespace TagKid.Lib.Repositories.Impl
 
         public IEnumerable<Tag> GetAll()
         {
-            return _repository.Query<Tag>()
+            return _repository.Select<Tag>()
                 .OrderBy(t => t.Name)
                 .ToList();
         }
 
         public IPage<Tag> Search(string name, int pageIndex, int pageSize)
         {
-            return _repository.Query<Tag>()
+            return _repository.Select<Tag>()
                 .Where(t => t.Name.Contains(name))
                 .OrderByDescending(t => t.Count)
                 .Page(pageSize, pageIndex);
         }
 
-        public IEnumerable<Tag> GetPostTags(long postId)
+        public IList<PostTagView> GetPostTags(params long[] postId)
         {
-            throw new NotImplementedException();
+            return _repository.Select<PostTagView>()
+                .Where(pt => postId.Contains(pt.PostId))
+                .ToList();
         }
 
         public IDictionary<Tag, int> GetUserTagCounts(long userId)
