@@ -1,23 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Taga.Core.Context;
 
 namespace Taga.Core.Repository.Base
 {
-    public abstract class UnitOfWork : IUnitOfWork
+    public abstract class UnitOfWork : ITransactionalUnitOfWork
     {
+        private ITransaction _transaction;
+
         protected UnitOfWork()
         {
             Push(this);
         }
 
-        public abstract void Save();
+        public void Save()
+        {
+            Save(false);
+        }
+
+        public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            _transaction = OnBeginTransaction(isolationLevel);
+        }
+
+        public void RollbackTransaction()
+        {
+            if (_transaction == null)
+                return;
+
+            _transaction.Rollback();
+            _transaction.Dispose();
+            _transaction = null;
+        }
+
+        public void Save(bool commit)
+        {
+            OnSave();
+
+            if (_transaction == null || !commit)
+                return;
+
+            _transaction.Commit();
+            _transaction.Dispose();
+            _transaction = null;
+        }
 
         void IDisposable.Dispose()
         {
             Pop();
+            RollbackTransaction();
             OnDispose();
         }
+
+        protected abstract ITransaction OnBeginTransaction(IsolationLevel isolationLevel);
+
+        protected abstract void OnSave();
 
         protected virtual void OnDispose()
         {

@@ -59,6 +59,7 @@
     <Compile Include="DynamicProxy\NullCallHandler.cs" />
     <Compile Include="DynamicProxy\Proxy.cs" />
     <Compile Include="DynamicProxy\ReflectionExtensions.cs" />
+    <Compile Include="Dynamix\Poco.cs" />
     <Compile Include="Exceptions\CoreException.cs" />
     <Compile Include="Exceptions\ExceptionExtensions.cs" />
     <Compile Include="Exceptions\TagaException.cs" />
@@ -73,10 +74,18 @@
     <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\ITransaction.cs" />
     <Compile Include="Repository\ITransactionalUnitOfWork.cs" />
     <Compile Include="Repository\Base\UnitOfWork.cs" />
     <Compile Include="Repository\IPage.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\Mapping\ColumnMapping.cs" />
+    <Compile Include="Repository\Mapping\DatabaseMapping.cs" />
+    <Compile Include="Repository\Mapping\IMappingProvider.cs" />
+    <Compile Include="Repository\Mapping\IDatabaseNamingConvention.cs" />
+    <Compile Include="Repository\Mapping\MappingProvider.cs" />
+    <Compile Include="Repository\Mapping\TableMapping.cs" />
+    <Compile Include="Repository\SaveException.cs" />
     <Compile Include="Rest\GenericApiHandler.cs" />
     <Compile Include="Rest\HttpMethodType.cs" />
     <Compile Include="Rest\MethodMapping.cs" />

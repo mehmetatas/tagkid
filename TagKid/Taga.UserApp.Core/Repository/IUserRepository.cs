@@ -1,13 +1,13 @@
-﻿using Taga.UserApp.Core.Model.Business;
+﻿using Taga.UserApp.Core.Model.Database;
 
 namespace Taga.UserApp.Core.Repository
 {
     public interface IUserRepository : IUserAppRepository
     {
-        void Save(UserModel model);
+        void Save(User user);
 
-        UserModel Get(long id, bool selectRoles = false, bool selectCategories = false);
+        User Get(long id);
         
-        void Delete(UserModel model);
+        void Delete(User user);
     }
 }

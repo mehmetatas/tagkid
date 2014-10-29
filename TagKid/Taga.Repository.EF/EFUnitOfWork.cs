@@ -5,10 +5,9 @@ using Taga.Core.Repository.Base;
 
 namespace Taga.Repository.EF
 {
-    public class EFUnitOfWork : UnitOfWork, ITransactionalUnitOfWork, IEFUnitOfWork
+    public class EFUnitOfWork : UnitOfWork, IEFUnitOfWork
     {
         private readonly DbContext _dbContext;
-        private DbContextTransaction _transaction;
 
         public EFUnitOfWork(DbContext dbContext)
         {
@@ -20,34 +19,20 @@ namespace Taga.Repository.EF
             get { return _dbContext; }
         }
 
-        public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        protected override ITransaction OnBeginTransaction(IsolationLevel isolationLevel)
         {
-            _transaction = _dbContext.Database.BeginTransaction(isolationLevel);
+            var tran = _dbContext.Database.BeginTransaction(isolationLevel);
+            return new EFTransaction(tran);
         }
 
-        public override void Save()
+        protected override void OnSave()
         {
             _dbContext.SaveChanges();
-
-            if (_transaction == null)
-                return;
-
-            _transaction.Commit();
-            _transaction = null;
         }
 
-        public void RollbackTransaction()
+        protected override void OnDispose()
         {
-            if (_transaction == null) 
-                return;
-
-            _transaction.Rollback();
-            _transaction = null;
-        }
-
-        public void Dispose()
-        {
-            RollbackTransaction();
+            _dbContext.Dispose();
         }
     }
 }

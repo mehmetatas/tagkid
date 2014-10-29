@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Taga.Core.IoC;
+using Taga.Core.Repository.Mapping;
 
 namespace Taga.Core.Repository
 {
     public interface IRepository
     {
-        void Save<T>(T entity) where T : class;
+        void Insert<T>(T entity) where T : class;
+        void Update<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
         IQueryable<T> Select<T>() where T : class;
 
@@ -28,6 +31,29 @@ namespace Taga.Core.Repository
 
     public static class RepositoryExtensions
     {
+        public static void Save<T>(this IRepository repo, T entity) where T : class
+        {
+            var mapingProv = ServiceProvider.Provider.GetOrCreate<IMappingProvider>();
+
+            var tableMapping = mapingProv.GetTableMapping<T>();
+
+            if (tableMapping.IdColumns.Length != 1 || !tableMapping.IdColumns[0].IsAutoIncrement)
+            {
+                throw new SaveException();
+            }
+
+            var isNew = tableMapping.IdColumns[0].PropertyInfo.GetValue(entity).Equals(0L);
+
+            if (isNew)
+            {
+                repo.Insert(entity);
+            }
+            else
+            {
+                repo.Update(entity);
+            }
+        }
+
         public static IList<T> ExecSp<T>(this IRepository repo, string spName, IDictionary<string, object> args = null)
             where T : class
         {

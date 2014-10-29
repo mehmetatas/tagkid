@@ -1,9 +1,7 @@
 ﻿using NHibernate;
 using NHibernate.Linq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Taga.Core.Repository;
 using Taga.Core.Repository.Base;
 
@@ -12,20 +10,32 @@ namespace Taga.Repository.NH
     public class NHRepository : IRepository
     {
         private readonly ISession _session;
+        private readonly INHSpCallBuilder _spCallBuilder;
 
-        public NHRepository()
+        public NHRepository(INHSpCallBuilder spCallBuilder)
         {
-            var uow = (INHUnitOfWork) UnitOfWork.Current;
+            var uow = (INHUnitOfWork)UnitOfWork.Current;
             _session = uow.Session;
+            _spCallBuilder = spCallBuilder;
         }
 
-        public void Save<T>(T entity) where T : class
+        public void Insert<T>(T entity) where T : class
         {
-            _session.SaveOrUpdate(entity);
+            _session.Persist(entity);
+        }
+
+        public void Update<T>(T entity) where T : class
+        {
+            _session.Update(entity);
         }
 
         public void Delete<T>(T entity) where T : class
         {
+            //if (!_session.Contains(entity))
+            //{
+            //    // Just to attach entity. Otherwise NHibernate may try to select entity before delete
+            //    _session.Update(entity);
+            //}
             _session.Delete(entity);
         }
 
@@ -37,10 +47,12 @@ namespace Taga.Repository.NH
         public IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false)
             where T : class
         {
-            var command = CreateSqlCommand(spNameOrSql, args, rawSql);
+            var command = rawSql
+                ? spNameOrSql
+                : _spCallBuilder.BuildSpCall(spNameOrSql, args);
 
             var query = _session.CreateSQLQuery(command);
-            query.AddEntity(typeof (T));
+            query.AddEntity(typeof(T));
 
             if (args != null)
             {
@@ -51,39 +63,6 @@ namespace Taga.Repository.NH
             }
 
             return query.List<T>();
-        }
-
-        private static string CreateSqlCommand(string spNameOrSql, IDictionary<string, object> args, bool rawSql)
-        {
-            if (rawSql)
-            {
-                return spNameOrSql;
-            }
-
-            // TODO: Here is mysql specific. Should be generalized!!!
-
-            var sb = new StringBuilder();
-
-            sb.Append("call ")
-                .Append(spNameOrSql)
-                .Append(" (");
-
-            if (args != null)
-            {
-                var comma = String.Empty;
-
-                foreach (var arg in args)
-                {
-                    sb.Append(comma)
-                        .Append(":")
-                        .Append(arg.Key);
-
-                    comma = ",";
-                }
-            }
-
-            return sb.Append(")")
-                .ToString();
         }
     }
 }

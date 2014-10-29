@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using Taga.Core.Repository;
 using Taga.Core.Repository.Base;
@@ -22,18 +21,19 @@ namespace Taga.Repository.EF
             return _dbContext.Set<T>();
         }
 
-        public void Save<T>(T entity) where T : class
+        public void Insert<T>(T entity) where T : class
         {
-            Set<T>().Add(entity);
-            _dbContext.SaveChanges();
+            SetState(entity, EntityState.Added);
+        }
+
+        public void Update<T>(T entity) where T : class
+        {
+            SetState(entity, EntityState.Modified);
         }
 
         public void Delete<T>(T entity) where T : class
         {
-            var entry = _dbContext.Entry(entity);
-            if (entry.State == EntityState.Detached)
-                Set<T>().Attach(entity);
-            Set<T>().Remove(entity);
+            SetState(entity, EntityState.Deleted);
         }
 
         public IQueryable<T> Select<T>() where T : class
@@ -43,7 +43,17 @@ namespace Taga.Repository.EF
 
         public IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false) where T : class
         {
-            return _dbContext.Database.SqlQuery<T>(spNameOrSql, args == null ? new object[0] : args.Values).ToList();
+            return _dbContext.Database.SqlQuery<T>(spNameOrSql, args == null ? null : args.Values).ToList();
+        }
+
+        private void SetState<T>(T entity, EntityState state) where T : class
+        {
+            var entry = _dbContext.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                Set<T>().Attach(entity);
+            }
+            entry.State = state;
         }
     }
 }
