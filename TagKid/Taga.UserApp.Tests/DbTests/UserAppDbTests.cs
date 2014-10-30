@@ -8,17 +8,21 @@ namespace Taga.UserApp.Tests.DbTests
     {
         protected UserAppDbTests()
         {
-            DbTestInitializer.Initialize(!(this is NHMySqlTests));
+            DbTestInitializer.Initialize(IsSqlServer);
             InitDb();
             TestCleanup();
         }
 
         protected abstract void InitDb();
 
+        protected abstract bool IsSqlServer { get; }
+
+        protected abstract bool IsEntityFramework { get; }
+
         [TestCleanup]
         public void TestCleanup()
         {
-            DbTestInitializer.ClearDb(this is EFSqlServerTests);
+            DbTestInitializer.ClearDb(IsEntityFramework);
         }
     }
 }

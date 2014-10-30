@@ -47,6 +47,10 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.6.9.3\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
@@ -73,6 +77,11 @@
   <ItemGroup>
     <Compile Include="DbTests\DbTestInitializer.cs" />
     <Compile Include="DbTests\EF\EFSqlServerTests.cs" />
+    <Compile Include="DbTests\Hybrid\HybridMySqlProvider.cs" />
+    <Compile Include="DbTests\Hybrid\HybridSqlServerProvider.cs" />
+    <Compile Include="DbTests\Hybrid\HybridWithEFSqlServerTests.cs" />
+    <Compile Include="DbTests\Hybrid\HybridWithNHMySqlTests.cs" />
+    <Compile Include="DbTests\Hybrid\HybridWithNHSqlServerTests.cs" />
     <Compile Include="DbTests\NH\NHMySqlTests.cs" />
     <Compile Include="DbTests\NH\NHSqlServerTests.cs" />
     <Compile Include="DbTests\UserAppDbTests.PostRepository.cs" />
@@ -104,6 +113,10 @@
     <ProjectReference Include="..\Taga.Repository.EF\Taga.Repository.EF.csproj">
       <Project>{6fb54d6c-bd90-42f5-93e3-65a735acae56}</Project>
       <Name>Taga.Repository.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taga.Repository.Hybrid\Taga.Repository.Hybrid.csproj">
+      <Project>{65e49106-4a80-426f-9b18-1dad6cc14c3d}</Project>
+      <Name>Taga.Repository.Hybrid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Taga.Repository.NH\Taga.Repository.NH.csproj">
       <Project>{e9eec4fa-4d1c-44c3-a44e-b39ee373675b}</Project>

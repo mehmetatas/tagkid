@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="INHSpCallBuilder.cs" />
     <Compile Include="INHUnitOfWork.cs" />
+    <Compile Include="NHQueryProvider.cs" />
     <Compile Include="TagaClassMap.cs" />
     <Compile Include="NHRepository.cs" />
     <Compile Include="NHTransaction.cs" />

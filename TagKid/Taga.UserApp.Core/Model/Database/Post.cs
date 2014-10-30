@@ -6,7 +6,10 @@ namespace Taga.UserApp.Core.Model.Database
     {
         public virtual long Id { get; set; }
         public virtual long CategoryId { get; set; }
+        public virtual PostType PostType { get; set; }
         public virtual DateTime CreateDate { get; set; }
         public virtual PostStatus Status { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string Content { get; set; }
     }
 }

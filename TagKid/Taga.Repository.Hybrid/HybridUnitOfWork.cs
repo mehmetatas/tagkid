@@ -9,8 +9,6 @@ namespace Taga.Repository.Hybrid
 {
     public class HybridUnitOfWork : UnitOfWork, IHybridUnitOfWork
     {
-        private static readonly IHybridDbProvider HybridDbProvider = ServiceProvider.Provider.GetOrCreate<IHybridDbProvider>();
-
         private readonly Queue<IHybridUowCommand> _commands = new Queue<IHybridUowCommand>();
 
         private IDbConnection _connection;
@@ -20,9 +18,25 @@ namespace Taga.Repository.Hybrid
             {
                 if (_connection == null)
                 {
-                    _connection = HybridDbProvider.CreateConnection();
+                    var hybridDbProvider = ServiceProvider.Provider.GetOrCreate<IHybridDbProvider>();
+                    _connection = hybridDbProvider.CreateConnection();
+                    _connection.Open();
                 }
                 return _connection;
+            }
+        }
+
+        private IQueryProvider _queryProvider;
+        IQueryProvider IHybridUnitOfWork.QueryProvider
+        {
+            get
+            {
+                if (_queryProvider == null)
+                {
+                    _queryProvider = ServiceProvider.Provider.GetOrCreate<IQueryProvider>();
+                    _queryProvider.SetConnection(Connection);
+                }
+                return _queryProvider;
             }
         }
 
@@ -37,7 +51,14 @@ namespace Taga.Repository.Hybrid
             while (_commands.Count > 0)
             {
                 var cmd = _commands.Dequeue();
-                cmd.Execute(Connection);
+                var dbCmd = Connection.CreateCommand();
+
+                if (Transaction != null)
+                {
+                    dbCmd.Transaction = ((HybridTransaction) Transaction).DbTransaction;
+                }
+
+                cmd.Execute(dbCmd);
             }
         }
 

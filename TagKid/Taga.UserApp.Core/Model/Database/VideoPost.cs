@@ -1,10 +1,8 @@
 ﻿
 namespace Taga.UserApp.Core.Model.Database
 {
-    public class VideoPost
+    public class VideoPost : Post
     {
-        public virtual long PostId { get; set; }
-        public virtual string Url { get; set; }
-        public virtual string Description { get; set; }
+        public virtual string VideoUrl { get; set; }
     }
 }

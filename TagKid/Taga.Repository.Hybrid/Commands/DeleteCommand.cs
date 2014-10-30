@@ -8,17 +8,19 @@ namespace Taga.Repository.Hybrid.Commands
 {
     class DeleteCommand : BaseCommand
     {
+#if DEBUG
+        private readonly Hashtable QueryCache = new Hashtable();
+#else
         private static readonly Hashtable QueryCache = new Hashtable();
+#endif
 
         public DeleteCommand(object entity)
             : base(entity)
         {
         }
 
-        public override void Execute(IDbConnection conn)
+        public override void Execute(IDbCommand cmd)
         {
-            var cmd = conn.CreateCommand();
-
             if (QueryCache.ContainsKey(EntityType))
             {
                 cmd.CommandText = (string)QueryCache[EntityType];

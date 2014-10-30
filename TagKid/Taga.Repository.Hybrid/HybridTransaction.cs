@@ -5,26 +5,26 @@ namespace Taga.Repository.Hybrid
 {
     class HybridTransaction : ITransaction
     {
-        private readonly IDbTransaction _transaction;
+        internal readonly IDbTransaction DbTransaction;
 
         public HybridTransaction(IDbTransaction transaction)
         {
-            _transaction = transaction;
+            DbTransaction = transaction;
         }
 
         public void Commit()
         {
-            _transaction.Commit();
+            DbTransaction.Commit();
         }
 
         public void Rollback()
         {
-            _transaction.Rollback();
+            DbTransaction.Rollback();
         }
 
         public void Dispose()
         {
-            _transaction.Dispose();
+            DbTransaction.Dispose();
         }
     }
 }

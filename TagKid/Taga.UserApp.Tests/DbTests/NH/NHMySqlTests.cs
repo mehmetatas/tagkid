@@ -17,18 +17,28 @@ namespace Taga.UserApp.Tests.DbTests.NH
         {
             var sessionFactory = Fluently.Configure()
                 .Database(MySQLConfiguration.Standard
-                    .ConnectionString(ConfigurationManager.ConnectionStrings["user_app_mysql_nh"].ConnectionString)
+                    .ConnectionString(ConfigurationManager.ConnectionStrings["user_app_mysql"].ConnectionString)
                     .ShowSql())
                 .Mappings(mappingConfig => mappingConfig.FluentMappings.AddFromAssemblyOf<User>())
                 .BuildSessionFactory();
 
             var prov = ServiceProvider.Provider;
 
-            prov.Register<INHSpCallBuilder, MySqlSpCallBuilder>();
+            prov.RegisterSingleton<INHSpCallBuilder>(new MySqlSpCallBuilder());
             prov.Register<IUnitOfWork, NHUnitOfWork>();
             prov.Register<ITransactionalUnitOfWork, NHUnitOfWork>();
             prov.Register<IRepository, NHRepository>();
             prov.RegisterSingleton(sessionFactory);
+        }
+
+        protected override bool IsSqlServer
+        {
+            get { return false; }
+        }
+
+        protected override bool IsEntityFramework
+        {
+            get { return false; }
         }
     }
 }

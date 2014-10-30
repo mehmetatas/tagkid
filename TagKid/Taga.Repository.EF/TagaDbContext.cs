@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Configuration;
@@ -24,6 +25,12 @@ namespace Taga.Repository.EF
 
         protected TagaDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
+        {
+
+        }
+
+        protected TagaDbContext(DbConnection connection)
+            : base(connection, false)
         {
 
         }

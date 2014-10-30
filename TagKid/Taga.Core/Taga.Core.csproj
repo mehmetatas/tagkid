@@ -73,6 +73,7 @@
     <Compile Include="Mail\MailMessage.cs" />
     <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IQueryProvider.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ITransaction.cs" />
     <Compile Include="Repository\ITransactionalUnitOfWork.cs" />

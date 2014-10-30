@@ -1,17 +1,18 @@
-﻿using FluentNHibernate.Cfg;
+﻿using System.Configuration;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Configuration;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
+using Taga.Repository.Hybrid;
 using Taga.Repository.NH;
 using Taga.Repository.NH.SpCallBuilders;
 using Taga.UserApp.Core.Model.Database;
 
-namespace Taga.UserApp.Tests.DbTests.NH
+namespace Taga.UserApp.Tests.DbTests.Hybrid
 {
     [TestClass]
-    public class NHSqlServerTests : UserAppDbTests
+    public class HybridWithNHSqlServerTests : UserAppDbTests
     {
         protected override void InitDb()
         {
@@ -23,11 +24,13 @@ namespace Taga.UserApp.Tests.DbTests.NH
                 .BuildSessionFactory();
 
             var prov = ServiceProvider.Provider;
-
+            
             prov.RegisterSingleton<INHSpCallBuilder>(new SqlServerSpCallBuilder());
-            prov.Register<IUnitOfWork, NHUnitOfWork>();
-            prov.Register<ITransactionalUnitOfWork, NHUnitOfWork>();
-            prov.Register<IRepository, NHRepository>();
+            prov.RegisterSingleton<IHybridDbProvider>(new HybridSqlServerProvider());
+            prov.Register<IQueryProvider, NHQueryProvider>();
+            prov.Register<IUnitOfWork, HybridUnitOfWork>();
+            prov.Register<ITransactionalUnitOfWork, HybridUnitOfWork>();
+            prov.Register<IRepository, HybridRepository>();
             prov.RegisterSingleton(sessionFactory);
         }
 

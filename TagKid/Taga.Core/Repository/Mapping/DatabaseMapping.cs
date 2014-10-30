@@ -11,6 +11,8 @@ namespace Taga.Core.Repository.Mapping
 
         private readonly Dictionary<Type, TableMapping> _tableMappings;
 
+        private TableMapping _currentTableMapping;
+
         private DatabaseMapping(IDatabaseNamingConvention namingConvention)
         {
             _namingConvention = namingConvention;
@@ -19,7 +21,14 @@ namespace Taga.Core.Repository.Mapping
 
         public DatabaseMapping Map(Type entityType, params string[] idProperties)
         {
-            _tableMappings.Add(entityType, TableMapping.For(entityType, _namingConvention, idProperties));
+            _currentTableMapping = TableMapping.For(entityType, _namingConvention, idProperties);
+            _tableMappings.Add(entityType, _currentTableMapping);
+            return this;
+        }
+
+        public DatabaseMapping ToTable(string tableName)
+        {
+            _currentTableMapping.TableName = tableName;
             return this;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Data.Common;
+using System.Data.Entity;
 using Taga.Repository.EF;
 using Taga.UserApp.Core.Model.Business;
 
@@ -18,6 +19,11 @@ namespace Taga.UserApp.Core.Database.EF
 
         public UserAppContext()
             : base("user_app_sqlserver")
+        {
+        }
+
+        public UserAppContext(DbConnection connection)
+            : base(connection)
         {
         }
 

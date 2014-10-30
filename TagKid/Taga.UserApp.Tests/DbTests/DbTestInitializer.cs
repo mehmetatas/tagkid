@@ -37,10 +37,10 @@ namespace Taga.UserApp.Tests.DbTests
                 .Map<RolePermission>(rp => rp.RoleId, rp => rp.PermissionId)
                 .Map<Category>()
                 .Map<Post>()
-                .Map<TextPost>(p => p.PostId)
-                .Map<ImagePost>(p => p.PostId)
-                .Map<VideoPost>(p => p.PostId)
-                .Map<QuotePost>(p => p.PostId);
+                .Map<TextPost>().ToTable(namingConvention.GetTableName("Post"))
+                .Map<ImagePost>().ToTable(namingConvention.GetTableName("Post"))
+                .Map<VideoPost>().ToTable(namingConvention.GetTableName("Post"))
+                .Map<QuotePost>().ToTable(namingConvention.GetTableName("Post"));
 
             var mappingProv = ServiceProvider.Provider.GetOrCreate<IMappingProvider>();
 

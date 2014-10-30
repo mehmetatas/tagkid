@@ -12,10 +12,15 @@ namespace Taga.Core.Repository.Mapping
         private ColumnMapping[] _insertColumns;
         private ColumnMapping[] _updateColumns;
 
-        public Type Type { get; set; }
-        public string TableName { get; set; }
+        public Type Type { get; internal set; }
+        public string TableName { get; internal set; }
 
-        private Dictionary<PropertyInfo, ColumnMapping> ColumnMappings { get; set; }
+        private TableMapping()
+        {
+            
+        }
+
+        private Dictionary<PropertyInfo, ColumnMapping> _columnMappings;
 
         public bool HasSingleAutoIncrementId
         {
@@ -28,7 +33,7 @@ namespace Taga.Core.Repository.Mapping
             {
                 if (_columns == null)
                 {
-                    _columns = ColumnMappings.Values.ToArray();
+                    _columns = _columnMappings.Values.ToArray();
                 }
 
                 return _columns;
@@ -41,7 +46,7 @@ namespace Taga.Core.Repository.Mapping
             {
                 if (_idColumns == null)
                 {
-                    _idColumns = ColumnMappings.Values.Where(cm => cm.IsId).ToArray();
+                    _idColumns = _columnMappings.Values.Where(cm => cm.IsId).ToArray();
                 }
 
                 return _idColumns;
@@ -54,7 +59,7 @@ namespace Taga.Core.Repository.Mapping
             {
                 if (_insertColumns == null)
                 {
-                    _insertColumns = ColumnMappings.Values.Where(cm => !cm.IsAutoIncrement).ToArray();
+                    _insertColumns = _columnMappings.Values.Where(cm => !cm.IsAutoIncrement).ToArray();
                 }
                 return _insertColumns;
             }
@@ -66,7 +71,7 @@ namespace Taga.Core.Repository.Mapping
             {
                 if (_updateColumns == null)
                 {
-                    _updateColumns = ColumnMappings.Values.Where(cm => !cm.IsId).ToArray();
+                    _updateColumns = _columnMappings.Values.Where(cm => !cm.IsId).ToArray();
                 }
                 return _updateColumns;
             }
@@ -85,7 +90,7 @@ namespace Taga.Core.Repository.Mapping
             {
                 Type = type,
                 TableName = tableName,
-                ColumnMappings = new Dictionary<PropertyInfo, ColumnMapping>()
+                _columnMappings = new Dictionary<PropertyInfo, ColumnMapping>()
             };
 
             foreach (var propInf in type.GetProperties())
@@ -107,7 +112,7 @@ namespace Taga.Core.Repository.Mapping
                     }
                 }
 
-                tableMapping.ColumnMappings.Add(propInf, columnMapping);
+                tableMapping._columnMappings.Add(propInf, columnMapping);
             }
 
             return tableMapping;

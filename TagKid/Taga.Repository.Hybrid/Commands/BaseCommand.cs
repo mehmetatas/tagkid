@@ -7,9 +7,6 @@ namespace Taga.Repository.Hybrid.Commands
 {
     abstract class BaseCommand : IHybridUowCommand
     {
-        public static readonly IMappingProvider MappingProvider = ServiceProvider.Provider.GetOrCreate<IMappingProvider>();
-        public static readonly IHybridDbProvider HybridDbProvider = ServiceProvider.Provider.GetOrCreate<IHybridDbProvider>();
-
         protected readonly object Entity;
         protected readonly Type EntityType;
 
@@ -19,7 +16,23 @@ namespace Taga.Repository.Hybrid.Commands
             EntityType = entity.GetType();
         }
 
-        public abstract void Execute(IDbConnection conn);
+        protected static IMappingProvider MappingProvider
+        {
+            get
+            {
+                return ServiceProvider.Provider.GetOrCreate<IMappingProvider>();
+            }
+        }
+
+        protected static IHybridDbProvider HybridDbProvider
+        {
+            get
+            {
+                return ServiceProvider.Provider.GetOrCreate<IHybridDbProvider>();
+            }
+        }
+
+        public abstract void Execute(IDbCommand cmd);
 
         protected static string GetParamName(string columnName)
         {

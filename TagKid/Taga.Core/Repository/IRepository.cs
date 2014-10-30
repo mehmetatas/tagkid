@@ -37,7 +37,7 @@ namespace Taga.Core.Repository
 
             var tableMapping = mapingProv.GetTableMapping<T>();
 
-            if (tableMapping.IdColumns.Length != 1 || !tableMapping.IdColumns[0].IsAutoIncrement)
+            if (!tableMapping.HasSingleAutoIncrementId)
             {
                 throw new SaveException();
             }

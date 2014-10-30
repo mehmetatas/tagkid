@@ -5,7 +5,7 @@ namespace Taga.UserApp.Tests.DbTests.EF
     public class TestUserAppContext : UserAppContext
     {
         public TestUserAppContext()
-            : base("user_app_sqlserver_ef")
+            : base("user_app_sqlserver")
         {
 
         }

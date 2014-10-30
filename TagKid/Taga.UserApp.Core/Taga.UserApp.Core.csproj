@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\Db.cs" />
+    <Compile Include="Database\EF\UserAppEFQueryProvider.cs" />
     <Compile Include="Database\IReadonlyDb.cs" />
     <Compile Include="Database\IReadWriteDb.cs" />
     <Compile Include="Database\ITransactionalDb.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Model\Database\Permission.cs" />
     <Compile Include="Model\Database\Post.cs" />
     <Compile Include="Model\Database\PostStatus.cs" />
+    <Compile Include="Model\Database\PostType.cs" />
     <Compile Include="Model\Database\QuotePost.cs" />
     <Compile Include="Model\Database\Role.cs" />
     <Compile Include="Model\Database\RolePermission.cs" />

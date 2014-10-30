@@ -18,5 +18,15 @@ namespace Taga.UserApp.Tests.DbTests.EF
             prov.Register<ITransactionalUnitOfWork, EFUnitOfWork>();
             prov.Register<IRepository, EFRepository>();
         }
+
+        protected override bool IsSqlServer
+        {
+            get { return true; }
+        }
+
+        protected override bool IsEntityFramework
+        {
+            get { return true; }
+        }
     }
 }

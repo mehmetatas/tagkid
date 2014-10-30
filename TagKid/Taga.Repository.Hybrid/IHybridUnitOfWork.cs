@@ -1,3 +1,5 @@
+using Taga.Core.Repository;
+
 namespace Taga.Repository.Hybrid
 {
     interface IHybridUnitOfWork
@@ -7,5 +9,7 @@ namespace Taga.Repository.Hybrid
         void Update(object entity);
 
         void Delete(object entity);
+
+        IQueryProvider QueryProvider { get; }
     }
 }

@@ -47,11 +47,18 @@ namespace Taga.Repository.NH
         public IList<T> Exec<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false)
             where T : class
         {
+            return Exec<T>(_session, _spCallBuilder, spNameOrSql, args, rawSql);
+        }
+
+        internal static IList<T> Exec<T>(ISession session, INHSpCallBuilder spCallBuilder, string spNameOrSql, IDictionary<string, object> args = null,
+            bool rawSql = false)
+            where T : class
+        {
             var command = rawSql
                 ? spNameOrSql
-                : _spCallBuilder.BuildSpCall(spNameOrSql, args);
+                : spCallBuilder.BuildSpCall(spNameOrSql, args);
 
-            var query = _session.CreateSQLQuery(command);
+            var query = session.CreateSQLQuery(command);
             query.AddEntity(typeof(T));
 
             if (args != null)
