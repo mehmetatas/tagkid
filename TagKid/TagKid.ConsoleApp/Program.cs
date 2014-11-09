@@ -1,98 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using HtmlAgilityPack;
-using Taga.Core.IoC;
-using Taga.Core.Repository;
-using TagKid.Lib.Bootstrapping;
-using TagKid.Lib.Exceptions;
-using TagKid.Lib.Models.Entities;
-using TagKid.Lib.Repositories;
-using IServiceProvider = Taga.Core.IoC.IServiceProvider;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
+using Taga.Core.Dynamix;
+using TagKid.Core.Models.Database;
+using Taga.Core.DynamicProxy;
 
 namespace TagKid.ConsoleApp
 {
     internal class Program
     {
-        private static readonly IServiceProvider prov = ServiceProvider.Provider;
-
         private static void Main(string[] args)
         {
             try
             {
-                Bootstrapper.StartApp();
+                //var mapper = new PocoMapper();
 
-                //StacManClient c = new StacManClient("TrhOnlvpT7bZ*Jj5NttVVA((");
 
-                //c.Questions.GetAll(filter:)
+                var mapper = CreateMapper<User>();
 
-                //HashSet<String> existingTags;
-                //using (prov.GetOrCreate<IUnitOfWork>())
-                //{
-                //    var repo = prov.GetOrCreate<ITagRepository>();
-                //    var tt = repo.GetAll();
-                //    existingTags = new HashSet<String>(tt.Select(t => t.Name));
-                //}
+                var users = new List<User>();
+                using (var conn = new SqlConnection("Server=localhost;Database=TagKid;uid=sa;pwd=123456;"))
+                {
+                    conn.Open();
 
-                //int pageSize = 100;
-                //StackExchange.StacMan.Tag[] arr;
+                    var cmd = conn.CreateCommand();
+                    cmd.CommandText = "select * from [User]";
+                    var reader = cmd.ExecuteReader();
 
-                //var tags = new List<Tag>();
-
-                //int page = 211;
-                //int retry = 10;
-                //do
-                //{
-                //    arr = null;
-                //    try
-                //    {
-                //        arr = c.Tags.GetAll("stackoverflow", page: page++, pagesize: pageSize, sort: Sort.Name).Result.Data.Items;
-                //        if (arr == null)
-                //            break;
-
-                //        foreach (var tag in arr)
-                //        {
-                //            tags.Add(new Tag
-                //            {
-                //                Name = tag.Name,
-                //                Hint = tag.Name,
-                //                Description = tag.Name
-                //            });
-                //        }
-                //        retry = 10;
-
-                //        if (tags.Count % 500 == 0)
-                //            Console.WriteLine(tags.Count);
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        Console.WriteLine("FATAL: " + ex.GetMessage());
-                //        if (retry-- > 0)
-                //            arr = new StackExchange.StacMan.Tag[100];
-                //    }
-                //} while (arr != null && arr.Length == pageSize);
-
-                //Console.WriteLine(tags.Count);
-                //using (var uow = prov.GetOrCreate<IUnitOfWork>())
-                //{
-                //    var repo = prov.GetOrCreate<ITagRepository>();
-                //    foreach (var tag in tags)
-                //    {
-                //        try
-                //        {
-                //            repo.Save(tag);
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //            Console.WriteLine(tag.Name + ": " + ex.GetMessage());
-                //        }
-                //    }
-                //    uow.Save();
-
-                //}
-
-                //DownloadData();
-                UpdateTagCounts();
+                    while (reader.Read())
+                    {
+                        users.Add(mapper.Map(reader));
+                    }
+                }
 
                 Console.WriteLine("OK!");
             }
@@ -103,107 +46,117 @@ namespace TagKid.ConsoleApp
             Console.ReadLine();
         }
 
-        private static void UpdateTagCounts()
+        private static IPocoMapper<T> CreateMapper<T>() where T : class, new()
         {
-            var lines = File.ReadAllLines(@"C:\Users\mehmet\Downloads\tags.csv");
+            var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                new AssemblyName("Taga.Core.Dynamix.Proxies"),
+                AssemblyBuilderAccess.Run);
 
-            using (var uow = prov.GetOrCreate<IUnitOfWork>())
-            {
-                var repo = prov.GetOrCreate<ITagRepository>();
+            var assemblyName = assemblyBuilder.GetName().Name;
 
-                var i = lines.Length;
-                Console.WriteLine(i);
+            var moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName);
 
-                foreach (var line in lines)
-                {
-                    var ss = line.Split(',');
+            var entityType = typeof (T);
 
-                    var name = ss[1].Replace("\"", "");
-                    var count = Convert.ToInt64(ss[2].Replace("\"", ""));
+            var typeName = entityType.Name + "Mapper";
 
-                    var tag = new Tag {Name = name, Count = count};
+            var interfaceType = typeof (IPocoMapper<>).MakeGenericType(entityType);
 
-                    tag.Hint = tag.Name + " - Hint";
-                    tag.Description = tag.Name + " - Description";
+            var typeBuilder = moduleBuilder.DefineType(
+                typeName,
+                TypeAttributes.Public | TypeAttributes.Class,
+                typeof (object),
+                new[] {interfaceType});
 
-                    repo.Save(tag);
+            var baseCtor = typeof(object).GetConstructor(Type.EmptyTypes);
 
-                    if (--i%100 == 0)
-                        Console.WriteLine(i);
-                }
+            var ctorBuilder = typeBuilder.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                Type.EmptyTypes);
 
-                uow.Save();
-            }
-        }
+            var ctorIL = ctorBuilder.GetILGenerator();
+            ctorIL.Emit(OpCodes.Ldarg_0);
+            ctorIL.Emit(OpCodes.Call, baseCtor);
+            ctorIL.Emit(OpCodes.Ret);
 
-        private static void DownloadData()
-        {
-            //var lines = File.ReadAllLines(@"C:\Users\mehmet\Downloads\QueryResults.csv");
+            var methodInfo = interfaceType.GetMethod("Map");
 
-            //Console.WriteLine(lines.Length);
+            // public override? ReturnType Method(arguments...)
+            var methodBuilder = typeBuilder.DefineMethod(methodInfo.Name,
+                MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual,
+                methodInfo.ReturnType,
+                methodInfo.GetParameterTypes());
+            
+            var methodIL = methodBuilder.GetILGenerator();
+               
+            var entityCtor = typeof(T).GetConstructor(Type.EmptyTypes);
 
-            //var tags = lines.Select(l => l.Split(',')[1].Trim('"')).ToList();
-            //var tagChars = tags.SelectMany(c => c).Distinct().OrderBy(c => c);
-
-            //foreach (var tag in tagChars)
-            //{
-            //    Console.Write(tag);
-            //}
-
-            IEnumerable<Tag> existingTags;
-            using (prov.GetOrCreate<IUnitOfWork>())
-            {
-                var repo = prov.GetOrCreate<ITagRepository>();
-                existingTags = repo.GetAll();
-            }
-
-            Console.WriteLine();
+            var user = methodIL.DeclareLocal(entityType); // User user;
+            methodIL.Emit(OpCodes.Newobj, entityCtor); // new User();   
+            methodIL.Emit(OpCodes.Stloc, user); // user = new User();
 
             var i = 0;
-
-            foreach (var tag in existingTags)
+            foreach (var property in entityType.GetProperties())
             {
-                if (++i%100 == 0)
-                    Console.WriteLine(i);
+                var drMethod = GetDataRecordMethod(property.PropertyType);
+                var setter = property.GetSetMethod(true);
 
-                try
-                {
-                    var url = String.Format("http://stackoverflow.com/tags/{0}/info", tag.Name.Replace("#", "%23"));
-
-                    var htmlDoc = new HtmlDocument();
-                    var downloader = new HtmlDownloader(url);
-                    downloader.GetHtml();
-                    htmlDoc.LoadHtml(downloader.HtmlContent);
-
-                    var node = htmlDoc.DocumentNode.SelectSingleNode("//div[@id = 'questions']");
-                    if (node == null)
-                        throw new Exception("id=questions not found");
-
-                    node = node.SelectSingleNode("//div[@class = 'post-text']");
-                    if (node == null)
-                        throw new Exception("class=post-text not found");
-
-                    var text = node.InnerText.Trim();
-
-                    var hint = text.Length <= 50 ? text : text.Substring(0, 50);
-                    var desc = text.Length <= 500 ? text : text.Substring(0, 500);
-
-                    using (var uow = prov.GetOrCreate<IUnitOfWork>())
-                    {
-                        var repo = prov.GetOrCreate<ITagRepository>();
-
-                        tag.Hint = hint;
-                        tag.Description = desc;
-                        repo.Save(tag);
-
-                        uow.Save();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(tag + ": " + ex.GetMessage());
-                }
+                methodIL.Emit(OpCodes.Ldloc, user);
+                methodIL.Emit(OpCodes.Ldarg_1);
+                methodIL.Emit(OpCodes.Ldc_I4, i++);
+                methodIL.Emit(OpCodes.Callvirt, drMethod);
+                methodIL.Emit(OpCodes.Callvirt, setter);
             }
+
+            methodIL.Emit(OpCodes.Ldloc, user);
+            methodIL.Emit(OpCodes.Ret);
+
+            var mapperType = typeBuilder.CreateType();
+
+            return (IPocoMapper<T>)Activator.CreateInstance(mapperType);
+        }
+
+        private static MethodInfo GetDataRecordMethod(Type type)
+        {
+            if (type == typeof(long))
+            {
+                return typeof(IDataRecord).GetMethod("GetInt64");
+            }
+            if (type == typeof(string))
+            {
+                return typeof(IDataRecord).GetMethod("GetString");
+            }
+            if (type == typeof(DateTime))
+            {
+                return typeof(IDataRecord).GetMethod("GetDateTime");
+            }
+            if (type.IsEnum)
+            {
+                return typeof(IDataRecord).GetMethod("GetInt32");
+            }
+            throw new Exception(type.ToString());
+        }
+    }
+
+
+    public class PocoMapper : IPocoMapper<User>
+    {
+        public User Map(IDataReader reader)
+        {
+            var user = new User();
+
+            user.Id = reader.GetInt64(0);
+            user.Fullname = reader.GetString(1);
+            user.Email = reader.GetString(2);
+            user.Username = reader.GetString(3);
+            user.Password = reader.GetString(4);
+            user.JoinDate = reader.GetDateTime(5);
+            user.FacebookId = reader.GetString(6);
+            user.Type = (UserType)reader.GetInt32(7);
+            user.Status = (UserStatus)reader.GetInt32(8);
+
+            return user;
         }
     }
 }

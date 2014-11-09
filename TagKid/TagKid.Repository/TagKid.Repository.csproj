@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BEFF827F-C349-4984-A458-FAF66EF66D6C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{56991AD4-7F75-4F89-9176-279DD6E3CE66}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TagKid.ConsoleApp</RootNamespace>
-    <AssemblyName>TagKid.ConsoleApp</AssemblyName>
+    <RootNamespace>TagKid.Repository</RootNamespace>
+    <AssemblyName>TagKid.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,13 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlDownloader.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="CommentRepository.cs" />
+    <Compile Include="ConfirmationCodeRepository.cs" />
+    <Compile Include="LoginRepository.cs" />
+    <Compile Include="NotificationRepository.cs" />
+    <Compile Include="PostRepository.cs" />
+    <Compile Include="PrivateMessageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <Compile Include="TagRepository.cs" />
+    <Compile Include="TokenRepository.cs" />
+    <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">
