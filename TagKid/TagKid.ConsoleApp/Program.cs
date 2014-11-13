@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using Taga.Core.Dynamix;
+using Taga.Core.ORM;
 using TagKid.Core.Models.Database;
-using Taga.Core.DynamicProxy;
 
 namespace TagKid.ConsoleApp
 {
@@ -17,25 +11,8 @@ namespace TagKid.ConsoleApp
         {
             try
             {
-                //var mapper = new PocoMapper();
-
-
-                var mapper = CreateMapper<User>();
-
-                var users = new List<User>();
-                using (var conn = new SqlConnection("Server=localhost;Database=TagKid;uid=sa;pwd=123456;"))
-                {
-                    conn.Open();
-
-                    var cmd = conn.CreateCommand();
-                    cmd.CommandText = "select * from [User]";
-                    var reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        users.Add(mapper.Map(reader));
-                    }
-                }
+                var mapper = PocoMapper.For<User>();
+                var user = mapper.Map<User>(new MockDataReader());
 
                 Console.WriteLine("OK!");
             }
@@ -45,118 +22,227 @@ namespace TagKid.ConsoleApp
             }
             Console.ReadLine();
         }
-
-        private static IPocoMapper<T> CreateMapper<T>() where T : class, new()
-        {
-            var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName("Taga.Core.Dynamix.Proxies"),
-                AssemblyBuilderAccess.Run);
-
-            var assemblyName = assemblyBuilder.GetName().Name;
-
-            var moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName);
-
-            var entityType = typeof (T);
-
-            var typeName = entityType.Name + "Mapper";
-
-            var interfaceType = typeof (IPocoMapper<>).MakeGenericType(entityType);
-
-            var typeBuilder = moduleBuilder.DefineType(
-                typeName,
-                TypeAttributes.Public | TypeAttributes.Class,
-                typeof (object),
-                new[] {interfaceType});
-
-            var baseCtor = typeof(object).GetConstructor(Type.EmptyTypes);
-
-            var ctorBuilder = typeBuilder.DefineConstructor(
-                MethodAttributes.Public,
-                CallingConventions.HasThis,
-                Type.EmptyTypes);
-
-            var ctorIL = ctorBuilder.GetILGenerator();
-            ctorIL.Emit(OpCodes.Ldarg_0);
-            ctorIL.Emit(OpCodes.Call, baseCtor);
-            ctorIL.Emit(OpCodes.Ret);
-
-            var methodInfo = interfaceType.GetMethod("Map");
-
-            // public override? ReturnType Method(arguments...)
-            var methodBuilder = typeBuilder.DefineMethod(methodInfo.Name,
-                MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual,
-                methodInfo.ReturnType,
-                methodInfo.GetParameterTypes());
-            
-            var methodIL = methodBuilder.GetILGenerator();
-               
-            var entityCtor = typeof(T).GetConstructor(Type.EmptyTypes);
-
-            var user = methodIL.DeclareLocal(entityType); // User user;
-            methodIL.Emit(OpCodes.Newobj, entityCtor); // new User();   
-            methodIL.Emit(OpCodes.Stloc, user); // user = new User();
-
-            var i = 0;
-            foreach (var property in entityType.GetProperties())
-            {
-                var drMethod = GetDataRecordMethod(property.PropertyType);
-                var setter = property.GetSetMethod(true);
-
-                methodIL.Emit(OpCodes.Ldloc, user);
-                methodIL.Emit(OpCodes.Ldarg_1);
-                methodIL.Emit(OpCodes.Ldc_I4, i++);
-                methodIL.Emit(OpCodes.Callvirt, drMethod);
-                methodIL.Emit(OpCodes.Callvirt, setter);
-            }
-
-            methodIL.Emit(OpCodes.Ldloc, user);
-            methodIL.Emit(OpCodes.Ret);
-
-            var mapperType = typeBuilder.CreateType();
-
-            return (IPocoMapper<T>)Activator.CreateInstance(mapperType);
-        }
-
-        private static MethodInfo GetDataRecordMethod(Type type)
-        {
-            if (type == typeof(long))
-            {
-                return typeof(IDataRecord).GetMethod("GetInt64");
-            }
-            if (type == typeof(string))
-            {
-                return typeof(IDataRecord).GetMethod("GetString");
-            }
-            if (type == typeof(DateTime))
-            {
-                return typeof(IDataRecord).GetMethod("GetDateTime");
-            }
-            if (type.IsEnum)
-            {
-                return typeof(IDataRecord).GetMethod("GetInt32");
-            }
-            throw new Exception(type.ToString());
-        }
     }
 
-
-    public class PocoMapper : IPocoMapper<User>
+    public class User
     {
-        public User Map(IDataReader reader)
+        public virtual long Id { get; set; }
+        public virtual string Email { get; set; }
+        
+        public virtual int Int32NotNull { get; set; }
+        public virtual int? Int32Null1 { get; set; }
+        public virtual int? Int32Null2 { get; set; }
+        
+        public virtual DateTime DateTimeNotNull { get; set; }
+        public virtual DateTime? DateTimeNull1 { get; set; }
+        public virtual DateTime? DateTimeNull2 { get; set; }
+
+        public virtual UserType EnumNotNull { get; set; }
+        public virtual UserType? EnumNull1 { get; set; }
+        public virtual UserType? EnumNull2 { get; set; }
+    }
+
+    public class MockDataReader : IDataReader
+    {
+
+        private User user = new User
         {
-            var user = new User();
+            Id = 1,
+            Email = "Mail",
+            Int32NotNull = 1,
+            Int32Null1 = 2,
+            DateTimeNotNull = DateTime.Now,
+            DateTimeNull1 = DateTime.Now.AddDays(1),
+            EnumNotNull = UserType.Moderator,
+            EnumNull1 = UserType.Admin
+        };
 
-            user.Id = reader.GetInt64(0);
-            user.Fullname = reader.GetString(1);
-            user.Email = reader.GetString(2);
-            user.Username = reader.GetString(3);
-            user.Password = reader.GetString(4);
-            user.JoinDate = reader.GetDateTime(5);
-            user.FacebookId = reader.GetString(6);
-            user.Type = (UserType)reader.GetInt32(7);
-            user.Status = (UserStatus)reader.GetInt32(8);
+        public object GetValue(int i)
+        {
+            if (i == 0)
+                return user.Id;
+            if (i == 1)
+                return user.Email;
+            if (i == 2)
+                return user.Int32NotNull;
+            if (i == 3)
+                return user.Int32Null1.Value;
+            if (i == 4)
+                return DBNull.Value;
+            if (i == 5)
+                return user.DateTimeNotNull;
+            if (i == 6)
+                return user.DateTimeNull1.Value;
+            if (i == 7)
+                return DBNull.Value;
+            if (i == 8)
+                return user.EnumNotNull;
+            if (i == 9)
+                return user.EnumNull1.Value;
+            if (i == 10)
+                return DBNull.Value;
+            return DBNull.Value;
+        }
 
-            return user;
+        public bool Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Close()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Depth
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public DataTable GetSchemaTable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsClosed
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool NextResult()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RecordsAffected
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int FieldCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool GetBoolean(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte GetByte(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public char GetChar(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataReader GetData(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDataTypeName(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime GetDateTime(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal GetDecimal(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetDouble(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Type GetFieldType(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public float GetFloat(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Guid GetGuid(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public short GetInt16(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetInt32(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetInt64(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetName(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetOrdinal(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetString(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetValues(object[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsDBNull(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object this[string name]
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public object this[int i]
+        {
+            get { throw new NotImplementedException(); }
         }
     }
+
 }
