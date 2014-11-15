@@ -1,4 +1,4 @@
-﻿namespace TagKid.Core.Models.Filters
+﻿namespace TagKid.Core.Models.Filter
 {
     public abstract class BaseFilter
     {

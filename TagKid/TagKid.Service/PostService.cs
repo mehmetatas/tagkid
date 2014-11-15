@@ -46,7 +46,7 @@ namespace TagKid.Service
                 post.UpdateDate = DateTime.Now;
             }
 
-            if (post.Status == PostStatus.Active &&
+            if (post.Status == PostStatus.Published &&
                 post.PublishDate == DateTime.MinValue)
             {
                 post.PublishDate = DateTime.Now;

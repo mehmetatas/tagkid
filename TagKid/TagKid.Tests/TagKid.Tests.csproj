@@ -63,6 +63,9 @@
     <Compile Include="RepositoryTests\ConfirmationCodeRepositoryTests.cs" />
     <Compile Include="RepositoryTests\LoginRespository.cs" />
     <Compile Include="RepositoryTests\NotificationRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\PostRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\PrivateMessageRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\TagRepositoryTests.cs" />
     <Compile Include="RepositoryTests\TokenRepositoryTests.cs" />
     <Compile Include="RepositoryTests\UserRepositoryTests.cs" />
   </ItemGroup>

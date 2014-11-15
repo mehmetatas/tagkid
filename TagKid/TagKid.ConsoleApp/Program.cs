@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using Taga.Core.ORM;
+using Taga.Core.Dynamix;
 using TagKid.Core.Models.Database;
 
 namespace TagKid.ConsoleApp

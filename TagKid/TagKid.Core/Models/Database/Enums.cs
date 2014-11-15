@@ -49,9 +49,9 @@
 
     public enum PostStatus
     {
-        Active,
+        Published,
         Draft,
-        Passive
+        Unpublished
     }
 
     public enum PostType
@@ -111,8 +111,7 @@
     public enum PrivateMessageStatus
     {
         Unread,
-        Read,
-        Deleted
+        Read
     }
 
     public enum TokenType

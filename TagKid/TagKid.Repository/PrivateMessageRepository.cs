@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Linq;
+﻿using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Repositories;
@@ -15,19 +14,26 @@ namespace TagKid.Repository
             _repository = repository;
         }
 
-        public IPage<PrivateMessage> GetMessages(long user1, long user2, int pageIndex, int pageSize)
+        public PrivateMessage[] GetMessages(long loggedInUserId, long otherUserId, int maxCount, long maxMessageId = 0)
         {
-            return _repository.Select<PrivateMessage>()
+            var query = _repository.Select<PrivateMessage>()
                 .Where(pm =>
-                    (pm.FromUserId == user1 && pm.ToUserId == user2) ||
-                    (pm.FromUserId == user2 && pm.ToUserId == user1))
-                .OrderByDescending(pm => pm.MessageDate)
-                .Page(pageIndex, pageSize);
+                    (pm.FromUserId == loggedInUserId && pm.ToUserId == otherUserId) ||
+                    (pm.FromUserId == otherUserId && pm.ToUserId == loggedInUserId));
+
+            if (maxMessageId > 0)
+            {
+                query = query.Where(pm => pm.Id < maxMessageId);
+            }
+
+            return query.OrderByDescending(pm => pm.Id)
+                .Take(maxCount)
+                .ToArray();
         }
 
         public void Save(PrivateMessage privateMessage)
         {
-            _repository.Save(privateMessage);
+            _repository.Insert(privateMessage);
         }
     }
 }

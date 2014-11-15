@@ -56,6 +56,18 @@
     <Compile Include="Database\TagKidPropertyFilter.cs" />
     <Compile Include="Database\TransactionalReadWriteDb.cs" />
     <Compile Include="Exceptions\SecurityException.cs" />
+    <Compile Include="Models\Database\FollowCategory.cs" />
+    <Compile Include="Models\Database\FollowUser.cs" />
+    <Compile Include="Models\Database\PostLike.cs" />
+    <Compile Include="Models\Database\Proxies\AudioPost.cs" />
+    <Compile Include="Models\Database\Proxies\ImagePost.cs" />
+    <Compile Include="Models\Database\Proxies\LinkPost.cs" />
+    <Compile Include="Models\Database\Proxies\PostProxy.cs" />
+    <Compile Include="Models\Database\Proxies\QuotePost.cs" />
+    <Compile Include="Models\Database\Proxies\RetagPost.cs" />
+    <Compile Include="Models\Database\Proxies\TextPost.cs" />
+    <Compile Include="Models\Database\Proxies\VideoPost.cs" />
+    <Compile Include="Models\Database\TagPost.cs" />
     <Compile Include="Models\DTO\Messages\PostRequest.cs" />
     <Compile Include="Models\DTO\Messages\PostResponse.cs" />
     <Compile Include="Models\DTO\Messages\SignInResponse.cs" />
@@ -74,7 +86,6 @@
     <Compile Include="Models\Database\Login.cs" />
     <Compile Include="Models\Database\Notification.cs" />
     <Compile Include="Models\Database\Post.cs" />
-    <Compile Include="Models\Database\TagPost.cs" />
     <Compile Include="Models\Database\PostTag.cs" />
     <Compile Include="Models\Database\PrivateMessage.cs" />
     <Compile Include="Models\Database\Tag.cs" />
@@ -90,6 +101,7 @@
     <Compile Include="Repositories\ICategoryRepository.cs" />
     <Compile Include="Repositories\ICommentRepository.cs" />
     <Compile Include="Repositories\IConfirmationCodeRepository.cs" />
+    <Compile Include="Repositories\IFollowRepository.cs" />
     <Compile Include="Repositories\ILoginRepository.cs" />
     <Compile Include="Repositories\INotificationRepository.cs" />
     <Compile Include="Repositories\IPostRepository.cs" />

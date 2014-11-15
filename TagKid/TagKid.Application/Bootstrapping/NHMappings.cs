@@ -3,8 +3,6 @@ using TagKid.Core.Models.Database;
 
 namespace TagKid.Application.Bootstrapping
 {
-    #region Tables
-
     public class UserMap : TagaClassMap<User>
     {
     }
@@ -18,6 +16,10 @@ namespace TagKid.Application.Bootstrapping
     }
 
     public class PostMap : TagaClassMap<Post>
+    {
+    }
+
+    public class PostLikeMap : TagaClassMap<PostLike>
     {
     }
 
@@ -53,5 +55,11 @@ namespace TagKid.Application.Bootstrapping
     {
     }
 
-    #endregion
+    public class FollowUserMap : TagaClassMap<FollowUser>
+    {
+    }
+
+    public class FollowCategoryMap : TagaClassMap<FollowCategory>
+    {
+    }
 }

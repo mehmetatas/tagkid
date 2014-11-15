@@ -51,7 +51,6 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
                 .Map<PostTag>(pt => pt.PostId, pt => pt.TagId)
                 .Map<PrivateMessage>()
                 .Map<Tag>()
-                .Map<TagPost>(tp => tp.TagId, tp => tp.PostId)
                 .Map<Token>()
                 .Map<User>().ToTable("[User]");
                 

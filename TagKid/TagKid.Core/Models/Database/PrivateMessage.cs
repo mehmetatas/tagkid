@@ -10,8 +10,5 @@ namespace TagKid.Core.Models.Database
         public virtual DateTime MessageDate { get; set; }
         public virtual string Message { get; set; }
         public virtual PrivateMessageStatus Status { get; set; }
-
-        public virtual User ToUser { get; set; }
-        public virtual User FromUser { get; set; }
     }
 }
