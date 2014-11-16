@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Repository
 {
@@ -13,11 +13,17 @@ namespace TagKid.Repository
         {
             _repository = repository;
         }
-        
-        public Category[] GetCategoriesOfUser(long userId)
+
+        public int GetCategoryCount(long userId)
         {
             return _repository.Select<Category>()
-                .Where(c => c.UserId == userId)
+                .Count(c => c.UserId == userId && c.Status == CategoryStatus.Active);
+        }
+        
+        public Category[] GetCategories(long userId)
+        {
+            return _repository.Select<Category>()
+                .Where(c => c.UserId == userId && c.Status == CategoryStatus.Active)
                 .ToArray();
         }
 

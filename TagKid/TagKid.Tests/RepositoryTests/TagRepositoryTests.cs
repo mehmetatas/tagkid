@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Taga.Core.Repository;
 using TagKid.Core.Database;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Tests.RepositoryTests
 {

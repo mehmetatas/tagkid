@@ -15,7 +15,8 @@ namespace TagKid.Application.Bootstrapping
                 new DatabaseBootstrapper(),
                 new RepositoryBootstrapper(),
                 new ServiceBootstrapper(),
-                new MappingBootstrapper());
+                new MappingBootstrapper(),
+                new RestBootstrapper());
         }
 
         public static void Bootstrap(params IBootstrapper[] bootstrappers)

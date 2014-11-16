@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Repository
 {

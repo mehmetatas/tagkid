@@ -7,13 +7,21 @@
 
         public override bool Equals(object obj)
         {
-            var other = obj as TagPost;
-            return other != null && other.TagId == TagId && other.PostId == PostId;
+            var that = obj as TagPost;
+
+            if (that == null)
+            {
+                return false;
+            }
+
+            return that.PostId == PostId &&
+                   that.TagId == TagId;
         }
 
         public override int GetHashCode()
         {
-            return TagId.GetHashCode() + PostId.GetHashCode() + 1;
+            return PostId.GetHashCode() * 7907 +
+                   TagId.GetHashCode() * 7919;
         }
     }
 }

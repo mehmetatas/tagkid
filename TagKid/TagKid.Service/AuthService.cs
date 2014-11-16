@@ -4,8 +4,8 @@ using TagKid.Core.Database;
 using TagKid.Core.Exceptions;
 using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
-using TagKid.Core.Services;
+using TagKid.Core.Repository;
+using TagKid.Core.Service;
 using TagKid.Core.Utils;
 using TagKid.Core.Validation;
 
@@ -145,7 +145,7 @@ namespace TagKid.Service
                 var loginRepo = db.GetRepository<ILoginRepository>();
                 var tokenRepo = db.GetRepository<ITokenRepository>();
 
-                var authToken = tokenRepo.GetById(tokenId);
+                var authToken = tokenRepo.Get(tokenId);
 
                 login.UserId = authToken == null ? 0 : authToken.UserId;
 
@@ -230,11 +230,11 @@ namespace TagKid.Service
                 // Validate tokens
                 var authToken = ValidateToken(
                     request.Context.AuthToken,
-                    tokenRepo.GetById(request.Context.AuthToken.Id));
+                    tokenRepo.Get(request.Context.AuthToken.Id));
 
                 var requestToken = ValidateToken(
                     request.Context.RequestToken,
-                    tokenRepo.GetById(request.Context.RequestToken.Id));
+                    tokenRepo.Get(request.Context.RequestToken.Id));
 
                 // Validate user
                 var user = userRepo.GetById(authToken.UserId);

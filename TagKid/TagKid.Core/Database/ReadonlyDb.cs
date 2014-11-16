@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Core.Database
 {

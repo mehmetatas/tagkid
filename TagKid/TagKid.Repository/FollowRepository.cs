@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Repository
 {
@@ -40,16 +40,16 @@ namespace TagKid.Repository
                 .Count(fc => fc.CategoryId == catId);
         }
 
-        public int GetFollowerCountOfUser(long userId)
+        public int GetFollowerCountOfUser(long followedUserId)
         {
             return _repository.Select<FollowUser>()
-                .Count(fu => fu.UserId2 == userId);
+                .Count(fu => fu.FollowedUserId == followedUserId);
         }
 
-        public int GetFollowingCountOfUser(long userId)
+        public int GetFollowedCountOfUser(long followerUserId)
         {
             return _repository.Select<FollowUser>()
-                .Count(fu => fu.UserId1 == userId);
+                .Count(fu => fu.FollowerUserId == followerUserId);
         }
 
         public IPage<User> GetFollowersOfCategory(long catId, int pageIndex, int pageSize)
@@ -67,30 +67,30 @@ namespace TagKid.Repository
             return query.Page(pageIndex, pageSize);
         }
 
-        public IPage<User> GetFollowersOfUser(long userId, int pageIndex, int pageSize)
+        public IPage<User> GetFollowersOfUser(long followedUserId, int pageIndex, int pageSize)
         {
             var users = _repository.Select<User>();
             var followUsers = _repository.Select<FollowUser>();
 
             var query = (from user in users
                          from followUser in followUsers
-                         where followUser.UserId2 == userId &&
-                               followUser.UserId1 == user.Id
+                         where followUser.FollowedUserId == followedUserId &&
+                               followUser.FollowerUserId == user.Id
                          orderby user.Username
                          select user);
 
             return query.Page(pageIndex, pageSize);
         }
 
-        public IPage<User> GetFollowingsOfUser(long userId, int pageIndex, int pageSize)
+        public IPage<User> GetFollowedOfUser(long followerUserId, int pageIndex, int pageSize)
         {
             var users = _repository.Select<User>();
             var followUsers = _repository.Select<FollowUser>();
 
             var query = (from user in users
                          from followUser in followUsers
-                         where followUser.UserId1 == userId &&
-                               followUser.UserId2 == user.Id
+                         where followUser.FollowerUserId == followerUserId &&
+                               followUser.FollowedUserId == user.Id
                          orderby user.Username
                          select user);
 

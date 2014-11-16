@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Repository
 {
@@ -12,6 +12,21 @@ namespace TagKid.Repository
         public NotificationRepository(IRepository repository)
         {
             _repository = repository;
+        }
+
+        public Notification GetNotification(long notificationId)
+        {
+            var notif = _repository.Select<Notification>()
+                .FirstOrDefault(n => n.Id == notificationId);
+
+            if (notif == null)
+            {
+                return null;
+            }
+
+            SetFromUsers(notif);
+
+            return notif;
         }
 
         public int GetUnreadNotificationCount(long toUserId)
@@ -41,7 +56,7 @@ namespace TagKid.Repository
             _repository.Save(notification);
         }
 
-        private void SetFromUsers(Notification[] notifications)
+        private void SetFromUsers(params Notification[] notifications)
         {
             if (notifications.Length == 0)
             {

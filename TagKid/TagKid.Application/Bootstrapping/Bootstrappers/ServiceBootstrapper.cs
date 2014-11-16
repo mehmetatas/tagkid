@@ -1,5 +1,5 @@
 ﻿using Taga.Core.IoC;
-using TagKid.Core.Services;
+using TagKid.Core.Service;
 using TagKid.Service;
 
 namespace TagKid.Application.Bootstrapping.Bootstrappers

@@ -14,7 +14,7 @@ namespace TagKid.Core.Models
         public Token RequestToken { get; set; }
         public Token NewRequestToken { get; set; }
 
-        public RequestContext Current
+        public static RequestContext Current
         {
             get
             {

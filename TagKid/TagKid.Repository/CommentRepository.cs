@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Repository
 {
@@ -12,6 +12,12 @@ namespace TagKid.Repository
         public CommentRepository(IRepository repository)
         {
             _repository = repository;
+        }
+
+        public Comment Get(long commentId)
+        {
+            return _repository.Select<Comment>()
+              .FirstOrDefault(c => c.Id == commentId && c.Status == CommentStatus.Active);
         }
 
         public int GetCommentCount(long postId)

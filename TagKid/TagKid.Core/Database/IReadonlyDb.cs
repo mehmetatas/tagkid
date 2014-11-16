@@ -1,5 +1,5 @@
 using System;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Core.Database
 {

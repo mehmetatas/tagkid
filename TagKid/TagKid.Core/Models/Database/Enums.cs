@@ -51,7 +51,7 @@
     {
         Published,
         Draft,
-        Unpublished
+        Deleted,
     }
 
     public enum PostType

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Repository
 {
@@ -14,10 +14,17 @@ namespace TagKid.Repository
             _repository = repository;
         }
 
-        public Token GetById(long tokenId)
+        public Token Get(long tokenId)
         {
             return _repository.Select<Token>()
                 .FirstOrDefault(t => t.Id == tokenId);
+        }
+
+        public Token GetActiveAuthToken(long userId)
+        {
+            return _repository.Select<Token>()
+                .Where(t => t.UserId == userId)
+                .FirstOrDefault();
         }
 
         public void Save(Token token)

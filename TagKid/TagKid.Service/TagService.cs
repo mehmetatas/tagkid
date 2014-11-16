@@ -3,8 +3,8 @@ using Taga.Core.DynamicProxy;
 using TagKid.Core.Database;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Models.DTO.Messages;
-using TagKid.Core.Repositories;
-using TagKid.Core.Services;
+using TagKid.Core.Repository;
+using TagKid.Core.Service;
 using TagKid.Core.Utils;
 
 namespace TagKid.Service

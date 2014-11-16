@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TagKid.Core.Database;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Models.Filter;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 using TagKid.Core.Utils;
 
 namespace TagKid.Tests.RepositoryTests
@@ -86,7 +86,7 @@ namespace TagKid.Tests.RepositoryTests
                         QuoteAuthor = "Quote Author",
                         QuoteText = "Quote Text",
                         Status =
-                            i % 5 != 1 ? PostStatus.Published : (i % 2 == 0 ? PostStatus.Draft : PostStatus.Unpublished),
+                            i % 5 != 1 ? PostStatus.Published : (i % 2 == 0 ? PostStatus.Draft : PostStatus.Deleted),
                         Tags =
                             new List<Tag>
                             {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TagKid.Core.Database;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Tests.RepositoryTests
 {
@@ -126,7 +126,7 @@ namespace TagKid.Tests.RepositoryTests
             using (var db = Db.Readonly())
             {
                 var repo = db.GetRepository<ICategoryRepository>();
-                cats = repo.GetCategoriesOfUser(1);
+                cats = repo.GetCategories(1);
             }
 
             Assert.AreEqual(5, cats.Length);

@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TagKid.Core.Database;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 using TagKid.Core.Utils;
 
 namespace TagKid.Tests.RepositoryTests

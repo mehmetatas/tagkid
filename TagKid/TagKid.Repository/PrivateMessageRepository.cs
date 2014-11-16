@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Repositories;
+using TagKid.Core.Repository;
 
 namespace TagKid.Repository
 {
@@ -12,6 +12,12 @@ namespace TagKid.Repository
         public PrivateMessageRepository(IRepository repository)
         {
             _repository = repository;
+        }
+
+        public PrivateMessage GetMessage(long messageId)
+        {
+            return _repository.Select<PrivateMessage>()
+                .FirstOrDefault(pm => pm.Id == messageId);
         }
 
         public PrivateMessage[] GetMessages(long loggedInUserId, long otherUserId, int maxCount, long maxMessageId = 0)

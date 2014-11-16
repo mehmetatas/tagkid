@@ -39,7 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">
+      <Project>{57206F02-5147-464F-93D1-F7705C2D9932}</Project>
+      <Name>Taga.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TagKid.Core\TagKid.Core.csproj">
+      <Project>{A7A98564-FB0E-421B-A011-0D13FD8A20F9}</Project>
+      <Name>TagKid.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

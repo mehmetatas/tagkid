@@ -52,6 +52,7 @@
     <Compile Include="Bootstrapping\Bootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\DatabaseBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\MappingBootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrappers\RestBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\TagKidHybridDbProvider.cs" />
     <Compile Include="Bootstrapping\NHMappings.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\RepositoryBootstrapper.cs" />
