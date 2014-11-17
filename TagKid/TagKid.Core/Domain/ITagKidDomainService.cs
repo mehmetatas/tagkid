@@ -1,8 +1,7 @@
 ﻿
 namespace TagKid.Core.Domain
 {
-    public interface IDomainPost
+    public interface ITagKidDomainService
     {
-
     }
 }

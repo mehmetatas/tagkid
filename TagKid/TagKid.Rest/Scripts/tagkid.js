@@ -5,7 +5,7 @@
             if (token) {
                 $.cookie('tagkid.authToken.token', token, { path: '/' });
             } else {
-                return $.cookie('tagkid.authToken.token', { path: '/' });
+                return $.cookie('tagkid.authToken.token');
             }
             return null;
         },
@@ -13,7 +13,7 @@
             if (id) {
                 $.cookie('tagkid.authToken.id', id, { path: '/' });
             } else {
-                return $.cookie('tagkid.authToken.id', { path: '/' });
+                return $.cookie('tagkid.authToken.id');
             }
             return null;
         },
@@ -26,8 +26,8 @@
                 dataType: 'json',
                 type: type,
                 headers: {
-                    'auth-token': tagkid.cookie.authToken(),
-                    'auth-token-id': tagkid.cookie.authTokenId(),
+                    'tagkid-auth-token': tagkid.cookie.authToken(),
+                    'tagkid-auth-token-id': tagkid.cookie.authTokenId(),
                 },
                 success: function(response, textStatus, jqXhr) {
                     onSuccess();

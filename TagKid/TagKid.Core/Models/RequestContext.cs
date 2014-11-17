@@ -10,9 +10,6 @@ namespace TagKid.Core.Models
         }
 
         public User User { get; set; }
-        public Token AuthToken { get; set; }
-        public Token RequestToken { get; set; }
-        public Token NewRequestToken { get; set; }
 
         public static RequestContext Current
         {

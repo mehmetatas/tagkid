@@ -20,16 +20,14 @@ namespace TagKid.Repository
                 .FirstOrDefault(t => t.Id == tokenId);
         }
 
-        public Token GetActiveAuthToken(long userId)
-        {
-            return _repository.Select<Token>()
-                .Where(t => t.UserId == userId)
-                .FirstOrDefault();
-        }
-
         public void Save(Token token)
         {
             _repository.Save(token);
+        }
+
+        public void Delete(Token token)
+        {
+            _repository.Delete(token);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public abstract class Request
     {
-        public RequestContext Context { get; set; }
+        
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
+using TagKid.Core.Exceptions;
 
 namespace TagKid.Core.Validation
 {
@@ -13,6 +14,7 @@ namespace TagKid.Core.Validation
         {
             var validatorTypes =
                 typeof (Validator).Assembly.GetTypes().Where(t => t.GetInterfaces().Contains(typeof (IValidator)));
+
             Validators = validatorTypes.ToDictionary(
                 t => t.BaseType.GetGenericArguments()[0],
                 t => (IValidator) Activator.CreateInstance(t));
@@ -25,7 +27,9 @@ namespace TagKid.Core.Validation
             if (res.IsValid)
                 return;
 
-            throw new ValidationException(String.Join(Environment.NewLine, res.Errors.Select(e => e.ErrorMessage)));
+            E.T(ErrorCodes.Validation_PasswordTooShort);
+
+            //throw new ValidationException(String.Join(Environment.NewLine, res.Errors.Select(e => e.ErrorMessage)));
         }
     }
 }

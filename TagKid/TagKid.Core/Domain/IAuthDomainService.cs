@@ -1,9 +1,10 @@
-﻿
+﻿using TagKid.Core.Models.Database;
+
 namespace TagKid.Core.Domain
 {
-    public interface IAuthDomainService
+    public interface IAuthDomainService : ITagKidDomainService
     {
-        void SignUpWithEmail(string username, string password, string email, string fullname);
+        void SignUpWithEmail(string email, string username, string password, string fullname);
 
         void SignUpWithFacebook(string facebookId, string facebookAuthToken);
 
@@ -19,9 +20,9 @@ namespace TagKid.Core.Domain
 
         void ActivateAccount(long tokenId, string guid);
 
-        void ValidateAuthToken();
+        User ValidateAuthToken(long tokenId, string token);
 
-        void ValidateRequestToken();
+        void ValidateRequestToken(long tokenId, string token);
 
         void IssueNewRequestToken();
     }

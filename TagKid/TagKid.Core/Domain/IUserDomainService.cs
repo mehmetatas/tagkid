@@ -4,7 +4,7 @@ using TagKid.Core.Models.Domain;
 
 namespace TagKid.Core.Domain
 {
-    public interface IUserDomainService
+    public interface IUserDomainService : ITagKidDomainService
     {
         void DeactivateAccount();
 

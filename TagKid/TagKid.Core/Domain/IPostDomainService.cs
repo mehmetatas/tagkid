@@ -4,7 +4,7 @@ using TagKid.Core.Models.Domain;
 
 namespace TagKid.Core.Domain
 {
-    public interface IPostDomainService
+    public interface IPostDomainService : ITagKidDomainService
     {
         PostProxy Get(long postId);
 

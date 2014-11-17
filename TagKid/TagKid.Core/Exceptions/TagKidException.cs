@@ -1,17 +1,20 @@
-﻿using System;
+﻿using Taga.Core.Exceptions;
 
 namespace TagKid.Core.Exceptions
 {
-    public abstract class TagKidException : Exception
+    public class TagKidException : TagaAppException
     {
-        protected TagKidException(string message, params object[] args)
-            : this(null, message, args)
+        public TagKidException(int errorCode, string message = "", params object[] args)
+            : base(message, args)
         {
+            ErrorCode = errorCode;
         }
 
-        protected TagKidException(Exception cause, string message, params object[] args)
-            : base(String.Format(message, args), cause)
+        public int ErrorCode { get; private set; }
+
+        public string UserMessage
         {
+            get { return ErrorMessages.Get(ErrorCode); }
         }
     }
 }

@@ -13,12 +13,10 @@
         $(function () {
             $('#signup').on('click', function () {
                 tagkid.authService.signup({
-                    User: {
-                        Username: 'username',
-                        Email: 'mail@mail.com',
-                        Password: 'pwd-1234',
-                        FacebookId: 'facebook-id'
-                    }
+                    Username: 'username',
+                    Email: 'mail@mail.com',
+                    Password: 'pwd-1234',
+                    Fullname: 'full-name'
                 });
             });
         });

@@ -6,8 +6,8 @@ namespace TagKid.Core.Repository
     {
         Token Get(long tokenId);
 
-        Token GetActiveAuthToken(long userId);
-
         void Save(Token token);
+
+        void Delete(Token token);
     }
 }

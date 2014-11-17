@@ -18,6 +18,8 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
             prov.Register<ITagRepository, TagRepository>();
             prov.Register<ITokenRepository, TokenRepository>();
             prov.Register<IUserRepository, UserRepository>();
+
+            prov.Register<IRepositoryProvider, RepositoryProvider>();
         }
     }
 }
