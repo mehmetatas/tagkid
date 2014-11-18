@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using Taga.Core.Logging;
@@ -7,45 +8,75 @@ namespace TagKid.Core.Logging
 {
     public class DbLogger : ILogger
     {
-        private readonly IDbCommand _cmd;
-
-        public DbLogger()
-        {
-            var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["tagkid"].ConnectionString);
-            conn.Open();
-            _cmd = conn.CreateCommand();
-            _cmd.CommandText = "INSERT INTO Log (Date, [Level], ErrorCode, Message, [User], Details) VALUES (@d, @l, @e, @m, @u, @de)";
-        }
+        private IDbCommand _cmd;
+        private IDbConnection _conn;
 
         public void Log(ILog log)
         {
-            _cmd.Parameters.Clear();
+            EnsureCommand();
 
-            var param = _cmd.CreateParameter();
-            param.ParameterName = "d";
-            param.Value = log.Date;
-
-            param = _cmd.CreateParameter();
-            param.ParameterName = "l";
-            param.Value = (int)log.Level;
-
-            param = _cmd.CreateParameter();
-            param.ParameterName = "e";
-            param.Value = log.ErrorCode;
-
-            param = _cmd.CreateParameter();
-            param.ParameterName = "m";
-            param.Value = log.Message;
-
-            param = _cmd.CreateParameter();
-            param.ParameterName = "u";
-            param.Value = log.User;
-
-            param = _cmd.CreateParameter();
-            param.ParameterName = "de";
-            param.Value = log.Details;
+            AddParam("d", log.Date);
+            AddParam("l", log.Level);
+            AddParam("e", log.ErrorCode);
+            AddParam("m", log.Message);
+            AddParam("u", log.User);
+            AddParam("de", log.Details);
 
             _cmd.ExecuteNonQuery();
+        }
+
+        private void EnsureCommand()
+        {
+            if (_cmd == null || _conn == null || _conn.State != ConnectionState.Open)
+            {
+                EnsureConnection();
+                CreateCommand();
+            }
+
+            _cmd.Parameters.Clear();
+        }
+
+        private void EnsureConnection()
+        {
+            if (_conn != null)
+            {
+                try
+                {
+                    if (_conn.State != ConnectionState.Closed)
+                    {
+                        _conn.Close();   
+                    }
+                    _conn.Dispose();
+                }
+                catch (Exception exception)
+                {
+                    L.E("Unable to close DbLogger connection", exception);
+                }
+            }
+
+            try
+            {
+                _conn = new SqlConnection(ConfigurationManager.ConnectionStrings["tagkid"].ConnectionString);
+                _conn.Open();
+            }
+            catch (Exception exception)
+            {
+                L.E("Unable to open DbLogger connection", exception);
+            }
+        }
+
+        private void CreateCommand()
+        {
+            _cmd = _conn.CreateCommand();
+            _cmd.CommandText = "INSERT INTO Log (Date, [Level], ErrorCode, Message, [User], Details) VALUES (@d, @l, @e, @m, @u, @de)";
+        }
+
+        private void AddParam(string name, object value)
+        {
+            var param = _cmd.CreateParameter();
+            param.ParameterName = name;
+            param.Value = value ?? DBNull.Value;
+            _cmd.Parameters.Add(param);
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using Taga.Core.Logging;
 using Taga.Core.Rest;
-using TagKid.Core.Database;
 using TagKid.Core.Domain;
 using TagKid.Core.Exceptions;
+using TagKid.Core.Logging;
 using TagKid.Core.Models;
 using TagKid.Core.Models.DTO.Messages;
 
@@ -14,7 +14,6 @@ namespace TagKid.Core.Service.Interceptors
     public class ActionInterceptor : IActionInterceptor
     {
         private readonly IDomainServiceProvider _prov;
-        private ITransactionalDb _db;
 
         public ActionInterceptor(IDomainServiceProvider prov)
         {
@@ -23,9 +22,6 @@ namespace TagKid.Core.Service.Interceptors
 
         public void BeforeCall(IRequestContext ctx, MethodInfo actionMethod, object[] parameters)
         {
-            _db = Db.Transactional();
-            _db.BeginTransaction();
-
             if (NoAuthMethods.Contains(actionMethod))
             {
                 return;
@@ -37,23 +33,24 @@ namespace TagKid.Core.Service.Interceptors
             var authTokenId = Convert.ToInt64(ctx.GetHeader("tagkid-auth-token-id"));
 
             RequestContext.Current.User = authDomainService.ValidateAuthToken(authTokenId, authToken);
-
-            _db.Save();
         }
 
         public void AfterCall(IRequestContext ctx, MethodInfo actionMethod, object[] parameters, object returnValue)
         {
-            _db.Save(true);
+            FlushLogs();
         }
 
         public object OnException(IRequestContext ctx, MethodInfo actionMethod, object[] parameters, Exception exception)
         {
+            L.E(String.Format("Service call ended with exception. Service: {0}, Method: {1}",
+                actionMethod.DeclaringType.Name, actionMethod.Name), exception);
+
+            FlushLogs();
+
             var tkException = exception as TagKidException;
-            
+
             if (tkException == null)
             {
-                _db.RollbackTransaction();
-
                 return new Response
                 {
                     ResponseCode = -1,
@@ -61,15 +58,16 @@ namespace TagKid.Core.Service.Interceptors
                 };
             }
 
-            _db.Save(true);
-
-            LogScope.Current.Flush(LogLevel.Debug, LogLevel.Warning);
-
             return new Response
             {
                 ResponseCode = tkException.ErrorCode,
                 ResponseMessage = tkException.UserMessage
             };
+        }
+
+        private static void FlushLogs()
+        {
+            L.Flush(LogLevel.Debug, LogLevel.Warning);
         }
 
         private static readonly HashSet<MethodInfo> NoAuthMethods = new HashSet<MethodInfo>();

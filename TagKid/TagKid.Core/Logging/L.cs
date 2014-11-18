@@ -19,14 +19,26 @@ namespace TagKid.Core.Logging
             Log(LogLevel.Info, message, details);
         }
 
-        public static void W(string message, string details = null, Exception ex = null)
+        public static void W(string message, Exception ex = null, string details = null)
         {
             Log(LogLevel.Warning, message, details, ex);
         }
 
-        public static void E(string message, string details = null, Exception ex = null)
+        public static void E(string message, Exception ex = null, string details = null)
         {
             Log(LogLevel.Error, message, details, ex);
+        }
+
+        public static void Flush(LogLevel minLogLevel, LogLevel treshhold)
+        {
+            try
+            {
+                LogScope.Current.Flush(minLogLevel, treshhold);
+            }
+            catch
+            {
+                
+            }
         }
 
         private static void Log(LogLevel level, string message, string details, Exception ex = null)
@@ -42,9 +54,10 @@ namespace TagKid.Core.Logging
             if (ex != null)
             {
                 log.Details += "|" + ex.GetMessages() + "|" + ex.StackTrace;
-                if (ex is TagKidException)
+                var tagKidException = ex as TagKidException;
+                if (tagKidException != null)
                 {
-                    log.ErrorCode = ((TagKidException) ex).ErrorCode.ToString();
+                    log.ErrorCode = tagKidException.ErrorCode.ToString();
                 }
             }
 

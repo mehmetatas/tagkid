@@ -8,7 +8,9 @@ namespace TagKid.Core.Database
         public bool Ignore(PropertyInfo propertyInfo)
         {
             var propType = propertyInfo.PropertyType;
-            return propType.IsClass && propType != typeof (string);
+            return propType.IsClass &&
+                   propType != typeof(string) &&
+                   propType != typeof(byte[]);
         }
     }
 }

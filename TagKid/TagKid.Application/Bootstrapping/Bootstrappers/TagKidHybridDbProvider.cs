@@ -1,7 +1,5 @@
 using System;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using Taga.Core.Repository.Hybrid;
 
 namespace TagKid.Application.Bootstrapping.Bootstrappers
@@ -20,11 +18,6 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
                 cmd.CommandText += "; SELECT SCOPE_IDENTITY();";
             }
             return cmd.ExecuteScalar();
-        }
-
-        public IDbConnection CreateConnection()
-        {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["tagkid"].ConnectionString);
         }
     }
 }

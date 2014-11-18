@@ -30,7 +30,7 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
 
             prov.RegisterSingleton<INHSpCallBuilder>(new SqlServerSpCallBuilder());
             prov.RegisterSingleton<IHybridDbProvider>(new TagKidHybridDbProvider());
-            prov.Register<IHybridQueryProvider, NHHybridQueryProvider>();
+            prov.Register<IHybridAdapter, NHHybridAdapter>();
             prov.Register<IUnitOfWork, HybridUnitOfWork>();
             prov.Register<ITransactionalUnitOfWork, HybridUnitOfWork>();
             prov.Register<IRepository, HybridRepository>();
