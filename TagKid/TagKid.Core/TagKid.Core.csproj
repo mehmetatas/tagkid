@@ -56,11 +56,9 @@
     <Compile Include="Database\ReadWriteDb.cs" />
     <Compile Include="Database\TagKidPropertyFilter.cs" />
     <Compile Include="Database\TransactionalReadWriteDb.cs" />
-    <Compile Include="Domain\DomainServiceProvider.cs" />
     <Compile Include="Domain\IAuthDomainService.cs" />
     <Compile Include="Domain\IPostDomainService.cs" />
     <Compile Include="Domain\ITagKidDomainService.cs" />
-    <Compile Include="Domain\IDomainServiceProvider.cs" />
     <Compile Include="Domain\IUserDomainService.cs" />
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Exceptions\Error.cs" />

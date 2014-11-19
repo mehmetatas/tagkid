@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using Taga.Core.IoC;
 using Taga.Core.Logging;
 using Taga.Core.Rest;
 using TagKid.Core.Domain;
@@ -10,27 +11,27 @@ using TagKid.Core.Logging;
 using TagKid.Core.Models;
 using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Validation;
+using IServiceProvider = Taga.Core.IoC.IServiceProvider;
 
 namespace TagKid.Core.Service.Interceptors
 {
     public class ActionInterceptor : IActionInterceptor
     {
-        private readonly IDomainServiceProvider _prov;
+        private readonly IServiceProvider _prov;
 
-        public ActionInterceptor(IDomainServiceProvider prov)
+        public ActionInterceptor()
         {
-            _prov = prov;
+            _prov = ServiceProvider.Provider;
         }
 
         public void BeforeCall(IRequestContext ctx, MethodInfo actionMethod, object[] parameters)
         {
             if (!NoAuthMethods.Contains(actionMethod))
             {
-                var authDomainService = _prov.GetService<IAuthDomainService>();
-
                 var authToken = ctx.GetHeader("tagkid-auth-token");
                 var authTokenId = Convert.ToInt64(ctx.GetHeader("tagkid-auth-token-id"));
 
+                var authDomainService = _prov.GetOrCreate<IAuthDomainService>();
                 RequestContext.Current.User = authDomainService.ValidateAuthToken(authTokenId, authToken);
             }
 

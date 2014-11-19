@@ -15,11 +15,6 @@ namespace TagKid.Core.Database
             UnitOfWork.BeginTransaction(isolationLevel);
         }
 
-        public void RollbackTransaction()
-        {
-            UnitOfWork.RollbackTransaction();
-        }
-
         public void Save(bool commit)
         {
             UnitOfWork.Save(commit);

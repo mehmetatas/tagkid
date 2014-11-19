@@ -17,7 +17,6 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
 
             prov.RegisterTransient<IAuthServiceInterceptor, AuthServiceInterceptor>();
 
-            prov.RegisterTransient<IDomainServiceProvider, DomainServiceProvider>();
             prov.RegisterTransient<IAuthDomainService, AuthDomainService>();
         }
     }
