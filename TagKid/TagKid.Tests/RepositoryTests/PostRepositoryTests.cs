@@ -97,7 +97,6 @@ namespace TagKid.Tests.RepositoryTests
                                 new Tag { Id = i + 5 }
                             },
                         Title = GetRandomTitle(),
-                        UpdateDate = DateTime.Now.TrimMillis(),
                         Type = (PostType)(i % 7)
                     });
                 }

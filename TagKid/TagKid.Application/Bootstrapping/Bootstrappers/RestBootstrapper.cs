@@ -18,7 +18,7 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
 
             cfg.Build();
 
-            prov.Register<IActionInterceptor, ActionInterceptor>();
+            prov.RegisterTransient<IActionInterceptor, ActionInterceptor>();
             prov.RegisterSingleton<IApiCallHandler>(new DefaultApiCallHandler());
         }
 

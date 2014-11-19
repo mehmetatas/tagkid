@@ -12,13 +12,13 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
     {
         public void Bootstrap(IServiceProvider prov)
         {
-            prov.Register(typeof(IAuthService), Proxy.TypeOf<AuthService>(typeof(IAuthServiceCallHandler)));
-            prov.Register<IPostService, PostService>();
+            prov.Register(typeof(IAuthService), Proxy.TypeOf<AuthService, IAuthServiceInterceptor>());
+            prov.RegisterTransient<IPostService, PostService>();
 
-            prov.Register<IAuthServiceCallHandler, AuthServiceCallHandler>();
+            prov.RegisterTransient<IAuthServiceInterceptor, AuthServiceInterceptor>();
 
-            prov.Register<IDomainServiceProvider, DomainServiceProvider>();
-            prov.Register<IAuthDomainService, AuthDomainService>();
+            prov.RegisterTransient<IDomainServiceProvider, DomainServiceProvider>();
+            prov.RegisterTransient<IAuthDomainService, AuthDomainService>();
         }
     }
 }

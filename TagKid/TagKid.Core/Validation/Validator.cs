@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentValidation;
 using TagKid.Core.Exceptions;
 
 namespace TagKid.Core.Validation
@@ -13,23 +13,34 @@ namespace TagKid.Core.Validation
         static Validator()
         {
             var validatorTypes =
-                typeof (Validator).Assembly.GetTypes().Where(t => t.GetInterfaces().Contains(typeof (IValidator)));
+                typeof (Validator).Assembly.GetTypes().Where(t => !t.IsAbstract && t.GetInterfaces().Contains(typeof (IValidator)));
 
             Validators = validatorTypes.ToDictionary(
                 t => t.BaseType.GetGenericArguments()[0],
                 t => (IValidator) Activator.CreateInstance(t));
         }
 
-        public static void Validate<T>(T instance)
+        public static void Validate(object request)
         {
-            var res = Validators[typeof (T)].Validate(instance);
+            var type = request.GetType();
+            if (!Validators.ContainsKey(type))
+            {
+                return;
+            }
+
+            var res = Validators[type].Validate(request);
 
             if (res.IsValid)
-                return;
+            {
+                return;   
+            }
 
-            E.T(ErrorCodes.Validation_PasswordTooShort);
+            if (res.Errors[0].CustomState != null)
+            {
+                E.x((Error)res.Errors[0].CustomState);
+            }
 
-            //throw new ValidationException(String.Join(Environment.NewLine, res.Errors.Select(e => e.ErrorMessage)));
+            E.x(Errors.Validation_GenericError);
         }
     }
 }

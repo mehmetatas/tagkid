@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 using Taga.Core.Logging;
 using Taga.Core.Rest;
@@ -8,6 +9,7 @@ using TagKid.Core.Exceptions;
 using TagKid.Core.Logging;
 using TagKid.Core.Models;
 using TagKid.Core.Models.DTO.Messages;
+using TagKid.Core.Validation;
 
 namespace TagKid.Core.Service.Interceptors
 {
@@ -22,17 +24,20 @@ namespace TagKid.Core.Service.Interceptors
 
         public void BeforeCall(IRequestContext ctx, MethodInfo actionMethod, object[] parameters)
         {
-            if (NoAuthMethods.Contains(actionMethod))
+            if (!NoAuthMethods.Contains(actionMethod))
             {
-                return;
+                var authDomainService = _prov.GetService<IAuthDomainService>();
+
+                var authToken = ctx.GetHeader("tagkid-auth-token");
+                var authTokenId = Convert.ToInt64(ctx.GetHeader("tagkid-auth-token-id"));
+
+                RequestContext.Current.User = authDomainService.ValidateAuthToken(authTokenId, authToken);
             }
 
-            var authDomainService = _prov.GetService<IAuthDomainService>();
-
-            var authToken = ctx.GetHeader("tagkid-auth-token");
-            var authTokenId = Convert.ToInt64(ctx.GetHeader("tagkid-auth-token-id"));
-
-            RequestContext.Current.User = authDomainService.ValidateAuthToken(authTokenId, authToken);
+            foreach (var parameter in parameters)
+            {
+                Validator.Validate(parameter);
+            }
         }
 
         public void AfterCall(IRequestContext ctx, MethodInfo actionMethod, object[] parameters, object returnValue)
@@ -42,7 +47,7 @@ namespace TagKid.Core.Service.Interceptors
 
         public object OnException(IRequestContext ctx, MethodInfo actionMethod, object[] parameters, Exception exception)
         {
-            L.E(String.Format("Service call ended with exception. Service: {0}, Method: {1}",
+            L.Err(String.Format("Service call ended with exception. Service: {0}, Method: {1}",
                 actionMethod.DeclaringType.Name, actionMethod.Name), exception);
 
             FlushLogs();
@@ -53,15 +58,15 @@ namespace TagKid.Core.Service.Interceptors
             {
                 return new Response
                 {
-                    ResponseCode = -1,
-                    ResponseMessage = "Unknown error has occured!"
+                    ResponseCode = Errors.Unknown.Code,
+                    ResponseMessage = Errors.Unknown.Message
                 };
             }
 
             return new Response
             {
-                ResponseCode = tkException.ErrorCode,
-                ResponseMessage = tkException.UserMessage
+                ResponseCode = tkException.Error.Code,
+                ResponseMessage = tkException.Error.Message
             };
         }
 
@@ -74,9 +79,19 @@ namespace TagKid.Core.Service.Interceptors
 
         static ActionInterceptor()
         {
-            var authServiceType = typeof(IAuthService);
+            new NoAuth<IAuthService>()
+                .Add(s => s.SignUpWithEmail(null))
+                .Add(s => s.SignUpWithEmail(null));
+        }
 
-            NoAuthMethods.Add(authServiceType.GetMethod("SignUpWithEmail"));
+        private class NoAuth<TService>
+        {
+            internal NoAuth<TService> Add(Expression<Action<TService>> expression)
+            {
+                var methodCall = (MethodCallExpression)expression.Body;
+                NoAuthMethods.Add(methodCall.Method);
+                return this;
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TagKid.Core.Models.Database
         public virtual string Code { get; set; }
         public virtual DateTime SendDate { get; set; }
         public virtual DateTime ExpireDate { get; set; }
-        public virtual DateTime ConfirmDate { get; set; }
+        public virtual DateTime? ConfirmDate { get; set; }
         public virtual ConfirmationReason Reason { get; set; }
         public virtual ConfirmationCodeStatus Status { get; set; }
     }

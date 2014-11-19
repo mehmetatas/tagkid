@@ -4,11 +4,11 @@ using Taga.Core.DynamicProxy;
 
 namespace TagKid.Core.Service.Interceptors
 {
-    public interface IAuthServiceCallHandler : ICallHandler
+    public interface IAuthServiceInterceptor : IMethodCallInterceptor
     {
     }
 
-    public class AuthServiceCallHandler : IAuthServiceCallHandler
+    public class AuthServiceInterceptor : IAuthServiceInterceptor
     {
         public object BeforeCall(object obj, MethodInfo mi, object[] args)
         {

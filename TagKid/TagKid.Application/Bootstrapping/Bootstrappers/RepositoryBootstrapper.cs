@@ -8,18 +8,16 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
     {
         public void Bootstrap(IServiceProvider prov)
         {
-            prov.Register<ICategoryRepository, CategoryRepository>();
-            prov.Register<ICommentRepository, CommentRepository>();
-            prov.Register<IConfirmationCodeRepository, ConfirmationCodeRepository>();
-            prov.Register<ILoginRepository, LoginRepository>();
-            prov.Register<INotificationRepository, NotificationRepository>();
-            prov.Register<IPostRepository, PostRepository>();
-            prov.Register<IPrivateMessageRepository, PrivateMessageRepository>();
-            prov.Register<ITagRepository, TagRepository>();
-            prov.Register<ITokenRepository, TokenRepository>();
-            prov.Register<IUserRepository, UserRepository>();
-
-            prov.Register<IRepositoryProvider, RepositoryProvider>();
+            prov.RegisterPerWebRequest<ICategoryRepository, CategoryRepository>();
+            prov.RegisterPerWebRequest<ICommentRepository, CommentRepository>();
+            prov.RegisterPerWebRequest<IConfirmationCodeRepository, ConfirmationCodeRepository>();
+            prov.RegisterPerWebRequest<ILoginRepository, LoginRepository>();
+            prov.RegisterPerWebRequest<INotificationRepository, NotificationRepository>();
+            prov.RegisterPerWebRequest<IPostRepository, PostRepository>();
+            prov.RegisterPerWebRequest<IPrivateMessageRepository, PrivateMessageRepository>();
+            prov.RegisterPerWebRequest<ITagRepository, TagRepository>();
+            prov.RegisterPerWebRequest<ITokenRepository, TokenRepository>();
+            prov.RegisterPerWebRequest<IUserRepository, UserRepository>();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TagKid.Tests.RepositoryTests
     [TestClass]
     public class UserRepositoryTests : BaseRepositoryTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("RepositoryTests")]
         public void Should_Create_User()
         {
             var user = new User
@@ -53,7 +53,8 @@ namespace TagKid.Tests.RepositoryTests
             Assert.AreEqual(user.Type, user2.Type);
             Assert.AreEqual(user.Username, user2.Username);
         }
-        [TestMethod]
+
+        [TestMethod, TestCategory("RepositoryTests")]
         public void Should_Update_User()
         {
             var joinDate = DateTime.Now.TrimMillis();
@@ -115,7 +116,7 @@ namespace TagKid.Tests.RepositoryTests
             Assert.AreEqual(user.Username + " Updated", user2.Username);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("RepositoryTests")]
         public void Should_Get_User_By_Email()
         {
             var user = new User
@@ -158,7 +159,7 @@ namespace TagKid.Tests.RepositoryTests
             Assert.AreEqual(user.Username, user2.Username);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("RepositoryTests")]
         public void Should_Get_User_By_Username()
         {
             var user = new User
@@ -201,7 +202,7 @@ namespace TagKid.Tests.RepositoryTests
             Assert.AreEqual(user.Username, user2.Username);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("RepositoryTests")]
         public void Should_Search_Users()
         {
             var user1 = new User

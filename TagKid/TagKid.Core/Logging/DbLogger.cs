@@ -50,7 +50,7 @@ namespace TagKid.Core.Logging
                 }
                 catch (Exception exception)
                 {
-                    L.E("Unable to close DbLogger connection", exception);
+                    L.Err("Unable to close DbLogger connection", exception);
                 }
             }
 
@@ -61,7 +61,7 @@ namespace TagKid.Core.Logging
             }
             catch (Exception exception)
             {
-                L.E("Unable to open DbLogger connection", exception);
+                L.Err("Unable to open DbLogger connection", exception);
             }
         }
 

@@ -1,6 +1,8 @@
-﻿namespace TagKid.Core.Repository
+﻿using TagKid.Core.Repository;
+
+namespace TagKid.Core.Database
 {
-    public interface IRepositoryProvider
+    public interface IDb
     {
         TRepository GetRepository<TRepository>() where TRepository : ITagKidRepository;
     }

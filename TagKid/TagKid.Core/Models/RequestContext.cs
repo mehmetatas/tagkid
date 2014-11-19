@@ -7,9 +7,11 @@ namespace TagKid.Core.Models
     {
         private RequestContext()
         {
+            Culture = "en-GB";
         }
 
         public User User { get; set; }
+        public string Culture { get; set; }
 
         public static RequestContext Current
         {

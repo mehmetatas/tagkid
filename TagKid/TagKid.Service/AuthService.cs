@@ -4,7 +4,6 @@ using TagKid.Core.Database;
 using TagKid.Core.Domain;
 using TagKid.Core.Models.DTO.Messages.Auth;
 using TagKid.Core.Service;
-using TagKid.Core.Validation;
 
 namespace TagKid.Service
 {
@@ -27,8 +26,6 @@ namespace TagKid.Service
 
         public virtual SignUpResponse SignUpWithEmail(SignUpWithEmailRequest request)
         {
-            Validator.Validate(request);
-
             using (var db = Db.Transactional())
             {
                 db.BeginTransaction();

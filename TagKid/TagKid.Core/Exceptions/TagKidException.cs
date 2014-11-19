@@ -4,17 +4,12 @@ namespace TagKid.Core.Exceptions
 {
     public class TagKidException : TagaAppException
     {
-        public TagKidException(int errorCode, string message = "", params object[] args)
-            : base(message, args)
+        public TagKidException(Error error, string message = null, params object[] args)
+            : base(message ?? error.Message, args)
         {
-            ErrorCode = errorCode;
+            Error = error;
         }
 
-        public int ErrorCode { get; private set; }
-
-        public string UserMessage
-        {
-            get { return ErrorMessages.Get(ErrorCode); }
-        }
+        public Error Error { get; private set; }
     }
 }

@@ -10,7 +10,7 @@ namespace TagKid.Tests.RepositoryTests
     [TestClass]
     public class TokenRepositoryTests : BaseRepositoryTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("RepositoryTests")]
         public void Should_Create_Token()
         {
             var token = new Token

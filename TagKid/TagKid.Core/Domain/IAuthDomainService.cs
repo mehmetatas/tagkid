@@ -21,9 +21,5 @@ namespace TagKid.Core.Domain
         void ActivateAccount(long tokenId, string guid);
 
         User ValidateAuthToken(long tokenId, string token);
-
-        void ValidateRequestToken(long tokenId, string token);
-
-        void IssueNewRequestToken();
     }
 }

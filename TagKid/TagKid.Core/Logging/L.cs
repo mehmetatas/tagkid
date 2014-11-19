@@ -9,22 +9,22 @@ namespace TagKid.Core.Logging
 {
     public static class L
     {
-        public static void D(string message, string details = null)
+        public static void Dbg(string message, string details = null)
         {
             Log(LogLevel.Debug, message, details);
         }
 
-        public static void I(string message, string details = null)
+        public static void Inf(string message, string details = null)
         {
             Log(LogLevel.Info, message, details);
         }
 
-        public static void W(string message, Exception ex = null, string details = null)
+        public static void Wrn(string message, Exception ex = null, string details = null)
         {
             Log(LogLevel.Warning, message, details, ex);
         }
 
-        public static void E(string message, Exception ex = null, string details = null)
+        public static void Err(string message, Exception ex = null, string details = null)
         {
             Log(LogLevel.Error, message, details, ex);
         }
@@ -57,7 +57,7 @@ namespace TagKid.Core.Logging
                 var tagKidException = ex as TagKidException;
                 if (tagKidException != null)
                 {
-                    log.ErrorCode = tagKidException.ErrorCode.ToString();
+                    log.ErrorCode = tagKidException.Error.Code.ToString();
                 }
             }
 

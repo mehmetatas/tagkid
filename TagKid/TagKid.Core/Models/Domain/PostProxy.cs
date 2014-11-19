@@ -45,13 +45,13 @@ namespace TagKid.Core.Models.Domain
             set { Post.CreateDate = value; }
         }
 
-        public DateTime PublishDate
+        public DateTime? PublishDate
         {
             get { return Post.PublishDate; }
             set { Post.PublishDate = value; }
         }
 
-        public DateTime UpdateDate
+        public DateTime? UpdateDate
         {
             get { return Post.UpdateDate; }
             set { Post.UpdateDate = value; }

@@ -29,11 +29,15 @@
                     'tagkid-auth-token': tagkid.cookie.authToken(),
                     'tagkid-auth-token-id': tagkid.cookie.authTokenId(),
                 },
-                success: function(response, textStatus, jqXhr) {
-                    onSuccess();
+                success: function (resp, textStatus, jqXhr) {
+                    if (resp.ResponseCode == 0) {
+                        onSuccess(resp);
+                    } else {
+                        alert(resp.ResponseMessage + ' [' + resp.ResponseCode + ']');
+                    }
                 },
                 error: function(jqXhr, textStatus, errorThrown) {
-                    onError();
+                    alert('Unknown error!');
                 }
             });
         }
@@ -41,7 +45,7 @@
     authService: {
         signup: function (signupRequest) {
             tagkid.client.ajax('POST', 'auth/signup', signupRequest,
-                function() {
+                function(resp) {
                      alert('success');
                 },
                 function() {

@@ -24,13 +24,7 @@ namespace TagKid.Core.Database
 
         public TRepository GetRepository<TRepository>() where TRepository : ITagKidRepository
         {
-            var type = typeof(TRepository);
-            if (_repositories.Contains(type))
-                return (TRepository)_repositories[type];
-
-            var repository = ServiceProvider.Provider.GetOrCreate<TRepository>();
-            _repositories.Add(type, repository);
-            return repository;
+            return ServiceProvider.Provider.GetOrCreate<TRepository>();
         }
     }
 }

@@ -28,12 +28,12 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
                 .Mappings(mappingConfig => mappingConfig.FluentMappings.AddFromAssemblyOf<UserMap>())
                 .BuildSessionFactory();
 
-            prov.RegisterSingleton<INHSpCallBuilder>(new SqlServerSpCallBuilder());
-            prov.RegisterSingleton<IHybridDbProvider>(new TagKidHybridDbProvider());
-            prov.Register<IHybridAdapter, NHHybridAdapter>();
-            prov.Register<IUnitOfWork, HybridUnitOfWork>();
-            prov.Register<ITransactionalUnitOfWork, HybridUnitOfWork>();
-            prov.Register<IRepository, HybridRepository>();
+            prov.RegisterSingleton<INHSpCallBuilder,SqlServerSpCallBuilder>();
+            prov.RegisterSingleton<IHybridDbProvider, TagKidHybridDbProvider>();
+            prov.RegisterPerWebRequest<IHybridAdapter, NHHybridAdapter>();
+            prov.RegisterPerWebRequest<IUnitOfWork, HybridUnitOfWork>();
+            prov.RegisterPerWebRequest<ITransactionalUnitOfWork, HybridUnitOfWork>();
+            prov.RegisterPerWebRequest<IRepository, HybridRepository>();
             prov.RegisterSingleton(sessionFactory);
         }
 

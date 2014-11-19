@@ -14,7 +14,7 @@ namespace TagKid.Core.Models.Domain
             RetaggedPost = Create(post);
         }
 
-        public virtual long RetaggedPostId
+        public virtual long? RetaggedPostId
         {
             get { return Post.RetaggedPostId; }
             set { Post.RetaggedPostId = value; }
