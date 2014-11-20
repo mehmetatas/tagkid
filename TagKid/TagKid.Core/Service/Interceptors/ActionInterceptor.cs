@@ -4,10 +4,12 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Taga.Core.IoC;
 using Taga.Core.Logging;
+using Taga.Core.Repository;
 using Taga.Core.Rest;
 using TagKid.Core.Domain;
 using TagKid.Core.Exceptions;
 using TagKid.Core.Logging;
+using TagKid.Core.Mailing;
 using TagKid.Core.Models;
 using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Validation;
@@ -17,19 +19,39 @@ namespace TagKid.Core.Service.Interceptors
 {
     public class ActionInterceptor : IActionInterceptor
     {
+        private const string AuthToken = "tagkid-auth-token";
+        private const string AuthTokenId = "tagkid-auth-token-id";
+
         private readonly IServiceProvider _prov;
+        private ITransactionalUnitOfWork _uow;
 
         public ActionInterceptor()
         {
             _prov = ServiceProvider.Provider;
         }
 
+        public IMailService MailService
+        {
+            get { return _prov.GetOrCreate<IMailService>(); }
+        }
+
+        public void Dispose()
+        {
+            if (_uow != null)
+            {
+                _uow.Dispose();
+            }
+        }
+
         public void BeforeCall(IRequestContext ctx, MethodInfo actionMethod, object[] parameters)
         {
+            _uow = _prov.GetOrCreate<ITransactionalUnitOfWork>();
+            _uow.BeginTransaction();
+
             if (!NoAuthMethods.Contains(actionMethod))
             {
-                var authToken = ctx.GetHeader("tagkid-auth-token");
-                var authTokenId = Convert.ToInt64(ctx.GetHeader("tagkid-auth-token-id"));
+                var authToken = ctx.GetHeader(AuthToken);
+                var authTokenId = Convert.ToInt64(ctx.GetHeader(AuthTokenId));
 
                 var authDomainService = _prov.GetOrCreate<IAuthDomainService>();
                 RequestContext.Current.User = authDomainService.ValidateAuthToken(authTokenId, authToken);
@@ -43,6 +65,17 @@ namespace TagKid.Core.Service.Interceptors
 
         public void AfterCall(IRequestContext ctx, MethodInfo actionMethod, object[] parameters, object returnValue)
         {
+            _uow.Save(true);
+
+            var token = RequestContext.Current.NewAuthToken;
+            if (token != null)
+            {
+                ctx.SetHeader(AuthToken, token.Guid);
+                ctx.SetHeader(AuthTokenId, token.Id.ToString());
+            }
+
+            MailService.SendMails();
+
             FlushLogs();
         }
 
@@ -64,6 +97,11 @@ namespace TagKid.Core.Service.Interceptors
                 };
             }
 
+            if (!ctx.RollbackOnError)
+            {
+                _uow.Save(true);
+            }
+
             return new Response
             {
                 ResponseCode = tkException.Error.Code,
@@ -82,7 +120,8 @@ namespace TagKid.Core.Service.Interceptors
         {
             new NoAuth<IAuthService>()
                 .Add(s => s.SignUpWithEmail(null))
-                .Add(s => s.SignUpWithEmail(null));
+                .Add(s => s.SignInWithPassword(null))
+                .Add(s => s.ActivateAccount(0, null));
         }
 
         private class NoAuth<TService>

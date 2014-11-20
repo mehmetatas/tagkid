@@ -29,5 +29,15 @@ namespace TagKid.Repository
         {
             _repository.Delete(token);
         }
+
+        public void DeleteTokensOfUser(long userId)
+        {
+            _repository.Delete<Token>(t => t.UserId, userId);
+        }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

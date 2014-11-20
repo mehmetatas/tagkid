@@ -41,5 +41,10 @@ namespace TagKid.Repository
         {
             _repository.Insert(privateMessage);
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

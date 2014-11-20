@@ -96,5 +96,10 @@ namespace TagKid.Repository
 
             return query.Page(pageIndex, pageSize);
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

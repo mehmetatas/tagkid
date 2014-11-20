@@ -7,16 +7,24 @@
     <script src="../Scripts/tagkid.js"></script>
 </head>
 <body>
-    <input type="button" id="signup" value="Sign Up" />
+    <input type="button" id="signUpWithEmail" value="Sign Up With Email" />
+    <input type="button" id="signInWithPassword" value="Sign In With Password" />
 
     <script type="text/javascript">
         $(function () {
-            $('#signup').on('click', function () {
-                tagkid.authService.signup({
+            $('#signUpWithEmail').on('click', function () {
+                tagkid.authService.signUpWithEmail({
                     Username: 'username',
                     Email: 'mail@mail.com',
                     Password: 'pwd-1234',
                     Fullname: 'full-name'
+                });
+            });
+
+            $('#signInWithPassword').on('click', function () {
+                tagkid.authService.signInWithPassword({
+                    emailOrUsername: 'username',
+                    Password: 'pwd-1234'
                 });
             });
         });

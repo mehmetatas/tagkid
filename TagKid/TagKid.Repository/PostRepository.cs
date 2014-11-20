@@ -305,5 +305,10 @@ namespace TagKid.Repository
                 currPost.Tags.Add(item.Tag);
             }
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

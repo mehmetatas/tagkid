@@ -44,5 +44,10 @@ namespace TagKid.Repository
                 .OrderBy(u => u.Username)
                 .Page(pageIndex, pageSize);
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

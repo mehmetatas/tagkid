@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentValidation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TagKid.Core.Exceptions;
 using TagKid.Core.Validation.Extensions;
 
 namespace TagKid.Tests.ValidationTests
@@ -17,7 +18,7 @@ namespace TagKid.Tests.ValidationTests
 
             Assert.IsFalse(valRes.IsValid);
             Assert.AreEqual(1, valRes.Errors.Count);
-            Assert.AreEqual(1, valRes.Errors[0].CustomState);
+            Assert.AreEqual(Errors.Unknown, valRes.Errors[0].CustomState);
         }
 
         [TestMethod, TestCategory("FluentValidation")]
@@ -65,8 +66,7 @@ namespace TagKid.Tests.ValidationTests
         public UserValidator1()
         {
             RuleFor(u => u.Username)
-                .TrimmedLength(4, 20)
-                .WithState(u => 1);
+                .TrimmedLength(4, 20, Errors.Unknown);
         }
     }
 

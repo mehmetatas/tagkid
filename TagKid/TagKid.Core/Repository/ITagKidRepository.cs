@@ -2,5 +2,6 @@
 {
     public interface ITagKidRepository
     {
+        void Flush();
     }
 }

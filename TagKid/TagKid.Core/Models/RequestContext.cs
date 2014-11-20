@@ -13,6 +13,8 @@ namespace TagKid.Core.Models
         public User User { get; set; }
         public string Culture { get; set; }
 
+        public Token NewAuthToken { get; set; }
+
         public static RequestContext Current
         {
             get

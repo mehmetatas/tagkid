@@ -9,5 +9,7 @@ namespace TagKid.Core.Repository
         void Save(Token token);
 
         void Delete(Token token);
+
+        void DeleteTokensOfUser(long userId);
     }
 }

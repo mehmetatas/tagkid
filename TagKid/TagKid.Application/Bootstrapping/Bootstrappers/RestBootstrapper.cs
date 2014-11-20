@@ -25,7 +25,9 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
         private void BuildAuthService(ControllerConfigurator cfg)
         {
             cfg.ControllerFor<IAuthService>("auth")
-                .ActionFor(s => s.SignUpWithEmail(default(SignUpWithEmailRequest)), "signup");
+                .ActionFor(s => s.SignUpWithEmail(default(SignUpWithEmailRequest)), "signUpWithEmail")
+                .ActionFor(s => s.SignInWithPassword(default(SignInWithPasswordRequest)), "signInWithPassword")
+                .ActionFor(s => s.ActivateAccount(default(long), default(string)), "activateAccount", HttpMethodType.Get).RollbackOnError(false);
         }
 
         private void BuildUserService(ControllerConfigurator cfg)

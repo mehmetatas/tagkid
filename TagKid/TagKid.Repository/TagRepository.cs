@@ -40,5 +40,10 @@ namespace TagKid.Repository
         {
             _repository.Save(tag);
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

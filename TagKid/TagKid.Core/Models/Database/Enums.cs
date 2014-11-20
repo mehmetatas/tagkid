@@ -81,7 +81,8 @@
     public enum ConfirmationCodeStatus
     {
         AwaitingConfirmation,
-        Cancelled,
+        Confirmed,
+        Failed,
         Expired
     }
 

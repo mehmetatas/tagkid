@@ -4,6 +4,10 @@ namespace TagKid.Core.Service
 {
     public interface IAuthService : ITagKidService
     {
-        SignUpResponse SignUpWithEmail(SignUpWithEmailRequest request);
+        SignUpWithEmailResponse SignUpWithEmail(SignUpWithEmailRequest request);
+
+        SignInWithPasswordResponse SignInWithPassword(SignInWithPasswordRequest request);
+
+        ActivateAccountResponse ActivateAccount(long ccid, string cc);
     }
 }

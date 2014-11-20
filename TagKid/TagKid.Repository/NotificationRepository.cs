@@ -73,5 +73,10 @@ namespace TagKid.Repository
                 notification.FromUser = users.First(u => u.Id == notification.FromUserId);
             }
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

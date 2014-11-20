@@ -1,55 +1,78 @@
 ﻿var tagkid = {
     apiUrl: 'http://localhost:53495/api/',
+    constants: {
+        apiVersion: 'tagkid-api-version',
+        authToken: 'tagkid-auth-token',
+        authTokenId: 'tagkid-auth-token-id'
+    },
     cookie: {
-        authToken: function (token) {
-            if (token) {
-                $.cookie('tagkid.authToken.token', token, { path: '/' });
-            } else {
-                return $.cookie('tagkid.authToken.token');
-            }
-            return null;
+        authToken: function () {
+            return $.cookie(tagkid.constants.authToken);
         },
-        authTokenId: function (id) {
-            if (id) {
-                $.cookie('tagkid.authToken.id', id, { path: '/' });
-            } else {
-                return $.cookie('tagkid.authToken.id');
-            }
-            return null;
+        authTokenId: function () {
+            return $.cookie(tagkid.constants.authTokenId);
         },
+        setAuthToken: function (jqXhr) {
+            var token = jqXhr.getResponseHeader(tagkid.constants.authToken);
+            var tokenId = jqXhr.getResponseHeader(tagkid.constants.authTokenId);
+
+            if (token && tokenId) {
+                $.cookie(tagkid.constants.authToken, token, { path: '/', expires: 15 });
+                $.cookie(tagkid.constants.authTokenId, tokenId, { path: '/', expires: 15 });
+            }
+        },
+        deleteAuthToken: function () {
+            $.removeCookie(tagkid.constants.authToken, { path: '/' });
+            $.removeCookie(tagkid.constants.authTokenId, { path: '/' });
+        }
     },
     client: {
         ajax: function (type, route, requestObj, onSuccess, onError) {
+            var headers = {};
+            headers[tagkid.constants.apiVersion] = 'v0';
+            headers[tagkid.constants.authToken] = tagkid.cookie.authToken();
+            headers[tagkid.constants.authTokenId] = tagkid.cookie.authTokenId();
+
             $.ajax(tagkid.apiUrl + route, {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(requestObj),
                 dataType: 'json',
                 type: type,
-                headers: {
-                    'tagkid-auth-token': tagkid.cookie.authToken(),
-                    'tagkid-auth-token-id': tagkid.cookie.authTokenId(),
-                },
+                headers: headers,
                 success: function (resp, textStatus, jqXhr) {
+                    tagkid.cookie.setAuthToken(jqXhr);
                     if (resp.ResponseCode == 0) {
                         onSuccess(resp);
                     } else {
-                        alert(resp.ResponseMessage + ' [' + resp.ResponseCode + ']');
+                        onError(resp, textStatus, jqXhr);
                     }
                 },
-                error: function(jqXhr, textStatus, errorThrown) {
-                    alert('Unknown error!');
+                error: function (jqXhr, textStatus, errorThrown) {
+                    onError({
+                        ResponseCode: -1,
+                        ResponseMessage: 'Unknown error!'
+                    }, jqXhr, textStatus, errorThrown);
                 }
             });
         }
     },
     authService: {
-        signup: function (signupRequest) {
-            tagkid.client.ajax('POST', 'auth/signup', signupRequest,
-                function(resp) {
-                     alert('success');
+        signUpWithEmail: function (signUpWithEmailRequest) {
+            tagkid.client.ajax('POST', 'auth/signUpWithEmail', signUpWithEmailRequest,
+                function (resp) {
+                    alert(resp.ResponseCode + ' : ' + resp.ResponseMessage);
                 },
-                function() {
-                     alert('error');
+                function (resp) {
+                    alert(resp.ResponseCode + ' : ' + resp.ResponseMessage);
+                });
+        },
+        signInWithPassword: function (signInWithPasswordRequest) {
+            tagkid.client.ajax('POST', 'auth/signInWithPassword', signInWithPasswordRequest,
+                function (resp) {
+                    alert(resp.ResponseCode + ' : ' + resp.ResponseMessage);
+                },
+                function (resp) {
+                    alert(resp.ResponseCode + ' : ' + resp.ResponseMessage);
                 });
         }
     }

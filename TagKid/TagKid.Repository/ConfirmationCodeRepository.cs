@@ -23,5 +23,10 @@ namespace TagKid.Repository
         {
             _repository.Save(confirmationCode);
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }

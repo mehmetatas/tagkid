@@ -18,7 +18,7 @@ namespace TagKid.Core.Domain
 
         void RequestReactivation(string email);
 
-        void ActivateAccount(long tokenId, string guid);
+        void ActivateAccount(long confirmationCodeId, string code);
 
         User ValidateAuthToken(long tokenId, string token);
     }

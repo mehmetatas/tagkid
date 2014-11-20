@@ -68,5 +68,10 @@ namespace TagKid.Repository
                 comment.User = users.First(u => u.Id == comment.UserId);
             }
         }
+
+        public void Flush()
+        {
+            _repository.Flush();
+        }
     }
 }
