@@ -37,10 +37,10 @@ namespace TagKid.Core.Validation
 
             if (res.Errors[0].CustomState != null)
             {
-                Throw.Error((Error)res.Errors[0].CustomState);
+                Throw.User((Error)res.Errors[0].CustomState);
             }
 
-            Throw.Error(Errors.Validation_GenericError);
+            Throw.User(Errors.Validation_GenericError);
         }
     }
 }

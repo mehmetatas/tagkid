@@ -18,9 +18,9 @@ namespace TagKid.Core.Utils
                 dateTime.Kind);
         }
 
-        public static DateTime ToSqlServerMin(this DateTime dateTime)
+        public static DateTime EnsureSqlServerMin(this DateTime dateTime)
         {
-            return SqlServerMindDateTime;
+            return dateTime == DateTime.MinValue ? SqlServerMindDateTime : dateTime;
         }
 
         public static bool IsSqlServerMin(this DateTime dateTime)

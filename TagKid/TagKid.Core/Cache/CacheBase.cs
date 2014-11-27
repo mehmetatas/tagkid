@@ -13,18 +13,27 @@ namespace TagKid.Core.Cache
             get
             {
                 if (_hashtable.Count == 0)
+                {
                     Load();
-
+                }
+                
                 if (_hashtable.ContainsKey(key))
-                    return (TValue) _hashtable[key];
+                {
+                    return (TValue)_hashtable[key];
+                }
+
                 return default(TValue);
             }
             set
             {
                 if (_hashtable.ContainsKey(key))
+                {
                     _hashtable[key] = value;
+                }
                 else
+                {
                     _hashtable.Add(key, value);
+                }
             }
         }
 
@@ -36,7 +45,9 @@ namespace TagKid.Core.Cache
         public void Remove(TKey key)
         {
             if (_hashtable.ContainsKey(key))
+            {
                 _hashtable.Remove(key);
+            }
         }
 
         public IEnumerable<TValue> Find(params TKey[] keys)

@@ -50,8 +50,8 @@ namespace TagKid.Core.Service.Interceptors
 
             if (!NoAuthMethods.Contains(actionMethod))
             {
-                var authToken = ctx.GetHeader(AuthToken);
-                var authTokenId = Convert.ToInt64(ctx.GetHeader(AuthTokenId));
+                var authToken = ctx.GetRequestHeader(AuthToken);
+                var authTokenId = Convert.ToInt64(ctx.GetRequestHeader(AuthTokenId));
 
                 var authDomainService = _prov.GetOrCreate<IAuthDomainService>();
                 RequestContext.Current.User = authDomainService.ValidateAuthToken(authTokenId, authToken);
@@ -70,8 +70,8 @@ namespace TagKid.Core.Service.Interceptors
             var token = RequestContext.Current.NewAuthToken;
             if (token != null)
             {
-                ctx.SetHeader(AuthToken, token.Guid);
-                ctx.SetHeader(AuthTokenId, token.Id.ToString());
+                ctx.SetResponseHeader(AuthToken, token.Guid);
+                ctx.SetResponseHeader(AuthTokenId, token.Id.ToString());
             }
 
             MailService.SendMails();
@@ -97,7 +97,7 @@ namespace TagKid.Core.Service.Interceptors
                 };
             }
 
-            if (!ctx.RollbackOnError)
+            if (tkException.IsCritical())
             {
                 _uow.Save(true);
             }

@@ -2,14 +2,22 @@
 
 namespace TagKid.Core.Exceptions
 {
-    public class TagKidException : TagaAppException
+    public abstract  class TagKidException : TagaAppException
     {
-        public TagKidException(Error error, string message = null, params object[] args)
+        protected TagKidException(Error error, string message = null, params object[] args)
             : base(message ?? error.Message, args)
         {
             Error = error;
         }
 
         public Error Error { get; private set; }
+    }
+
+    public static class TagKidExceptionExtensions
+    {
+        public static bool IsCritical(this TagKidException exception)
+        {
+            return exception is CriticalException;
+        }
     }
 }
