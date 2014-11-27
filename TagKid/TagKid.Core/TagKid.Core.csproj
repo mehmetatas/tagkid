@@ -140,9 +140,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">
       <Project>{57206f02-5147-464f-93d1-f7705c2d9932}</Project>
