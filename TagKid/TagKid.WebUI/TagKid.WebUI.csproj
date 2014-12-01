@@ -123,6 +123,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="css\animate.css" />
     <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="css\app.css" />
@@ -150,9 +151,18 @@
     <Content Include="js\config.js" />
     <Content Include="js\config.lazyload.js" />
     <Content Include="js\config.router.js" />
+    <Content Include="js\controllers\bootstrap.js" />
+    <Content Include="js\directives\setnganimate.js" />
+    <Content Include="js\directives\ui-butterbar.js" />
+    <Content Include="js\directives\ui-focus.js" />
     <Content Include="js\directives\ui-fullscreen.js" />
     <Content Include="js\directives\ui-jq.js" />
+    <Content Include="js\directives\ui-module.js" />
     <Content Include="js\directives\ui-nav.js" />
+    <Content Include="js\directives\ui-scroll.js" />
+    <Content Include="js\directives\ui-shift.js" />
+    <Content Include="js\directives\ui-toggleclass.js" />
+    <Content Include="js\directives\ui-validate.js" />
     <Content Include="js\filters\fromNow.js" />
     <Content Include="js\main.js" />
     <Content Include="js\services\ui-load.js" />
