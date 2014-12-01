@@ -70,11 +70,14 @@
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -82,9 +85,11 @@
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -118,15 +123,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="css\app.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\font-awesome.min.css" />
-    <Content Include="css\font.css" />
     <Content Include="css\simple-line-icons.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="img\a0.jpg" />
     <Content Include="img\a2.jpg" />
     <Content Include="img\a3.jpg" />
@@ -418,12 +422,11 @@
     <Content Include="template-site\vendor\modules\videogular\plugins\overlay-play.min.js" />
     <Content Include="template-site\vendor\modules\videogular\plugins\poster.min.js" />
     <Content Include="template-site\vendor\modules\videogular\videogular.min.js" />
-    <Content Include="tpl\app.html" />
-    <Content Include="tpl\apps_note.html" />
     <Content Include="tpl\apps_timeline.html" />
     <Content Include="tpl\blocks\aside.html" />
     <Content Include="tpl\blocks\header.html" />
     <Content Include="tpl\blocks\nav.html" />
+    <Content Include="tpl\blocks\settings.html" />
     <Content Include="tpl\layout.html" />
     <Content Include="vendor\angular\angular-animate\angular-animate.js" />
     <Content Include="vendor\angular\angular-bootstrap\ui-bootstrap-tpls.js" />
@@ -439,6 +442,7 @@
     <Content Include="vendor\angular\angular.js" />
     <Content Include="vendor\angular\ngstorage\ngStorage.js" />
     <Content Include="vendor\angular\oclazyload\ocLazyLoad.js" />
+    <Content Include="vendor\jquery\jquery-autogrow.js" />
     <Content Include="vendor\jquery\jquery.layout-1.3.0.rc30.80.js" />
     <Content Include="vendor\jquery\jquery.min.js" />
     <Content Include="vendor\libs\moment.min.js" />
@@ -468,12 +472,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\Simple-Line-Icons.eot" />
-    <Content Include="fonts\Simple-Line-Icons.ttf" />
-    <Content Include="fonts\Simple-Line-Icons.woff" />
-    <Content Include="fonts\sourcesanspro\sourcesanspro-bold.woff" />
-    <Content Include="fonts\sourcesanspro\sourcesanspro-light.woff" />
-    <Content Include="fonts\sourcesanspro\sourcesanspro.woff" />
     <Content Include="js\app\note\notes.json" />
     <Content Include="template-site\api\login" />
     <Content Include="template-site\api\signup" />
@@ -522,6 +520,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\Simple-Line-Icons.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\Simple-Line-Icons.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\Simple-Line-Icons.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\taga.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
