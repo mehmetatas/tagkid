@@ -1,7 +1,65 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="TimelineCtrl">
     <div class="col">
         <div class="padder">
-            <div class="streamline b-l b-info m-l-lg m-b padder-v">
+            <div class="streamline b-l b-info m-l m-b padder-v">
+                <div>
+                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                        <img src="img/a2.jpg" alt="...">
+                    </a>
+                    <div class="m-l-lg panel b-a r-3x">
+                        <div class="panel-heading pos-rlt b-b b-light">
+                            <span class="text-muted m-l-sm pull-left">
+                                <span class="arrow left pull-up"></span>
+                                <a href>Mehmet Ataş</a>
+                                <span class="text-xs">@mehmetatas</span>
+                                <br />
+                                <a href="#"><label class="label bg-danger m-r-xs">coding</label></a>
+                                <a href="#"><label class="label bg-light m-r-xs">c#</label></a>
+                                <a href="#"><label class="label bg-light m-r-xs">.net</label></a>
+                                <a href="#"><label class="label bg-light m-r-xs">java</label></a>
+                                <a href="#"><label class="label bg-light m-r-xs">oracle-10g</label></a>
+                                <!--
+                                <ui-select multiple ng-model="Tags" theme="bootstrap" ng-disabled="disabled">
+                                           <ui-select-match placeholder="Select tag...">{{$item.Name}}</ui-select-match>
+                                           <ui-select-choices repeat="tag in Tags | propsFilter: {Name: $select.search}">
+                                               <div ng-bind-html="tag.Name | highlight: $select.search"></div>
+                                               <small>
+                                                   Tag: {{tag.Name}} ({{tag.Hint}})
+                                                   Description: <span ng-bind-html="''+tag.Description | highlight: $select.search"></span>
+                                               </small>
+                                           </ui-select-choices>
+                                       </ui-select>
+                                   -->
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <input type="text" placeholder="Title here" class="r-t form-control no-border tk-title text-lg no-padder" />
+                            <textarea class="form-control no-border r-b tk-editor no-padder" style="margin-top: -1px" rows="3" placeholder="Write your post here"></textarea>
+                            <div class="tk-preview" style="display: none;"></div>
+                            <div class="m-t-sm">
+                                <a href="#" class="btn btn-default btn-xs tk-preview-btn">
+                                    <i class="fa fa-list-alt text-muted text"></i> Preview
+                                </a>
+                                <a href="#" class="btn btn-default btn-xs tk-edit-btn" style="display: none">
+                                    <i class="fa fa-edit text-muted text"></i> Edit
+                                </a>
+                                <a href="#" class="btn btn-default btn-xs">
+                                    <i class="fa fa-trash text-muted text"></i> Cancel
+                                </a>
+                                <a href="#" class="btn btn-default btn-xs">
+                                    <i class="fa fa-save text-muted"></i> Save As Draft
+                                </a>
+                                <a href="#" class="btn btn-default btn-xs">
+                                    <i class="fa fa-mail-forward text-muted"></i> Publish
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
                 <div>
                     <a class="pull-left thumb-sm avatar m-l-n-md">
                         <img src="img/a2.jpg" alt="...">
@@ -126,7 +184,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
 
@@ -152,11 +210,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
+                
                 <div>
                     <a class="pull-left thumb-sm avatar m-l-n-md">
                         <img src="img/a2.jpg" alt="...">
@@ -177,10 +231,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -292,9 +342,25 @@
 <script type="text/javascript">
     $('textarea').autogrow();
 
-    $(function() {
-        $('.btn-comment').on('click', function() {
+    $(function () {
+        $('.btn-comment').on('click', function () {
             $('#comments').toggle();
+        });
+
+        var editor = tkEditor.create('.tk-editor', '.tk-preview', '.tk-title');
+
+        $('.tk-preview-btn').on('click', function (e) {
+            $('.tk-preview-btn').toggle();
+            $('.tk-edit-btn').toggle();
+            editor.toggle();
+            e.preventDefault();
+        });
+
+        $('.tk-edit-btn').on('click', function (e) {
+            $('.tk-preview-btn').toggle();
+            $('.tk-edit-btn').toggle();
+            editor.toggle();
+            e.preventDefault();
         });
     });
 </script>

@@ -33,15 +33,39 @@ angular.module('app')
               .state('apps.timeline', {
                   url: '/timeline',
                   templateUrl: 'tpl/apps_timeline.html',
+                  controller: 'TimelineCtrl',
                   resolve: {
                       deps: [
-                          'uiLoad',
-                          function(uiLoad) {
-                              return uiLoad.load(['js/app/timeline/timeline.js']);
+                          '$ocLazyLoad',
+                          function ($ocLazyLoad) {
+                              $ocLazyLoad.load('ui.select').then(
+                                  function () {
+                                      return $ocLazyLoad.load('js/app/timeline/timeline.js');
+                                  }
+                              );
                           }
                       ]
                   }
               });
+                  // {
+                  //    deps: [
+                  //        'uiLoad',
+                  //        function(uiLoad) {
+                  //            return uiLoad.load(['js/app/timeline/timeline.js']);
+                  //        }
+                  //    ]
+                  //}
+          //                  resolve: {
+          //                      deps: ['$ocLazyLoad',
+          //                        function( $ocLazyLoad ){
+          //                          return $ocLazyLoad.load('ui.select').then(
+          //                              function(){
+          //                                  return $ocLazyLoad.load('js/controllers/select.js');
+          //                              }
+          //                          );
+          //                      }]
+          //                  }
+
           //.state('app', {
           //    abstract: true,
           //    url: '/app',

@@ -7,9 +7,10 @@
           <i class="glyphicon glyphicon-align-justify"></i>
         </button>
         <!-- brand -->
-        <a href="#/" class="navbar-brand text-lt">
-          <span class="hidden-folded m-l-xs">{{app.name}}</span>
-        </a>
+          <a href="#/" class="navbar-brand text-lt">
+              <i class="fa fa-user"></i>
+              <span class="hidden-folded m-l-xs">{{app.name}}</span>
+          </a>
         <!-- / brand -->
       </div>
       <!-- / navbar header -->
@@ -20,9 +21,6 @@
         <div class="nav navbar-nav hidden-xs">
           <a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
             <i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw"></i>
-          </a>
-          <a href class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
-            <i class="icon-user fa-fw"></i>
           </a>
         </div>
         <!-- / buttons -->
@@ -162,7 +160,7 @@
         <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search">
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">
+              <input type="text" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search tags...">
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
               </span>

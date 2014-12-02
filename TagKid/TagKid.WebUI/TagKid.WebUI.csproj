@@ -124,6 +124,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="css\animate.css" />
+    <Content Include="editor\index.html" />
     <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="css\app.css" />
@@ -144,7 +145,6 @@
     <Content Include="img\c4.jpg" />
     <Content Include="img\c5.jpg" />
     <Content Include="img\logo.png" />
-    <Content Include="Html\index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\app\note\note.js" />
     <Content Include="js\app\timeline\timeline.js" />
@@ -163,6 +163,7 @@
     <Content Include="js\directives\ui-shift.js" />
     <Content Include="js\directives\ui-toggleclass.js" />
     <Content Include="js\directives\ui-validate.js" />
+    <Content Include="js\editor.js" />
     <Content Include="js\filters\fromNow.js" />
     <Content Include="js\main.js" />
     <Content Include="js\services\ui-load.js" />
@@ -457,6 +458,8 @@
     <Content Include="vendor\jquery\jquery.min.js" />
     <Content Include="vendor\libs\moment.min.js" />
     <Content Include="vendor\libs\screenfull.min.js" />
+    <Content Include="vendor\modules\angular-ui-select\select.min.css" />
+    <Content Include="vendor\modules\angular-ui-select\select.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
