@@ -1,3 +1,6 @@
+/// <reference path="app/timeline/timeline.js" />
+/// <reference path="app/timeline/timeline.js" />
+/// <reference path="app/timeline/timeline.js" />
 'use strict';
 
 /**
@@ -38,11 +41,7 @@ angular.module('app')
                       deps: [
                           '$ocLazyLoad',
                           function ($ocLazyLoad) {
-                              $ocLazyLoad.load('ui.select').then(
-                                  function () {
-                                      return $ocLazyLoad.load('js/app/timeline/timeline.js');
-                                  }
-                              );
+                              $ocLazyLoad.load('js/app/timeline/timeline.js');
                           }
                       ]
                   }

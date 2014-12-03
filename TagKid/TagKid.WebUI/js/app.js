@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('app', [
     'ngAnimate',
     'ngCookies',
@@ -11,7 +10,7 @@ angular.module('app', [
     'ui.router',
     'ui.bootstrap',
     'ui.load',
-//    'ui.jq',
+    'ui.jq',
 //    'ui.validate',
     'oc.lazyLoad',
     'pascalprecht.translate'
