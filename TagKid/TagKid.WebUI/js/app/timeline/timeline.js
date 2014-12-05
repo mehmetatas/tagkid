@@ -1,4 +1,4 @@
-app.controller('TimelineCtrl', ['$scope', '$http', function ($scope, $http) {
+app.controller('TimelineCtrl', ['$scope', '$modal', '$http', function ($scope, $modal, $http) {
     $scope.Tags = [
        { Name: 'c#', Hint: 'c-sharp', Description: 'programming language' },
        { Name: 'java', Hint: 'java', Description: 'open source programming language' },
@@ -14,7 +14,7 @@ app.controller('TimelineCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.SelectedTags = [];
 
-    $scope.removeTag = function(tag, e) {
+    $scope.removeTag = function (tag, e) {
         var tags = $scope.SelectedTags;
         for (var i = 0; i < tags.length; i++) {
             if (tags[i].Name == tag.Name) {
@@ -23,11 +23,31 @@ app.controller('TimelineCtrl', ['$scope', '$http', function ($scope, $http) {
             }
         }
 
-        setTimeout(function() {
+        setTimeout(function () {
             $('.tag-input').focus();
         }, 100);
 
         return false;
+    };
+
+    $scope.selectedCategory = null;
+    $scope.categories = [
+        { Name: 'coding', CssClass: 'bg-danger' },
+        { Name: 'daily', CssClass: 'bg-warning' },
+        { Name: 'photography', CssClass: 'bg-success' },
+        { Name: 'sports', CssClass: 'bg-info' }
+    ];
+    $scope.selectCategory = function (cat) {
+        $scope.selectedCategory = cat;
+    };
+    $scope.showNewCategoryPopup = function () {
+        $modal.open({
+            templateUrl: 'newCategoryModalContent.html',
+            controller: 'NewCategoryModalCtrl'
+        }).result.then(function (newCategory) {
+            $scope.categories.push(newCategory);
+            $scope.selectedCategory = newCategory;
+        });
     };
 
     var allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890-.+#';
@@ -146,12 +166,47 @@ app.controller('TimelineCtrl', ['$scope', '$http', function ($scope, $http) {
         });
 }]);
 
-app.filter('propsFilter', function() {
-    return function(items, props) {
+app.controller('NewCategoryModalCtrl', [
+    '$scope', '$modalInstance', function ($scope, $modalInstance) {
+        $scope.newCategory = {
+            Name: '',
+            Description: '',
+            CssClass: 'bg-light',
+            ColorName: 'Gray'
+        };
+
+        $scope.newCategoryColors = [
+            { CssClass: 'bg-light', Name: 'Gray' },
+            { CssClass: 'bg-dark', Name: 'Dark' },
+            { CssClass: 'bg-black', Name: 'Black' },
+            { CssClass: 'bg-primary', Name: 'Purple' },
+            { CssClass: 'bg-info', Name: 'Blue' },
+            { CssClass: 'bg-success', Name: 'Green' },
+            { CssClass: 'bg-warning', Name: 'Yellow' },
+            { CssClass: 'bg-danger', Name: 'Red' }
+        ];
+
+        $scope.selectNewCategoryColor = function (color) {
+            $scope.newCategory.CssClass = color.CssClass;
+            $scope.newCategory.ColorName = color.Name;
+        };
+
+        $scope.cancelNewCategory = function () {
+            $modalInstance.dismiss('cancel');
+        };
+
+        $scope.saveNewCategory = function () {
+            $modalInstance.close($scope.newCategory);
+        };
+    }
+]);
+
+app.filter('propsFilter', function () {
+    return function (items, props) {
         var out = [];
 
         if (angular.isArray(items)) {
-            items.forEach(function(item) {
+            items.forEach(function (item) {
                 var itemMatches = false;
 
                 var keys = Object.keys(props);
