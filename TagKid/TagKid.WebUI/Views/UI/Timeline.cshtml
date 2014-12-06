@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm">
+﻿<div class="hbox hbox-auto-xs hbox-auto-sm">
     <div class="col">
         <div class="padder">
             <div class="streamline b-l b-info m-l m-b padder-v">
@@ -11,7 +11,7 @@
                             <span class="text-muted m-l-sm pull-left">
                                 <span class="arrow left pull-up"></span>
                                 <a href>Mehmet Ataş</a>
-                                <span class="text-xs">@mehmetatas</span>
+                                <span class="text-xs">@@mehmetatas</span>
                                 <div class="tag-search">
                                     <div class="btn-group" dropdown>
                                         <a href="#" dropdown-toggle><label class="label m-r-xs" ng-class="selectedCategory ? selectedCategory.CssClass : 'bg-light'">{{selectedCategory ? selectedCategory.Name : 'Select Category'}}</label></a>
@@ -25,7 +25,7 @@
                                     </div>
 
                                     <script type="text/ng-template" id="newCategoryModalContent.html">
-                                        <div ng-include="'tpl/modals/new_category.html'"></div>
+                                        <div ng-include="'ui/NewCategory'"></div>
                                     </script>
 
                                     <span class="tags" ng-repeat="tag in SelectedTags">
@@ -37,14 +37,14 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" placeholder="Title here" class="r-t form-control no-border tk-title text-lg no-padder" />
-                            <textarea class="form-control no-border r-b tk-editor no-padder" style="margin-top: -1px" rows="3" placeholder="Your post here"></textarea>
-                            <div class="tk-preview" style="display: none;"></div>
+                            <input type="text" id="tk-title" placeholder="Title here" class="r-t form-control no-border text-lg no-padder" />
+                            <textarea id="tk-editor" class="form-control no-border r-b no-padder" style="margin-top: -1px" rows="3" placeholder="Your post here"></textarea>
+                            <div id="tk-preview" style="display: none;"></div>
                             <div class="m-t-sm">
-                                <a href="#" class="btn btn-default btn-xs tk-preview-btn">
+                                <a href="#" id="tk-preview-btn" class="btn btn-default btn-xs">
                                     <i class="fa fa-list-alt text-muted text"></i> Preview
                                 </a>
-                                <a href="#" class="btn btn-default btn-xs tk-edit-btn" style="display: none">
+                                <a href="#" id="tk-edit-btn" class="btn btn-default btn-xs" style="display: none">
                                     <i class="fa fa-edit text-muted text"></i> Edit
                                 </a>
                                 <a href="#" class="btn btn-default btn-xs">
@@ -75,7 +75,7 @@
                             <span class="text-muted m-l-sm pull-left">
                                 <span class="arrow left pull-up"></span>
                                 <a href>Mehmet Ataş</a>
-                                <span class="text-xs">@mehmetatas</span>
+                                <span class="text-xs">@@mehmetatas</span>
                                 <br />
                                 <a href="#"><label class="label bg-danger m-r-xs">coding</label></a>
                                 <a href="#"><label class="label bg-light m-r-xs">c#</label></a>
@@ -148,7 +148,7 @@
                                             <span class="text-muted m-l-sm pull-right">
                                                 42m ago
                                             </span>
-                                            <a href>Mika Sam</a> <span class="text-xs">@miksam</span><br />
+                                            <a href>Mika Sam</a> <span class="text-xs">@@miksam</span><br />
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                         </div>
                                     </div>
@@ -306,15 +306,15 @@
                             <h4 class="font-thin padder">Latest Tweets</h4>
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <p>Wellcome <a href class="text-info">@Drew Wllon</a> and play this web application template, have fun1 </p>
+                                    <p>Wellcome <a href class="text-info">@@Drew Wllon</a> and play this web application template, have fun1 </p>
                                     <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 minuts ago</small>
                                 </li>
                                 <li class="list-group-item">
-                                    <p>Morbi nec <a href class="text-info">@Jonathan George</a> nunc condimentum ipsum dolor sit amet, consectetur</p>
+                                    <p>Morbi nec <a href class="text-info">@@Jonathan George</a> nunc condimentum ipsum dolor sit amet, consectetur</p>
                                     <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 1 hour ago</small>
                                 </li>
                                 <li class="list-group-item">
-                                    <p><a href class="text-info">@Josh Long</a> Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis</p>
+                                    <p><a href class="text-info">@@Josh Long</a> Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis</p>
                                     <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 hours ago</small>
                                 </li>
                             </ul>
@@ -325,7 +325,7 @@
                                     <img src="img/a0.jpg" class="img-circle">
                                 </a>
                                 <div class="clear">
-                                    <a href class="text-info">@Mike Mcalidek <i class="fa fa-twitter"></i></a>
+                                    <a href class="text-info">@@Mike Mcalidek <i class="fa fa-twitter"></i></a>
                                     <small class="block text-muted">2,415 followers / 225 tweets</small>
                                     <a href class="btn btn-xs btn-success m-t-xs">Follow</a>
                                 </div>
@@ -350,16 +350,16 @@
             $('#comments').toggle();
         });
 
-        var editor = tkEditor.create('.tk-editor', '.tk-preview', '.tk-title');
+        var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
-        $('.tk-preview-btn').on('click', function (e) {
+        $('#tk-preview-btn').on('click', function (e) {
             $('.tk-preview-btn').toggle();
             $('.tk-edit-btn').toggle();
             editor.toggle();
             e.preventDefault();
         });
 
-        $('.tk-edit-btn').on('click', function (e) {
+        $('#tk-edit-btn').on('click', function (e) {
             $('.tk-preview-btn').toggle();
             $('.tk-edit-btn').toggle();
             editor.toggle();

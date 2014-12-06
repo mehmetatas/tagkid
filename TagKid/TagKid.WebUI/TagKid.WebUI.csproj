@@ -113,7 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -433,13 +433,6 @@
     <Content Include="template-site\vendor\modules\videogular\plugins\overlay-play.min.js" />
     <Content Include="template-site\vendor\modules\videogular\plugins\poster.min.js" />
     <Content Include="template-site\vendor\modules\videogular\videogular.min.js" />
-    <Content Include="tpl\apps_timeline.html" />
-    <Content Include="tpl\blocks\aside.html" />
-    <Content Include="tpl\blocks\header.html" />
-    <Content Include="tpl\blocks\nav.html" />
-    <Content Include="tpl\blocks\settings.html" />
-    <Content Include="tpl\layout.html" />
-    <Content Include="tpl\modals\new_category.html" />
     <Content Include="vendor\angular\angular-animate\angular-animate.js" />
     <Content Include="vendor\angular\angular-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="vendor\angular\angular-cookies\angular-cookies.js" />
@@ -533,7 +526,7 @@
     <Content Include="template-site\vendor\jquery\footable\fonts\footable.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\UI\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\Simple-Line-Icons.eot" />
@@ -546,6 +539,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\taga.pubxml" />
+    <Content Include="Views\UI\NewCategory.cshtml" />
+    <Content Include="Views\UI\Timeline.cshtml" />
+    <Content Include="Views\UI\Aside.cshtml" />
+    <Content Include="Views\UI\Header.cshtml" />
+    <Content Include="Views\UI\Nav.cshtml" />
+    <Content Include="Views\UI\Layout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

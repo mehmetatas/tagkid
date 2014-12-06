@@ -19,23 +19,23 @@ angular.module('app')
     ['$stateProvider', '$urlRouterProvider', '$locationProvider',
       function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-          //$locationProvider.html5Mode({
-          //    enabled: true,
-          //    requireBase: false
-          //});
+          $locationProvider.html5Mode({
+              enabled: true,
+              requireBase: false
+          });
 
           $urlRouterProvider
-              .otherwise('/apps/timeline');
+              .otherwise('/');
 
           $stateProvider
-              .state('apps', {
+              .state('ui', {
                   abstract: true,
-                  url: '/apps',
-                  templateUrl: 'tpl/layout.html'
+                  url: '',
+                  templateUrl: 'ui/layout'
               })
-              .state('apps.timeline', {
-                  url: '/timeline',
-                  templateUrl: 'tpl/apps_timeline.html',
+              .state('ui.timeline', {
+                  url: '/',
+                  templateUrl: 'ui/timeline',
                   controller: 'TimelineCtrl',
                   resolve: {
                       deps: [

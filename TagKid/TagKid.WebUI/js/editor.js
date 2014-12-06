@@ -9,6 +9,8 @@ function TagKidEditor(input, preview, title) {
     var $title = $(title);
     var $preview = $(preview);
 
+    $preview.css('white-space', 'pre-wrap');
+
     this.toggle = function () {
         sync();
 
