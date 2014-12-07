@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading;
+using System.Web.Mvc;
 
 namespace TagKid.WebUI.Controllers
 {
@@ -6,6 +7,12 @@ namespace TagKid.WebUI.Controllers
     {
         public ActionResult Timeline()
         {
+            return PartialView();
+        }
+
+        public new ActionResult User()
+        {
+            Thread.Sleep(3000);
             return PartialView();
         }
 

@@ -2,15 +2,17 @@
     <div class="col">
         <div class="padder">
             <div class="streamline b-l b-info m-l m-b padder-v">
+                <!-- New Post -->
                 <div>
-                    <a ui-sref="/user/mehmetatas" class="pull-left thumb-sm avatar m-l-n-md">
-                        <img src="img/a2.jpg" alt="...">
+                    @*<a ng-href="{{'/user/' + user.Username}}" class="pull-left thumb-sm avatar m-l-n-md">*@
+                    <a ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
+                        <img ng-src="{{user.ProfileImageUrl}}" ng-alt="{{user.Fullname}}">
                     </a>
                     <div class="m-l-lg panel b-a r-3x" ng-controller="EditorCtrl">
                         <div class=" panel-heading pos-rlt b-b b-light">
                             <span class="text-muted m-l-sm pull-left">
                                 <span class="arrow left pull-up"></span>
-                                <a ui-sref="/user/mehmetatas">
+                                <a ng-href="{{'/user/' + user.Username}}">
                                     <span class="text-md font-bold" ng-bind="user.Fullname"></span>
                                     <span class=" text-xs text-muted" ng-bind="'&#64;' + user.Username"></span>
                                 </a>
@@ -62,9 +64,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
+                <!-- Posts -->
                 <div ng-repeat="post in posts">
                     <a class="pull-left thumb-sm avatar m-l-n-md">
                         <img ng-src="{{post.User.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
@@ -116,7 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- .comments -->
+                                <!-- comments -->
                                 <div class="m-l-xs m-b-n" ng-repeat="comment in post.Comments">
                                     <a ng-href="{{'/user/' + comment.User.Username}}" class="pull-left thumb-xs avatar">
                                         <img ng-src="{{comment.User.ProfileImageUrl}}" alt="{{comment.User.Fullname}}">
@@ -134,180 +135,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- / .comments -->
+                                <!-- comments -->
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <a class="pull-left thumb-sm avatar m-l-n-md">
-                        <img src="img/a2.jpg" alt="...">
-                    </a>
-                    <div class="m-l-lg panel b-a r-3x">
-                        <div class="panel-heading pos-rlt b-b b-light">
-                            <span class="text-muted m-l-sm pull-right">
-                                9h ago
-                            </span>
-                            <span class="text-muted m-l-sm pull-left">
-                                <span class="arrow left pull-up"></span>
-                                <a href>Mehmet Ataş</a>
-                                <span class="text-xs">@@mehmetatas</span>
-                                <br />
-                                <a href="#"><label class="label bg-danger m-r-xs">coding</label></a>
-                                <a href="#"><label class="label bg-light m-r-xs">c#</label></a>
-                                <a href="#"><label class="label bg-light m-r-xs">.net</label></a>
-                                <a href="#"><label class="label bg-light m-r-xs">java</label></a>
-                                <a href="#"><label class="label bg-light m-r-xs">oracle-10g</label></a>
-                            </span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-body">
-                            <h4>Lorem ipsum dolor sit amet!</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consecteter adipiscing elit... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                            </p>
-                            <p>
-                                posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                            </p>
-                            <div class="m-t-sm">
-                                <a href ui-toggle-class class="btn btn-default btn-xs active">
-                                    <i class="fa fa-heart-o text-muted text"></i>
-                                    <i class="fa fa-heart text-danger text-active"></i>
-                                    19
-                                </a>
-                                <a href class="btn btn-default btn-xs">
-                                    <i class="fa fa-mail-reply text-muted"></i> 3
-                                </a>
-                                <a class="btn btn-default btn-xs btn-comment">
-                                    <i class="fa fa-comments-o text-muted"></i> 192
-                                </a>
-                            </div>
-                            <div id="comments" style="max-height: 200px; display: none;" class="m-t-md m-b-md text-xs scroll-y">
-                                <div class="m-l-xs">
-                                    <a class="pull-left thumb-xs avatar">
-                                        <img src="img/a5.jpg" alt="...">
-                                    </a>
-                                    <div class="m-l-xxl panel b-a r-2x">
-                                        <div class="panel-heading pos-rlt">
-                                            <span class="arrow left pull-up"></span>
-                                            <textarea class="no-border w-full text-xs" rows="1" placeholder="Your comment..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .comments -->
-                                <div class="m-l-xs m-b-n">
-                                    <a class="pull-left thumb-xs avatar">
-                                        <img src="img/a5.jpg" alt="...">
-                                    </a>
-                                    <div class="m-l-xxl panel b-a r-2x">
-                                        <div class="panel-heading pos-rlt">
-                                            <span class="arrow left pull-up"></span>
-                                            <span class="text-muted m-l-sm pull-right">
-                                                1s ago
-                                            </span>
-                                            <a href>Mika Sam</a>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Report this comment is helpful
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-l-xs m-b-n">
-                                    <a class="pull-left thumb-xs avatar">
-                                        <img src="img/a5.jpg" alt="...">
-                                    </a>
-                                    <div class="m-l-xxl panel b-a r-2x">
-                                        <div class="panel-heading pos-rlt">
-                                            <span class="arrow left pull-up"></span>
-                                            <span class="text-muted m-l-sm pull-right">
-                                                42m ago
-                                            </span>
-                                            <a href>Mika Sam</a> <span class="text-xs">@@miksam</span><br />
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-l-xs m-b-n">
-                                    <a class="pull-left thumb-xs avatar">
-                                        <img src="img/a5.jpg" alt="...">
-                                    </a>
-                                    <div class="m-l-xxl panel b-a r-2x">
-                                        <div class="panel-heading pos-rlt">
-                                            <span class="arrow left pull-up"></span>
-                                            <span class="text-muted m-l-sm pull-right">
-                                                5h ago
-                                            </span>
-                                            <a href>Mika Sam</a>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-l-xs m-b-n">
-                                    <a class="pull-left thumb-xs avatar">
-                                        <img src="img/a5.jpg" alt="...">
-                                    </a>
-                                    <div class="m-l-xxl panel b-a r-2x">
-                                        <div class="panel-heading pos-rlt">
-                                            <span class="arrow left pull-up"></span>
-                                            <span class="text-muted m-l-sm pull-right">
-                                                2d ago
-                                            </span>
-                                            <a href>Mika Sam</a>
-                                            Report this comment is helpful
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- / .comments -->
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div>
-                    <a class="pull-left thumb-sm avatar m-l-n-md">
-                        <img src="img/a2.jpg" alt="...">
-                    </a>
-                    <div class="m-l-lg panel b-a r-3x">
-                        <div class="panel-heading pos-rlt b-b b-light">
-                            <span class="arrow left"></span>
-                            <a href>Peter</a>
-                            <label class="label bg-light m-l-xs">VIP</label>
-                            <span class="text-muted m-l-sm pull-right">
-                                9h ago
-                            </span>
-                        </div>
-                        <div class="panel-body">
-                            <blockquote>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-                            </blockquote>
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <a class="pull-left thumb-sm avatar m-l-n-md">
-                        <img src="img/a2.jpg" alt="...">
-                    </a>
-                    <div class="m-l-lg panel b-a r-3x">
-                        <div class="panel-heading pos-rlt b-b b-light">
-                            <span class="arrow left"></span>
-                            <a href>Peter</a>
-                            <label class="label bg-light m-l-xs">VIP</label>
-                            <span class="text-muted m-l-sm pull-right">
-                                9h ago
-                            </span>
-                        </div>
-                        <div class="panel-body">
-                            <img src="img/c5.jpg" class="r-3x img-responsive w-full">
-                            <br />
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
                         </div>
                     </div>
                 </div>

@@ -90,7 +90,7 @@ namespace TagKid.Domain
 
         }
 
-        public virtual void SignInWithPassword(string emailOrUsername, string password)
+        public virtual User SignInWithPassword(string emailOrUsername, string password)
         {
             var user = emailOrUsername.Contains("@")
                 ? UserRepository.GetByEmail(emailOrUsername)
@@ -123,6 +123,8 @@ namespace TagKid.Domain
             TokenRepository.Save(authToken);
 
             RequestContext.Current.NewAuthToken = authToken;
+
+            return user;
         }
 
         public virtual void SignInWithFacebook(string facebookId, string facebookAuthToken)

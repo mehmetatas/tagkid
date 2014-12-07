@@ -75,6 +75,11 @@ tagkid = {
                 var authTokenId = header('tagkid-auth-token-id');
                 tagkid.cookies.authToken(authToken);
                 tagkid.cookies.authTokenId(authTokenId);
+                tagkid.context.user = {
+                    Username: resp.Username,
+                    Fullname: resp.Fullname,
+                    ProfileImageUrl: resp.ProfileImageUrl,
+                };
                 tagkid.go('pages.timeline');
             });
         },

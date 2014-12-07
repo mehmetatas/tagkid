@@ -8,7 +8,7 @@ namespace TagKid.Core.Domain
 
         void SignUpWithFacebook(string facebookId, string facebookAuthToken);
 
-        void SignInWithPassword(string emailOrUsername, string password);
+        User SignInWithPassword(string emailOrUsername, string password);
 
         void SignInWithFacebook(string facebookId, string facebookAuthToken);
 

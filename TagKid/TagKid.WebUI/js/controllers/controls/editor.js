@@ -1,6 +1,5 @@
 ﻿app.controller('EditorCtrl', [
     '$scope', '$modal', function ($scope, $modal) {
-
         var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
         tkTagInput.create('#tk-tag-input', $scope);
@@ -11,10 +10,7 @@
             editor.toggle();
         };
 
-        $scope.user = {
-            Username: 'mehmetatas',
-            Fullname: 'Mehmet Ataş'
-        };
+        $scope.user = tagkid.context.user;
 
         $scope.tags = [
            { Name: 'c#', Hint: 'c-sharp', Description: 'programming language' },

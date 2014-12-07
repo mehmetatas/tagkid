@@ -35,8 +35,13 @@ namespace TagKid.Service
 
         public virtual SignInWithPasswordResponse SignInWithPassword(SignInWithPasswordRequest request)
         {
-            DomainService.SignInWithPassword(request.EmailOrUsername, request.Password);
-            return new SignInWithPasswordResponse();
+            var user = DomainService.SignInWithPassword(request.EmailOrUsername, request.Password);
+            return new SignInWithPasswordResponse
+            {
+                Username = user.Username,
+                Fullname = user.Fullname,
+                ProfileImageUrl = "img/a2.jpg"
+            };
         }
 
         public ActivateAccountResponse ActivateAccount(long ccid, string cc)

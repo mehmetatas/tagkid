@@ -179,6 +179,7 @@
     <Content Include="js\config.lazyload.js" />
     <Content Include="js\config.router.js" />
     <Content Include="js\controllers\bootstrap.js" />
+    <Content Include="js\controllers\pages\user.js" />
     <Content Include="js\directives\setnganimate.js" />
     <Content Include="js\directives\ui-butterbar.js" />
     <Content Include="js\directives\ui-focus.js" />
@@ -578,6 +579,7 @@
     <Content Include="Views\Pages\SignIn.cshtml" />
     <Content Include="Views\Pages\ForgotPwd.cshtml" />
     <Content Include="Views\Modals\TermsAndPolicy.cshtml" />
+    <Content Include="Views\Pages\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">

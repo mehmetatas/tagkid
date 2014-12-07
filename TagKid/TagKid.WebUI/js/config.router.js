@@ -28,16 +28,16 @@ angular.module('app')
               .state('pages', {
                   abstract: true,
                   url: '',
-                  templateUrl: 'layout/main'
-              })
-              .state('pages.timeline', {
-                  url: '/',
-                  templateUrl: 'pages/timeline',
-                  controller: 'TimelineCtrl',
+                  templateUrl: 'layout/main',
                   onEnter: function ($http, $state) {
                       tagkid.setNgContext($http, $state);
                       tagkid.ensureLoggedIn();
                   }
+              })
+              .state('pages.timeline', {
+                  url: '/',
+                  templateUrl: 'pages/timeline',
+                  controller: 'TimelineCtrl'
                   //resolve: {
                   //    deps: [
                   //        '$ocLazyLoad',
@@ -46,6 +46,15 @@ angular.module('app')
                   //        }
                   //    ]
                   //}
+              })
+              .state('pages.user', {
+                  url: '/user/:username',
+                  templateUrl: 'pages/user',
+                  controller: 'UserCtrl',
+                  onEnter: function ($http, $state) {
+                      tagkid.setNgContext($http, $state);
+                      tagkid.ensureLoggedIn();
+                  }
               })
               .state('auth', {
                   url: '',

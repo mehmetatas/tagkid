@@ -5,6 +5,8 @@
         $('#comments').toggle();
     });
 
+    $scope.user = tagkid.context.user;
+
     $scope.posts = [
     {
         ShowComments: false,
