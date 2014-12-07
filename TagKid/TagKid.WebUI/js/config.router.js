@@ -1,6 +1,3 @@
-/// <reference path="app/timeline/timeline.js" />
-/// <reference path="app/timeline/timeline.js" />
-/// <reference path="app/timeline/timeline.js" />
 'use strict';
 
 /**
@@ -37,6 +34,10 @@ angular.module('app')
                   url: '/',
                   templateUrl: 'pages/timeline',
                   controller: 'TimelineCtrl',
+                  onEnter: function ($http, $state) {
+                      tagkid.setNgContext($http, $state);
+                      tagkid.ensureLoggedIn();
+                  }
                   //resolve: {
                   //    deps: [
                   //        '$ocLazyLoad',
@@ -46,24 +47,28 @@ angular.module('app')
                   //    ]
                   //}
               })
-              .state('access', {
-                    url: '',
-                    template: '<div ui-view class="fade-in-right-big smooth"></div>'
+              .state('auth', {
+                  url: '',
+                  template: '<div ui-view class="fade-in-right-big smooth"></div>',
+                  onEnter: function ($http, $state) {
+                      tagkid.setNgContext($http, $state);
+                      tagkid.redirectIfLoggedIn();
+                  }
               })
-              .state('access.signup', {
+              .state('auth.signup', {
                   url: '/signup',
                   templateUrl: 'pages/signup',
-                  controller: 'SignUpCtrl',
+                  controller: 'SignUpCtrl'
               })
-              .state('access.signin', {
+              .state('auth.signin', {
                   url: '/signin',
                   templateUrl: 'pages/signin',
-                  controller: 'SignInCtrl',
+                  controller: 'SignInCtrl'
               })
-          .state('access.forgotpwd', {
+          .state('auth.forgotpwd', {
               url: '/forgotpwd',
               templateUrl: 'pages/forgotpwd',
-              controller: 'ForgotPwdCtrl',
+              controller: 'ForgotPwdCtrl'
           });
       }
     ]

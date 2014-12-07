@@ -11,7 +11,7 @@ angular.module('app', [
     'ui.bootstrap',
     'ui.load',
     'ui.jq',
-    'ui.validate',
+    'ui.validate'
     //'oc.lazyLoad',
-    'pascalprecht.translate'
+    //'pascalprecht.translate'
 ]);

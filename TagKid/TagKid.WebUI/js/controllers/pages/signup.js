@@ -1,5 +1,25 @@
 ﻿app.controller('SignUpCtrl', [
-    '$scope', '$modal', '$http', 'authService', function($scope, $modal, $http, authService) {
-        authService.redirectIfLoggedIn();
+    '$scope', '$modal', function ($scope, $modal) {
+        $scope.isCollapsed = true;
+
+        $scope.signup = function() {
+            tagkid.auth.signUpWithEmail($scope.req,
+                function (resp, header) {
+                    $scope.isCollapsed = false;
+                },
+                function (resp) {
+                     $scope.authError = resp.ResponseMessage;
+                });
+        };
+
+        $scope.openTermsAndPolicy = function () {
+            $modal.open({
+                templateUrl: 'termsAndPolicyModalContent.html',
+                controller: 'TermsAndPolicyModalCtrl'
+            }).result.then(function (newCategory) {
+                $scope.categories.push(newCategory);
+                $scope.selectedCategory = newCategory;
+            });
+        };
     }
 ]);

@@ -1,13 +1,9 @@
-﻿app.controller('TimelineCtrl', ['$scope', '$modal', '$http', 'authService', function ($scope, $modal, $http, authService) {
-    authService.ensureLoggedIn();
-
+﻿app.controller('TimelineCtrl', ['$scope', '$modal', '$http', function ($scope, $modal, $http) {
     $('textarea').autogrow();
 
     $(document).on('click', '.btn-comment', function () {
         $('#comments').toggle();
     });
-
-    $scope.user = authService.user;
 
     $scope.posts = [
     {

@@ -1,5 +1,7 @@
 ﻿app.controller('SignInCtrl', [
-    '$scope', '$modal', '$http', 'authService', function($scope, $modal, $http, authService) {
-        authService.redirectIfLoggedIn();
+    '$scope', '$modal', '$http', '$state', function($scope, $modal, $http, $state) {
+        $scope.signin = function () {
+            tagkid.auth.signInWithPassword($scope.req);
+        };
     }
 ]);
