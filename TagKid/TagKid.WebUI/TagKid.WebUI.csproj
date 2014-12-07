@@ -39,7 +39,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.4.0.2.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -113,7 +132,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\UIController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\ModalsController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,8 +167,12 @@
     <Content Include="img\c5.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="js\app.js" />
-    <Content Include="js\app\note\note.js" />
-    <Content Include="js\app\timeline\timeline.js" />
+    <Content Include="js\controllers\controls\editor.js" />
+    <Content Include="js\controllers\modals\new_category.js" />
+    <Content Include="js\controllers\pages\forgotpwd.js" />
+    <Content Include="js\controllers\pages\signin.js" />
+    <Content Include="js\controllers\pages\signup.js" />
+    <Content Include="js\controllers\pages\timeline.js" />
     <Content Include="js\config.js" />
     <Content Include="js\config.lazyload.js" />
     <Content Include="js\config.router.js" />
@@ -166,6 +191,7 @@
     <Content Include="js\editor.js" />
     <Content Include="js\filters\fromNow.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\services\authService.js" />
     <Content Include="js\services\ui-load.js" />
     <Content Include="l10n\en.js" />
     <Content Include="template-site\angular-stripped.html" />
@@ -465,6 +491,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="js\controllers\layout\" />
     <Folder Include="Models\" />
     <Folder Include="template-site\js\controllers\uploads\" />
   </ItemGroup>
@@ -479,7 +506,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="js\app\note\notes.json" />
     <Content Include="template-site\api\login" />
     <Content Include="template-site\api\signup" />
     <Content Include="template-site\css\less\app.arrow.less" />
@@ -526,7 +552,7 @@
     <Content Include="template-site\vendor\jquery\footable\fonts\footable.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\UI\Index.cshtml" />
+    <Content Include="Views\Layout\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\Simple-Line-Icons.eot" />
@@ -539,12 +565,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\taga.pubxml" />
-    <Content Include="Views\UI\NewCategory.cshtml" />
-    <Content Include="Views\UI\Timeline.cshtml" />
-    <Content Include="Views\UI\Aside.cshtml" />
-    <Content Include="Views\UI\Header.cshtml" />
-    <Content Include="Views\UI\Nav.cshtml" />
-    <Content Include="Views\UI\Layout.cshtml" />
+    <Content Include="Views\Modals\NewCategory.cshtml" />
+    <Content Include="Views\Pages\Timeline.cshtml" />
+    <Content Include="Views\Layout\Aside.cshtml" />
+    <Content Include="Views\Layout\Header.cshtml" />
+    <Content Include="Views\Layout\Nav.cshtml" />
+    <Content Include="Views\Layout\Main.cshtml" />
+    <Content Include="Views\Pages\SignUp.cshtml" />
+    <Content Include="Views\Pages\SignIn.cshtml" />
+    <Content Include="Views\Pages\ForgotPwd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">
+      <Project>{57206F02-5147-464F-93D1-F7705C2D9932}</Project>
+      <Name>Taga.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TagKid.Application\TagKid.Application.csproj">
+      <Project>{AF00930E-9F7A-46AF-994C-245674C78B6E}</Project>
+      <Name>TagKid.Application</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

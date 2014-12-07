@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Taga.Core.Rest;
+using TagKid.Application.Bootstrapping;
 
 namespace TagKid.WebUI
 {
@@ -9,11 +8,15 @@ namespace TagKid.WebUI
     {
         public static void Register(HttpConfiguration config)
         {
+            Bootstrapper.StartApp();
+
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+                "GenericHttpApi",
+                "api/{*.}",
+                new { controller = "GenericHttpApi" },
+                null,
+                new GenericApiHandler(config)
+                );
         }
     }
 }

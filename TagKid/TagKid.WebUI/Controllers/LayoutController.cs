@@ -2,19 +2,14 @@
 
 namespace TagKid.WebUI.Controllers
 {
-    public class UIController : Controller
+    public class LayoutController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Layout()
-        {
-            return PartialView();
-        }
-
-        public ActionResult Timeline()
+        public ActionResult Main()
         {
             return PartialView();
         }
@@ -30,11 +25,6 @@ namespace TagKid.WebUI.Controllers
         }
 
         public ActionResult Header()
-        {
-            return PartialView();
-        }
-
-        public ActionResult NewCategory()
         {
             return PartialView();
         }

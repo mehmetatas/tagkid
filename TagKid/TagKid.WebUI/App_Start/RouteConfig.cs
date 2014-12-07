@@ -11,14 +11,13 @@ namespace TagKid.WebUI
 
             routes.MapRoute(
                 name: "ViewAction",
-                url: "{controller}/{action}",
-                defaults: new { controller = "UI", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}"
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{*.}",
-                defaults: new { controller = "UI", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Layout", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

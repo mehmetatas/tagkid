@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="~/css/app.css" type="text/css" />
 </head>
 <body ng-controller="AppCtrl">
-    <!--'container':app.settings.container-->
-    <div id="app" class="app container" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock}" ui-view></div>
+    <!---->
+    <div id="app" class="app" ng-class="{'container':app.settings.container, 'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock}" ui-view></div>
 
     <!-- jQuery -->
     <script src="~/vendor/jquery/jquery.min.js"></script>
@@ -34,7 +34,7 @@
     <!-- bootstrap -->
     <script src="~/vendor/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- lazyload -->
-    <script src="~/vendor/angular/oclazyload/ocLazyLoad.js"></script>
+    @*<script src="~/vendor/angular/oclazyload/ocLazyLoad.js"></script>*@
     <!-- translate -->
     <script src="~/vendor/angular/angular-translate/angular-translate.js"></script>
     <script src="~/vendor/angular/angular-translate/loader-static-files.js"></script>
@@ -44,7 +44,7 @@
     <!-- App -->
     <script src="~/js/app.js"></script>
     <script src="~/js/config.js"></script>
-    <script src="~/js/config.lazyload.js"></script>
+    @*<script src="~/js/config.lazyload.js"></script>*@
     <script src="~/js/config.router.js"></script>
     <script src="~/js/main.js"></script>
     <script src="~/js/services/ui-load.js"></script>
@@ -61,7 +61,15 @@
     <script src="~/js/directives/ui-toggleclass.js"></script>
     <script src="~/js/directives/ui-validate.js"></script>
     <script src="~/js/controllers/bootstrap.js"></script>
-    <script src="~/js/editor.js"></script>
+    <!-- Services -->
+    <script src="~/js/services/authService.js"></script>
     <!-- Lazy loading -->
+    <script src="~/js/editor.js"></script>
+    <script src="~/js/controllers/pages/timeline.js"></script>
+    <script src="~/js/controllers/pages/signin.js"></script>
+    <script src="~/js/controllers/pages/signup.js"></script>
+    <script src="~/js/controllers/pages/forgotpwd.js"></script>
+    <script src="~/js/controllers/controls/editor.js"></script>
+    <script src="~/js/controllers/modals/new_category.js"></script>
 </body>
 </html>

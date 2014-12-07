@@ -3,21 +3,24 @@
         <div class="padder">
             <div class="streamline b-l b-info m-l m-b padder-v">
                 <div>
-                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                    <a ui-sref="/user/mehmetatas" class="pull-left thumb-sm avatar m-l-n-md">
                         <img src="img/a2.jpg" alt="...">
                     </a>
-                    <div class="m-l-lg panel b-a r-3x">
-                        <div class="panel-heading pos-rlt b-b b-light">
+                    <div class="m-l-lg panel b-a r-3x" ng-controller="EditorCtrl">
+                        <div class=" panel-heading pos-rlt b-b b-light">
                             <span class="text-muted m-l-sm pull-left">
                                 <span class="arrow left pull-up"></span>
-                                <a href>Mehmet Ataş</a>
-                                <span class="text-xs">@@mehmetatas</span>
+                                <a ui-sref="/user/mehmetatas">
+                                    <span class="text-md font-bold" ng-bind="user.Fullname"></span>
+                                    <span class=" text-xs text-muted" ng-bind="'&#64;' + user.Username"></span>
+                                </a>
+
                                 <div class="tag-search">
                                     <div class="btn-group" dropdown>
-                                        <a href="#" dropdown-toggle><label class="label m-r-xs" ng-class="selectedCategory ? selectedCategory.CssClass : 'bg-light'">{{selectedCategory ? selectedCategory.Name : 'Select Category'}}</label></a>
+                                        <a href="#" dropdown-toggle><label class="label m-r-xs" ng-class="selectedCategory ? selectedCategory.CssClass : 'bg-light'" ng-bind="selectedCategory ? selectedCategory.Name : 'Select Category'"></label></a>
                                         <div class="dropdown-menu text-sm padder" role="menu">
                                             <a href ng-repeat="category in categories" ng-click="selectCategory(category);">
-                                                <label ng-class="category.CssClass" class="label m-r-xs">{{category.Name}}</label>
+                                                <label ng-class="category.CssClass" class="label m-r-xs" ng-bind="category.Name"></label>
                                             </a>
                                             <hr class="m-xs">
                                             <a href><label class="label bg-light m-r-xs" ng-click="showNewCategoryPopup();">new category</label></a>
@@ -25,13 +28,13 @@
                                     </div>
 
                                     <script type="text/ng-template" id="newCategoryModalContent.html">
-                                        <div ng-include="'ui/NewCategory'"></div>
+                                        <div ng-include="'modals/NewCategory'"></div>
                                     </script>
 
-                                    <span class="tags" ng-repeat="tag in SelectedTags">
-                                        <a ng-click="removeTag(tag)"><label class=" label bg-light m-r-xs">{{tag.Name}}</label></a>
+                                    <span class="tags" ng-repeat="tag in selectedTags">
+                                        <a ng-click="removeTag(tag)"><label class=" label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
                                     </span>
-                                    <input type="text" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="SelectedTags.length >= 5" ng-show="SelectedTags.length < 5" />
+                                    <input type="text" id="tk-tag-input" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="selectedTags.length >= 5" ng-show="selectedTags.length < 5" />
                                 </div>
                             </span>
                             <div class="clearfix"></div>
@@ -41,10 +44,10 @@
                             <textarea id="tk-editor" class="form-control no-border r-b no-padder" style="margin-top: -1px" rows="3" placeholder="Your post here"></textarea>
                             <div id="tk-preview" style="display: none;"></div>
                             <div class="m-t-sm">
-                                <a href="#" id="tk-preview-btn" class="btn btn-default btn-xs">
+                                <a href id="tk-preview-btn" class="btn btn-default btn-xs" ng-click="toggleEditor();">
                                     <i class="fa fa-list-alt text-muted text"></i> Preview
                                 </a>
-                                <a href="#" id="tk-edit-btn" class="btn btn-default btn-xs" style="display: none">
+                                <a href id="tk-edit-btn" class="btn btn-default btn-xs" style="display: none" ng-click="toggleEditor();">
                                     <i class="fa fa-edit text-muted text"></i> Edit
                                 </a>
                                 <a href="#" class="btn btn-default btn-xs">
@@ -57,10 +60,84 @@
                                     <i class="fa fa-mail-forward text-muted"></i> Publish
                                 </a>
                             </div>
-
                         </div>
                     </div>
 
+                </div>
+
+                <div ng-repeat="post in posts">
+                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                        <img ng-src="{{post.User.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
+                    </a>
+                    <div class="m-l-lg panel b-a r-3x">
+                        <div class="panel-heading pos-rlt b-b b-light">
+                            <span class="text-muted m-l-sm pull-right" ng-bind="post.PublishDate"></span>
+                            <span class="text-muted m-l-sm pull-left">
+                                <span class="arrow left pull-up"></span>
+                                <a ng-href="{{'/user/' + post.User.Username}}">
+                                    <span class="text-md font-bold" ng-bind="post.User.Fullname"></span>
+                                    <span class="text-xs text-muted" ng-bind="'&#64;' + post.User.Username"></span>
+                                </a>
+
+                                <br />
+                                <a ng-href="{{'/category/' + post.Category.Id}}"><label class="label m-r-xs" ng-class="post.Category.CssClass" ng-bind="post.Category.Name"></label></a>
+                                <a ng-repeat="tag in post.Tags" ng-href="'/tag/' + tag.Id"><label class="label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <h4 ng-bind="post.Title"></h4>
+                            <div ng-bind-html="post.Content"></div>
+                            <div class="m-t-sm">
+                                <a href class="btn btn-default btn-xs" ng-class="{active: post.Liked}" ng-click="likeUnlike(post)">
+                                    <i class="fa fa-heart-o text-muted text"></i>
+                                    <i class="fa fa-heart text-danger text-active"></i>
+                                    <span ng-bind="post.LikeCount"></span>
+                                </a>
+                                <a href class="btn btn-default btn-xs" ng-class="{active: post.Retagged}" ng-disabled="post.Retagged" ng-click="retag(post);">
+                                    <i class="fa fa-mail-reply text-muted text"></i>
+                                    <i class="fa fa-mail-reply text-info text-active"></i>
+                                    <span ng-bind="post.RetagCount"></span>
+                                </a>
+                                <a href class="btn btn-default btn-xs" ng-click="toggleComments(post);">
+                                    <i class="fa fa-comments-o text-muted"></i>
+                                    <span ng-bind="post.CommentCount"></span>
+                                </a>
+                            </div>
+                            <div style="max-height: 300px;" ng-show="post.ShowComments" class="m-t-md m-b-md text-xs scroll-y">
+                                <div class="m-l-xs">
+                                    <a ng-href="{{'/user/' + user.Username}}" class="pull-left thumb-xs avatar">
+                                        <img ng-src="{{user.ProfileImageUrl}}" alt="{{user.Fullname}}">
+                                    </a>
+                                    <div class="m-l-xxl panel b-a r-2x">
+                                        <div class="panel-heading pos-rlt">
+                                            <span class="arrow left pull-up"></span>
+                                            <textarea ng-model="post.NewComment" class="no-border w-full text-xs" rows="1" placeholder="Your comment..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- .comments -->
+                                <div class="m-l-xs m-b-n" ng-repeat="comment in post.Comments">
+                                    <a ng-href="{{'/user/' + comment.User.Username}}" class="pull-left thumb-xs avatar">
+                                        <img ng-src="{{comment.User.ProfileImageUrl}}" alt="{{comment.User.Fullname}}">
+                                    </a>
+                                    <div class="m-l-xxl panel b-a r-2x">
+                                        <div class="panel-heading pos-rlt">
+                                            <span class="arrow left pull-up"></span>
+                                            <span class="text-muted m-l-sm pull-right" ng-bind="comment.CommentDate"></span>
+                                            <a ng-href="{{'/user/' + comment.User.Username}}">
+                                                <span class="text-xs font-bold" ng-bind="comment.User.Fullname"></span>
+                                                <span class="text-xxs text-muted" ng-bind="'&#64;' + comment.User.Username"></span>
+                                            </a>
+                                            <br />
+                                            <span ng-bind="comment.Comment"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / .comments -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div>
@@ -342,28 +419,3 @@
 
 
 </div>
-<script type="text/javascript">
-    $('textarea').autogrow();
-
-    $(function () {
-        $('.btn-comment').on('click', function () {
-            $('#comments').toggle();
-        });
-
-        var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
-
-        $('#tk-preview-btn').on('click', function (e) {
-            $('.tk-preview-btn').toggle();
-            $('.tk-edit-btn').toggle();
-            editor.toggle();
-            e.preventDefault();
-        });
-
-        $('#tk-edit-btn').on('click', function (e) {
-            $('.tk-preview-btn').toggle();
-            $('.tk-edit-btn').toggle();
-            editor.toggle();
-            e.preventDefault();
-        });
-    });
-</script>
