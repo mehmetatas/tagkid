@@ -12,7 +12,6 @@ namespace TagKid.WebUI.Controllers
 
         public new ActionResult User()
         {
-            Thread.Sleep(3000);
             return PartialView();
         }
 

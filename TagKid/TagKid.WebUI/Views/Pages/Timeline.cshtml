@@ -4,7 +4,6 @@
             <div class="streamline b-l b-info m-l m-b padder-v">
                 <!-- New Post -->
                 <div>
-                    @*<a ng-href="{{'/user/' + user.Username}}" class="pull-left thumb-sm avatar m-l-n-md">*@
                     <a ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
                         <img ng-src="{{user.ProfileImageUrl}}" ng-alt="{{user.Fullname}}">
                     </a>
@@ -30,7 +29,7 @@
                                     </div>
 
                                     <script type="text/ng-template" id="newCategoryModalContent.html">
-                                        <div ng-include="'modals/NewCategory'"></div>
+                                        <div ng-include="'/modals/NewCategory'"></div>
                                     </script>
 
                                     <span class="tags" ng-repeat="tag in selectedTags">
@@ -168,7 +167,7 @@
                             <ul class="list-group no-bg no-borders pull-in">
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="img/a4.jpg" alt="..." class="img-circle">
+                                        <img src="~/img/a4.jpg" alt="..." class="img-circle">
                                         <i class="on b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -178,7 +177,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="img/a5.jpg" alt="..." class="img-circle">
+                                        <img src="~/img/a5.jpg" alt="..." class="img-circle">
                                         <i class="on b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -188,7 +187,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="img/a6.jpg" alt="..." class="img-circle">
+                                        <img src="~/img/a6.jpg" alt="..." class="img-circle">
                                         <i class="busy b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -198,7 +197,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="img/a7.jpg" alt="..." class="img-circle">
+                                        <img src="~/img/a7.jpg" alt="..." class="img-circle">
                                         <i class="away b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -228,7 +227,7 @@
                         <div class="panel b-light clearfix">
                             <div class="panel-body">
                                 <a href class="thumb pull-left m-r">
-                                    <img src="img/a0.jpg" class="img-circle">
+                                    <img src="~/img/a0.jpg" class="img-circle">
                                 </a>
                                 <div class="clear">
                                     <a href class="text-info">@@Mike Mcalidek <i class="fa fa-twitter"></i></a>

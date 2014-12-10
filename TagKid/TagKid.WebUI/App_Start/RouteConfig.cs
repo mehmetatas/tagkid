@@ -10,8 +10,24 @@ namespace TagKid.WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "ViewAction",
-                url: "{controller}/{action}"
+                name: "Layout",
+                url: "Layout/{action}",
+                defaults: new { controller = "Layout" }
+
+            );
+
+            routes.MapRoute(
+                name: "Pages",
+                url: "Pages/{action}",
+                defaults: new { controller = "Pages" }
+
+            );
+
+            routes.MapRoute(
+                name: "Modals",
+                url: "Modals/{action}",
+                defaults: new { controller = "Modals" }
+
             );
 
             routes.MapRoute(

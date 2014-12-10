@@ -7,7 +7,7 @@
         <i class="glyphicon glyphicon-align-justify"></i>
     </button>
     <!-- brand -->
-    <a href="#/" class="navbar-brand text-lt">
+    <a href="/" class="navbar-brand text-lt">
         <i class="fa fa-user"></i>
         <span class="hidden-folded m-l-xs">{{app.name}}</span>
     </a>
@@ -167,21 +167,6 @@
     <!-- / search form -->
     <!-- nabar right -->
     <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown hidden-sm" is-open="lang.isopen" dropdown>
-            <a href class="dropdown-toggle" dropdown-toggle>
-                {{selectLang}} <b class="caret"></b>
-            </a>
-            <!-- dropdown -->
-            <ul class="dropdown-menu animated fadeInRight w">
-                <li ng-repeat="(langKey, label) in langs">
-                    <a ng-click="setLang(langKey, $event)" href>{{label}}</a>
-                </li>
-            </ul>
-            <!-- / dropdown -->
-        </li>
-        <li class="hidden-xs">
-            <a ui-fullscreen></a>
-        </li>
         <li class="dropdown" dropdown>
             <a href class="dropdown-toggle" dropdown-toggle>
                 <i class="icon-bell fa-fw"></i>
@@ -197,7 +182,7 @@
                     <div class="list-group">
                         <a href class="media list-group-item">
                             <span class="pull-left thumb-sm">
-                                <img src="img/a0.jpg" alt="..." class="img-circle">
+                                <img src="~/img/a0.jpg" alt="..." class="img-circle">
                             </span>
                             <span class="media-body block m-b-none">
                                 Use awesome animate.css<br>
@@ -222,7 +207,7 @@
         <li class="dropdown" dropdown>
             <a href class="dropdown-toggle clear" dropdown-toggle>
                 <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                    <img src="img/a0.jpg" alt="...">
+                    <img src="~/img/a0.jpg" alt="...">
                     <i class="on md b-white bottom"></i>
                 </span>
                 <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>

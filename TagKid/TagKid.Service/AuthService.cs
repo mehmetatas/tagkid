@@ -40,7 +40,7 @@ namespace TagKid.Service
             {
                 Username = user.Username,
                 Fullname = user.Fullname,
-                ProfileImageUrl = "img/a2.jpg"
+                ProfileImageUrl = "/img/a2.jpg"
             };
         }
 

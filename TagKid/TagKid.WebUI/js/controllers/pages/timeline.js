@@ -37,6 +37,33 @@
             { Id: 4, Name: 'junit' },
             { Id: 5, Name: 'nunit' }
         ]
+    },
+    {
+        ShowComments: false,
+        NewComment: '',
+        Title: 'Lorem ipsum dolor sit amet',
+        Content: '<p>Lorem ipsum dolor sit amet, consecteter adipiscing elit... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer</p><p>posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>',
+        PublishDate: '29 Aug 2014 Wed, 22:34',
+        Liked: false,
+        LikeCount: 42,
+        Retagged: true,
+        RetagCount: 24,
+        CommentCount: 0,
+        Comments: [],
+        User: {
+            ProfileImageUrl: '/img/a2.jpg',
+            Username: 'sedacetinkaya',
+            Fullname: 'Seda Çetinkaya'
+        },
+        Category: {
+            Id: 125,
+            Name: 'textile',
+            CssClass: 'bg-primary'
+        },
+        Tags: [
+            { Id: 1, Name: 'denim' },
+            { Id: 2, Name: 'blue-jean' }
+        ]
     }];
 
     $scope.likeUnlike = function (post) {

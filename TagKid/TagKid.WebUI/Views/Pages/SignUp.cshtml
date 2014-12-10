@@ -27,7 +27,7 @@
                     <input type="checkbox" ng-model="agree" required><i></i> Agree the <a ng-click="openTermsAndPolicy();">terms and policy</a>
                 </label>
                 <script type="text/ng-template" id="termsAndPolicyModalContent.html">
-                    <div ng-include="'modals/TermsAndPolicy'"></div>
+                    <div ng-include="'/modals/TermsAndPolicy'"></div>
                 </script>
             </div>
             <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="signup()" ng-disabled='form.$invalid'>Sign up</button>
