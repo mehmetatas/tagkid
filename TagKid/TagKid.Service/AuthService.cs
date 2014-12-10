@@ -48,7 +48,7 @@ namespace TagKid.Service
         {
             if (ccid < 1 || String.IsNullOrWhiteSpace(cc))
             {
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode);
+                throw Errors.S_InvalidActivationCode.ToException();
             }
             DomainService.ActivateAccount(ccid, cc);
             return new ActivateAccountResponse();

@@ -22,10 +22,10 @@ namespace TagKid.Core.Models.DTO.Messages.Auth
         public SignInWithPasswordRequestValidator()
         {
             RuleFor(r => r.Password)
-                .NotNull(Errors.Validation_SignIn_EmptyPassword);
+                .NotNull(Errors.V_Password);
 
             RuleFor(r => r.EmailOrUsername)
-                .NotNull(Errors.Validation_SignIn_EmptyUsernameOrEmail);
+                .NotNull(Errors.V_UsernameOrEmail);
         }
     }
 }

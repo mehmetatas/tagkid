@@ -47,13 +47,13 @@ namespace TagKid.Domain
             var user = UserRepository.GetByEmail(email);
             if (user != null)
             {
-                Throw.Critical(Errors.Validation_SignUp_EmailAlreadyExists);
+                throw Errors.V_EmailAlreadyExists.ToException();
             }
 
             user = UserRepository.GetByUsername(username);
             if (user != null)
             {
-                Throw.Critical(Errors.Validation_SignUp_UsernameAlreadyExists);
+                throw Errors.V_UsernameAlreadyExists.ToException();
             }
 
             user = new User
@@ -98,17 +98,18 @@ namespace TagKid.Domain
 
             if (user == null)
             {
-                Throw.Critical(Errors.Security_InvalidUsernameOrPassword, "Invalid email or username: {0}", emailOrUsername);
+                throw Errors.S_InvalidUsernameOrPassword.ToException("Invalid email or username: {0}", emailOrUsername);
             }
 
             if (user.Password != Util.EncryptPwd(password))
             {
-                Throw.Critical(Errors.Security_InvalidUsernameOrPassword, "Invalid password for: {0} {1}", user.Username, user.Id);
+                throw Errors.S_InvalidUsernameOrPassword.ToException("Invalid password for: {0} {1}", user.Username,
+                    user.Id);
             }
 
             if (user.Status != UserStatus.Active)
             {
-                Throw.Critical(Errors.Security_InvalidUsernameOrPassword, "User not active: {0} {1}", user.Username, user.Id);
+                throw Errors.S_InvalidUsernameOrPassword.ToException("User not active: {0} {1}", user.Username, user.Id);
             }
 
             var authToken = new Token
@@ -153,32 +154,37 @@ namespace TagKid.Domain
 
             if (confirmationCode == null)
             {
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode, "Invalid confirmation code id: {0}", confirmationCodeId);
+                throw Errors.S_InvalidActivationCode.ToException("Invalid confirmation code id: {0}", confirmationCodeId);
             }
 
             if (confirmationCode.Code != code)
             {
                 SetConfirmationCodeAsUsed(confirmationCode, ConfirmationCodeStatus.Failed);
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode, "Invalid confirmation code: id={0}, code={1}", confirmationCodeId, code);
+                throw Errors.S_InvalidActivationCode.ToException("Invalid confirmation code: id={0}, code={1}",
+                    confirmationCodeId, code);
             }
 
             if (confirmationCode.Status != ConfirmationCodeStatus.AwaitingConfirmation)
             {
                 SetConfirmationCodeAsUsed(confirmationCode, ConfirmationCodeStatus.Failed);
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode, "Already confirmed confirmation code: id={0}, code={1}", confirmationCodeId, code);
+                throw Errors.S_InvalidActivationCode.ToException(
+                    "Already confirmed confirmation code: id={0}, code={1}", confirmationCodeId, code);
             }
 
             if (confirmationCode.ExpireDate < DateTime.Now)
             {
                 SetConfirmationCodeAsUsed(confirmationCode, ConfirmationCodeStatus.Expired);
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode, "Confirmation code expired: id={0}, code={1}", confirmationCodeId, code);
+                throw Errors.S_InvalidActivationCode.ToException("Confirmation code expired: id={0}, code={1}",
+                    confirmationCodeId, code);
             }
 
             if (confirmationCode.Reason != ConfirmationReason.NewUser &&
                 confirmationCode.Reason != ConfirmationReason.AccountReactivation)
             {
                 SetConfirmationCodeAsUsed(confirmationCode, ConfirmationCodeStatus.Failed);
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode, "Invalid confirmation code reason: id={0}, code={1}, reason: {2}", confirmationCodeId, code, confirmationCode.Reason);
+                throw Errors.S_InvalidActivationCode.ToException(
+                    "Invalid confirmation code reason: id={0}, code={1}, reason: {2}", confirmationCodeId, code,
+                    confirmationCode.Reason);
             }
 
             var user = UserRepository.GetById(confirmationCode.UserId);
@@ -186,13 +192,17 @@ namespace TagKid.Domain
             if (user == null)
             {
                 SetConfirmationCodeAsUsed(confirmationCode, ConfirmationCodeStatus.Failed);
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode, "User not found for confirmation code: id={0}, code={1}, userId: {2}", confirmationCodeId, code, confirmationCode.UserId);
+                throw Errors.S_InvalidActivationCode.ToException(
+                    "User not found for confirmation code: id={0}, code={1}, userId: {2}",
+                    confirmationCodeId, code, confirmationCode.UserId);
             }
 
             if (user.Status != UserStatus.AwaitingActivation)
             {
                 SetConfirmationCodeAsUsed(confirmationCode, ConfirmationCodeStatus.Failed);
-                Throw.Critical(Errors.Security_ActivateAccount_InvalidActivationCode, "Invalid User status for confirmation code: id={0}, code={1}, userId: {2}, usersTatus: {3}", confirmationCodeId, code, confirmationCode.UserId, user.Status);
+                throw Errors.S_InvalidActivationCode.ToException(
+                    "Invalid User status for confirmation code: id={0}, code={1}, userId: {2}, usersTatus: {3}",
+                    confirmationCodeId, code, confirmationCode.UserId, user.Status);
             }
 
             SetConfirmationCodeAsUsed(confirmationCode, ConfirmationCodeStatus.Confirmed);
@@ -207,18 +217,18 @@ namespace TagKid.Domain
 
             if (token == null)
             {
-                Throw.Critical(Errors.Security_InvalidAuthToken, "No token found with the id {0}", tokenId);
+                throw Errors.S_InvalidAuthToken.ToException("No token found with the id {0}", tokenId);
             }
 
             if (token.Guid != guid)
             {
-                Throw.Critical(Errors.Security_InvalidAuthToken, "Invalid guid ({0}) for token id {1}", guid, tokenId);
+                throw Errors.S_InvalidAuthToken.ToException("Invalid guid ({0}) for token id {1}", guid, tokenId);
             }
 
             if (token.ExpireDate < DateTime.Now)
             {
                 TokenRepository.Delete(token);
-                Throw.Critical(Errors.Security_InvalidAuthToken, "Expired token");
+                throw Errors.S_InvalidAuthToken.ToException("Expired token");
             }
 
             var user = UserRepository.GetById(token.UserId);
@@ -226,7 +236,7 @@ namespace TagKid.Domain
             if (user.Status != UserStatus.Active)
             {
                 TokenRepository.Delete(token);
-                Throw.Critical(Errors.Security_InvalidAuthToken, "User not active");
+                throw Errors.S_InvalidAuthToken.ToException("User not active");
             }
 
             token.UseDate = DateTime.Now;

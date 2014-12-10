@@ -9,7 +9,6 @@ using Taga.Core.Rest;
 using TagKid.Core.Domain;
 using TagKid.Core.Exceptions;
 using TagKid.Core.Logging;
-using TagKid.Core.Mailing;
 using TagKid.Core.Models;
 using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Validation;
@@ -28,11 +27,6 @@ namespace TagKid.Core.Service.Interceptors
         public ActionInterceptor()
         {
             _prov = ServiceProvider.Provider;
-        }
-
-        public IMailService MailService
-        {
-            get { return _prov.GetOrCreate<IMailService>(); }
         }
 
         public void Dispose()
@@ -74,8 +68,6 @@ namespace TagKid.Core.Service.Interceptors
                 ctx.SetResponseHeader(AuthTokenId, token.Id.ToString());
             }
 
-            MailService.SendMails();
-
             FlushLogs();
         }
 
@@ -97,7 +89,7 @@ namespace TagKid.Core.Service.Interceptors
                 };
             }
 
-            if (tkException.IsCritical())
+            if (tkException.Error.Type == ErrorType.Security)
             {
                 _uow.Save(true);
             }

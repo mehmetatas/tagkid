@@ -35,12 +35,11 @@ namespace TagKid.Core.Validation
                 return;   
             }
 
-            if (res.Errors[0].CustomState != null)
-            {
-                Throw.User((Error)res.Errors[0].CustomState);
-            }
+            var error = res.Errors[0].CustomState == null
+                ? Errors.V_GenericError
+                : (Error) res.Errors[0].CustomState;
 
-            Throw.User(Errors.Validation_GenericError);
+            throw error.ToException();
         }
     }
 }

@@ -60,8 +60,7 @@
     <Compile Include="Domain\IPostDomainService.cs" />
     <Compile Include="Domain\ITagKidDomainService.cs" />
     <Compile Include="Domain\IUserDomainService.cs" />
-    <Compile Include="Exceptions\CriticalException.cs" />
-    <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="Exceptions\ErrorType.cs" />
     <Compile Include="Mailing\Commands\IMailCommand.cs" />
     <Compile Include="Mailing\Commands\NewUserActivationMail.cs" />
     <Compile Include="Mailing\MailService.cs" />
@@ -71,7 +70,6 @@
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Exceptions\Error.cs" />
     <Compile Include="Exceptions\Errors.cs" />
-    <Compile Include="Exceptions\Throw.cs" />
     <Compile Include="Logging\DbLogger.cs" />
     <Compile Include="Logging\L.cs" />
     <Compile Include="Models\Database\FollowCategory.cs" />
@@ -90,6 +88,7 @@
     <Compile Include="Models\Database\TagPost.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignUpWithEmail.cs" />
     <Compile Include="Utils\ML.cs" />
+    <Compile Include="Utils\Strings.cs" />
     <Compile Include="Validation\TagKidValidator.cs" />
     <Compile Include="Models\RequestContext.cs" />
     <Compile Include="Models\Database\Token.cs" />

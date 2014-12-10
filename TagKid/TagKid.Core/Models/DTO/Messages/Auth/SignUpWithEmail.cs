@@ -22,21 +22,21 @@ namespace TagKid.Core.Models.DTO.Messages.Auth
         public SignUpWithEmailRequestValidator()
         {
             RuleFor(r => r.Email)
-                .EmailAddress(Errors.Validation_SignUp_EmailAddress)
-                .TrimmedLength(5, 80, Errors.Validation_SignUp_EmailAddress);
+                .EmailAddress(Errors.V_EmailAddress)
+                .TrimmedLength(5, 80, Errors.V_EmailAddress);
 
             RuleFor(r => r.Username)
-                .NotNull(Errors.Validation_SignUp_Username)
-                .TrimmedLength(1, 16, Errors.Validation_SignUp_Username)
-                .Charset("abcdefghijklmnopqrstuvwxyz0123456789-_", false, Cultures.EnGb, Errors.Validation_SignUp_Username);
+                .NotNull(Errors.V_Username)
+                .TrimmedLength(1, 16, Errors.V_Username)
+                .Charset("abcdefghijklmnopqrstuvwxyz0123456789-_", false, Cultures.EnGb, Errors.V_Username);
 
             RuleFor(r => r.Password)
-                .NotNull(Errors.Validation_SignUp_Password)
-                .TrimmedLength(6, 20, Errors.Validation_SignUp_Password);
+                .NotNull(Errors.V_Password)
+                .TrimmedLength(6, 20, Errors.V_Password);
 
             RuleFor(r => r.Fullname)
-                .NotNull(Errors.Validation_SignUp_Fullname)
-                .Length(0, 50, Errors.Validation_SignUp_Fullname);
+                .NotNull(Errors.V_Fullname)
+                .Length(0, 50, Errors.V_Fullname);
         }
     }
 }
