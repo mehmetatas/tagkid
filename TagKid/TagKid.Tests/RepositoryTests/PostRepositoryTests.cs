@@ -74,17 +74,11 @@ namespace TagKid.Tests.RepositoryTests
                         AccessLevel = (AccessLevel) (i % 3),
                         CategoryId = (i % 4) + 1,
                         UserId =  (i % 4) + 1,
-                        Content = "Content",
-                        ContentCode = "Content Code",
+                        EditorType = EditorType.TagKid,
+                        EditorContent = "*Content*",
+                        HtmlContent = "<b>Content</b>",
                         CreateDate = DateTime.Now.AddDays(-2).TrimMillis(),
-                        LinkDescription = "Link Description",
-                        LinkImageUrl = "Link Image Url",
-                        LinkTitle = "Link Title",
-                        LinkUrl = "Link Url",
-                        MediaEmbedUrl = "Media Embed Url",
                         PublishDate = DateTime.Now.AddDays(-1).TrimMillis(),
-                        QuoteAuthor = "Quote Author",
-                        QuoteText = "Quote Text",
                         Status =
                             i % 5 != 1 ? PostStatus.Published : (i % 2 == 0 ? PostStatus.Draft : PostStatus.Deleted),
                         Tags =
@@ -96,8 +90,7 @@ namespace TagKid.Tests.RepositoryTests
                                 new Tag { Id = i + 4 },
                                 new Tag { Id = i + 5 }
                             },
-                        Title = GetRandomTitle(),
-                        Type = (PostType)(i % 7)
+                        Title = GetRandomTitle()
                     });
                 }
 

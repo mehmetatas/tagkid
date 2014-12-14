@@ -352,7 +352,7 @@ function TagBuilder(htmlTag) {
 $(function () {
     $(document).on('click', '.play-button', function (e) {
         var $parent = $(this).parents('.youtube-preview');
-        var videoId = $(this).attr('href').substring(1);
+        var videoId = $(this).attr('data-href');
 
         $parent.after(
             '<div class="flex-video widescreen">'

@@ -29,7 +29,7 @@ angular.module('app')
                   abstract: true,
                   url: '',
                   templateUrl: '/layout/main',
-                  onEnter: function ($http, $state) {
+                  onEnter: function($http, $state) {
                       tagkid.setNgContext($http, $state);
                       tagkid.ensureLoggedIn();
                   }
@@ -50,16 +50,13 @@ angular.module('app')
               .state('pages.user', {
                   url: '/user/:username',
                   templateUrl: '/pages/user',
-                  controller: 'UserCtrl',
-                  onEnter: function ($http, $state) {
-                      tagkid.setNgContext($http, $state);
-                      tagkid.ensureLoggedIn();
-                  }
-              })
-              .state('auth', {
+                  controller: 'UserCtrl'
+              });
+
+          $stateProvider.state('auth', {
                   url: '',
                   template: '<div ui-view class="fade-in-right-big smooth"></div>',
-                  onEnter: function ($http, $state) {
+                  onEnter: function($http, $state) {
                       tagkid.setNgContext($http, $state);
                       tagkid.redirectIfLoggedIn();
                   }
@@ -74,11 +71,16 @@ angular.module('app')
                   templateUrl: '/pages/signin',
                   controller: 'SignInCtrl'
               })
-          .state('auth.forgotpwd', {
-              url: '/forgotpwd',
-              templateUrl: '/pages/forgotpwd',
-              controller: 'ForgotPwdCtrl'
-          });
+              .state('auth.activation', {
+                  url: '/activation/:ccid/:cc',
+                  templateUrl: '/pages/activation',
+                  controller: 'ActivationCtrl'
+              })
+              .state('auth.forgotpwd', {
+                  url: '/forgotpwd',
+                  templateUrl: '/pages/forgotpwd',
+                  controller: 'ForgotPwdCtrl'
+              });
       }
     ]
   );

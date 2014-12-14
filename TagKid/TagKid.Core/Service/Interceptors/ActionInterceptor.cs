@@ -44,11 +44,11 @@ namespace TagKid.Core.Service.Interceptors
 
             if (!NoAuthMethods.Contains(actionMethod))
             {
-                var authToken = ctx.GetRequestHeader(AuthToken);
+                var authToken = new Guid(ctx.GetRequestHeader(AuthToken));
                 var authTokenId = Convert.ToInt64(ctx.GetRequestHeader(AuthTokenId));
 
                 var authDomainService = _prov.GetOrCreate<IAuthDomainService>();
-                RequestContext.Current.User = authDomainService.ValidateAuthToken(authTokenId, authToken);
+                authDomainService.SetupRequestContext(authTokenId, authToken);
             }
 
             foreach (var parameter in parameters)
@@ -61,10 +61,10 @@ namespace TagKid.Core.Service.Interceptors
         {
             _uow.Save(true);
 
-            var token = RequestContext.Current.NewAuthToken;
+            var token = RequestContext.Current.AuthToken;
             if (token != null)
             {
-                ctx.SetResponseHeader(AuthToken, token.Guid);
+                ctx.SetResponseHeader(AuthToken, token.Guid.ToString());
                 ctx.SetResponseHeader(AuthTokenId, token.Id.ToString());
             }
 
@@ -113,7 +113,8 @@ namespace TagKid.Core.Service.Interceptors
             new NoAuth<IAuthService>()
                 .Add(s => s.SignUpWithEmail(null))
                 .Add(s => s.SignInWithPassword(null))
-                .Add(s => s.ActivateAccount(0, null));
+                .Add(s => s.SignInWithToken(null))
+                .Add(s => s.ActivateAccount(null));
         }
 
         private class NoAuth<TService>

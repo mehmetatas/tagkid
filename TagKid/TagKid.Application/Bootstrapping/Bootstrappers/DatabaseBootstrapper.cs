@@ -3,10 +3,8 @@ using FluentNHibernate.Cfg.Db;
 using System.Configuration;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
-using Taga.Core.Repository.Hybrid;
 using Taga.Core.Repository.Mapping;
 using Taga.Core.Repository.Mapping.NamingConvention;
-using Taga.Repository.Hybrid;
 using Taga.Repository.NH;
 using Taga.Repository.NH.SpCallBuilders;
 using TagKid.Core.Models.Database;
@@ -29,11 +27,14 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
                 .BuildSessionFactory();
 
             prov.RegisterSingleton<INHSpCallBuilder,SqlServerSpCallBuilder>();
-            prov.RegisterSingleton<IHybridDbProvider, TagKidHybridDbProvider>();
-            prov.RegisterPerWebRequest<IHybridAdapter, NHHybridAdapter>();
-            prov.RegisterPerWebRequest<IUnitOfWork, HybridUnitOfWork>();
-            prov.RegisterPerWebRequest<ITransactionalUnitOfWork, HybridUnitOfWork>();
-            prov.RegisterPerWebRequest<IRepository, HybridRepository>();
+            prov.RegisterPerWebRequest<ITransactionalUnitOfWork, NHUnitOfWork>();
+            prov.RegisterPerWebRequest<IRepository, NHRepository>();
+
+            //prov.RegisterSingleton<IHybridDbProvider, TagKidHybridDbProvider>();
+            //prov.RegisterPerWebRequest<IHybridAdapter, NHHybridAdapter>();
+            //prov.RegisterPerWebRequest<IUnitOfWork, HybridUnitOfWork>();
+            //prov.RegisterPerWebRequest<ITransactionalUnitOfWork, HybridUnitOfWork>();
+            //prov.RegisterPerWebRequest<IRepository, HybridRepository>();
             prov.RegisterSingleton(sessionFactory);
         }
 

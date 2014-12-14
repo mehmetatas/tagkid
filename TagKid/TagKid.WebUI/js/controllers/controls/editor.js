@@ -10,7 +10,7 @@
             editor.toggle();
         };
 
-        $scope.user = tagkid.context.user;
+        $scope.user = tagkid.user();
 
         $scope.tags = [
            { Name: 'c#', Hint: 'c-sharp', Description: 'programming language' },
@@ -37,7 +37,7 @@
             }
 
             setTimeout(function () {
-                $('.tag-input').focus();
+                $('#tk-tag-input').focus();
             }, 100);
 
             return false;
@@ -63,5 +63,16 @@
             });
         };
 
+        $scope.saveAsDraft = function () {
+            alert('save as draft');
+        };
+
+        $scope.cancel = function () {
+            alert('cancel');
+        };
+
+        $scope.publish = function () {
+            alert('publish');
+        };
     }
 ]);

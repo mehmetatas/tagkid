@@ -20,5 +20,10 @@ namespace TagKid.WebUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        protected void Application_Error()
+        {
+            
+        }
     }
 }

@@ -10,10 +10,14 @@ namespace TagKid.Core.Models
             Culture = "en-GB";
         }
 
-        public User User { get; set; }
         public string Culture { get; set; }
 
-        public Token NewAuthToken { get; set; }
+        public Token AuthToken { get; set; }
+
+        public bool Authenticated
+        {
+            get { return AuthToken != null && AuthToken.User != null; }
+        }
 
         public static RequestContext Current
         {

@@ -1,0 +1,12 @@
+﻿<div class="container w-xxl w-auto-xs text-center text-lg padder-lg" ng-init="app.settings.container = false;">
+    <div class="alert alert-info" ng-hide="error">Activating account...</div>
+    <div class="alert alert-danger" ng-show="error" ng-bind="error"></div>
+    <form name="form" class="form-validation" ng-show="error">
+        <div class="list-group list-group-sm">
+            <div class="list-group-item">
+                <input type="email" class="form-control no-border" placeholder="email address" ng-model="email" required />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="requestNewActivationCode();" ng-disabled='form.$invalid'>Request New Activation Code</button>
+    </form>
+</div>

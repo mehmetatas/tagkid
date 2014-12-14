@@ -22,9 +22,9 @@ namespace TagKid.Core.Utils
             }
         }
 
-        public static string GenerateGuid()
+        public static Guid GenerateGuid()
         {
-            return Guid.NewGuid().ToString();
+            return Guid.NewGuid();
         }
     }
 }

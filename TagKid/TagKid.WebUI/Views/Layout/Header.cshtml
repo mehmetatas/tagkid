@@ -15,7 +15,7 @@
 </div>
 <!-- / navbar header -->
 <!-- navbar collapse -->
-<div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+<div ng-controller="AppCtrl" class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
     <!-- buttons -->
     <div class="nav navbar-nav hidden-xs">
         <a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
@@ -210,7 +210,7 @@
                     <img src="~/img/a0.jpg" alt="...">
                     <i class="on md b-white bottom"></i>
                 </span>
-                <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+                <span class="hidden-sm hidden-md" ng-bind="user.Fullname"></span> <b class="caret"></b>
             </a>
             <!-- dropdown -->
             <ul class="dropdown-menu animated fadeInRight w">
@@ -227,7 +227,7 @@
                     </a>
                 </li>
                 <li>
-                    <a ui-sref="app.page.profile">Profile</a>
+                    <a ui-sref="pages.user({username: user.Username})">Profile</a>
                 </li>
                 <li>
                     <a ui-sref="app.docs">
@@ -237,7 +237,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a ng-controller="AppCtrl" ng-click="signout();">Sign out</a>
+                    <a ng-click="signout();">Sign out</a>
                 </li>
             </ul>
             <!-- / dropdown -->

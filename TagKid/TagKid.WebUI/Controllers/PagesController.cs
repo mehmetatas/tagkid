@@ -25,6 +25,11 @@ namespace TagKid.WebUI.Controllers
             return PartialView();
         }
 
+        public ActionResult Activation()
+        {
+            return PartialView();
+        }
+
         public ActionResult ForgotPwd()
         {
             return PartialView();

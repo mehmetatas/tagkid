@@ -11,7 +11,7 @@
                         <div class=" panel-heading pos-rlt b-b b-light">
                             <span class="text-muted m-l-sm pull-left">
                                 <span class="arrow left pull-up"></span>
-                                <a ng-href="{{'/user/' + user.Username}}">
+                                <a ui-sref="pages.user({username: user.Username})">
                                     <span class="text-md font-bold" ng-bind="user.Fullname"></span>
                                     <span class=" text-xs text-muted" ng-bind="'&#64;' + user.Username"></span>
                                 </a>
@@ -51,13 +51,13 @@
                                 <a href id="tk-edit-btn" class="btn btn-default btn-xs" style="display: none" ng-click="toggleEditor();">
                                     <i class="fa fa-edit text-muted text"></i> Edit
                                 </a>
-                                <a href="#" class="btn btn-default btn-xs">
+                                <a href="#" class="btn btn-default btn-xs" ng-click="cancel();">
                                     <i class="fa fa-trash text-muted text"></i> Cancel
                                 </a>
-                                <a href="#" class="btn btn-default btn-xs">
+                                <a href="#" class="btn btn-default btn-xs" ng-click="saveAsDraft();">
                                     <i class="fa fa-save text-muted"></i> Save As Draft
                                 </a>
-                                <a href="#" class="btn btn-default btn-xs">
+                                <a href="#" class="btn btn-default btn-xs" ng-click="publish();">
                                     <i class="fa fa-mail-forward text-muted"></i> Publish
                                 </a>
                             </div>
@@ -74,7 +74,7 @@
                             <span class="text-muted m-l-sm pull-right" ng-bind="post.PublishDate"></span>
                             <span class="text-muted m-l-sm pull-left">
                                 <span class="arrow left pull-up"></span>
-                                <a ng-href="{{'/user/' + post.User.Username}}">
+                                <a ui-sref="pages.user({username: post.User.Username})">
                                     <span class="text-md font-bold" ng-bind="post.User.Fullname"></span>
                                     <span class="text-xs text-muted" ng-bind="'&#64;' + post.User.Username"></span>
                                 </a>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="panel-body">
                             <h4 ng-bind="post.Title"></h4>
-                            <div ng-bind-html="post.Content"></div>
+                            <div ng-bind-html="to_trusted(post.Content)"></div>
                             <div class="m-t-sm">
                                 <a href class="btn btn-default btn-xs" ng-class="{active: post.Liked}" ng-click="likeUnlike(post)">
                                     <i class="fa fa-heart-o text-muted text"></i>
@@ -106,7 +106,7 @@
                             </div>
                             <div style="max-height: 300px;" ng-show="post.ShowComments" class="m-t-md m-b-md text-xs scroll-y">
                                 <div class="m-l-xs">
-                                    <a ng-href="{{'/user/' + user.Username}}" class="pull-left thumb-xs avatar">
+                                    <a ui-sref="pages.user({username: user.Username})" class="pull-left thumb-xs avatar">
                                         <img ng-src="{{user.ProfileImageUrl}}" alt="{{user.Fullname}}">
                                     </a>
                                     <div class="m-l-xxl panel b-a r-2x">
@@ -118,14 +118,14 @@
                                 </div>
                                 <!-- comments -->
                                 <div class="m-l-xs m-b-n" ng-repeat="comment in post.Comments">
-                                    <a ng-href="{{'/user/' + comment.User.Username}}" class="pull-left thumb-xs avatar">
+                                    <a ui-sref="pages.user({username: comment.User.Username})" class="pull-left thumb-xs avatar">
                                         <img ng-src="{{comment.User.ProfileImageUrl}}" alt="{{comment.User.Fullname}}">
                                     </a>
                                     <div class="m-l-xxl panel b-a r-2x">
                                         <div class="panel-heading pos-rlt">
                                             <span class="arrow left pull-up"></span>
                                             <span class="text-muted m-l-sm pull-right" ng-bind="comment.CommentDate"></span>
-                                            <a ng-href="{{'/user/' + comment.User.Username}}">
+                                            <a ui-sref="pages.user({username: comment.User.Username})">
                                                 <span class="text-xs font-bold" ng-bind="comment.User.Fullname"></span>
                                                 <span class="text-xxs text-muted" ng-bind="'&#64;' + comment.User.Username"></span>
                                             </a>

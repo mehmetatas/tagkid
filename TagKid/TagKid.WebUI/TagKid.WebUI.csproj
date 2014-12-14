@@ -171,6 +171,7 @@
     <Content Include="js\controllers\controls\editor.js" />
     <Content Include="js\controllers\modals\new_category.js" />
     <Content Include="js\controllers\modals\terms_and_policy.js" />
+    <Content Include="js\controllers\pages\activation.js" />
     <Content Include="js\controllers\pages\forgotpwd.js" />
     <Content Include="js\controllers\pages\signin.js" />
     <Content Include="js\controllers\pages\signup.js" />
@@ -578,6 +579,7 @@
     <Content Include="Views\Pages\ForgotPwd.cshtml" />
     <Content Include="Views\Modals\TermsAndPolicy.cshtml" />
     <Content Include="Views\Pages\User.cshtml" />
+    <Content Include="Views\Pages\Activation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">

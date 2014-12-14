@@ -61,9 +61,9 @@ namespace TagKid.Core.Logging
                 }
             }
 
-            if (RequestContext.Current.User != null)
+            if (RequestContext.Current.Authenticated)
             {
-                log.User = RequestContext.Current.User.Id.ToString();
+                log.User = RequestContext.Current.AuthToken.User.Id.ToString();
             }
 
             LogScope.Current.Log(log);

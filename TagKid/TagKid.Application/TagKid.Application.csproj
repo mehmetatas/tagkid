@@ -78,10 +78,6 @@
       <Project>{16def608-1021-4a43-ae4d-88446a83f84d}</Project>
       <Name>Taga.Mapping.AutoMapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\taga\Taga.Repository.Hybrid\Taga.Repository.Hybrid.csproj">
-      <Project>{65e49106-4a80-426f-9b18-1dad6cc14c3d}</Project>
-      <Name>Taga.Repository.Hybrid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\taga\Taga.Repository.NH\Taga.Repository.NH.csproj">
       <Project>{e9eec4fa-4d1c-44c3-a44e-b39ee373675b}</Project>
       <Name>Taga.Repository.NH</Name>

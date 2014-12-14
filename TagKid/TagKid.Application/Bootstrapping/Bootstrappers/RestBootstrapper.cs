@@ -1,8 +1,12 @@
-﻿using Taga.Core.IoC;
+﻿using System;
+using System.Linq.Expressions;
+using NHibernate.Criterion;
+using Taga.Core.IoC;
 using Taga.Core.Rest;
 using TagKid.Core.Models.DTO.Messages.Auth;
 using TagKid.Core.Service;
 using TagKid.Core.Service.Interceptors;
+using IServiceProvider = Taga.Core.IoC.IServiceProvider;
 
 namespace TagKid.Application.Bootstrapping.Bootstrappers
 {
@@ -27,7 +31,9 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
             cfg.ControllerFor<IAuthService>("auth")
                 .ActionFor(s => s.SignUpWithEmail(default(SignUpWithEmailRequest)), "signUpWithEmail")
                 .ActionFor(s => s.SignInWithPassword(default(SignInWithPasswordRequest)), "signInWithPassword")
-                .ActionFor(s => s.ActivateAccount(default(long), default(string)), "activateAccount", HttpMethodType.Get);
+                .ActionFor(s => s.SignInWithToken(default(SignInWithTokenRequest)), "signInWithToken")
+                .ActionFor(s => s.SignOut(), "signOut")
+                .ActionFor(s => s.ActivateAccount(default(ActivateAccountRequest)), "activateAccount", HttpMethodType.Get);
         }
 
         private void BuildUserService(ControllerConfigurator cfg)

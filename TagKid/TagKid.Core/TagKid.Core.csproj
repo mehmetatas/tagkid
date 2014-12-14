@@ -64,9 +64,12 @@
     <Compile Include="Mailing\Commands\IMailCommand.cs" />
     <Compile Include="Mailing\Commands\NewUserActivationMail.cs" />
     <Compile Include="Mailing\MailService.cs" />
+    <Compile Include="Models\Domain\Profile.cs" />
     <Compile Include="Models\DTO\Messages\Auth\ActivateAccount.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignInWithPassword.cs" />
     <Compile Include="Mailing\IMailService.cs" />
+    <Compile Include="Models\DTO\Messages\Auth\SignInWithToken.cs" />
+    <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Exceptions\Error.cs" />
     <Compile Include="Exceptions\Errors.cs" />
@@ -76,19 +79,11 @@
     <Compile Include="Models\Database\FollowUser.cs" />
     <Compile Include="Models\Database\Log.cs" />
     <Compile Include="Models\Database\PostLike.cs" />
-    <Compile Include="Models\Domain\AudioPost.cs" />
-    <Compile Include="Models\Domain\ImagePost.cs" />
-    <Compile Include="Models\Domain\LinkPost.cs" />
-    <Compile Include="Models\Domain\PostProxy.cs" />
-    <Compile Include="Models\Domain\Profile.cs" />
-    <Compile Include="Models\Domain\QuotePost.cs" />
-    <Compile Include="Models\Domain\RetagPost.cs" />
-    <Compile Include="Models\Domain\TextPost.cs" />
-    <Compile Include="Models\Domain\VideoPost.cs" />
     <Compile Include="Models\Database\TagPost.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignUpWithEmail.cs" />
     <Compile Include="Utils\ML.cs" />
     <Compile Include="Utils\Strings.cs" />
+    <Compile Include="Validation\Extensions\GuidValidator.cs" />
     <Compile Include="Validation\TagKidValidator.cs" />
     <Compile Include="Models\RequestContext.cs" />
     <Compile Include="Models\Database\Token.cs" />
@@ -156,10 +151,6 @@
     <ProjectReference Include="..\..\..\taga\Taga.Mapping.AutoMapper\Taga.Mapping.AutoMapper.csproj">
       <Project>{16DEF608-1021-4A43-AE4D-88446A83F84D}</Project>
       <Name>Taga.Mapping.AutoMapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\taga\Taga.Repository.Hybrid\Taga.Repository.Hybrid.csproj">
-      <Project>{65E49106-4A80-426F-9B18-1DAD6CC14C3D}</Project>
-      <Name>Taga.Repository.Hybrid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\taga\Taga.Repository.NH\Taga.Repository.NH.csproj">
       <Project>{e9eec4fa-4d1c-44c3-a44e-b39ee373675b}</Project>

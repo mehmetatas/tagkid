@@ -28,6 +28,13 @@
         SystemError
     }
 
+    public enum EditorType
+    {
+        TagKid,
+        Cke,
+        MarkDown
+    }
+
     public enum UserType
     {
         User,
@@ -52,17 +59,6 @@
         Published,
         Draft,
         Deleted,
-    }
-
-    public enum PostType
-    {
-        Text,
-        Quote,
-        Image,
-        Audio,
-        Video,
-        Link,
-        Retag
     }
 
     public enum CommentStatus

@@ -1,4 +1,5 @@
-﻿using TagKid.Core.Models.Database;
+﻿using System;
+using TagKid.Core.Models.Database;
 
 namespace TagKid.Core.Domain
 {
@@ -10,16 +11,18 @@ namespace TagKid.Core.Domain
 
         User SignInWithPassword(string emailOrUsername, string password);
 
-        void SignInWithFacebook(string facebookId, string facebookAuthToken);
+        User SignInWithFacebook(string facebookId, string facebookAuthToken);
 
-        void SignInWithToken();
+        User SignInWithToken(long tokenId, Guid guid);
+
+        User ActivateAccount(long confirmationCodeId, string code);
+
+        void SignOut();
+
+        void SetupRequestContext(long tokenId, Guid guid);
 
         void ResetPassword(string email);
 
         void RequestReactivation(string email);
-
-        void ActivateAccount(long confirmationCodeId, string code);
-
-        User ValidateAuthToken(long tokenId, string token);
     }
 }

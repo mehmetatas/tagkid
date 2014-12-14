@@ -1,9 +1,11 @@
-﻿
+﻿;
 tagkid = {
     context: {
-        user: null,
         client: null,
         $state: null
+    },
+    user: function (u) {
+        return tagkid.cookies.user(u);
     },
     setNgContext: function ($http, $state) {
         tagkid.context.client = new NgClient($http);
@@ -24,12 +26,15 @@ tagkid = {
         return tagkid.context.client.send('GET', '/api/' + url, null, onSucces, onFail);
     },
     cookies: {
-        cookie: function (name, value, expireDays) {
+        _cookie: function (name, value, expireDays) {
+            $.cookie.json = true;
             if (typeof (value) === 'undefined') {
                 return $.cookie(name);
             } else {
                 if (value === null) {
-                    $.removeCookie(name);
+                    $.removeCookie(name, {
+                        path: '/'
+                    });
                 } else {
                     $.cookie(name, value, {
                         path: '/',
@@ -40,29 +45,42 @@ tagkid = {
             }
         },
         authToken: function (value) {
-            return tagkid.cookies.cookie('authToken', value);
+            return tagkid.cookies._cookie('authToken', value);
         },
         authTokenId: function (value) {
-            return tagkid.cookies.cookie('authTokenId', value);
+            return tagkid.cookies._cookie('authTokenId', value);
+        },
+        user: function (value) {
+            return tagkid.cookies._cookie('user', value);
         }
     },
     redirectIfLoggedIn: function () {
-        if (tagkid.cookies.authToken() && tagkid.cookies.authTokenId()) {
-            // TODO: validate token
-            tagkid.go('pages.timeline');
+        var req = {
+            token: tagkid.cookies.authToken(),
+            tokenId: tagkid.cookies.authTokenId()
+        };
+
+        if (req.token && req.tokenId) {
+            if (tagkid.user()) {
+                tagkid.go('pages.timeline');
+            } else {
+                tagkid.auth.signInWithToken(req);
+            }
         }
     },
     ensureLoggedIn: function () {
-        if (!tagkid.cookies.authToken() || !tagkid.cookies.authTokenId()) {
-            tagkid.cookies.authToken(null);
-            tagkid.cookies.authTokenId(null);
-            tagkid.go('auth.signin');
+        var req = {
+            token: tagkid.cookies.authToken(),
+            tokenId: tagkid.cookies.authTokenId()
+        };
+
+        if (req.token && req.tokenId) {
+            if (!tagkid.user()) {
+                tagkid.auth.signInWithToken(req);
+            }
+            return;
         }
-    },
-    signout: function () {
-        // TODO: call service
-        tagkid.cookies.authToken(null);
-        tagkid.cookies.authTokenId(null);
+
         tagkid.go('auth.signin');
     },
     auth: {
@@ -70,19 +88,60 @@ tagkid = {
             tagkid.post('auth/signUpWithEmail', req, success, error);
         },
         signInWithPassword: function (req) {
-            tagkid.post('auth/signInWithPassword', req, function (resp, header) {
-                var authToken = header('tagkid-auth-token');
-                var authTokenId = header('tagkid-auth-token-id');
-                tagkid.cookies.authToken(authToken);
-                tagkid.cookies.authTokenId(authTokenId);
-                tagkid.context.user = {
-                    Username: resp.Username,
-                    Fullname: resp.Fullname,
-                    ProfileImageUrl: resp.ProfileImageUrl,
-                };
-                tagkid.go('pages.timeline');
-            });
+            tagkid.post('auth/signInWithPassword', req,
+                function (resp) {
+                    tagkid.user({
+                        Username: resp.Username,
+                        Fullname: resp.Fullname,
+                        ProfileImageUrl: resp.ProfileImageUrl,
+                    });
+                    tagkid.go('pages.timeline');
+                });
         },
+        signInWithToken: function (req) {
+            tagkid.post('auth/signInWithToken', req,
+                function (resp) {
+                    tagkid.user({
+                        Username: resp.Username,
+                        Fullname: resp.Fullname,
+                        ProfileImageUrl: resp.ProfileImageUrl,
+                    });
+                },
+                function () {
+                    tagkid.user(null);
+                    tagkid.cookies.authToken(null);
+                    tagkid.cookies.authTokenId(null);
+                    tagkid.go('auth.signin');
+                });
+        },
+        signOut: function () {
+            tagkid.post('auth/signOut');
+
+            tagkid.user(null);
+            tagkid.cookies.authToken(null);
+            tagkid.cookies.authTokenId(null);
+            tagkid.go('auth.signin');
+        },
+        activateAccount: function (ccid, cc, onSuccess, onFail) {
+            tagkid.get('auth/activateAccount', {
+                ConfirmationCodeId: ccid,
+                ConfirmationCode: cc
+            },
+                function (resp) {
+                    tagkid.user({
+                        Username: resp.Username,
+                        Fullname: resp.Fullname,
+                        ProfileImageUrl: resp.ProfileImageUrl,
+                    });
+                    tagkid.go('pages.timeline');
+                },
+                function (resp) {
+                    tagkid.user(null);
+                    tagkid.cookies.authToken(null);
+                    tagkid.cookies.authTokenId(null);
+                    onFail(resp);
+                });
+        }
     }
 };
 
@@ -96,26 +155,38 @@ function NgClient($http) {
                 'tagkid-auth-token': tagkid.cookies.authToken(),
                 'tagkid-auth-token-id': tagkid.cookies.authTokenId()
             }
-        }).
-        success(function (resp, status, headers, config) {
-            if (!onSuccess) {
-                return;
-            }
-            if (resp.ResponseCode == 0) {
-                onSuccess(resp, headers);
-            } else {
-                if (onError) {
-                    onError(resp, headers);
-                } else {
-                    alert(resp.ResponseMessage);
+        })
+            .success(function (resp, status, headers, config) {
+                var authToken = headers('tagkid-auth-token');
+                var authTokenId = headers('tagkid-auth-token-id');
+
+                if (authToken && authTokenId) {
+                    tagkid.cookies.authToken(authToken);
+                    tagkid.cookies.authTokenId(authTokenId);
                 }
-            }
-        }).
-        error(function (data, status, headers, config) {
-            if (!onError) {
-                return;
-            }
-            alert('Ooops! Something terribly went wrong :(');
-        });
+
+                if (resp.ResponseCode == 0) {
+                    if (onSuccess) {
+                        onSuccess(resp, headers);
+                    }
+                } else {
+                    var isSecurityError = resp.ResponseCode >= 100 && resp.ResponseCode < 200;
+
+                    if (onError) {
+                        onError(resp, headers);
+                    } else {
+                        alert(resp.ResponseMessage);
+                    }
+
+                    if (isSecurityError) {
+                        tagkid.user(null);
+                        tagkid.cookies.authToken(null);
+                        tagkid.cookies.authTokenId(null);
+                    }
+                }
+            })
+            .error(function (data, status, headers, config) {
+                alert('Ooops! Something terribly went wrong :(');
+            });
     };
-}
+};

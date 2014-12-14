@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using TagKid.Core.Exceptions;
 
 namespace TagKid.Core.Validation.Extensions
@@ -31,6 +32,16 @@ namespace TagKid.Core.Validation.Extensions
         public static IRuleBuilderOptions<T, string> EmailAddress<T>(this IRuleBuilder<T, string> ruleBuilder, Error error)
         {
             return ruleBuilder.EmailAddress().WithState(t => error);
+        }
+
+        public static IRuleBuilderOptions<T, TProperty> GreaterThan<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, TProperty minValue, Error error) where TProperty : IComparable<TProperty>, IComparable
+        {
+            return ruleBuilder.GreaterThan(minValue).WithState(t => error);
+        }
+
+        public static IRuleBuilderOptions<T, string> Guid<T>(this IRuleBuilder<T, string> ruleBuilder, Error error)
+        {
+            return ruleBuilder.SetValidator(new GuidValidator()).WithState(t => error);
         }
     }
 }

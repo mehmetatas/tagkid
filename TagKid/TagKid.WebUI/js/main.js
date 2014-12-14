@@ -8,7 +8,9 @@ angular.module('app')
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
-      isSmartDevice( $window ) && angular.element($window.document.body).addClass('smart');
+      isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
+
+        $scope.user = tagkid.user();
 
       // config
       $scope.app = {
@@ -74,6 +76,6 @@ angular.module('app')
       }
 
         $scope.signout = function() {
-            tagkid.signout();
+            tagkid.auth.signOut();
         };
     }]);

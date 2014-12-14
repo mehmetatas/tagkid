@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Taga.Core.DynamicProxy;
 using Taga.Core.IoC;
 using TagKid.Core.Domain;
@@ -15,31 +16,26 @@ namespace TagKid.Domain
     [Intercept]
     public class AuthDomainService : IAuthDomainService
     {
-        private readonly IServiceProvider _prov;
+        private readonly static Hashtable AuthTokens = Hashtable.Synchronized(new Hashtable());
 
-        public AuthDomainService()
+        private static IUserRepository UserRepository
         {
-            _prov = ServiceProvider.Provider;
+            get { return ServiceProvider.Provider.GetOrCreate<IUserRepository>(); }
         }
 
-        private IUserRepository UserRepository
+        private static ITokenRepository TokenRepository
         {
-            get { return _prov.GetOrCreate<IUserRepository>(); }
+            get { return ServiceProvider.Provider.GetOrCreate<ITokenRepository>(); }
         }
 
-        private ITokenRepository TokenRepository
+        private static IConfirmationCodeRepository ConfirmationCodeRepository
         {
-            get { return _prov.GetOrCreate<ITokenRepository>(); }
+            get { return ServiceProvider.Provider.GetOrCreate<IConfirmationCodeRepository>(); }
         }
 
-        private IConfirmationCodeRepository ConfirmationCodeRepository
+        private static IMailService MailService
         {
-            get { return _prov.GetOrCreate<IConfirmationCodeRepository>(); }
-        }
-
-        private IMailService MailService
-        {
-            get { return _prov.GetOrCreate<IMailService>(); }
+            get { return ServiceProvider.Provider.GetOrCreate<IMailService>(); }
         }
 
         public virtual void SignUpWithEmail(string email, string username, string password, string fullname)
@@ -112,30 +108,57 @@ namespace TagKid.Domain
                 throw Errors.S_InvalidUsernameOrPassword.ToException("User not active: {0} {1}", user.Username, user.Id);
             }
 
-            var authToken = new Token
-            {
-                Guid = Util.GenerateGuid(),
-                Type = TokenType.Auth,
-                ExpireDate = DateTime.Now.AddDays(15),
-                UserId = user.Id
-            };
-
-            TokenRepository.DeleteTokensOfUser(user.Id);
-            TokenRepository.Save(authToken);
-
-            RequestContext.Current.NewAuthToken = authToken;
+            IssueNewAuthToken(user);
 
             return user;
         }
 
-        public virtual void SignInWithFacebook(string facebookId, string facebookAuthToken)
+        public virtual User SignInWithFacebook(string facebookId, string facebookAuthToken)
         {
-
+            throw new NotImplementedException();
         }
 
-        public virtual void SignInWithToken()
+        public virtual User SignInWithToken(long tokenId, Guid guid)
         {
+            var token = GetAuthToken(guid) ?? TokenRepository.Get(tokenId);
 
+            if (token == null)
+            {
+                throw Errors.S_InvalidAuthToken.ToException("No token found with the id {0}", tokenId);
+            }
+
+            if (token.Guid != guid)
+            {
+                throw Errors.S_InvalidAuthToken.ToException("Invalid guid ({0}) for token id {1}", guid, tokenId);
+            }
+
+            if (token.ExpireDate < DateTime.Now)
+            {
+                TokenRepository.Delete(token);
+                throw Errors.S_InvalidAuthToken.ToException("Expired token");
+            }
+
+            var user = token.User ?? UserRepository.GetById(token.UserId);
+
+            if (user == null)
+            {
+                TokenRepository.Delete(token);
+                throw Errors.S_InvalidAuthToken.ToException("No user found for token");
+            }
+
+            if (user.Status != UserStatus.Active)
+            {
+                TokenRepository.Delete(token);
+                throw Errors.S_InvalidAuthToken.ToException("User not active");
+            }
+            
+            token.UseDate = DateTime.Now;
+            token.ExpireDate = DateTime.Now.AddDays(15);
+            TokenRepository.Save(token);
+
+            SetAuthToken(token, user);
+
+            return user;
         }
 
         public virtual void ResetPassword(string email)
@@ -148,7 +171,7 @@ namespace TagKid.Domain
 
         }
 
-        public virtual void ActivateAccount(long confirmationCodeId, string code)
+        public virtual User ActivateAccount(long confirmationCodeId, string code)
         {
             var confirmationCode = ConfirmationCodeRepository.GetById(confirmationCodeId);
 
@@ -209,47 +232,80 @@ namespace TagKid.Domain
 
             user.Status = UserStatus.Active;
             UserRepository.Save(user);
+
+            IssueNewAuthToken(user);
+
+            return user;
         }
 
-        public virtual User ValidateAuthToken(long tokenId, string guid)
+        public virtual void SignOut()
         {
-            var token = TokenRepository.Get(tokenId);
+            RemoveAuthToken(RequestContext.Current.AuthToken.Guid);
+            TokenRepository.Delete(RequestContext.Current.AuthToken);
+            RequestContext.Current.AuthToken = null;
+        }
+
+        public virtual void SetupRequestContext(long tokenId, Guid guid)
+        {
+            var token = GetAuthToken(guid);
 
             if (token == null)
             {
-                throw Errors.S_InvalidAuthToken.ToException("No token found with the id {0}", tokenId);
+                var user = SignInWithToken(tokenId, guid);
+                if (user == null)
+                {
+                    return;
+                }
+                token = GetAuthToken(guid);
             }
 
-            if (token.Guid != guid)
-            {
-                throw Errors.S_InvalidAuthToken.ToException("Invalid guid ({0}) for token id {1}", guid, tokenId);
-            }
-
-            if (token.ExpireDate < DateTime.Now)
-            {
-                TokenRepository.Delete(token);
-                throw Errors.S_InvalidAuthToken.ToException("Expired token");
-            }
-
-            var user = UserRepository.GetById(token.UserId);
-
-            if (user.Status != UserStatus.Active)
-            {
-                TokenRepository.Delete(token);
-                throw Errors.S_InvalidAuthToken.ToException("User not active");
-            }
-
-            token.UseDate = DateTime.Now;
-            token.ExpireDate = DateTime.Now.AddDays(15);
-            TokenRepository.Save(token);
-
-            return user;
+            RequestContext.Current.AuthToken = token;
         }
 
         private void SetConfirmationCodeAsUsed(ConfirmationCode confirmationCode, ConfirmationCodeStatus status)
         {
             confirmationCode.Status = status;
             ConfirmationCodeRepository.Save(confirmationCode);
+        }
+
+        private void IssueNewAuthToken(User user)
+        {
+            var authToken = new Token
+            {
+                Guid = Util.GenerateGuid(),
+                Type = TokenType.Auth,
+                ExpireDate = DateTime.Now.AddDays(15),
+                UserId = user.Id
+            };
+
+            TokenRepository.DeleteTokensOfUser(user.Id);
+            TokenRepository.Save(authToken);
+
+            SetAuthToken(authToken, user);
+        }
+
+        private void SetAuthToken(Token token, User user)
+        {
+            token.User = user;
+            AuthTokens.Add(token.Guid, token);
+            RequestContext.Current.AuthToken = token;
+        }
+
+        private void RemoveAuthToken(Guid guid)
+        {
+            if (AuthTokens.ContainsKey(guid))
+            {
+                AuthTokens.Remove(guid);
+            }
+        }
+
+        private Token GetAuthToken(Guid guid)
+        {
+            if (AuthTokens.ContainsKey(guid))
+            {
+                return (Token)AuthTokens[guid];
+            }
+            return null;
         }
     }
 }
