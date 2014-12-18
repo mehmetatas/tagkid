@@ -5,6 +5,8 @@ namespace TagKid.Core.Domain
 {
     public interface IPostDomainService : ITagKidDomainService
     {
+        void SaveAsDraft(Post post);
+
         Post Get(long postId);
 
         Post[] GetTimeline(int pageSize, long maxPostId = 0);

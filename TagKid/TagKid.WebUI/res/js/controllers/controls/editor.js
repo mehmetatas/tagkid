@@ -1,5 +1,5 @@
 ﻿app.controller('EditorCtrl', [
-    '$scope', '$modal', 'tagkid', function ($scope, $modal, tagkid) {
+    '$scope', '$modal', 'tagkid', 'post', function ($scope, $modal, tagkid, post) {
         var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
         tkTagInput.create('#tk-tag-input', $scope);
@@ -11,6 +11,14 @@
         };
 
         $scope.user = tagkid.user();
+
+        $scope.post = {
+            Title: '',
+            EditorContent: '',
+            Category: '',
+            Tags: [],
+            EditorType: 0
+        };
 
         $scope.tags = [
            { Name: 'c#', Hint: 'c-sharp', Description: 'programming language' },
@@ -25,10 +33,8 @@
            { Name: 'objective-c', Hint: 'ios', Description: 'objective c desc' }
         ];
 
-        $scope.selectedTags = [];
-
         $scope.removeTag = function (tag) {
-            var tags = $scope.selectedTags;
+            var tags = $scope.post.Tags;
             for (var i = 0; i < tags.length; i++) {
                 if (tags[i].Name == tag.Name) {
                     tags.splice(i, 1);
@@ -43,15 +49,14 @@
             return false;
         };
 
-        $scope.selectedCategory = null;
         $scope.categories = [
-            { Name: 'coding', CssClass: 'bg-danger' },
-            { Name: 'daily', CssClass: 'bg-warning' },
-            { Name: 'photography', CssClass: 'bg-success' },
-            { Name: 'sports', CssClass: 'bg-info' }
+            { Id: 1, Name: 'coding', CssClass: 'bg-danger' },
+            { Id: 2, Name: 'daily', CssClass: 'bg-warning' },
+            { Id: 3, Name: 'photography', CssClass: 'bg-success' },
+            { Id: 4, Name: 'sports', CssClass: 'bg-info' }
         ];
         $scope.selectCategory = function (cat) {
-            $scope.selectedCategory = cat;
+            $scope.post.Category = cat;
         };
         $scope.showNewCategoryPopup = function () {
             $modal.open({
@@ -59,12 +64,14 @@
                 controller: 'NewCategoryModalCtrl'
             }).result.then(function (newCategory) {
                 $scope.categories.push(newCategory);
-                $scope.selectedCategory = newCategory;
+                $scope.post.Category = newCategory;
             });
         };
 
         $scope.saveAsDraft = function () {
-            alert('save as draft');
+            post.saveAsDraft({
+                Post: $scope.post
+            });
         };
 
         $scope.cancel = function () {

@@ -29,7 +29,7 @@ namespace TagKid.Service
             {
                 user.Username,
                 user.Fullname,
-                ProfileImageUrl = "/img/a2.jpg"
+                ProfileImageUrl = "/res/img/a2.jpg"
             });
         }
 
@@ -40,7 +40,7 @@ namespace TagKid.Service
             {
                 user.Username,
                 user.Fullname,
-                ProfileImageUrl = "/img/a2.jpg"
+                ProfileImageUrl = "/res/img/a2.jpg"
             });
         }
 
@@ -52,7 +52,7 @@ namespace TagKid.Service
             {
                 user.Username,
                 user.Fullname,
-                ProfileImageUrl = "/img/a2.jpg"
+                ProfileImageUrl = "/res/img/a2.jpg"
             });
         }
 

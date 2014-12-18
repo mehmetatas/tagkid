@@ -119,7 +119,6 @@
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Service\IApiService.cs" />
     <Compile Include="Service\IAuthService.cs" />
-    <Compile Include="Service\Interceptors\AuthServiceInterceptor.cs" />
     <Compile Include="Service\IPostService.cs" />
     <Compile Include="Service\ITagKidService.cs" />
     <Compile Include="Service\Interceptors\ActionInterceptor.cs" />

@@ -44,14 +44,14 @@
 
     public enum CategoryStatus
     {
-        Active,
-        Passive
+        Passive,
+        Active
     }
 
     public enum TagStatus
     {
-        Active,
-        Passive
+        Passive,
+        Active
     }
 
     public enum PostStatus

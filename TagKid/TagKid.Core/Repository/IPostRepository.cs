@@ -22,6 +22,7 @@ namespace TagKid.Core.Repository
         int GetLikeCount(long postId);
         
         User[] GetLikers(long postId, int maxCount, DateTime maxLikeDate);
+
         int GetPostCount(long userId);
     }
 }

@@ -4,6 +4,7 @@ using NHibernate.Criterion;
 using Taga.Core.IoC;
 using Taga.Core.Rest;
 using TagKid.Core.Models.DTO.Messages.Auth;
+using TagKid.Core.Models.DTO.Messages.Post;
 using TagKid.Core.Service;
 using TagKid.Core.Service.Interceptors;
 using IServiceProvider = Taga.Core.IoC.IServiceProvider;
@@ -43,7 +44,9 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
 
         private void BuildPostService(ControllerConfigurator cfg)
         {
-
+            cfg.ControllerFor<IPostService>("post")
+                .ActionFor(s => s.SavePost(default(SavePostRequest)), "saveAsDraft")
+                .ActionFor(s => s.GetTimeline(default(GetTimelineRequest)), "timeline", HttpMethodType.Get);
         }
     }
 }

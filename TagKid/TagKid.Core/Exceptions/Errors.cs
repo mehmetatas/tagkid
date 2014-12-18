@@ -20,6 +20,7 @@ namespace TagKid.Core.Exceptions
         public static readonly Error V_Token = new Error(10, "V_Token");
         public static readonly Error V_ConfirmationCodeId = new Error(11, "V_ConfirmationCodeId");
         public static readonly Error V_ConfirmationCode = new Error(12, "V_ConfirmationCode");
+        public static readonly Error V_SelectCategory = new Error(13, "V_SelectCategory");
 
         #endregion
 
@@ -29,7 +30,7 @@ namespace TagKid.Core.Exceptions
         public static readonly Error S_UserInactive = new Error(101, "S_UserInactive");
         public static readonly Error S_InvalidUsernameOrPassword = new Error(102, "S_InvalidUsernameOrPassword");
         public static readonly Error S_InvalidActivationCode = new Error(103, "S_InvalidActivationCode");
-        
+
         #endregion
     }
 }

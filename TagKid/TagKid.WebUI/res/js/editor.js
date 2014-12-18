@@ -32,7 +32,7 @@ var tkTagInput = {
                 }
 
                 if (text.length > 0) {
-                    $scope.selectedTags.push({ Id: 1, Name: text });
+                    $scope.post.Tags.push({ Id: 1, Name: text });
                     $scope.$apply();
                     $element.val('');
 
@@ -65,8 +65,8 @@ var tkTagInput = {
                 var $element = $(this);
 
                 if (e.keyCode == 8) { // backspace
-                    if ($element.val().length == 0 && $scope.selectedTags.length > 0) {
-                        $scope.selectedTags.splice($scope.selectedTags.length - 1, 1);
+                    if ($element.val().length == 0 && $scope.post.Tags.length > 0) {
+                        $scope.post.Tags.splice($scope.post.Tags.length - 1, 1);
                         $scope.$apply();
 
                         return;

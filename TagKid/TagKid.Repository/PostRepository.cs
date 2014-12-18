@@ -54,6 +54,41 @@ namespace TagKid.Repository
             var posts = _repository.Select<Post>();
             var categories = _repository.Select<Category>();
             var users = _repository.Select<User>();
+
+            var query = from post in posts
+                from category in categories
+                from user in users
+                where
+                    post.CategoryId == category.Id &&
+                    post.UserId == user.Id &&
+                    category.Id == user.Id
+                select new { post, category, user };
+
+            var postList = new List<Post>();
+            
+            foreach (var item in query.ToList())
+            {
+                item.post.User = item.user;
+                item.post.Category = item.category;
+                if (item.post.PublishDate == null)
+                {
+                    item.post.PublishDate = item.post.CreateDate;
+                }
+                postList.Add(item.post);
+            }
+
+            var postArr = postList.ToArray();
+            
+            SetTags(postArr);
+
+            return postArr;
+        }
+
+        public Post[] GetForUserId_(long userId, int maxCount, long maxPostId = 0)
+        {
+            var posts = _repository.Select<Post>();
+            var categories = _repository.Select<Category>();
+            var users = _repository.Select<User>();
             var followUsers = _repository.Select<FollowUser>();
             var followCategories = _repository.Select<FollowCategory>();
 

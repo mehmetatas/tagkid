@@ -18,7 +18,7 @@
 
                                 <div class="tag-search">
                                     <div class="btn-group" dropdown>
-                                        <a href="#" dropdown-toggle><label class="label m-r-xs" ng-class="selectedCategory ? selectedCategory.CssClass : 'bg-light'" ng-bind="selectedCategory ? selectedCategory.Name : 'Select Category'"></label></a>
+                                        <a href="#" dropdown-toggle><label class="label m-r-xs" ng-class="post.Category && post.Category.CssClass ? post.Category.CssClass : 'bg-light'" ng-bind="post.Category ? post.Category.Name : 'Select Category'"></label></a>
                                         <div class="dropdown-menu text-sm padder" role="menu">
                                             <a href ng-repeat="category in categories" ng-click="selectCategory(category);">
                                                 <label ng-class="category.CssClass" class="label m-r-xs" ng-bind="category.Name"></label>
@@ -32,17 +32,17 @@
                                         <div ng-include="'/modals/NewCategory'"></div>
                                     </script>
 
-                                    <span class="tags" ng-repeat="tag in selectedTags">
+                                    <span class="tags" ng-repeat="tag in post.Tags">
                                         <a ng-click="removeTag(tag)"><label class=" label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
                                     </span>
-                                    <input type="text" id="tk-tag-input" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="selectedTags.length >= 5" ng-show="selectedTags.length < 5" />
+                                    <input type="text" id="tk-tag-input" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="post.Tags.length >= 5" ng-show="post.Tags.length < 5" />
                                 </div>
                             </span>
                             <div class="clearfix"></div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" id="tk-title" placeholder="Title here" class="r-t form-control no-border text-lg no-padder" />
-                            <textarea id="tk-editor" class="form-control no-border r-b no-padder" style="margin-top: -1px" rows="3" placeholder="Your post here"></textarea>
+                            <input type="text" id="tk-title" placeholder="Title here" class="r-t form-control no-border text-lg no-padder" ng-model="post.Title" />
+                            <textarea id="tk-editor" class="form-control no-border r-b no-padder" style="margin-top: -1px" rows="3" placeholder="Your post here" ng-model="post.EditorContent"></textarea>
                             <div id="tk-preview" style="display: none;"></div>
                             <div class="m-t-sm">
                                 <a href id="tk-preview-btn" class="btn btn-default btn-xs" ng-click="toggleEditor();">
@@ -80,14 +80,14 @@
                                 </a>
 
                                 <br />
-                                <a ng-href="{{'/category/' + post.Category.Id}}"><label class="label m-r-xs" ng-class="post.Category.CssClass" ng-bind="post.Category.Name"></label></a>
+                                <a ng-href="{{'/category/' + post.Category.Id}}"><label class="label m-r-xs" ng-class="post.Category && post.Category.CssClass ? post.Category.CssClass : 'bg-light'" ng-bind="post.Category.Name"></label></a>
                                 <a ng-repeat="tag in post.Tags" ng-href="'/tag/' + tag.Id"><label class="label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
                             </span>
                             <div class="clearfix"></div>
                         </div>
                         <div class="panel-body">
                             <h4 ng-bind="post.Title"></h4>
-                            <div ng-bind-html="to_trusted(post.Content)"></div>
+                            <div ng-bind-html="to_trusted(post.HtmlContent)"></div>
                             <div class="m-t-sm">
                                 <a href class="btn btn-default btn-xs" ng-class="{active: post.Liked}" ng-click="likeUnlike(post)">
                                     <i class="fa fa-heart-o text-muted text"></i>
@@ -167,7 +167,7 @@
                             <ul class="list-group no-bg no-borders pull-in">
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="~/img/a4.jpg" alt="..." class="img-circle">
+                                        <img src="~/res/img/a4.jpg" alt="..." class="img-circle">
                                         <i class="on b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -177,7 +177,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="~/img/a5.jpg" alt="..." class="img-circle">
+                                        <img src="~/res/img/a5.jpg" alt="..." class="img-circle">
                                         <i class="on b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -187,7 +187,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="~/img/a6.jpg" alt="..." class="img-circle">
+                                        <img src="~/res/img/a6.jpg" alt="..." class="img-circle">
                                         <i class="busy b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -197,7 +197,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a herf class="pull-left thumb-sm avatar m-r">
-                                        <img src="~/img/a7.jpg" alt="..." class="img-circle">
+                                        <img src="~/res/img/a7.jpg" alt="..." class="img-circle">
                                         <i class="away b-white bottom"></i>
                                     </a>
                                     <div class="clear">
@@ -227,7 +227,7 @@
                         <div class="panel b-light clearfix">
                             <div class="panel-body">
                                 <a href class="thumb pull-left m-r">
-                                    <img src="~/img/a0.jpg" class="img-circle">
+                                    <img src="~/res/img/a0.jpg" class="img-circle">
                                 </a>
                                 <div class="clear">
                                     <a href class="text-info">@@Mike Mcalidek <i class="fa fa-twitter"></i></a>
