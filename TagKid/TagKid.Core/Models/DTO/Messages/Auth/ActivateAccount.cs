@@ -4,14 +4,7 @@ using TagKid.Core.Validation.Extensions;
 
 namespace TagKid.Core.Models.DTO.Messages.Auth
 {
-    public class ActivateAccountResponse : Response
-    {
-        public string Username { get; set; }
-        public string Fullname { get; set; }
-        public string ProfileImageUrl { get; set; }
-    }
-
-    public class ActivateAccountRequest : Request
+    public class ActivateAccountRequest
     {
         public long ConfirmationCodeId { get; set; }
         public string ConfirmationCode { get; set; }

@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$localStorage', '$window',
-    function(              $scope,  $localStorage,   $window ) {
+  .controller('AppCtrl', ['$scope', '$localStorage', '$window', 'tagkid', 'auth',
+    function ($scope, $localStorage, $window, tagkid, auth) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
@@ -76,6 +76,6 @@ angular.module('app')
       }
 
         $scope.signout = function() {
-            tagkid.auth.signOut();
+            auth.signOut();
         };
     }]);

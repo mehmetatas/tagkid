@@ -7,7 +7,7 @@ namespace TagKid.Core.Domain
     {
         Post Get(long postId);
 
-        Post[] GetPostsForWall(int pageSize, long maxPostId = 0);
+        Post[] GetTimeline(int pageSize, long maxPostId = 0);
 
         IPage<Post> SearchByTag(long tagId, int pageIndex, int pageSize);
 

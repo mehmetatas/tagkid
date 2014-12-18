@@ -5,11 +5,7 @@ using TagKid.Core.Validation.Extensions;
 
 namespace TagKid.Core.Models.DTO.Messages.Auth
 {
-    public class SignUpWithEmailResponse : Response
-    {
-    }
-
-    public class SignUpWithEmailRequest : Request
+    public class SignUpWithEmailRequest
     {
         public string Email { get; set; }
         public string Username { get; set; }

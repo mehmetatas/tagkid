@@ -1,7 +1,7 @@
 ﻿app.controller('ActivationCtrl', [
-    '$scope', '$stateParams', function ($scope, $stateParams) {
+    '$scope', '$stateParams', 'tagkid', 'auth', function ($scope, $stateParams, tagkid, auth) {
         if ($stateParams.ccid && $stateParams.cc) {
-            tagkid.auth.activateAccount($stateParams.ccid, $stateParams.cc, function() {
+            auth.activateAccount($stateParams.ccid, $stateParams.cc, function() {
                 
             }, function (resp) {
                 $scope.error = resp.ResponseMessage;

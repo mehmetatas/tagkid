@@ -1,9 +1,9 @@
 ﻿app.controller('SignUpCtrl', [
-    '$scope', '$modal', function ($scope, $modal) {
+    '$scope', '$modal', 'auth', function ($scope, $modal, auth) {
         $scope.isCollapsed = true;
 
         $scope.signup = function() {
-            tagkid.auth.signUpWithEmail($scope.req,
+            auth.signUpWithEmail($scope.req,
                 function (resp, header) {
                     $scope.isCollapsed = false;
                 },

@@ -70,6 +70,9 @@
     <Compile Include="Mailing\IMailService.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignInWithToken.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
+    <Compile Include="Models\DTO\Messages\Post\GetTimeline.cs" />
+    <Compile Include="Models\DTO\Messages\Post\SavePost.cs" />
+    <Compile Include="Models\DTO\Messages\Response.cs" />
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Exceptions\Error.cs" />
     <Compile Include="Exceptions\Errors.cs" />
@@ -101,7 +104,6 @@
     <Compile Include="Models\Database\Tag.cs" />
     <Compile Include="Models\Database\User.cs" />
     <Compile Include="Exceptions\TagKidException.cs" />
-    <Compile Include="Models\DTO\Messages\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
     <Compile Include="Repository\ICommentRepository.cs" />
@@ -120,7 +122,6 @@
     <Compile Include="Service\Interceptors\AuthServiceInterceptor.cs" />
     <Compile Include="Service\IPostService.cs" />
     <Compile Include="Service\ITagKidService.cs" />
-    <Compile Include="Models\DTO\Messages\Response.cs" />
     <Compile Include="Service\Interceptors\ActionInterceptor.cs" />
     <Compile Include="Utils\DateTimeExtensions.cs" />
     <Compile Include="Utils\EditorUtils.cs" />

@@ -1,8 +1,8 @@
 ﻿using System;
 using Taga.Core.DynamicProxy;
 using Taga.Core.IoC;
-using Taga.Core.Mapping;
 using TagKid.Core.Domain;
+using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Models.DTO.Messages.Auth;
 using TagKid.Core.Service;
 
@@ -11,62 +11,55 @@ namespace TagKid.Service
     [Intercept]
     public class AuthService : IAuthService
     {
-        private readonly IMapper _mapper;
-
-        public AuthService(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-
         private static IAuthDomainService DomainService
         {
             get { return ServiceProvider.Provider.GetOrCreate<IAuthDomainService>(); }
         }
 
-        public virtual SignUpWithEmailResponse SignUpWithEmail(SignUpWithEmailRequest request)
+        public virtual Response SignUpWithEmail(SignUpWithEmailRequest request)
         {
             DomainService.SignUpWithEmail(request.Email, request.Username, request.Password, request.Fullname);
-            return new SignUpWithEmailResponse();
+            return Response.Success;
         }
 
-        public virtual SignInWithPasswordResponse SignInWithPassword(SignInWithPasswordRequest request)
+        public virtual Response SignInWithPassword(SignInWithPasswordRequest request)
         {
             var user = DomainService.SignInWithPassword(request.EmailOrUsername, request.Password);
-            return new SignInWithPasswordResponse
+            return Response.Success.WithData(new
             {
-                Username = user.Username,
-                Fullname = user.Fullname,
+                user.Username,
+                user.Fullname,
                 ProfileImageUrl = "/img/a2.jpg"
-            };
+            });
         }
 
-        public virtual ActivateAccountResponse ActivateAccount(ActivateAccountRequest request)
+        public virtual Response ActivateAccount(ActivateAccountRequest request)
         {
-         var user =   DomainService.ActivateAccount(request.ConfirmationCodeId, request.ConfirmationCode);
-            return new ActivateAccountResponse
+            var user = DomainService.ActivateAccount(request.ConfirmationCodeId, request.ConfirmationCode);
+            return Response.Success.WithData(new
             {
-                Username = user.Username,
-                Fullname = user.Fullname,
+                user.Username,
+                user.Fullname,
                 ProfileImageUrl = "/img/a2.jpg"
-            };
+            });
         }
 
 
-        public virtual SignInWithTokenResponse SignInWithToken(SignInWithTokenRequest request)
+        public virtual Response SignInWithToken(SignInWithTokenRequest request)
         {
             var user = DomainService.SignInWithToken(request.TokenId, new Guid(request.Token));
-            return new SignInWithTokenResponse
+            return Response.Success.WithData(new
             {
-                Username = user.Username,
-                Fullname = user.Fullname,
+                user.Username,
+                user.Fullname,
                 ProfileImageUrl = "/img/a2.jpg"
-            };
+            });
         }
 
-        public virtual SignOutResponse SignOut()
+        public virtual Response SignOut()
         {
             DomainService.SignOut();
-            return new SignOutResponse();
+            return Response.Success;
         }
     }
 }

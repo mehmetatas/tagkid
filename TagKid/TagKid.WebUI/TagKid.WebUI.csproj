@@ -195,8 +195,9 @@
     <Content Include="js\editor.js" />
     <Content Include="js\filters\fromNow.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\services\auth.js" />
+    <Content Include="js\services\tagkid.js" />
     <Content Include="js\services\ui-load.js" />
-    <Content Include="js\tagkid.js" />
     <Content Include="l10n\en.js" />
     <Content Include="template-site\angular-stripped.html" />
     <Content Include="template-site\css\animate.css" />

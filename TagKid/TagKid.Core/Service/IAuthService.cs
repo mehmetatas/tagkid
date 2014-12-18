@@ -1,17 +1,18 @@
-﻿using TagKid.Core.Models.DTO.Messages.Auth;
+﻿using TagKid.Core.Models.DTO.Messages;
+using TagKid.Core.Models.DTO.Messages.Auth;
 
 namespace TagKid.Core.Service
 {
     public interface IAuthService : ITagKidService
     {
-        SignOutResponse SignOut();
+        Response SignOut();
 
-        SignUpWithEmailResponse SignUpWithEmail(SignUpWithEmailRequest request);
+        Response SignUpWithEmail(SignUpWithEmailRequest request);
 
-        SignInWithPasswordResponse SignInWithPassword(SignInWithPasswordRequest request);
+        Response SignInWithPassword(SignInWithPasswordRequest request);
 
-        SignInWithTokenResponse SignInWithToken(SignInWithTokenRequest request);
+        Response SignInWithToken(SignInWithTokenRequest request);
 
-        ActivateAccountResponse ActivateAccount(ActivateAccountRequest request);
+        Response ActivateAccount(ActivateAccountRequest request);
     }
 }

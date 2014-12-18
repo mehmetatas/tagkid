@@ -1,7 +1,7 @@
 ﻿app.controller('SignInCtrl', [
-    '$scope', function ($scope) {
+    '$scope', 'auth', function ($scope, auth) {
         $scope.signin = function () {
-            tagkid.auth.signInWithPassword($scope.req);
+            auth.signInWithPassword($scope.req);
         };
     }
 ]);

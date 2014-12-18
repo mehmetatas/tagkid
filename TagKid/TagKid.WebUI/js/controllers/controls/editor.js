@@ -1,5 +1,5 @@
 ﻿app.controller('EditorCtrl', [
-    '$scope', '$modal', function ($scope, $modal) {
+    '$scope', '$modal', 'tagkid', function ($scope, $modal, tagkid) {
         var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
         tkTagInput.create('#tk-tag-input', $scope);

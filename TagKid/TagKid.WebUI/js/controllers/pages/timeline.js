@@ -1,4 +1,4 @@
-﻿app.controller('TimelineCtrl', ['$scope', '$sce', function ($scope, $sce) {
+﻿app.controller('TimelineCtrl', ['$scope', '$sce', 'tagkid', function ($scope, $sce, tagkid) {
     $('textarea').autogrow();
 
     $(document).on('click', '.btn-comment', function () {

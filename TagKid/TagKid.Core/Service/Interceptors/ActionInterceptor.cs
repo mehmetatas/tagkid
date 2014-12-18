@@ -82,11 +82,7 @@ namespace TagKid.Core.Service.Interceptors
 
             if (tkException == null)
             {
-                return new Response
-                {
-                    ResponseCode = Errors.Unknown.Code,
-                    ResponseMessage = Errors.Unknown.Message
-                };
+                return Response.Error(Errors.Unknown);
             }
 
             if (tkException.Error.Type == ErrorType.Security)
@@ -94,11 +90,7 @@ namespace TagKid.Core.Service.Interceptors
                 _uow.Save(true);
             }
 
-            return new Response
-            {
-                ResponseCode = tkException.Error.Code,
-                ResponseMessage = tkException.Error.Message
-            };
+            return Response.Error(tkException.Error);
         }
 
         private static void FlushLogs()

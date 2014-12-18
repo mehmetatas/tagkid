@@ -120,7 +120,7 @@ namespace TagKid.Domain
 
         public virtual User SignInWithToken(long tokenId, Guid guid)
         {
-            var token = GetAuthToken(guid) ?? TokenRepository.Get(tokenId);
+            var token = TokenRepository.Get(tokenId);
 
             if (token == null)
             {
@@ -159,6 +159,20 @@ namespace TagKid.Domain
             SetAuthToken(token, user);
 
             return user;
+        }
+
+        public virtual void SetupRequestContext(long tokenId, Guid guid)
+        {
+            var token = GetAuthToken(guid);
+
+            if (token == null)
+            {
+                SignInWithToken(tokenId, guid);
+            }
+            else
+            {
+                RequestContext.Current.AuthToken = token;
+            }
         }
 
         public virtual void ResetPassword(string email)
@@ -245,23 +259,6 @@ namespace TagKid.Domain
             RequestContext.Current.AuthToken = null;
         }
 
-        public virtual void SetupRequestContext(long tokenId, Guid guid)
-        {
-            var token = GetAuthToken(guid);
-
-            if (token == null)
-            {
-                var user = SignInWithToken(tokenId, guid);
-                if (user == null)
-                {
-                    return;
-                }
-                token = GetAuthToken(guid);
-            }
-
-            RequestContext.Current.AuthToken = token;
-        }
-
         private void SetConfirmationCodeAsUsed(ConfirmationCode confirmationCode, ConfirmationCodeStatus status)
         {
             confirmationCode.Status = status;
@@ -286,6 +283,7 @@ namespace TagKid.Domain
 
         private void SetAuthToken(Token token, User user)
         {
+            token.UserId = user.Id;
             token.User = user;
             AuthTokens.Add(token.Guid, token);
             RequestContext.Current.AuthToken = token;

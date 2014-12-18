@@ -4,14 +4,7 @@ using TagKid.Core.Validation.Extensions;
 
 namespace TagKid.Core.Models.DTO.Messages.Auth
 {
-    public class SignInWithPasswordResponse : Response
-    {
-        public string Username { get; set; }
-        public string Fullname { get; set; }
-        public string ProfileImageUrl { get; set; }
-    }
-
-    public class SignInWithPasswordRequest : Request
+    public class SignInWithPasswordRequest
     {
         public string Password { get; set; }
         public string EmailOrUsername { get; set; }

@@ -29,10 +29,9 @@ angular.module('app')
                   abstract: true,
                   url: '',
                   templateUrl: '/layout/main',
-                  onEnter: function($http, $state) {
-                      tagkid.setNgContext($http, $state);
-                      tagkid.ensureLoggedIn();
-                  }
+                  onEnter: ['auth', function(auth) {
+                      auth.ensureLoggedIn();
+                  }]
               })
               .state('pages.timeline', {
                   url: '/',
@@ -56,10 +55,9 @@ angular.module('app')
           $stateProvider.state('auth', {
                   url: '',
                   template: '<div ui-view class="fade-in-right-big smooth"></div>',
-                  onEnter: function($http, $state) {
-                      tagkid.setNgContext($http, $state);
-                      tagkid.redirectIfLoggedIn();
-                  }
+                  onEnter: ['auth', function(auth) {
+                      auth.redirectIfLoggedIn();
+                  }]
               })
               .state('auth.signup', {
                   url: '/signup',
