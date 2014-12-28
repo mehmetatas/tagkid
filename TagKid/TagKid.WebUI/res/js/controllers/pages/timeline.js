@@ -7,16 +7,21 @@
 
     $scope.user = tagkid.user();
 
-    $scope.to_trusted = function(content) {
+    $scope.to_trusted = function (content) {
         return $sce.trustAsHtml(content);
     };
 
     $scope.posts = [];
 
     post.getTimeline({},
-        function(resp) {
-            $scope.posts = resp.Data;
-        }, function() {
+        function (resp) {
+            var posts = resp.Data;
+            for (var i = 0; i < posts.length; i++) {
+                var p = posts[i];
+                p.User.ProfileImageUrl = '/res/img/a2.jpg';
+                $scope.posts.push(p);
+            }
+        }, function () {
             alert('unable to load timeline');
         });
 

@@ -27,9 +27,14 @@ namespace TagKid.Domain
             get { return ServiceProvider.Provider.GetOrCreate<IPostRepository>(); }
         }
 
+        private static ICategoryRepository CategoryRepository
+        {
+            get { return ServiceProvider.Provider.GetOrCreate<ICategoryRepository>(); }
+        }
+
         public virtual void SaveAsDraft(Post post)
         {
-            post.UserId = RequestContext.Current.AuthToken.UserId;
+            post.UserId = RequestContext.User.Id;
             post.HtmlContent = EditorUtils.ToHtml(post.EditorContent);
             post.Status = PostStatus.Draft;
             post.AccessLevel = AccessLevel.Private;
@@ -53,7 +58,7 @@ namespace TagKid.Domain
 
         public virtual Post[] GetTimeline(int pageSize, long maxPostId = 0)
         {
-            return PostRepository.GetForUserId(1L, pageSize);
+            return PostRepository.GetForUserId(RequestContext.User.Id, pageSize);
         }
 
         public virtual IPage<Post> SearchByTag(long tagId, int pageIndex, int pageSize)
@@ -89,6 +94,18 @@ namespace TagKid.Domain
         public virtual Tag[] SearchTags(string name, int pageSize)
         {
             throw new NotImplementedException();
+        }
+
+        public Category[] GetCategoriesOfUser(long userId)
+        {
+            return CategoryRepository.GetCategories(userId);
+        }
+
+        public void CreateCategory(Category category)
+        {
+            category.UserId = RequestContext.User.Id;
+            category.Status = CategoryStatus.Active;
+            CategoryRepository.Save(category);
         }
     }
 }

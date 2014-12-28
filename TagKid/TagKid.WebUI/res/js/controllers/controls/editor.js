@@ -49,12 +49,11 @@
             return false;
         };
 
-        $scope.categories = [
-            { Id: 1, Name: 'coding', CssClass: 'bg-danger' },
-            { Id: 2, Name: 'daily', CssClass: 'bg-warning' },
-            { Id: 3, Name: 'photography', CssClass: 'bg-success' },
-            { Id: 4, Name: 'sports', CssClass: 'bg-info' }
-        ];
+        $scope.categories = [];
+        post.getCategories(function (resp) {
+            $scope.categories = resp.Data;
+        });
+
         $scope.selectCategory = function (cat) {
             $scope.post.Category = cat;
         };
@@ -63,8 +62,11 @@
                 templateUrl: 'newCategoryModalContent.html',
                 controller: 'NewCategoryModalCtrl'
             }).result.then(function (newCategory) {
-                $scope.categories.push(newCategory);
-                $scope.post.Category = newCategory;
+                post.createCategory({ Category: newCategory }, function(resp) {
+                    newCategory.Id = resp.Data;
+                    $scope.categories.push(newCategory);
+                    $scope.post.Category = newCategory;
+                });
             });
         };
 

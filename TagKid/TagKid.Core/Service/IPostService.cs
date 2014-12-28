@@ -8,5 +8,9 @@ namespace TagKid.Core.Service
         Response GetTimeline(GetTimelineRequest request);
 
         Response SavePost(SavePostRequest request);
+
+        Response CreateCategory(CreateCategoryRequest request);
+
+        Response GetCategories();
     }
 }

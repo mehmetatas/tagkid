@@ -61,7 +61,7 @@ namespace TagKid.Core.Service.Interceptors
         {
             _uow.Save(true);
 
-            var token = RequestContext.Current.AuthToken;
+            var token = RequestContext.AuthToken;
             if (token != null)
             {
                 ctx.SetResponseHeader(AuthToken, token.Guid.ToString());

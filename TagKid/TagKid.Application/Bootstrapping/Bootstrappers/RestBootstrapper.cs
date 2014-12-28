@@ -46,7 +46,9 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
         {
             cfg.ControllerFor<IPostService>("post")
                 .ActionFor(s => s.SavePost(default(SavePostRequest)), "saveAsDraft")
-                .ActionFor(s => s.GetTimeline(default(GetTimelineRequest)), "timeline", HttpMethodType.Get);
+                .ActionFor(s => s.GetTimeline(default(GetTimelineRequest)), "timeline", HttpMethodType.Get)
+                .ActionFor(s => s.GetCategories(), "categories", HttpMethodType.Get)
+                .ActionFor(s => s.CreateCategory(default(CreateCategoryRequest)), "createCategory");
         }
     }
 }

@@ -171,7 +171,7 @@ namespace TagKid.Domain
             }
             else
             {
-                RequestContext.Current.AuthToken = token;
+                RequestContext.AuthToken = token;
             }
         }
 
@@ -254,9 +254,9 @@ namespace TagKid.Domain
 
         public virtual void SignOut()
         {
-            RemoveAuthToken(RequestContext.Current.AuthToken.Guid);
-            TokenRepository.Delete(RequestContext.Current.AuthToken);
-            RequestContext.Current.AuthToken = null;
+            RemoveAuthToken(RequestContext.AuthToken.Guid);
+            TokenRepository.Delete(RequestContext.AuthToken);
+            RequestContext.AuthToken = null;
         }
 
         private void SetConfirmationCodeAsUsed(ConfirmationCode confirmationCode, ConfirmationCodeStatus status)
@@ -286,7 +286,7 @@ namespace TagKid.Domain
             token.UserId = user.Id;
             token.User = user;
             AuthTokens.Add(token.Guid, token);
-            RequestContext.Current.AuthToken = token;
+            RequestContext.AuthToken = token;
         }
 
         private void RemoveAuthToken(Guid guid)

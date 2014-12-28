@@ -5,21 +5,31 @@ namespace TagKid.Core.Models
 {
     public class RequestContext
     {
+        private readonly string _culture;
+        private Token _authToken;
+
         private RequestContext()
         {
-            Culture = "en-GB";
+            _culture = "en-GB";
         }
 
-        public string Culture { get; set; }
-
-        public Token AuthToken { get; set; }
-
-        public bool Authenticated
+        public static bool IsAuthenticated
         {
-            get { return AuthToken != null && AuthToken.User != null; }
+            get { return Current._authToken != null && Current._authToken.User != null; }
         }
 
-        public static RequestContext Current
+        public static Token AuthToken 
+        {
+            get { return Current._authToken; }
+            set { Current._authToken = value; }
+        }
+
+        public static User User
+        {
+            get { return Current._authToken.User; }
+        }
+
+        private static RequestContext Current
         {
             get
             {

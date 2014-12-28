@@ -70,6 +70,7 @@
     <Compile Include="Mailing\IMailService.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignInWithToken.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
+    <Compile Include="Models\DTO\Messages\Post\CreateCategory.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetTimeline.cs" />
     <Compile Include="Models\DTO\Messages\Post\SavePost.cs" />
     <Compile Include="Models\DTO\Messages\Response.cs" />

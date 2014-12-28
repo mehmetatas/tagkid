@@ -24,5 +24,9 @@ namespace TagKid.Core.Domain
         Post[] ContinueGetPostsOfCategory(long categoryId, long maxPostId, int pageSize);
 
         Tag[] SearchTags(string name, int pageSize);
+
+        Category[] GetCategoriesOfUser(long userId);
+
+        void CreateCategory(Category category);
     }
 }

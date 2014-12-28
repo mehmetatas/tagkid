@@ -32,7 +32,7 @@ var tkTagInput = {
                 }
 
                 if (text.length > 0) {
-                    $scope.post.Tags.push({ Id: 1, Name: text });
+                    $scope.post.Tags.push({ Id: 0, Name: text });
                     $scope.$apply();
                     $element.val('');
 

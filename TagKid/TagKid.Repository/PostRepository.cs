@@ -56,12 +56,13 @@ namespace TagKid.Repository
             var users = _repository.Select<User>();
 
             var query = from post in posts
-                from category in categories
                 from user in users
+                from category in categories
                 where
-                    post.CategoryId == category.Id &&
                     post.UserId == user.Id &&
-                    category.Id == user.Id
+                    post.CategoryId == category.Id &&
+                    category.UserId == user.Id
+                orderby post.Id descending
                 select new { post, category, user };
 
             var postList = new List<Post>();
@@ -202,6 +203,8 @@ namespace TagKid.Repository
 
             foreach (var tag in post.Tags.Where(tag => tag.Id < 1))
             {
+                tag.Status = TagStatus.Active;
+                tag.Count = 1;
                 _repository.Insert(tag);
             }
 
