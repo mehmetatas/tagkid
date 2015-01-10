@@ -26,5 +26,22 @@ namespace TagKid.Core.Utils
         {
             return Guid.NewGuid();
         }
+
+        [Obsolete("Convert this method to use AutoMapper")]
+        public static void MapTo<TBase, TDerived>(TBase baseObj, TDerived derived)
+            where TBase : class, new()
+            where TDerived : TBase, new()
+        {
+            if (baseObj == null)
+            {
+                return;
+            }
+
+            var props = baseObj.GetType().GetProperties();
+            foreach (var prop in props)
+            {
+                prop.SetValue(derived, prop.GetValue(baseObj));
+            }
+        }
     }
 }

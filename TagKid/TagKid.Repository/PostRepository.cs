@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
+using TagKid.Core.Models.Database.View;
 using TagKid.Core.Models.Filter;
 using TagKid.Core.Repository;
 
@@ -11,10 +12,12 @@ namespace TagKid.Repository
     public class PostRepository : IPostRepository
     {
         private readonly IRepository _repository;
+        private readonly ISqlRepository _sqlRepository;
 
-        public PostRepository(IRepository repository)
+        public PostRepository(IRepository repository, ISqlRepository sqlRepository)
         {
             _repository = repository;
+            _sqlRepository = sqlRepository;
         }
 
         public Post GetById(long postId)
@@ -64,10 +67,15 @@ namespace TagKid.Repository
                     category.UserId == user.Id
                 orderby post.Id descending
                 select new { post, category, user };
+            
+            if (maxPostId > 0)
+            {
+                query = query.Where(q => q.post.Id < maxPostId);
+            }
 
             var postList = new List<Post>();
             
-            foreach (var item in query.ToList())
+            foreach (var item in query.Take(maxCount))
             {
                 item.post.User = item.user;
                 item.post.Category = item.category;
@@ -129,6 +137,35 @@ namespace TagKid.Repository
             SetTags(result);
 
             return result;
+        }
+
+        public PostInfo[] GetPostInfo(long userId, params long[] postIds)
+        {
+            var sql = @"select 
+	ISNULL(Likes.PostId, Comments.PostId) as PostId, 
+	ISNULL(Likes.LikeCount, 0) as LikeCount,
+	(select count(*) from PostLike where PostId = Likes.PostId and UserId = ~p_userId) as Liked,
+	ISNULL(Comments.CommentCount, 0) as CommentCount
+	--,(select count(*) from Comment where PostId = Comments.PostId and UserId = ~p_userId) as Commented
+from 
+	(select PostId, count(PostId) as LikeCount from PostLike where PostId in ({0}) group by PostId) Likes
+	full join (select PostId, count(PostId) as CommentCount from Comment where PostId in ({0}) group by PostId) Comments
+on
+	Likes.PostId = Comments.PostId";
+
+            var postIdsParamsStr = Enumerable.Range(0, postIds.Length).Select(i => String.Format("~p_{0}", i));
+
+            sql = string.Format(sql, String.Join(",", postIdsParamsStr));
+
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("p_userId", userId);
+
+            for (var i = 0; i < postIds.Length; i++)
+            {
+                parameters.Add(String.Format("p_{0}", i), postIds[i]);
+            }
+
+            return _sqlRepository.Query<PostInfo>(sql, parameters, true).ToArray();
         }
 
         public IPage<Post> Search(PostFilter filter)
@@ -196,7 +233,7 @@ namespace TagKid.Repository
         {
             if (post.Id > 0)
             {
-                _repository.Delete<PostTag>(pt => pt.PostId, post.Id);
+                _sqlRepository.Delete<PostTag>(pt => pt.PostId, post.Id);
             }
 
             _repository.Save(post);
@@ -347,6 +384,31 @@ namespace TagKid.Repository
         public void Flush()
         {
             _repository.Flush();
+        }
+
+        public void Like(long postId, long userId)
+        {
+            _repository.Insert(new PostLike
+            {
+                LikedDate = DateTime.Now,
+                PostId = postId,
+                UserId = userId
+            });
+        }
+
+        public void Unlike(long postId, long userId)
+        {
+            _repository.Delete(new PostLike
+            {
+                PostId = postId,
+                UserId = userId
+            });
+        }
+
+        public bool HasLiked(long postId, long userId)
+        {
+            return _repository.Select<PostLike>()
+                .Any(pl => pl.PostId == postId && pl.UserId == userId);
         }
     }
 }

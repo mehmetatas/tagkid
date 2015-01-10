@@ -1,5 +1,6 @@
 ﻿using Taga.Repository.NH;
 using TagKid.Core.Models.Database;
+using TagKid.Core.Models.Database.View;
 
 namespace TagKid.Application.Bootstrapping
 {
@@ -60,6 +61,10 @@ namespace TagKid.Application.Bootstrapping
     }
 
     public class FollowCategoryMap : TagaClassMap<FollowCategory>
+    {
+    }
+
+    public class PostInfoMap : TagaClassMap<PostInfo>
     {
     }
 }

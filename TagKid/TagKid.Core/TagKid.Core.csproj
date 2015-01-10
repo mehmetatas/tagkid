@@ -64,7 +64,10 @@
     <Compile Include="Mailing\Commands\IMailCommand.cs" />
     <Compile Include="Mailing\Commands\NewUserActivationMail.cs" />
     <Compile Include="Mailing\MailService.cs" />
-    <Compile Include="Models\Domain\Profile.cs" />
+    <Compile Include="Models\Domain\LikeResultDO.cs" />
+    <Compile Include="Models\Domain\ProfileDO.cs" />
+    <Compile Include="Models\Domain\PostDO.cs" />
+    <Compile Include="Models\Database\View\PostInfo.cs" />
     <Compile Include="Models\DTO\Messages\Auth\ActivateAccount.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignInWithPassword.cs" />
     <Compile Include="Mailing\IMailService.cs" />

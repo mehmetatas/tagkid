@@ -7,10 +7,16 @@ namespace TagKid.Core.Service
     {
         Response GetTimeline(GetTimelineRequest request);
 
-        Response SavePost(SavePostRequest request);
+        Response SaveAsDraft(SaveAsDraftRequest request);
+
+        Response Publish(PublishRequest request);
 
         Response CreateCategory(CreateCategoryRequest request);
 
         Response GetCategories();
+
+        Response GetComments(GetCommentsRequest request);
+
+        Response LikeUnlike(LikeUnlikeRequest request);
     }
 }

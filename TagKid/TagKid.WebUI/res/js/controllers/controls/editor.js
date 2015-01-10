@@ -1,5 +1,5 @@
 ﻿app.controller('EditorCtrl', [
-    '$scope', '$modal', 'tagkid', 'post', function ($scope, $modal, tagkid, post) {
+    '$scope', '$modal', 'tagkid', 'postService', function ($scope, $modal, tagkid, postService) {
         var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
         tkTagInput.create('#tk-tag-input', $scope);
@@ -50,7 +50,7 @@
         };
 
         $scope.categories = [];
-        post.getCategories(function (resp) {
+        postService.getCategories(function (resp) {
             $scope.categories = resp.Data;
         });
 
@@ -62,7 +62,7 @@
                 templateUrl: 'newCategoryModalContent.html',
                 controller: 'NewCategoryModalCtrl'
             }).result.then(function (newCategory) {
-                post.createCategory({ Category: newCategory }, function(resp) {
+                postService.createCategory({ Category: newCategory }, function (resp) {
                     newCategory.Id = resp.Data;
                     $scope.categories.push(newCategory);
                     $scope.post.Category = newCategory;
@@ -70,18 +70,25 @@
             });
         };
 
+        $scope.cancel = function () {
+            if (confirm('Are you sure you want to cancel changes?')) {
+                $scope.post.Category = null;
+                $scope.post.Tags = [];
+                $scope.post.Title = '';
+                $scope.post.EditorContent = '';
+            }
+        };
+
         $scope.saveAsDraft = function () {
-            post.saveAsDraft({
+            postService.saveAsDraft({
                 Post: $scope.post
             });
         };
 
-        $scope.cancel = function () {
-            alert('cancel');
-        };
-
         $scope.publish = function () {
-            alert('publish');
+            postService.publish({
+                Post: $scope.post
+            });
         };
     }
 ]);

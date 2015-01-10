@@ -8,10 +8,12 @@ namespace TagKid.Repository
     public class TokenRepository : ITokenRepository
     {
         private readonly IRepository _repository;
+        private readonly ISqlRepository _sqlRepository;
 
-        public TokenRepository(IRepository repository)
+        public TokenRepository(IRepository repository, ISqlRepository sqlRepository)
         {
             _repository = repository;
+            _sqlRepository = sqlRepository;
         }
 
         public Token Get(long tokenId)
@@ -32,7 +34,7 @@ namespace TagKid.Repository
 
         public void DeleteTokensOfUser(long userId)
         {
-            _repository.Delete<Token>(t => t.UserId, userId);
+            _sqlRepository.Delete<Token>(t => t.UserId, userId);
         }
 
         public void Flush()

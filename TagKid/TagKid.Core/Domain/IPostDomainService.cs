@@ -1,5 +1,6 @@
 ﻿using Taga.Core.Repository;
 using TagKid.Core.Models.Database;
+using TagKid.Core.Models.Domain;
 
 namespace TagKid.Core.Domain
 {
@@ -7,26 +8,32 @@ namespace TagKid.Core.Domain
     {
         void SaveAsDraft(Post post);
 
+        void Publish(Post post);
+
         Post Get(long postId);
 
-        Post[] GetTimeline(int pageSize, long maxPostId = 0);
+        PostDO[] GetTimeline(long maxPostId = 0);
 
-        IPage<Post> SearchByTag(long tagId, int pageIndex, int pageSize);
+        IPage<Post> SearchByTag(long tagId, int pageIndex);
 
-        Post[] ContinueSearchByTag(long tagId, long maxPostId, int pageSize);
+        Post[] ContinueSearchByTag(long tagId, long maxPostId);
 
-        IPage<Post> GetPostsOfUser(long userId, int pageIndex, int pageSize);
+        IPage<Post> GetPostsOfUser(long userId, int pageIndex);
 
-        Post[] ContinuteGetPostsOfUser(long userId, long maxPostId, int pageSize);
+        Post[] ContinuteGetPostsOfUser(long userId, long maxPostId);
 
-        IPage<Post> GetPostsOfCategory(long categoryId, int pageIndex, int pageSize);
+        IPage<Post> GetPostsOfCategory(long categoryId, int pageIndex);
 
-        Post[] ContinueGetPostsOfCategory(long categoryId, long maxPostId, int pageSize);
+        Post[] ContinueGetPostsOfCategory(long categoryId, long maxPostId);
 
-        Tag[] SearchTags(string name, int pageSize);
+        Tag[] SearchTags(string name);
 
         Category[] GetCategoriesOfUser(long userId);
 
         void CreateCategory(Category category);
+
+        Comment[] GetComments(long postId, long maxCommentId = 0);
+
+        LikeResultDO LikeUnlike(long postId);
     }
 }

@@ -31,16 +31,23 @@
             }
         };
         
-        var $send = function (method, url, req, success, error, complete) {
-            $http({
+        var $send = function (method, url, data, success, error, complete) {
+            var opts = {
                 method: method,
                 url: url,
-                data: req,
                 headers: {
                     'tagkid-auth-token': cookies.authToken(),
                     'tagkid-auth-token-id': cookies.authTokenId()
                 }
-            })
+            };
+
+            if (method === 'GET') {
+                opts.params = data;
+            } else {
+                opts.data = data;
+            }
+
+            $http(opts)
                 .success(function (resp, status, headers, config) {
                     var authToken = headers('tagkid-auth-token');
                     var authTokenId = headers('tagkid-auth-token-id');
@@ -70,7 +77,7 @@
                         }
                     }
                 })
-                .error(function (data, status, headers, config) {
+                .error(function (resp, status, headers, config) {
                     alert('Ooops! Something terribly went wrong :(');
                 })
                 .finally(function () {
@@ -90,16 +97,7 @@
             },
             get: function (controller, action, data, succes, error, complete) {
                 var url = '/api/' + controller + '/' + action;
-
-                if (data) {
-                    var join = '?';
-                    for (prop in data) {
-                        url += join + prop + '=' + data[prop];
-                        join = '&';
-                    }
-                }
-
-                return $send('GET', url, null, succes, error, complete);
+                return $send('GET', url, data, succes, error, complete);
             }
         };
     }

@@ -8,6 +8,7 @@ using Taga.Core.Repository.Mapping.NamingConvention;
 using Taga.Repository.NH;
 using Taga.Repository.NH.SpCallBuilders;
 using TagKid.Core.Models.Database;
+using TagKid.Core.Models.Database.View;
 using IServiceProvider = Taga.Core.IoC.IServiceProvider;
 
 namespace TagKid.Application.Bootstrapping.Bootstrappers
@@ -29,6 +30,7 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
             prov.RegisterSingleton<INHSpCallBuilder,SqlServerSpCallBuilder>();
             prov.RegisterPerWebRequest<ITransactionalUnitOfWork, NHUnitOfWork>();
             prov.RegisterPerWebRequest<IRepository, NHRepository>();
+            prov.RegisterPerWebRequest<ISqlRepository, NHRepository>();
 
             //prov.RegisterSingleton<IHybridDbProvider, TagKidHybridDbProvider>();
             //prov.RegisterPerWebRequest<IHybridAdapter, NHHybridAdapter>();
@@ -57,7 +59,8 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
                 .Map<PrivateMessage>()
                 .Map<Tag>()
                 .Map<Token>()
-                .Map<User>().ToTable("[User]");
+                .Map<User>().ToTable("[User]")
+                .Map<PostInfo>(pi => pi.PostId);
                 
             var prov = ServiceProvider.Provider.GetOrCreate<IMappingProvider>();
             prov.SetDatabaseMapping(dbMapping);

@@ -3,11 +3,11 @@ using TagKid.Core.Models.Database;
 
 namespace TagKid.Core.Models.Domain
 {
-    public class Profile
+    public class ProfileDO
     {
         private readonly User _user;
 
-        public Profile(User user, int followerCount, int followingCount, int postCount, int categoryCount)
+        public ProfileDO(User user, int followerCount, int followingCount, int postCount, int categoryCount)
         {
             _user = user;
             CategoryCount = categoryCount;

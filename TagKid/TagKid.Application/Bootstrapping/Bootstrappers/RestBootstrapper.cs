@@ -45,10 +45,13 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
         private void BuildPostService(ControllerConfigurator cfg)
         {
             cfg.ControllerFor<IPostService>("post")
-                .ActionFor(s => s.SavePost(default(SavePostRequest)), "saveAsDraft")
+                .ActionFor(s => s.SaveAsDraft(default(SaveAsDraftRequest)), "saveAsDraft")
+                .ActionFor(s => s.Publish(default(PublishRequest)), "publish")
                 .ActionFor(s => s.GetTimeline(default(GetTimelineRequest)), "timeline", HttpMethodType.Get)
                 .ActionFor(s => s.GetCategories(), "categories", HttpMethodType.Get)
-                .ActionFor(s => s.CreateCategory(default(CreateCategoryRequest)), "createCategory");
+                .ActionFor(s => s.CreateCategory(default(CreateCategoryRequest)), "createCategory")
+                .ActionFor(s => s.GetComments(default(GetCommentsRequest)), "comments", HttpMethodType.Get)
+                .ActionFor(s => s.LikeUnlike(default(LikeUnlikeRequest)), "like");
         }
     }
 }

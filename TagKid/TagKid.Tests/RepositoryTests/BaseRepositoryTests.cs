@@ -27,7 +27,7 @@ namespace TagKid.Tests.RepositoryTests
         {
             using (var uow = ServiceProvider.Provider.GetOrCreate<IUnitOfWork>())
             {
-                var repo = ServiceProvider.Provider.GetOrCreate<IRepository>();
+                var repo = ServiceProvider.Provider.GetOrCreate<ISqlRepository>();
                 repo.ExecSp("TruncateAll");
                 uow.Save();
             }

@@ -15,17 +15,24 @@ namespace TagKid.Service
         public PostService(IPostDomainService postDomain)
         {
             _postDomain = postDomain;
+            System.Threading.Thread.Sleep(1000);
         }
 
         public virtual Response GetTimeline(GetTimelineRequest request)
         {
-            var posts = _postDomain.GetTimeline(10);
+            var posts = _postDomain.GetTimeline(request.MaxPostId);
             return Response.Success.WithData(posts);
         }
 
-        public virtual Response SavePost(SavePostRequest request)
+        public virtual Response SaveAsDraft(SaveAsDraftRequest request)
         {
             _postDomain.SaveAsDraft(request.Post);
+            return Response.Success.WithData(request.Post);
+        }
+
+        public virtual Response Publish(PublishRequest request)
+        {
+            _postDomain.Publish(request.Post);
             return Response.Success.WithData(request.Post);
         }
 
@@ -40,6 +47,18 @@ namespace TagKid.Service
         {
             var categories = _postDomain.GetCategoriesOfUser(RequestContext.User.Id);
             return Response.Success.WithData(categories);
+        }
+
+        public virtual Response GetComments(GetCommentsRequest request)
+        {
+            var comments = _postDomain.GetComments(request.PostId, request.MaxCommentId);
+            return Response.Success.WithData(comments);
+        }
+
+        public virtual Response LikeUnlike(LikeUnlikeRequest request)
+        {
+            var likeResult = _postDomain.LikeUnlike(request.PostId);
+            return Response.Success.WithData(likeResult);
         }
     }
 }

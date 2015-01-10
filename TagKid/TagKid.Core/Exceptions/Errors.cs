@@ -21,6 +21,8 @@ namespace TagKid.Core.Exceptions
         public static readonly Error V_ConfirmationCodeId = new Error(11, "V_ConfirmationCodeId");
         public static readonly Error V_ConfirmationCode = new Error(12, "V_ConfirmationCode");
         public static readonly Error V_SelectCategory = new Error(13, "V_SelectCategory");
+        public static readonly Error V_TitleTooLong = new Error(14, "V_TitleTooLong");
+        public static readonly Error V_ContentTooLong = new Error(15, "V_ContentTooLong");
 
         #endregion
 
