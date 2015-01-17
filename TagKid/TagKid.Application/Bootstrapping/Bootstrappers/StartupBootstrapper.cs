@@ -9,7 +9,6 @@ using Taga.Mapping.AutoMapper;
 using TagKid.Core.Database;
 using TagKid.Core.Logging;
 using TagKid.Core.Mailing;
-using FileMailSender = TagKid.Core.Mailing.FileMailSender;
 using MailService = TagKid.Core.Mailing.MailService;
 
 namespace TagKid.Application.Bootstrapping.Bootstrappers
@@ -18,7 +17,7 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
     {
         public void Bootstrap(IServiceProvider prov)
         {
-            prov.RegisterSingleton<IMailSender, FileMailSender>();
+            prov.RegisterSingleton<IMailSender, SmtpMailSender>();
             prov.RegisterSingleton<IMailService, MailService>();
             prov.RegisterSingleton<IMappingProvider, MappingProvider>();
             prov.RegisterSingleton<IJsonSerializer, NewtonsoftJsonSerializer>();

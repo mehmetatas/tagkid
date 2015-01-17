@@ -24,7 +24,7 @@ namespace TagKid.Core.Mailing.Commands
             _mailSender.Send(new MailMessage
             {
                 To = new[] { User.Email },
-                Body = String.Format("http://localhost:53495/api/auth/activateAccount?ccid={0}&cc={1}", ConfirmationCode.Id, ConfirmationCode.Code),
+                Body = String.Format("http://test.tagkid.com/activation/{0}/{1}", ConfirmationCode.Id, ConfirmationCode.Code),
                 Subject = "TagKid Activation"
             });
         }
