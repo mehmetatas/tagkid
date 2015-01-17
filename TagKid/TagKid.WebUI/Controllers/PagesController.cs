@@ -34,5 +34,15 @@ namespace TagKid.WebUI.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult Tag()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Category()
+        {
+            return PartialView();
+        }
     }
 }

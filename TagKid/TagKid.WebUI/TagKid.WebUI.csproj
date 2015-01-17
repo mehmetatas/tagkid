@@ -582,6 +582,8 @@
     <Content Include="Views\Modals\TermsAndPolicy.cshtml" />
     <Content Include="Views\Pages\User.cshtml" />
     <Content Include="Views\Pages\Activation.cshtml" />
+    <Content Include="Views\Pages\Category.cshtml" />
+    <Content Include="Views\Pages\Tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">

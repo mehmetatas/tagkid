@@ -50,6 +50,16 @@ angular.module('app')
                   url: '/user/:username',
                   templateUrl: '/pages/user',
                   controller: 'UserCtrl'
+              })
+              .state('pages.tag', {
+                  url: '/tag/:id/:name',
+                  templateUrl: '/pages/tag',
+                  controller: 'TagCtrl'
+              })
+              .state('pages.category', {
+                  url: '/category/:id/:name',
+                  templateUrl: '/pages/category',
+                  controller: 'CategoryCtrl'
               });
 
           $stateProvider.state('auth', {
