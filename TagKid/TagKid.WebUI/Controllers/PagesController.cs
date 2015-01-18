@@ -5,6 +5,11 @@ namespace TagKid.WebUI.Controllers
 {
     public class PagesController : Controller
     {
+        public PagesController()
+        {
+            Thread.Sleep(1000);
+        }
+
         public ActionResult Timeline()
         {
             return PartialView();

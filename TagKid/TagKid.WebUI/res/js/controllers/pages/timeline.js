@@ -34,7 +34,7 @@
                     $scope.posts.push(post);
                 }
 
-                $scope.disableMorePosts = posts.length < 1; // 1 = PageSize
+                $scope.disableMorePosts = posts.length < 10; // 10 = PageSize
                 if ($scope.disableMorePosts) {
                     $scope.morePostsButtonText = 'No more posts';
                 } else {
@@ -85,7 +85,7 @@
                 post.Comments.push(comment);
             }
 
-            post.disableLoadComments = comments.length < 1; // 1 = PageSize
+            post.disableLoadComments = comments.length < 10; // 10 = PageSize
             if (post.disableLoadComments) {
                 post.moreCommentsButtonText = 'No more comments';
             } else {

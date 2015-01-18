@@ -5055,6 +5055,7 @@ a.text-#000000:hover {
     position: relative;
     height: 3px;
     margin-bottom: -3px;
+        z-index: 5;
 }
 
     .butterbar .bar {
@@ -5063,6 +5064,7 @@ a.text-#000000:hover {
         height: 0;
         text-indent: -9999px;
         background-color: #23b7e5;
+        z-index: 6;
     }
 
         .butterbar .bar:before {

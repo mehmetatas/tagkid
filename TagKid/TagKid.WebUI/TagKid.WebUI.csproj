@@ -200,7 +200,6 @@
     <Content Include="res\js\services\tagkid.js" />
     <Content Include="res\js\services\ui-load.js" />
     <Content Include="res\l10n\en.js" />
-    <Content Include="res\template-site\angular-stripped.html" />
     <Content Include="res\template-site\css\animate.css" />
     <Content Include="res\template-site\css\app.css" />
     <Content Include="res\template-site\css\bootstrap.css" />
@@ -289,7 +288,9 @@
     <Content Include="res\template-site\js\controllers\tab.js" />
     <Content Include="res\template-site\js\controllers\toaster.js" />
     <Content Include="res\template-site\js\controllers\tree.js" />
+    <Content Include="res\template-site\js\controllers\uigrid.js" />
     <Content Include="res\template-site\js\controllers\vectormap.js" />
+    <Content Include="res\template-site\js\controllers\xeditable.js" />
     <Content Include="res\template-site\js\directives\setnganimate.js" />
     <Content Include="res\template-site\js\directives\ui-butterbar.js" />
     <Content Include="res\template-site\js\directives\ui-focus.js" />
@@ -300,7 +301,6 @@
     <Content Include="res\template-site\js\directives\ui-scroll.js" />
     <Content Include="res\template-site\js\directives\ui-shift.js" />
     <Content Include="res\template-site\js\directives\ui-toggleclass.js" />
-    <Content Include="res\template-site\js\directives\ui-validate.js" />
     <Content Include="res\template-site\js\filters\fromNow.js" />
     <Content Include="res\template-site\js\main.js" />
     <Content Include="res\template-site\js\services\ui-load.js" />
@@ -332,6 +332,7 @@
     <Content Include="res\template-site\tpl\form_slider.html" />
     <Content Include="res\template-site\tpl\form_validation.html" />
     <Content Include="res\template-site\tpl\form_wizard.html" />
+    <Content Include="res\template-site\tpl\form_xeditable.html" />
     <Content Include="res\template-site\tpl\layout.html" />
     <Content Include="res\template-site\tpl\layout_app.html" />
     <Content Include="res\template-site\tpl\layout_footer_fullwidth.html" />
@@ -363,9 +364,11 @@
     <Content Include="res\template-site\tpl\page_signin.html" />
     <Content Include="res\template-site\tpl\page_signup.html" />
     <Content Include="res\template-site\tpl\table_datatable.html" />
+    <Content Include="res\template-site\tpl\table_editable.html" />
     <Content Include="res\template-site\tpl\table_footable.html" />
     <Content Include="res\template-site\tpl\table_grid.html" />
     <Content Include="res\template-site\tpl\table_static.html" />
+    <Content Include="res\template-site\tpl\table_uigrid.html" />
     <Content Include="res\template-site\tpl\ui_bootstrap.html" />
     <Content Include="res\template-site\tpl\ui_buttons.html" />
     <Content Include="res\template-site\tpl\ui_chart.html" />
@@ -438,6 +441,11 @@
     <Content Include="res\template-site\vendor\jquery\sortable\jquery.sortable.js" />
     <Content Include="res\template-site\vendor\jquery\spinner\jquery.bootstrap-touchspin.css" />
     <Content Include="res\template-site\vendor\jquery\spinner\jquery.bootstrap-touchspin.min.js" />
+    <Content Include="res\template-site\vendor\jquery\ui-jp.config.js" />
+    <Content Include="res\template-site\vendor\jquery\ui-jp.js" />
+    <Content Include="res\template-site\vendor\jquery\ui-load.js" />
+    <Content Include="res\template-site\vendor\jquery\ui-nav.js" />
+    <Content Include="res\template-site\vendor\jquery\ui-toggle.js" />
     <Content Include="res\template-site\vendor\jquery\wysiwyg\bootstrap-wysiwyg.js" />
     <Content Include="res\template-site\vendor\jquery\wysiwyg\jquery.hotkeys.js" />
     <Content Include="res\template-site\vendor\libs\moment.min.js" />
@@ -448,8 +456,16 @@
     <Content Include="res\template-site\vendor\modules\angular-slider\angular-slider.css" />
     <Content Include="res\template-site\vendor\modules\angular-slider\angular-slider.min.js" />
     <Content Include="res\template-site\vendor\modules\angular-ui-calendar\calendar.js" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.css" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.js" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.min.css" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.min.js" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.svg" />
     <Content Include="res\template-site\vendor\modules\angular-ui-select\select.min.css" />
     <Content Include="res\template-site\vendor\modules\angular-ui-select\select.min.js" />
+    <Content Include="res\template-site\vendor\modules\angular-xeditable\css\xeditable.css" />
+    <Content Include="res\template-site\vendor\modules\angular-xeditable\js\xeditable.js" />
+    <Content Include="res\template-site\vendor\modules\angular-xeditable\js\xeditable.min.js" />
     <Content Include="res\template-site\vendor\modules\angularjs-toaster\toaster.css" />
     <Content Include="res\template-site\vendor\modules\angularjs-toaster\toaster.js" />
     <Content Include="res\template-site\vendor\modules\ng-grid\ng-grid.min.css" />
@@ -511,7 +527,39 @@
     <Content Include="res\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="res\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="res\fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\fonts\Simple-Line-Icons.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\fonts\Simple-Line-Icons.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\fonts\Simple-Line-Icons.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\taga.pubxml" />
+    <Content Include="Views\Modals\NewCategory.cshtml" />
+    <Content Include="Views\Pages\Timeline.cshtml" />
+    <Content Include="Views\Layout\Aside.cshtml" />
+    <Content Include="Views\Layout\Header.cshtml" />
+    <Content Include="Views\Layout\Nav.cshtml" />
+    <Content Include="Views\Layout\Main.cshtml" />
+    <Content Include="Views\Pages\SignUp.cshtml" />
+    <Content Include="Views\Pages\SignIn.cshtml" />
+    <Content Include="Views\Pages\ForgotPwd.cshtml" />
+    <Content Include="Views\Modals\TermsAndPolicy.cshtml" />
+    <Content Include="Views\Pages\User.cshtml" />
+    <Content Include="Views\Pages\Activation.cshtml" />
+    <Content Include="Views\Pages\Category.cshtml" />
+    <Content Include="Views\Pages\Tag.cshtml" />
+    <Content Include="res\template-site\.DS_Store" />
+    <Content Include="res\template-site\api\groups" />
     <Content Include="res\template-site\api\login" />
+    <Content Include="res\template-site\api\saveUser" />
     <Content Include="res\template-site\api\signup" />
     <Content Include="res\template-site\css\less\app.arrow.less" />
     <Content Include="res\template-site\css\less\app.butterbar.less" />
@@ -555,35 +603,9 @@
     <Content Include="res\template-site\vendor\jquery\footable\fonts\footable.eot" />
     <Content Include="res\template-site\vendor\jquery\footable\fonts\footable.ttf" />
     <Content Include="res\template-site\vendor\jquery\footable\fonts\footable.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Layout\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="res\fonts\Simple-Line-Icons.eot" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="res\fonts\Simple-Line-Icons.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="res\fonts\Simple-Line-Icons.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\PublishProfiles\taga.pubxml" />
-    <Content Include="Views\Modals\NewCategory.cshtml" />
-    <Content Include="Views\Pages\Timeline.cshtml" />
-    <Content Include="Views\Layout\Aside.cshtml" />
-    <Content Include="Views\Layout\Header.cshtml" />
-    <Content Include="Views\Layout\Nav.cshtml" />
-    <Content Include="Views\Layout\Main.cshtml" />
-    <Content Include="Views\Pages\SignUp.cshtml" />
-    <Content Include="Views\Pages\SignIn.cshtml" />
-    <Content Include="Views\Pages\ForgotPwd.cshtml" />
-    <Content Include="Views\Modals\TermsAndPolicy.cshtml" />
-    <Content Include="Views\Pages\User.cshtml" />
-    <Content Include="Views\Pages\Activation.cshtml" />
-    <Content Include="Views\Pages\Category.cshtml" />
-    <Content Include="Views\Pages\Tag.cshtml" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.eot" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.ttf" />
+    <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.woff" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">

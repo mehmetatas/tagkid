@@ -54,7 +54,7 @@ namespace TagKid.Core.Mailing
             
             client.Credentials = new NetworkCredential("tagkid@turpgames.com", "Tag1234Kid");
 
-            client.Send(new System.Net.Mail.MailMessage("tagkid@turpgames.com", mailMessage.To[0], mailMessage.Subject, mailMessage.Body)
+            client.SendMailAsync(new System.Net.Mail.MailMessage("tagkid@turpgames.com", mailMessage.To[0], mailMessage.Subject, mailMessage.Body)
             {
                 IsBodyHtml = true
             });

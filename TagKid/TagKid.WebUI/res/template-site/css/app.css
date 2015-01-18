@@ -900,6 +900,7 @@ body {
 }
 
 .navbar-brand img {
+  display: inline;
   max-height: 20px;
   margin-top: -4px;
   vertical-align: middle;
@@ -965,7 +966,7 @@ body {
     bottom: 0;
     left: 0;
     z-index: 1000;
-    width: 200px;
+    width: 199px;
     overflow: hidden;
   }
   .app-aside-fixed .aside-wrap .navi-wrap {
@@ -992,7 +993,7 @@ body {
     z-index: 1010;
   }
   .app-aside-fixed.app-aside-folded .aside-wrap {
-    width: 60px;
+    width: 59px;
   }
   .app-aside-fixed.app-aside-folded .aside-wrap .navi-wrap {
     width: 77px;
@@ -1171,10 +1172,10 @@ html {
           transition: all 0.2s ease-in-out 0s;
 }
 
-.active .nav-sub,
-.app-aside-folded li:hover .nav-sub,
-.app-aside-folded li:focus .nav-sub,
-.app-aside-folded li:active .nav-sub {
+.active > .nav-sub,
+.app-aside-folded li:hover > .nav-sub,
+.app-aside-folded li:focus > .nav-sub,
+.app-aside-folded li:active > .nav-sub {
   height: auto !important;
   margin-left: 0;
   overflow: auto;
@@ -1196,6 +1197,14 @@ html {
 
 .navi ul.nav li li a {
   padding-left: 55px;
+}
+
+.navi ul.nav li li ul {
+  display: none;
+}
+
+.navi ul.nav li li.active > ul {
+  display: block;
 }
 
 .navi ul.nav li a {
@@ -1270,7 +1279,7 @@ html {
     right: 12px;
     z-index: 3;
   }
-  .app-aside-folded .navi > ul ul {
+  .app-aside-folded .navi > ul > li > ul {
     position: absolute;
     top: 0 !important;
     left: 100%;
@@ -1482,9 +1491,9 @@ html {
   .app-aside-dock .app-aside .navi li li a {
     padding-left: 15px;
   }
-  .app-aside-dock .app-aside .navi li:hover .nav-sub,
-  .app-aside-dock .app-aside .navi li:focus .nav-sub,
-  .app-aside-dock .app-aside .navi li:active .nav-sub {
+  .app-aside-dock .app-aside .navi li:hover > .nav-sub,
+  .app-aside-dock .app-aside .navi li:focus > .nav-sub,
+  .app-aside-dock .app-aside .navi li:active > .nav-sub {
     display: block;
     height: auto !important;
     margin-left: 0;
@@ -3878,6 +3887,10 @@ a.text-#000000:hover {
   color: #fff;
 }
 
+.text-black {
+  color: #000;
+}
+
 .text-muted {
   color: #98a6ad;
 }
@@ -4690,6 +4703,18 @@ a.text-#000000:hover {
   margin: 0;
 }
 
+.w-1x {
+  width: 1em;
+}
+
+.w-2x {
+  width: 2em;
+}
+
+.w-3x {
+  width: 3em;
+}
+
 .w-xxs {
   width: 60px;
 }
@@ -4885,6 +4910,9 @@ a.text-#000000:hover {
   .hidden-sm.show {
     display: inherit !important;
   }
+  .no-m-sm {
+    margin: 0 !important;
+  }
 }
 
 /*phone*/
@@ -4945,6 +4973,9 @@ a.text-#000000:hover {
   .padder-md {
     padding-right: 15px;
     padding-left: 15px;
+  }
+  .no-m-xs {
+    margin: 0 !important;
   }
 }
 

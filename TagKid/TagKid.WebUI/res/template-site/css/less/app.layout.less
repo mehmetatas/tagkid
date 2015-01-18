@@ -215,6 +215,7 @@ body{
 		max-height: 20px;
 		margin-top: -4px;
 		vertical-align: middle;
+		display: inline;
 	}	
 }
 
@@ -289,7 +290,7 @@ body{
 			top: @app-header-height;
 			bottom: 0;
 			left: 0;
-			width: @app-aside-width;
+			width: @app-aside-width - 1;
 			z-index: 1000;
 			.navi-wrap{
 				width: @app-aside-width + @scroll-bar-width;
@@ -317,7 +318,7 @@ body{
 				z-index: 1010;
 			}
 			.aside-wrap{
-				width: @app-aside-folded-width;
+				width: @app-aside-folded-width - 1;
 				.navi-wrap{
 					width: @app-aside-folded-width + @scroll-bar-width;
 				}

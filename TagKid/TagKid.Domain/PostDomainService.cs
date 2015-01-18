@@ -3,7 +3,6 @@ using System.Linq;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
 using TagKid.Core.Domain;
-using TagKid.Core.Exceptions;
 using TagKid.Core.Models;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Models.Database.View;
@@ -15,7 +14,7 @@ namespace TagKid.Domain
 {
     public class PostDomainService : IPostDomainService
     {
-        private const int PageSize = 1;
+        private const int PageSize = 10;
 
         private static IUserRepository UserRepository
         {

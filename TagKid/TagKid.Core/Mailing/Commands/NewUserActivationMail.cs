@@ -21,11 +21,14 @@ namespace TagKid.Core.Mailing.Commands
 
         public void Send()
         {
+            var activationLink = String.Format("http://test.tagkid.com/activation/{0}/{1}", ConfirmationCode.Id,
+                ConfirmationCode.Code);
+
             _mailSender.Send(new MailMessage
             {
                 To = new[] { User.Email },
-                Body = String.Format("http://test.tagkid.com/activation/{0}/{1}", ConfirmationCode.Id, ConfirmationCode.Code),
-                Subject = "TagKid Activation"
+                Body = String.Format("Dear {0},<br/><br/>Thanks for joining TagKid.com!<br/><br/>You are now one step away to start tagging. You can <a href='{1}'>click here</a> to activate your TagKid.com account. If the link does not work, you can simply copy and paste the below link into your browser.<br/><br/><a href='{1}'>{1}</a><br/><br/>Sincerely,<br/>TagKid.com team.", User.Fullname, activationLink),
+                Subject = "TagKid.com Activation for " + User.Fullname
             });
         }
     }

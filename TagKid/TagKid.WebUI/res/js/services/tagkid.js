@@ -1,4 +1,4 @@
-﻿app.factory('tagkid', [
+﻿app.service('tagkid', [
     '$http', '$state', function ($http, $state) {
         var cookies = {
             authToken: function (value) {
@@ -47,6 +47,8 @@
                 opts.data = data;
             }
 
+            $('.butterbar').removeClass('hide').addClass('active');
+
             $http(opts)
                 .success(function (resp, status, headers, config) {
                     var authToken = headers('tagkid-auth-token');
@@ -81,6 +83,7 @@
                     alert('Ooops! Something terribly went wrong :(');
                 })
                 .finally(function () {
+                    $('.butterbar').removeClass('active').addClass('hide');
                     if (complete) {
                         complete();
                     }
