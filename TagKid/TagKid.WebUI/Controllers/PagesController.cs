@@ -1,15 +1,9 @@
-﻿using System.Threading;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace TagKid.WebUI.Controllers
 {
     public class PagesController : BaseController
     {
-        public PagesController()
-        {
-            Thread.Sleep(1000);
-        }
-
         public ActionResult Timeline()
         {
             return PartialView();
@@ -41,11 +35,6 @@ namespace TagKid.WebUI.Controllers
         }
 
         public ActionResult Tag()
-        {
-            return PartialView();
-        }
-
-        public ActionResult Category()
         {
             return PartialView();
         }

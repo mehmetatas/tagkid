@@ -34,5 +34,11 @@ namespace TagKid.Core.Exceptions
         public static readonly Error S_InvalidActivationCode = new Error(103, "S_InvalidActivationCode");
 
         #endregion
+
+        #region User
+
+        public static readonly Error U_ProfileError = new Error(200, "U_ProfileError");
+
+        #endregion
     }
 }

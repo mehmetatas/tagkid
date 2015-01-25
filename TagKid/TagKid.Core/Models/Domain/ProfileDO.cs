@@ -7,6 +7,11 @@ namespace TagKid.Core.Models.Domain
     {
         private readonly User _user;
 
+        public ProfileDO(User user)
+        {
+            _user = user;
+        }
+
         public ProfileDO(User user, int followerCount, int followingCount, int postCount, int categoryCount)
         {
             _user = user;
@@ -35,6 +40,10 @@ namespace TagKid.Core.Models.Domain
         {
             get { return _user.JoinDate; }
         }
+
+        public string ProfileImageUrl { get; set; }
+
+        public string CoverImageUrl { get; set; }
 
         public int FollowerCount { get; private set; }
 

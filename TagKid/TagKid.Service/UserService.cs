@@ -1,5 +1,6 @@
 ﻿using Taga.Core.DynamicProxy;
 using TagKid.Core.Domain;
+using TagKid.Core.Models;
 using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Models.DTO.Messages.User;
 using TagKid.Core.Service;
@@ -18,7 +19,8 @@ namespace TagKid.Service
 
         public Response GetProfile(GetProfileRequest request)
         {
-            throw new System.NotImplementedException();
+            var profile = _userDomain.GetProfile(request.Username);
+            return Response.Success.WithData(profile);
         }
     }
 }

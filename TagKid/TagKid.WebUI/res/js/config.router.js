@@ -51,15 +51,15 @@ angular.module('app')
                   templateUrl: '/pages/user',
                   controller: 'UserCtrl'
               })
+              .state('pages.category', {
+                  url: '/user/:username/:category',
+                  templateUrl: '/pages/user',
+                  controller: 'UserCtrl'
+              })
               .state('pages.tag', {
-                  url: '/tag/:id/:name',
+                  url: '/tag/:name',
                   templateUrl: '/pages/tag',
                   controller: 'TagCtrl'
-              })
-              .state('pages.category', {
-                  url: '/category/:id/:name',
-                  templateUrl: '/pages/category',
-                  controller: 'CategoryCtrl'
               });
 
           $stateProvider.state('auth', {

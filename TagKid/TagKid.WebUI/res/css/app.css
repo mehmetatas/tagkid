@@ -5055,7 +5055,7 @@ a.text-#000000:hover {
     position: relative;
     height: 3px;
     margin-bottom: -3px;
-        z-index: 5;
+    z-index: 5;
 }
 
     .butterbar .bar {

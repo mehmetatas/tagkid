@@ -1,11 +1,13 @@
 ﻿angular.module('app')
     .directive('tagkidEditor', ['$modal', '$timeout', 'tagkid', 'postService', function ($modal, $timeout, tagkid, postService) {
-        postService.getCategories(function (resp) {
-            categories.splice(0, categories.length);
-            for (var i = 0; i < resp.Data.length; i++) {
-                categories.push(resp.Data[i]);
-            }
-        });
+        var loadCategories = function () {
+            postService.getCategories({ UserId: tagkid.user().Id }, function (resp) {
+                categories.splice(0, categories.length);
+                for (var i = 0; i < resp.Data.length; i++) {
+                    categories.push(resp.Data[i]);
+                }
+            });
+        }
 
         var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
@@ -76,6 +78,11 @@
         var publish = function () {
             postService.publish({
                 Post: post
+            }, function() {
+                post.Category = null;
+                post.Tags = [];
+                post.Title = '';
+                post.EditorContent = '';
             });
         };
 
@@ -92,6 +99,7 @@
             scope.publish = publish;
 
             tkTagInput.create('#tk-tag-input', scope);
+            loadCategories();
         };
 
         return {

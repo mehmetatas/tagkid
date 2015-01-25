@@ -4,70 +4,9 @@
             <div class="streamline b-l b-info m-l m-b padder-v">
                 <!-- New Post -->
                 <tagkid-editor></tagkid-editor>
-                @*<div>
-                    <a ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
-                        <img ng-src="{{user.ProfileImageUrl}}" ng-alt="{{user.Fullname}}">
-                    </a>
-                    <div class="m-l-lg panel b-a r-3x" ng-controller="EditorCtrl">
-                        <div class=" panel-heading pos-rlt b-b b-light">
-                            <span class="text-muted m-l-sm pull-left">
-                                <span class="arrow left pull-up"></span>
-                                <a ui-sref="pages.user({username: user.Username})">
-                                    <span class="text-md font-bold" ng-bind="user.Fullname"></span>
-                                    <span class=" text-xs text-muted" ng-bind="'&#64;' + user.Username"></span>
-                                </a>
-
-                                <div class="tag-search">
-                                    <div class="btn-group" dropdown>
-                                        <a href="#" dropdown-toggle><label class="label m-r-xs" ng-class="post.Category && post.Category.CssClass ? post.Category.CssClass : 'bg-light'" ng-bind="post.Category ? post.Category.Name : 'Select Category'"></label></a>
-                                        <div class="dropdown-menu text-sm padder" role="menu">
-                                            <a href ng-repeat="category in categories" ng-click="selectCategory(category);">
-                                                <label ng-class="category.CssClass" class="label m-r-xs" ng-bind="category.Name"></label>
-                                            </a>
-                                            <hr class="m-xs">
-                                            <a href><label class="label bg-light m-r-xs" ng-click="showNewCategoryPopup();">new category</label></a>
-                                        </div>
-                                    </div>
-
-                                    <script type="text/ng-template" id="newCategoryModalContent.html">
-                                        <div ng-include="'/modals/NewCategory'"></div>
-                                    </script>
-
-                                    <span class="tags" ng-repeat="tag in post.Tags">
-                                        <a ng-click="removeTag(tag)"><label class=" label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
-                                    </span>
-                                    <input type="text" id="tk-tag-input" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="post.Tags.length >= 5" ng-show="post.Tags.length < 5" />
-                                </div>
-                            </span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-body">
-                            <input type="text" id="tk-title" placeholder="Title here" class="r-t form-control no-border text-lg no-padder" ng-model="post.Title" />
-                            <textarea id="tk-editor" class="form-control no-border r-b no-padder" style="margin-top: -1px" rows="3" placeholder="Your post here" ng-model="post.EditorContent"></textarea>
-                            <div id="tk-preview" style="display: none;"></div>
-                            <div class="m-t-sm">
-                                <a href id="tk-preview-btn" class="btn btn-default btn-xs" ng-click="toggleEditor();">
-                                    <i class="fa fa-list-alt text-muted text"></i> Preview
-                                </a>
-                                <a href id="tk-edit-btn" class="btn btn-default btn-xs" style="display: none" ng-click="toggleEditor();">
-                                    <i class="fa fa-edit text-muted text"></i> Edit
-                                </a>
-                                <a href="#" class="btn btn-default btn-xs" ng-click="cancel();">
-                                    <i class="fa fa-trash text-muted text"></i> Cancel
-                                </a>
-                                <a href="#" class="btn btn-default btn-xs" ng-click="saveAsDraft();">
-                                    <i class="fa fa-save text-muted"></i> Save As Draft
-                                </a>
-                                <a href="#" class="btn btn-default btn-xs" ng-click="publish();">
-                                    <i class="fa fa-mail-forward text-muted"></i> Publish
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
                 <!-- Posts -->
                 <tagkid-post ng-repeat="post in posts" post="post"></tagkid-post>
-                </div>
+            </div>
             <div class="text-center">
                 <button class="btn btn-default w-full" ng-click="loadTimeline();" ng-disabled="disableMorePosts" ng-bind="morePostsButtonText"></button>
             </div>

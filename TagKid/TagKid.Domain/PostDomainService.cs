@@ -44,9 +44,9 @@ namespace TagKid.Domain
         public virtual void SaveAsDraft(Post post)
         {
             post.UserId = RequestContext.User.Id;
-            post.HtmlContent = EditorUtils.ToHtml(post.EditorContent);
+            post.HtmlContent = HtmlBuilder.ToHtml(post.EditorContent);
             post.Status = PostStatus.Draft;
-            post.AccessLevel = AccessLevel.Private;
+            post.AccessLevel = AccessLevel.Public;
             post.CategoryId = post.Category.Id;
             post.RetaggedPostId = post.RetaggedPost == null
                 ? (long?)null
@@ -63,9 +63,9 @@ namespace TagKid.Domain
         public void Publish(Post post)
         {
             post.UserId = RequestContext.User.Id;
-            post.HtmlContent = EditorUtils.ToHtml(post.EditorContent);
+            post.HtmlContent = HtmlBuilder.ToHtml(post.EditorContent);
             post.Status = PostStatus.Published;
-            post.AccessLevel = AccessLevel.Private;
+            post.AccessLevel = AccessLevel.Public;
             post.CategoryId = post.Category.Id;
             post.RetaggedPostId = post.RetaggedPost == null
                 ? (long?)null
@@ -97,22 +97,23 @@ namespace TagKid.Domain
             return PostDO.Create(posts, infos);
         }
 
+        public virtual PostDO[] GetPostsOfUser(long userId, long categoryId, long maxPostId)
+        {
+            var posts = PostRepository.GetPostsOfUser(userId, categoryId, PageSize, maxPostId);
+         
+            var infos = posts.Any()
+                ? PostRepository.GetPostInfo(RequestContext.User.Id, posts.Select(p => p.Id).ToArray())
+                : new PostInfo[0];
+
+            return PostDO.Create(posts, infos);
+        }
+
         public virtual IPage<Post> SearchByTag(long tagId, int pageIndex)
         {
             throw new NotImplementedException();
         }
 
         public virtual Post[] ContinueSearchByTag(long tagId, long maxPostId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IPage<Post> GetPostsOfUser(long userId, int pageIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Post[] ContinuteGetPostsOfUser(long userId, long maxPostId)
         {
             throw new NotImplementedException();
         }

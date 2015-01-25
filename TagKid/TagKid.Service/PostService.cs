@@ -1,6 +1,5 @@
 ﻿using Taga.Core.DynamicProxy;
 using TagKid.Core.Domain;
-using TagKid.Core.Models;
 using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Models.DTO.Messages.Post;
 using TagKid.Core.Service;
@@ -15,7 +14,6 @@ namespace TagKid.Service
         public PostService(IPostDomainService postDomain)
         {
             _postDomain = postDomain;
-            System.Threading.Thread.Sleep(1000);
         }
 
         public virtual Response GetTimeline(GetTimelineRequest request)
@@ -43,9 +41,9 @@ namespace TagKid.Service
             return Response.Success.WithData(category.Id);
         }
 
-        public virtual Response GetCategories()
+        public virtual Response GetCategories(GetCategoriesRequest request)
         {
-            var categories = _postDomain.GetCategoriesOfUser(RequestContext.User.Id);
+            var categories = _postDomain.GetCategoriesOfUser(request.UserId);
             return Response.Success.WithData(categories);
         }
 
@@ -63,7 +61,8 @@ namespace TagKid.Service
 
         public Response GetPosts(GetPostsRequest request)
         {
-            throw new System.NotImplementedException();
+            var res = _postDomain.GetPostsOfUser(request.UserId, request.CategoryId, request.MaxPostId);
+            return Response.Success.WithData(res);
         }
     }
 }

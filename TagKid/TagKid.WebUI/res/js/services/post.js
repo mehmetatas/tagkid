@@ -10,8 +10,11 @@
             getTimeline: function (req, success, error) {
                 tagkid.get('post', 'timeline', req, success, error);
             },
-            getCategories: function (success, error) {
-                tagkid.get('post', 'categories', null, success, error);
+            getPosts: function (req, success, error) {
+                tagkid.get('post', 'posts', req, success, error);
+            },
+            getCategories: function (req, success, error) {
+                tagkid.get('post', 'categories', req, success, error);
             },
             createCategory: function (req, success, error) {
                 tagkid.post('post', 'createCategory', req, success, error);

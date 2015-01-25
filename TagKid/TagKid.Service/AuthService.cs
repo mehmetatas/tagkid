@@ -27,6 +27,7 @@ namespace TagKid.Service
             var user = DomainService.SignInWithPassword(request.EmailOrUsername, request.Password);
             return Response.Success.WithData(new
             {
+                user.Id,
                 user.Username,
                 user.Fullname,
                 ProfileImageUrl = "/res/img/a2.jpg"
@@ -38,6 +39,7 @@ namespace TagKid.Service
             var user = DomainService.ActivateAccount(request.ConfirmationCodeId, request.ConfirmationCode);
             return Response.Success.WithData(new
             {
+                user.Id,
                 user.Username,
                 user.Fullname,
                 ProfileImageUrl = "/res/img/a2.jpg"
@@ -50,6 +52,7 @@ namespace TagKid.Service
             var user = DomainService.SignInWithToken(request.TokenId, new Guid(request.Token));
             return Response.Success.WithData(new
             {
+                user.Id,
                 user.Username,
                 user.Fullname,
                 ProfileImageUrl = "/res/img/a2.jpg"

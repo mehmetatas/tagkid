@@ -70,6 +70,7 @@
     <Compile Include="Models\DTO\Messages\Auth\SignInWithTokenRequest.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
     <Compile Include="Models\DTO\Messages\Post\CreateCategoryRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\GetCategoriesRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetCommentsRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetPostsRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetTimelineRequest.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Models\Database\TagPost.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignUpWithEmailRequest.cs" />
     <Compile Include="Utils\ML.cs" />
+    <Compile Include="Utils\StringBuilderExtensions.cs" />
     <Compile Include="Utils\Strings.cs" />
     <Compile Include="Models\RequestContext.cs" />
     <Compile Include="Models\Database\Token.cs" />
@@ -127,7 +129,7 @@
     <Compile Include="Service\ITagKidService.cs" />
     <Compile Include="Service\Interceptors\ActionInterceptor.cs" />
     <Compile Include="Utils\DateTimeExtensions.cs" />
-    <Compile Include="Utils\EditorUtils.cs" />
+    <Compile Include="Utils\HtmlBuilder.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="Validation\Validator.cs" />
   </ItemGroup>

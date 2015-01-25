@@ -168,15 +168,18 @@
     <Content Include="res\img\bg.jpg" />
     <Content Include="res\img\c4.jpg" />
     <Content Include="res\img\c5.jpg" />
+    <Content Include="res\img\cover.jpg" />
     <Content Include="res\img\logo.png" />
     <Content Include="res\js\app.js" />
     <Content Include="res\js\controllers\controls\editor.js" />
     <Content Include="res\js\controllers\modals\new_category.js" />
     <Content Include="res\js\controllers\modals\terms_and_policy.js" />
     <Content Include="res\js\controllers\pages\activation.js" />
+    <Content Include="res\js\controllers\pages\category.js" />
     <Content Include="res\js\controllers\pages\forgotpwd.js" />
     <Content Include="res\js\controllers\pages\signin.js" />
     <Content Include="res\js\controllers\pages\signup.js" />
+    <Content Include="res\js\controllers\pages\tag.js" />
     <Content Include="res\js\controllers\pages\timeline.js" />
     <Content Include="res\js\config.js" />
     <Content Include="res\js\config.lazyload.js" />
@@ -204,6 +207,7 @@
     <Content Include="res\js\services\post.js" />
     <Content Include="res\js\services\tagkid.js" />
     <Content Include="res\js\services\ui-load.js" />
+    <Content Include="res\js\services\user.js" />
     <Content Include="res\l10n\en.js" />
     <Content Include="res\template-site\css\animate.css" />
     <Content Include="res\template-site\css\app.css" />
@@ -559,7 +563,6 @@
     <Content Include="Views\Modals\TermsAndPolicy.cshtml" />
     <Content Include="Views\Pages\User.cshtml" />
     <Content Include="Views\Pages\Activation.cshtml" />
-    <Content Include="Views\Pages\Category.cshtml" />
     <Content Include="Views\Pages\Tag.cshtml" />
     <Content Include="res\template-site\.DS_Store" />
     <Content Include="res\template-site\api\groups" />

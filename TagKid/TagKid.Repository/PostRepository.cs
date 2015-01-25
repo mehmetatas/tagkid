@@ -59,22 +59,22 @@ namespace TagKid.Repository
             var users = _repository.Select<User>();
 
             var query = from post in posts
-                from user in users
-                from category in categories
-                where
-                    post.UserId == user.Id &&
-                    post.CategoryId == category.Id &&
-                    category.UserId == user.Id
-                orderby post.Id descending
-                select new { post, category, user };
-            
+                        from user in users
+                        from category in categories
+                        where
+                            post.UserId == user.Id &&
+                            post.CategoryId == category.Id &&
+                            category.UserId == user.Id
+                        orderby post.Id descending
+                        select new { post, category, user };
+
             if (maxPostId > 0)
             {
                 query = query.Where(q => q.post.Id < maxPostId);
             }
 
             var postList = new List<Post>();
-            
+
             foreach (var item in query.Take(maxCount))
             {
                 item.post.User = item.user;
@@ -87,7 +87,54 @@ namespace TagKid.Repository
             }
 
             var postArr = postList.ToArray();
-            
+
+            SetTags(postArr);
+
+            return postArr;
+        }
+
+        public Post[] GetPostsOfUser(long userId, long categoryId, int maxCount, long maxPostId)
+        {
+            var posts = _repository.Select<Post>();
+            var categories = _repository.Select<Category>();
+            var users = _repository.Select<User>();
+
+            var query = from post in posts
+                        from user in users
+                        from category in categories
+                        where
+                            user.Id == userId &&
+                            post.UserId == user.Id &&
+                            post.CategoryId == category.Id &&
+                            category.UserId == user.Id
+                        orderby post.Id descending
+                        select new { post, category, user };
+
+            if (categoryId > 0)
+            {
+                query = query.Where(q => q.category.Id == categoryId);
+            }
+
+            if (maxPostId > 0)
+            {
+                query = query.Where(q => q.post.Id < maxPostId);
+            }
+
+            var postList = new List<Post>();
+
+            foreach (var item in query.Take(maxCount))
+            {
+                item.post.User = item.user;
+                item.post.Category = item.category;
+                if (item.post.PublishDate == null)
+                {
+                    item.post.PublishDate = item.post.CreateDate;
+                }
+                postList.Add(item.post);
+            }
+
+            var postArr = postList.ToArray();
+
             SetTags(postArr);
 
             return postArr;
@@ -238,14 +285,28 @@ on
 
             _repository.Save(post);
 
-            foreach (var tag in post.Tags.Where(tag => tag.Id < 1))
-            {
-                tag.Status = TagStatus.Active;
-                tag.Count = 1;
-                _repository.Insert(tag);
-            }
+            var tagNames = post.Tags.Select(t => t.Name).ToArray();
 
-            _repository.Flush();
+            var existingTags = _repository.Select<Tag>()
+                .Where(t => tagNames.Contains(t.Name))
+                .ToList();
+
+            foreach (var tag in post.Tags)
+            {
+                var existingTag = existingTags.FirstOrDefault(t => t.Name == tag.Name);
+                if (existingTag == null)
+                {
+                    tag.Status = TagStatus.Active;
+                    tag.Count = 1;
+                    _repository.Insert(tag);
+                }
+                else
+                {
+                    tag.Id = existingTag.Id;
+                    existingTag.Count += 1;
+                    _repository.Update(existingTag);
+                }
+            }
 
             foreach (var tag in post.Tags)
             {
@@ -305,7 +366,7 @@ on
             {
                 return;
             }
-            
+
             var retaggedPostIds = posts
                 .Select(post => post.RetaggedPostId)
                 .Distinct()

@@ -42,6 +42,7 @@
     <Compile Include="AuthDomainService.cs" />
     <Compile Include="PostDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDomainService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">

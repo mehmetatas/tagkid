@@ -13,8 +13,11 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
             prov.RegisterTransient<IAuthService, AuthService>();
             prov.RegisterTransient<IAuthDomainService, AuthDomainService>();
 
-            prov.RegisterTransient<IPostService, PostService>(); 
+            prov.RegisterTransient<IPostService, PostService>();
             prov.RegisterTransient<IPostDomainService, PostDomainService>();
+
+            prov.RegisterTransient<IUserService, UserService>();
+            prov.RegisterTransient<IUserDomainService, UserDomainService>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace TagKid.Core.Domain
 
         void SignOut();
 
-        ProfileDO GetProfile();
+        ProfileDO GetProfile(string username);
 
         Category CreateCategory(string name, string description, AccessLevel accessLevel);
 

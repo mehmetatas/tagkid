@@ -14,13 +14,11 @@ namespace TagKid.Core.Domain
 
         PostDO[] GetTimeline(long maxPostId = 0);
 
+        PostDO[] GetPostsOfUser(long userId, long categoryId, long maxPostId);
+
         IPage<Post> SearchByTag(long tagId, int pageIndex);
 
         Post[] ContinueSearchByTag(long tagId, long maxPostId);
-
-        IPage<Post> GetPostsOfUser(long userId, int pageIndex);
-
-        Post[] ContinuteGetPostsOfUser(long userId, long maxPostId);
 
         IPage<Post> GetPostsOfCategory(long categoryId, int pageIndex);
 

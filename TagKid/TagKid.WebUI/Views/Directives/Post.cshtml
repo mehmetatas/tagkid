@@ -13,8 +13,8 @@
                 </a>
 
                 <br />
-                <a href ui-sref="pages.category({id: post.Category.Id, name: post.Category.Name})"><label class="label m-r-xs" ng-class="post.Category.CssClass ? post.Category.CssClass : 'bg-light'" ng-bind="post.Category.Name"></label></a>
-                <a href ng-repeat="tag in post.Tags" ui-sref="pages.tag({id: tag.Id, name: tag.Name})"><label class="label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
+                <a href ui-sref="pages.category({username: post.User.Username, category: post.Category.Name})"><label class="label m-r-xs" ng-class="post.Category.CssClass ? post.Category.CssClass : 'bg-light'" ng-bind="post.Category.Name"></label></a>
+                <a href ng-repeat="tag in post.Tags" ui-sref="pages.tag({name: tag.Name})"><label class="label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
             </span>
             <div class="clearfix"></div>
         </div>
@@ -30,6 +30,9 @@
                 <a href class="btn btn-default btn-xs" ng-click="toggleComments(post);">
                     <i class="fa fa-comments-o text-muted"></i>
                     <span ng-bind="post.CommentCount"></span>
+                </a>
+                <a href class="btn btn-default btn-xs" ng-show="post.User.Username == user.Username" ng-click="edit(post);">
+                    <i class="fa fa-edit text-muted text"></i> Edit
                 </a>
                 <a href class="btn btn-default btn-xs" style="display: none" ng-class="{active: post.Retagged}" ng-disabled="post.Retagged" ng-click="retag(post);">
                     <i class="fa fa-mail-reply text-muted text"></i>

@@ -35,6 +35,7 @@
             tagkid.post('auth', 'signInWithToken', req,
                 function(resp) {
                     tagkid.user({
+                        Id: resp.Data.Id,
                         Username: resp.Data.Username,
                         Fullname: resp.Data.Fullname,
                         ProfileImageUrl: resp.Data.ProfileImageUrl,
@@ -58,6 +59,7 @@
                 tagkid.post('auth', 'signInWithPassword', req,
                     function(resp) {
                         tagkid.user({
+                            Id: resp.Data.Id,
                             Username: resp.Data.Username,
                             Fullname: resp.Data.Fullname,
                             ProfileImageUrl: resp.Data.ProfileImageUrl,
@@ -80,6 +82,7 @@
                     },
                     function(resp) {
                         tagkid.user({
+                            Id: resp.Data.Id,
                             Username: resp.Data.Username,
                             Fullname: resp.Data.Fullname,
                             ProfileImageUrl: resp.Data.ProfileImageUrl,

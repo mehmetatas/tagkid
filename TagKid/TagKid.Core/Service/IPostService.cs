@@ -15,7 +15,7 @@ namespace TagKid.Core.Service
 
         Response CreateCategory(CreateCategoryRequest request);
 
-        Response GetCategories();
+        Response GetCategories(GetCategoriesRequest request);
 
         Response GetComments(GetCommentsRequest request);
 

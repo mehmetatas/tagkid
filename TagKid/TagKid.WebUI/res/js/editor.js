@@ -172,24 +172,11 @@ function HtmlBuilder() {
     var buildYoutubeLink = function () {
         isYoutubeLink = false;
 
-        //html += '<div class="flex-video widescreen">'
-        //    + '<iframe width="420" height="315" src="//www.youtube.com/embed/'
-        //    + linkText
-        //    + '" frameborder="0" allowfullscreen></iframe>'
-        //    + '</div>';
-
-        var imgUrl = 'http://img.youtube.com/vi/' + linkText + '/hqdefault.jpg';
-
-        html += '<div class="youtube-preview" style="'
-            + 'background-image: url('
-            + imgUrl +
-            ');">'
-            + '<a class="play-button" href="#'
+        html += '<div class="flex-video widescreen">'
+            + '<iframe src="//www.youtube.com/embed/'
             + linkText
-            + '"><i class="fa fa-4x fa-youtube-play"></i></a>'
-            + '<img class="img-responsive" src="'
-            + imgUrl
-            + '" style="visibility:hidden"/></div>';
+            + '?html5=1" frameborder="0" allowfullscreen></iframe>'
+            + '</div>';
     };
 
     var buildSoundCloudLink = function () {
@@ -350,7 +337,7 @@ $(function () {
             '<div class="flex-video widescreen">'
             + '<iframe src="//www.youtube.com/embed/'
             + videoId
-            + '?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+            + '?autoplay=1&html5=1" frameborder="0" allowfullscreen></iframe>'
             + '</div>');
 
         $parent.remove();

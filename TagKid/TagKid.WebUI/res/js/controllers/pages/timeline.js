@@ -30,7 +30,7 @@
                     $scope.posts.push(post);
                 }
 
-                $scope.disableMorePosts = posts.length < 10; // 10 = PageSize
+                $scope.disableMorePosts = posts.length < 10; // PageSize
                 if ($scope.disableMorePosts) {
                     $scope.morePostsButtonText = 'No more posts';
                 } else {
