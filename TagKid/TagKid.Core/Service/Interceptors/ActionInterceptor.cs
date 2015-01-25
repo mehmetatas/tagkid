@@ -53,7 +53,7 @@ namespace TagKid.Core.Service.Interceptors
 
             foreach (var parameter in parameters)
             {
-                Validator.Validate(parameter);
+                TagKidValidator.Validate(parameter);
             }
         }
 

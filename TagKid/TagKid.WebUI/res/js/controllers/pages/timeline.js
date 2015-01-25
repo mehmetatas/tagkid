@@ -1,4 +1,4 @@
-﻿app.controller('TimelineCtrl', ['$scope', '$sce', 'tagkid', 'postService', function ($scope, $sce, tagkid, postService) {
+﻿app.controller('TimelineCtrl', ['$scope', 'tagkid', 'postService', function ($scope, tagkid, postService) {
     $('textarea').autogrow();
 
     $(document).on('click', '.btn-comment', function () {
@@ -6,10 +6,6 @@
     });
 
     $scope.user = tagkid.user();
-
-    $scope.to_trusted = function (content) {
-        return $sce.trustAsHtml(content);
-    };
 
     $scope.morePostsButtonText = 'Loading posts...';
     $scope.disableMorePosts = true;
@@ -45,73 +41,6 @@
                 $scope.morePostsButtonText = 'Load more posts';
                 alert('unable to load timeline');
             });
-    };
-
-    $scope.likeUnlike = function (post) {
-        post.sendingLike = true;
-        postService.likeUnlike({ PostId: post.Id },
-            function (resp) {
-                post.Liked = resp.Data.Liked;
-                post.LikeCount = resp.Data.LikeCount;
-            }, function() {
-                alert('unable to like/unlike');
-            }, function() {
-                post.sendingLike = false;
-            });
-    };
-
-    $scope.retag = function (post) {
-        post.Retagged = !post.Retagged;
-        post.RetagCount += post.Retagged ? 1 : -1;
-    };
-
-    $scope.loadComments = function(post) {
-        var maxId = 0;
-        if (post.Comments.length > 0) {
-            maxId = post.Comments[post.Comments.length - 1].Id;
-        }
-
-        post.disableLoadComments = true;
-        post.moreCommentsButtonText = "Loading comments...";
-
-        postService.getComments({
-            PostId: post.Id,
-            MaxCommentId: maxId
-        }, function (resp) {
-            var comments = resp.Data;
-            for (var i = 0; i < comments.length; i++) {
-                var comment = comments[i];
-                comment.User.ProfileImageUrl = '/res/img/a2.jpg';
-                post.Comments.push(comment);
-            }
-
-            post.disableLoadComments = comments.length < 10; // 10 = PageSize
-            if (post.disableLoadComments) {
-                post.moreCommentsButtonText = 'No more comments';
-            } else {
-                post.moreCommentsButtonText = 'Load more comments';
-            }
-        }, function () {
-            post.disableLoadComments = false;
-            post.moreCommentsButtonText = "Load more comments";
-            alert('unable to get comments!');
-        });
-    };
-
-    $scope.toggleComments = function (post) {
-        post.ShowComments = !post.ShowComments;
-        if (!post.ShowComments) {
-            return;
-        }
-
-        if (!post.Comments) {
-            post.Comments = [];
-            $scope.loadComments(post);
-        }
-    };
-
-    $scope.sendComment = function (post) {
-        alert('send comment ' + post.Title + ' : ' + post.NewComment);
     };
 
     $scope.loadTimeline();

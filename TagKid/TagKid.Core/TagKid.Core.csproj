@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentValidation, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -68,15 +64,21 @@
     <Compile Include="Models\Domain\ProfileDO.cs" />
     <Compile Include="Models\Domain\PostDO.cs" />
     <Compile Include="Models\Database\View\PostInfo.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\ActivateAccount.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\SignInWithPassword.cs" />
+    <Compile Include="Models\DTO\Messages\Auth\ActivateAccountRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Auth\SignInWithPasswordRequest.cs" />
     <Compile Include="Mailing\IMailService.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\SignInWithToken.cs" />
+    <Compile Include="Models\DTO\Messages\Auth\SignInWithTokenRequest.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
-    <Compile Include="Models\DTO\Messages\Post\CreateCategory.cs" />
-    <Compile Include="Models\DTO\Messages\Post\GetTimeline.cs" />
-    <Compile Include="Models\DTO\Messages\Post\SavePost.cs" />
+    <Compile Include="Models\DTO\Messages\Post\CreateCategoryRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\GetCommentsRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\GetPostsRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\GetTimelineRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\LikeUnlikeRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\SaveAsDraftRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\PublishRequest.cs" />
     <Compile Include="Models\DTO\Messages\Response.cs" />
+    <Compile Include="Models\DTO\Messages\User\GetProfile.cs" />
+    <Compile Include="Service\IUserService.cs" />
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Exceptions\Error.cs" />
     <Compile Include="Exceptions\Errors.cs" />
@@ -87,11 +89,9 @@
     <Compile Include="Models\Database\Log.cs" />
     <Compile Include="Models\Database\PostLike.cs" />
     <Compile Include="Models\Database\TagPost.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\SignUpWithEmail.cs" />
+    <Compile Include="Models\DTO\Messages\Auth\SignUpWithEmailRequest.cs" />
     <Compile Include="Utils\ML.cs" />
     <Compile Include="Utils\Strings.cs" />
-    <Compile Include="Validation\Extensions\GuidValidator.cs" />
-    <Compile Include="Validation\TagKidValidator.cs" />
     <Compile Include="Models\RequestContext.cs" />
     <Compile Include="Models\Database\Token.cs" />
     <Compile Include="Models\Database\Category.cs" />
@@ -129,9 +129,6 @@
     <Compile Include="Utils\DateTimeExtensions.cs" />
     <Compile Include="Utils\EditorUtils.cs" />
     <Compile Include="Utils\Util.cs" />
-    <Compile Include="Validation\Extensions\CharsetValidator.cs" />
-    <Compile Include="Validation\Extensions\CustomValidatorExtensions.cs" />
-    <Compile Include="Validation\Extensions\TrimmedLengthValidator.cs" />
     <Compile Include="Validation\Validator.cs" />
   </ItemGroup>
   <ItemGroup>

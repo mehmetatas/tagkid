@@ -24,6 +24,13 @@ namespace TagKid.WebUI
             );
 
             routes.MapRoute(
+                name: "Directives",
+                url: "Directives/{action}",
+                defaults: new { controller = "Directives" }
+
+            );
+
+            routes.MapRoute(
                 name: "Modals",
                 url: "Modals/{action}",
                 defaults: new { controller = "Modals" }

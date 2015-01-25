@@ -60,5 +60,10 @@ namespace TagKid.Service
             var likeResult = _postDomain.LikeUnlike(request.PostId);
             return Response.Success.WithData(likeResult);
         }
+
+        public Response GetPosts(GetPostsRequest request)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

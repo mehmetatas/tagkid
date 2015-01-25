@@ -1,0 +1,93 @@
+﻿angular.module('app')
+    .directive('tagkidPost', ['$compile', '$sce', 'tagkid', 'postService', function ($compile, $sce, tagkid, postService) {
+        var likeUnlike = function (post) {
+            post.sendingLike = true;
+            postService.likeUnlike({ PostId: post.Id },
+                function (resp) {
+                    post.Liked = resp.Data.Liked;
+                    post.LikeCount = resp.Data.LikeCount;
+                }, function () {
+                    alert('unable to like/unlike');
+                }, function () {
+                    post.sendingLike = false;
+                });
+        };
+
+        var retag = function (post) {
+            post.Retagged = !post.Retagged;
+            post.RetagCount += post.Retagged ? 1 : -1;
+        };
+
+        var loadComments = function (post) {
+            var maxId = 0;
+            if (post.Comments.length > 0) {
+                maxId = post.Comments[post.Comments.length - 1].Id;
+            }
+
+            post.disableLoadComments = true;
+            post.moreCommentsButtonText = "Loading comments...";
+
+            postService.getComments({
+                PostId: post.Id,
+                MaxCommentId: maxId
+            }, function (resp) {
+                var comments = resp.Data;
+                for (var i = 0; i < comments.length; i++) {
+                    var comment = comments[i];
+                    comment.User.ProfileImageUrl = '/res/img/a2.jpg';
+                    post.Comments.push(comment);
+                }
+
+                post.disableLoadComments = comments.length < 10; // 10 = PageSize
+                if (post.disableLoadComments) {
+                    post.moreCommentsButtonText = 'No more comments';
+                } else {
+                    post.moreCommentsButtonText = 'Load more comments';
+                }
+            }, function () {
+                post.disableLoadComments = false;
+                post.moreCommentsButtonText = "Load more comments";
+                alert('unable to get comments!');
+            });
+        };
+
+        var toggleComments = function (post) {
+            post.ShowComments = !post.ShowComments;
+            if (!post.ShowComments) {
+                return;
+            }
+
+            if (!post.Comments) {
+                post.Comments = [];
+                loadComments(post);
+            }
+        };
+
+        var sendComment = function (post) {
+            alert('send comment ' + post.Title + ' : ' + post.NewComment);
+        };
+
+        var to_trusted = function (content) {
+            return $sce.trustAsHtml(content);
+        };
+
+        var linker = function (scope, element, attrs) {
+            scope.likeUnlike = likeUnlike;
+            scope.retag = retag;
+            scope.loadComments = loadComments;
+            scope.toggleComments = toggleComments;
+            scope.likeUnlike = likeUnlike;
+            scope.sendComment = sendComment;
+            scope.to_trusted = to_trusted;
+            scope.user = tagkid.user();
+        };
+
+        return {
+            restrict: 'E',
+            link: linker,
+            scope: {
+                post: '='
+            },
+            templateUrl: '/Directives/Post'
+        };
+    }]);

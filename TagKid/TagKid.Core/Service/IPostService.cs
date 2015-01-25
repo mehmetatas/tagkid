@@ -7,6 +7,8 @@ namespace TagKid.Core.Service
     {
         Response GetTimeline(GetTimelineRequest request);
 
+        Response GetPosts(GetPostsRequest request);
+
         Response SaveAsDraft(SaveAsDraftRequest request);
 
         Response Publish(PublishRequest request);

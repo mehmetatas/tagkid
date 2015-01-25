@@ -2,14 +2,14 @@
 
 namespace TagKid.WebUI.Controllers
 {
-    public class ModalsController : BaseController
+    public class DirectivesController : BaseController
     {
-        public ActionResult NewCategory()
+        public ActionResult Post()
         {
             return PartialView();
         }
 
-        public ActionResult TermsAndPolicy()
+        public ActionResult Editor()
         {
             return PartialView();
         }

@@ -1,5 +1,9 @@
 ﻿app.controller('EditorCtrl', [
     '$scope', '$modal', 'tagkid', 'postService', function ($scope, $modal, tagkid, postService) {
+        postService.getCategories(function (resp) {
+            $scope.categories = resp.Data;
+        });
+
         var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
         tkTagInput.create('#tk-tag-input', $scope);
@@ -20,18 +24,7 @@
             EditorType: 0
         };
 
-        $scope.tags = [
-           { Name: 'c#', Hint: 'c-sharp', Description: 'programming language' },
-           { Name: 'java', Hint: 'java', Description: 'open source programming language' },
-           { Name: 'javascript', Hint: 'jscript', Description: 'scripting language' },
-           { Name: 'php', Hint: 'php Hint', Description: 'php desc' },
-           { Name: 'sql-server', Hint: 'microsoft', Description: 'ms sql server desc' },
-           { Name: 'oracle', Hint: '12g', Description: 'oracle desc' },
-           { Name: 'mysql', Hint: 'db', Description: 'mysql desc' },
-           { Name: 'phyton', Hint: 'snake', Description: 'piton desc' },
-           { Name: 'ruby-on-rails', Hint: 'ruby', Description: 'ruby on rails desc' },
-           { Name: 'objective-c', Hint: 'ios', Description: 'objective c desc' }
-        ];
+        $scope.tags = [];
 
         $scope.removeTag = function (tag) {
             var tags = $scope.post.Tags;
@@ -50,13 +43,11 @@
         };
 
         $scope.categories = [];
-        postService.getCategories(function (resp) {
-            $scope.categories = resp.Data;
-        });
 
         $scope.selectCategory = function (cat) {
             $scope.post.Category = cat;
         };
+
         $scope.showNewCategoryPopup = function () {
             $modal.open({
                 templateUrl: 'newCategoryModalContent.html',

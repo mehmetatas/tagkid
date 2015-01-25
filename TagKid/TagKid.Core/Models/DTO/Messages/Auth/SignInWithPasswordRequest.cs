@@ -1,6 +1,5 @@
-﻿using TagKid.Core.Exceptions;
-using TagKid.Core.Validation;
-using TagKid.Core.Validation.Extensions;
+﻿using Taga.Core.Validation;
+using TagKid.Core.Exceptions;
 
 namespace TagKid.Core.Models.DTO.Messages.Auth
 {
@@ -10,9 +9,9 @@ namespace TagKid.Core.Models.DTO.Messages.Auth
         public string EmailOrUsername { get; set; }
     }
 
-    public class SignInWithPasswordRequestValidator : TagKidValidator<SignInWithPasswordRequest>
+    public class SignInWithPasswordRequestValidator : Validator<SignInWithPasswordRequest>
     {
-        public SignInWithPasswordRequestValidator()
+        protected override void BuildRules()
         {
             RuleFor(r => r.Password)
                 .NotNull(Errors.V_Password);

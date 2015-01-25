@@ -1,23 +1,36 @@
-﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using System.Linq;
+using Taga.Core.Validation;
 using TagKid.Core.Exceptions;
 
 namespace TagKid.Core.Validation
 {
-    public static class Validator
+    public class TagKidValidator
     {
-        private static readonly Dictionary<Type, IValidator> Validators;
+        private static readonly Hashtable Validators = new Hashtable();
 
-        static Validator()
+        private TagKidValidator()
         {
-            var validatorTypes =
-                typeof (Validator).Assembly.GetTypes().Where(t => !t.IsAbstract && t.GetInterfaces().Contains(typeof (IValidator)));
+            
+        }
 
-            Validators = validatorTypes.ToDictionary(
-                t => t.BaseType.GetGenericArguments()[0],
-                t => (IValidator) Activator.CreateInstance(t));
+        static TagKidValidator()
+        {
+            LoadFromAssemblyOf<TagKidValidator>();
+        }
+
+        public static void LoadFromAssemblyOf<T>()
+        {
+            var requestValidatorTypes = typeof(T).Assembly
+                .GetTypes()
+                .Where(type => typeof(IValidator).IsAssignableFrom(type) && !type.IsAbstract);
+
+            foreach (var validatorType in requestValidatorTypes)
+            {
+                var requestType = validatorType.BaseType.GetGenericArguments()[0];
+                Validators.Add(requestType, Activator.CreateInstance(validatorType));
+            }
         }
 
         public static void Validate(object request)
@@ -28,16 +41,19 @@ namespace TagKid.Core.Validation
                 return;
             }
 
-            var res = Validators[type].Validate(request);
+            var res = ((IValidator)Validators[type]).Validate(request);
 
             if (res.IsValid)
             {
-                return;   
+                return;
             }
 
-            var error = res.Errors[0].CustomState == null
-                ? Errors.V_GenericError
-                : (Error) res.Errors[0].CustomState;
+            var error = res.Error as Error;
+
+            if (error == null)
+            {
+                error = Errors.V_GenericError;
+            }
 
             throw error.ToException();
         }

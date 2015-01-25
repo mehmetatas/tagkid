@@ -1,6 +1,25 @@
 ﻿var tkEditor = {
     create: function (input, preview, title) {
-        return new TagKidEditor(input, preview, title);
+        var sync = function () {
+            var htmlBuilder = new HtmlBuilder();
+            var html = htmlBuilder.build($(input).val());
+
+            if ($(title).val().length > 0) {
+                html = '<h4>' + $(title).val() + '</h4>' + html;
+            }
+
+            $(preview).html(html).css('white-space', 'pre-wrap');
+        };
+
+        return {
+            toggle: function () {
+                sync();
+
+                $(input).toggle();
+                $(title).toggle();
+                $(preview).toggle();
+            }
+        };
     }
 };
 
@@ -122,33 +141,6 @@ var tkTagInput = {
             });
     }
 };
-
-function TagKidEditor(input, preview, title) {
-    var $input = $(input);
-    var $title = $(title);
-    var $preview = $(preview);
-
-    $preview.css('white-space', 'pre-wrap');
-
-    this.toggle = function () {
-        sync();
-
-        $input.toggle();
-        $title.toggle();
-        $preview.toggle();
-    }
-
-    var sync = function () {
-        var htmlBuilder = new HtmlBuilder();
-        var html = htmlBuilder.build($input.val());
-
-        if ($title.val().length > 0) {
-            html = '<h4>' + $title.val() + '</h4>' + html;
-        }
-
-        $preview.html(html);
-    };
-}
 
 function HtmlBuilder() {
     var html = '';

@@ -2,7 +2,7 @@
 
 namespace TagKid.WebUI.Controllers
 {
-    public class LayoutController : Controller
+    public class LayoutController : BaseController
     {
         public ActionResult Index()
         {

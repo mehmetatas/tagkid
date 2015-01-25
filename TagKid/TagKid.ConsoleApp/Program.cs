@@ -11,8 +11,10 @@ namespace TagKid.ConsoleApp
         {
             try
             {
-                var mapper = PocoMapper.For<User>();
-                var user = mapper.Map<User>(new MockDataReader());
+                //var mapper = PocoMapper.For<User>();
+                //var user = mapper.Map<User>(new MockDataReader());
+                var d = new SecondDerivative();
+                d.GetChild();
 
                 Console.WriteLine("OK!");
             }
@@ -245,4 +247,44 @@ namespace TagKid.ConsoleApp
         }
     }
 
+
+    public interface ISecretFactory<T>
+    {
+        T Create(string param);
+    }
+
+    public abstract class Base<T> where T : Base<T>, ISecretFactory<T>
+    {
+        public T GetChild()
+        {
+            var factory = this as ISecretFactory<T>;
+            return factory.Create("base param");
+        }
+    }
+
+    public class Derivative : Base<Derivative>, ISecretFactory<Derivative>
+    {
+        public Derivative()
+        {
+
+        }
+
+        private Derivative(string param)
+        {
+
+        }
+
+        Derivative ISecretFactory<Derivative>.Create(string param)
+        {
+            return new Derivative(param);
+        }
+    }
+
+    public class SecondDerivative : Derivative
+    {
+        public void F()
+        {
+            
+        }
+    }
 }

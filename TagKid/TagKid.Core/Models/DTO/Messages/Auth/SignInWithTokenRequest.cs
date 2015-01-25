@@ -1,6 +1,5 @@
-﻿using TagKid.Core.Exceptions;
-using TagKid.Core.Validation;
-using TagKid.Core.Validation.Extensions;
+﻿using Taga.Core.Validation;
+using TagKid.Core.Exceptions;
 
 namespace TagKid.Core.Models.DTO.Messages.Auth
 {
@@ -10,12 +9,12 @@ namespace TagKid.Core.Models.DTO.Messages.Auth
         public string Token { get; set; }
     }
 
-    public class SignInWithTokenRequestValidator : TagKidValidator<SignInWithTokenRequest>
+    public class SignInWithTokenRequestValidator : Validator<SignInWithTokenRequest>
     {
-        public SignInWithTokenRequestValidator()
+        protected override void BuildRules()
         {
             RuleFor(r => r.TokenId)
-                .GreaterThan(0, Errors.V_TokenId);
+                .GreaterThan(Errors.V_TokenId, 0);
 
             RuleFor(r => r.Token)
                 .Guid(Errors.V_Token);

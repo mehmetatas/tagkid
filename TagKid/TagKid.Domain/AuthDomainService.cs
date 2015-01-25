@@ -275,7 +275,6 @@ namespace TagKid.Domain
                 UserId = user.Id
             };
 
-            TokenRepository.DeleteTokensOfUser(user.Id);
             TokenRepository.Save(authToken);
 
             SetAuthToken(authToken, user);

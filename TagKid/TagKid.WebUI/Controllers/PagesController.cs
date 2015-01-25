@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace TagKid.WebUI.Controllers
 {
-    public class PagesController : Controller
+    public class PagesController : BaseController
     {
         public PagesController()
         {

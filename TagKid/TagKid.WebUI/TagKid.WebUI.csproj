@@ -133,6 +133,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DirectivesController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\ModalsController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
@@ -181,6 +183,9 @@
     <Content Include="res\js\config.router.js" />
     <Content Include="res\js\controllers\bootstrap.js" />
     <Content Include="res\js\controllers\pages\user.js" />
+    <Content Include="res\js\directives\directive.js" />
+    <Content Include="res\js\directives\tagkid-editor.js" />
+    <Content Include="res\js\directives\tagkid-post.js" />
     <Content Include="res\js\directives\setnganimate.js" />
     <Content Include="res\js\directives\ui-butterbar.js" />
     <Content Include="res\js\directives\ui-focus.js" />
@@ -606,6 +611,8 @@
     <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.eot" />
     <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.ttf" />
     <Content Include="res\template-site\vendor\modules\angular-ui-grid\ui-grid.woff" />
+    <Content Include="Views\Directives\Post.cshtml" />
+    <Content Include="Views\Directives\Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">
