@@ -34,18 +34,6 @@ namespace TagKid.Service
             return Response.Success.WithData(request.Post);
         }
 
-        public virtual Response CreateCategory(CreateCategoryRequest request)
-        {
-            var category = request.Category;
-            _postDomain.CreateCategory(category);
-            return Response.Success.WithData(category.Id);
-        }
-
-        public virtual Response GetCategories(GetCategoriesRequest request)
-        {
-            var categories = _postDomain.GetCategoriesOfUser(request.UserId);
-            return Response.Success.WithData(categories);
-        }
 
         public virtual Response GetComments(GetCommentsRequest request)
         {
@@ -61,7 +49,7 @@ namespace TagKid.Service
 
         public Response GetPosts(GetPostsRequest request)
         {
-            var res = _postDomain.GetPostsOfUser(request.UserId, request.CategoryId, request.MaxPostId);
+            var res = _postDomain.GetPostsOfUser(request.UserId, request.MaxPostId);
             return Response.Success.WithData(res);
         }
     }

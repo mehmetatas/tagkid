@@ -12,21 +12,6 @@
                 </a>
 
                 <div class="tag-search">
-                    <div class="btn-group" dropdown>
-                        <a href="#" dropdown-toggle><label class="label m-r-xs" ng-class="post.Category && post.Category.CssClass ? post.Category.CssClass : 'bg-light'" ng-bind="post.Category ? post.Category.Name : 'Select Category'"></label></a>
-                        <div class="dropdown-menu text-sm padder" role="menu">
-                            <a href ng-repeat="category in categories" ng-click="selectCategory(category);">
-                                <label ng-class="category.CssClass" class="label m-r-xs" ng-bind="category.Name"></label>
-                            </a>
-                            <hr class="m-xs">
-                            <a href><label class="label bg-light m-r-xs" ng-click="showNewCategoryPopup();">new category</label></a>
-                        </div>
-                    </div>
-
-                    <script type="text/ng-template" id="newCategoryModalContent.html">
-                        <div ng-include="'/Modals/NewCategory'"></div>
-                    </script>
-
                     <span class="tags" ng-repeat="tag in post.Tags">
                         <a ng-click="removeTag(tag)"><label class=" label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
                     </span>

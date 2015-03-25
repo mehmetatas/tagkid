@@ -75,11 +75,6 @@
 //        Username: 'mehmetatas',
 //        Fullname: 'Mehmet Ataş'
 //    },
-//    Category: {
-//        Id: 125,
-//        Name: 'coding',
-//        CssClass: 'bg-danger'
-//    },
 //    Tags: [
 //        { Id: 1, Name: 'c#' },
 //        { Id: 2, Name: 'java' },

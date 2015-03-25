@@ -34,6 +34,6 @@ namespace TagKid.Core.Repository
 
         int GetPostCount(long userId);
 
-        Post[] GetPostsOfUser(long userId, long categoryId, int maxCount, long maxPostId);
+        Post[] GetPostsOfUser(long userId, int maxCount, long maxPostId);
     }
 }

@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryRepository.cs" />
     <Compile Include="CommentRepository.cs" />
     <Compile Include="ConfirmationCodeRepository.cs" />
     <Compile Include="FollowRepository.cs" />

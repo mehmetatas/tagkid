@@ -51,11 +51,6 @@ angular.module('app')
                   templateUrl: '/pages/user',
                   controller: 'UserCtrl'
               })
-              .state('pages.category', {
-                  url: '/user/:username/:category',
-                  templateUrl: '/pages/user',
-                  controller: 'UserCtrl'
-              })
               .state('pages.tag', {
                   url: '/tag/:name',
                   templateUrl: '/pages/tag',

@@ -50,8 +50,7 @@ angular.module('app')
                   name: 'timeline',
                   files: [
                     'js/controllers/pages/timeline.js',
-                    'js/controllers/controls/editor.js',
-                    'js/controllers/modals/new_category.js'
+                    'js/controllers/controls/editor.js'
                   ]
               },
               {

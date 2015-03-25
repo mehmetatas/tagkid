@@ -69,8 +69,6 @@
     <Compile Include="Mailing\IMailService.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignInWithTokenRequest.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
-    <Compile Include="Models\DTO\Messages\Post\CreateCategoryRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\GetCategoriesRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetCommentsRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetPostsRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetTimelineRequest.cs" />
@@ -85,7 +83,6 @@
     <Compile Include="Exceptions\Errors.cs" />
     <Compile Include="Logging\DbLogger.cs" />
     <Compile Include="Logging\L.cs" />
-    <Compile Include="Models\Database\FollowCategory.cs" />
     <Compile Include="Models\Database\FollowUser.cs" />
     <Compile Include="Models\Database\Log.cs" />
     <Compile Include="Models\Database\PostLike.cs" />
@@ -96,7 +93,6 @@
     <Compile Include="Utils\Strings.cs" />
     <Compile Include="Models\RequestContext.cs" />
     <Compile Include="Models\Database\Token.cs" />
-    <Compile Include="Models\Database\Category.cs" />
     <Compile Include="Models\Database\Comment.cs" />
     <Compile Include="Models\Database\ConfirmationCode.cs" />
     <Compile Include="Models\Database\Enums.cs" />
@@ -111,7 +107,6 @@
     <Compile Include="Models\Database\User.cs" />
     <Compile Include="Exceptions\TagKidException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ICategoryRepository.cs" />
     <Compile Include="Repository\ICommentRepository.cs" />
     <Compile Include="Repository\IConfirmationCodeRepository.cs" />
     <Compile Include="Repository\IFollowRepository.cs" />

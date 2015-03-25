@@ -45,12 +45,10 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
             var dbMapping = DatabaseMapping
                 .For(DbSystem.SqlServer)
                 .WithNamingConvention(new SqlServerNamingConvention(false))
-                .Map<Category>()
                 .Map<Comment>()
                 .Map<ConfirmationCode>()
                 .Map<Login>()
                 .Map<Notification>()
-                .Map<FollowCategory>(fc => fc.UserId, fc => fc.CategoryId)
                 .Map<FollowUser>(fu => fu.FollowerUserId, fu => fu.FollowedUserId)
                 .Map<PostLike>(pl => pl.PostId, pl => pl.UserId)
                 .Map<Post>()

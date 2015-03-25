@@ -12,14 +12,6 @@ namespace TagKid.Core.Domain
 
         ProfileDO GetProfile(string username);
 
-        Category CreateCategory(string name, string description, AccessLevel accessLevel);
-
-        void UpdateCategory(Category category);
-
-        void DeleteCategory(long categoryId);
-
-        Category[] GetCategories();
-
         IPage<Notification> GetAllNotifications(int pageIndex, int pageSize);
 
         IPage<Notification> GetUnreadNotifications(int pageIndex, int pageSize);

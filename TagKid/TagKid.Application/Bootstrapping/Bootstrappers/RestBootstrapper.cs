@@ -47,8 +47,6 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
                 .ActionFor(s => s.SaveAsDraft(default(SaveAsDraftRequest)), "saveAsDraft")
                 .ActionFor(s => s.Publish(default(PublishRequest)), "publish")
                 .ActionFor(s => s.GetTimeline(default(GetTimelineRequest)), "timeline", HttpMethodType.Get)
-                .ActionFor(s => s.GetCategories(default(GetCategoriesRequest)), "categories", HttpMethodType.Get)
-                .ActionFor(s => s.CreateCategory(default(CreateCategoryRequest)), "createCategory")
                 .ActionFor(s => s.GetComments(default(GetCommentsRequest)), "comments", HttpMethodType.Get)
                 .ActionFor(s => s.LikeUnlike(default(LikeUnlikeRequest)), "like")
                 .ActionFor(s => s.GetPosts(default(GetPostsRequest)), "posts", HttpMethodType.Get);

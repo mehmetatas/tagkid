@@ -13,7 +13,6 @@
                 </a>
 
                 <br />
-                <a href ui-sref="pages.category({username: post.User.Username, category: post.Category.Name})"><label class="label m-r-xs" ng-class="post.Category.CssClass ? post.Category.CssClass : 'bg-light'" ng-bind="post.Category.Name"></label></a>
                 <a href ng-repeat="tag in post.Tags" ui-sref="pages.tag({name: tag.Name})"><label class="label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
             </span>
             <div class="clearfix"></div>

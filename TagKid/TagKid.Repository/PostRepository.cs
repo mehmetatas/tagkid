@@ -23,17 +23,14 @@ namespace TagKid.Repository
         public Post GetById(long postId)
         {
             var posts = _repository.Select<Post>();
-            var categories = _repository.Select<Category>();
             var users = _repository.Select<User>();
 
             var query = from p in posts
                         from u in users
-                        from c in categories
                         where
                             p.Id == postId &&
-                            p.CategoryId == c.Id &&
                             p.UserId == u.Id
-                        select new { post = p, user = u, category = c };
+                        select new { post = p, user = u };
 
             var queryResult = query.FirstOrDefault();
 
@@ -44,10 +41,8 @@ namespace TagKid.Repository
 
             var post = queryResult.post;
             post.User = queryResult.user;
-            post.Category = queryResult.category;
 
             SetTags(post);
-            SetRetaggedPosts(post);
 
             return post;
         }
@@ -55,18 +50,14 @@ namespace TagKid.Repository
         public Post[] GetForUserId(long userId, int maxCount, long maxPostId = 0)
         {
             var posts = _repository.Select<Post>();
-            var categories = _repository.Select<Category>();
             var users = _repository.Select<User>();
 
             var query = from post in posts
                         from user in users
-                        from category in categories
                         where
-                            post.UserId == user.Id &&
-                            post.CategoryId == category.Id &&
-                            category.UserId == user.Id
+                            post.UserId == user.Id
                         orderby post.Id descending
-                        select new { post, category, user };
+                        select new { post, user };
 
             if (maxPostId > 0)
             {
@@ -78,7 +69,6 @@ namespace TagKid.Repository
             foreach (var item in query.Take(maxCount))
             {
                 item.post.User = item.user;
-                item.post.Category = item.category;
                 if (item.post.PublishDate == null)
                 {
                     item.post.PublishDate = item.post.CreateDate;
@@ -93,27 +83,18 @@ namespace TagKid.Repository
             return postArr;
         }
 
-        public Post[] GetPostsOfUser(long userId, long categoryId, int maxCount, long maxPostId)
+        public Post[] GetPostsOfUser(long userId, int maxCount, long maxPostId)
         {
             var posts = _repository.Select<Post>();
-            var categories = _repository.Select<Category>();
             var users = _repository.Select<User>();
 
             var query = from post in posts
                         from user in users
-                        from category in categories
                         where
                             user.Id == userId &&
-                            post.UserId == user.Id &&
-                            post.CategoryId == category.Id &&
-                            category.UserId == user.Id
+                            post.UserId == user.Id
                         orderby post.Id descending
-                        select new { post, category, user };
-
-            if (categoryId > 0)
-            {
-                query = query.Where(q => q.category.Id == categoryId);
-            }
+                        select new { post, user };
 
             if (maxPostId > 0)
             {
@@ -125,7 +106,6 @@ namespace TagKid.Repository
             foreach (var item in query.Take(maxCount))
             {
                 item.post.User = item.user;
-                item.post.Category = item.category;
                 if (item.post.PublishDate == null)
                 {
                     item.post.PublishDate = item.post.CreateDate;
@@ -138,52 +118,6 @@ namespace TagKid.Repository
             SetTags(postArr);
 
             return postArr;
-        }
-
-        public Post[] GetForUserId_(long userId, int maxCount, long maxPostId = 0)
-        {
-            var posts = _repository.Select<Post>();
-            var categories = _repository.Select<Category>();
-            var users = _repository.Select<User>();
-            var followUsers = _repository.Select<FollowUser>();
-            var followCategories = _repository.Select<FollowCategory>();
-
-            var query = from p in posts
-                        from u in users
-                        from c in categories
-                        from fu in followUsers
-                        from fc in followCategories
-                        where
-                            ((fu.FollowerUserId == userId && fu.FollowedUserId == p.UserId) ||
-                             (fc.UserId == userId && fc.CategoryId == p.CategoryId)) &&
-                            p.CategoryId == c.Id &&
-                            p.UserId == u.Id &&
-                            p.Status == PostStatus.Published &&
-                            p.AccessLevel != AccessLevel.Private &&
-                            u.Status == UserStatus.Active &&
-                            c.Status == CategoryStatus.Active &&
-                            c.AccessLevel != AccessLevel.Private
-                        orderby p.Id descending
-                        select new { post = p, user = u, category = c };
-
-            if (maxPostId > 0)
-            {
-                query = query.Where(q => q.post.Id < maxPostId);
-            }
-
-            var postList = new List<Post>();
-            foreach (var item in query.Take(maxCount))
-            {
-                item.post.User = item.user;
-                item.post.Category = item.category;
-                postList.Add(item.post);
-            }
-
-            var result = postList.ToArray();
-
-            SetTags(result);
-
-            return result;
         }
 
         public PostInfo[] GetPostInfo(long userId, params long[] postIds)
@@ -218,21 +152,16 @@ on
         public IPage<Post> Search(PostFilter filter)
         {
             var posts = _repository.Select<Post>();
-            var categories = _repository.Select<Category>();
             var users = _repository.Select<User>();
 
             var query = from p in posts
-                        from c in categories
                         from u in users
-                        where c.Id == p.CategoryId &&
-                              p.UserId == u.Id &&
+                        where p.UserId == u.Id &&
                               p.Status == PostStatus.Published &&
                               p.AccessLevel == AccessLevel.Public &&
-                              c.Status == CategoryStatus.Active &&
-                              c.AccessLevel == AccessLevel.Public &&
                               u.Status == UserStatus.Active
                         orderby p.Id descending
-                        select new { post = p, user = u, category = c };
+                        select new { post = p, user = u };
 
             if (filter.ByTitle)
             {
@@ -256,7 +185,6 @@ on
 
             foreach (var item in page.Items)
             {
-                item.post.Category = item.category;
                 item.post.User = item.user;
                 postList.Add(item.post);
             }
@@ -264,7 +192,6 @@ on
             var postArr = postList.ToArray();
 
             SetTags(postArr);
-            SetRetaggedPosts(postArr);
 
             return new Page<Post>
             {
@@ -354,65 +281,6 @@ on
                     select user)
                 .Take(maxCount)
                 .ToArray();
-        }
-
-        private void SetRetaggedPosts(params Post[] posts)
-        {
-            var retags = posts
-                .Where(post => post.RetaggedPostId > 0)
-                .ToList();
-
-            if (!retags.Any())
-            {
-                return;
-            }
-
-            var retaggedPostIds = posts
-                .Select(post => post.RetaggedPostId)
-                .Distinct()
-                .ToList();
-
-            var allPosts = _repository.Select<Post>();
-            var users = _repository.Select<User>();
-            var categories = _repository.Select<Category>();
-
-            // TODO: access level of retagged post??? 
-
-            var query = from p in allPosts
-                        from u in users
-                        from c in categories
-                        where
-                            retaggedPostIds.Contains(p.Id) &&
-                            p.UserId == u.Id &&
-                            p.CategoryId == c.Id &&
-                            p.AccessLevel != AccessLevel.Private &&
-                            c.AccessLevel != AccessLevel.Private &&
-                            p.Status == PostStatus.Published &&
-                            c.Status == CategoryStatus.Active &&
-                            u.Status == UserStatus.Active
-                        select new { post = p, user = u, category = c };
-
-            var retaggedPosts = new List<Post>();
-
-            foreach (var item in query)
-            {
-                item.post.User = item.user;
-                item.post.Category = item.category;
-                retaggedPosts.Add(item.post);
-            }
-
-            SetTags(retaggedPosts.ToArray());
-
-            foreach (var post in retags)
-            {
-                foreach (var retaggedPost in retaggedPosts)
-                {
-                    if (post.RetaggedPostId == retaggedPost.Id)
-                    {
-                        post.RetaggedPost = retaggedPost;
-                    }
-                }
-            }
         }
 
         private void SetTags(params Post[] posts)

@@ -25,11 +25,6 @@ namespace TagKid.Domain
             get { return ServiceProvider.Provider.GetOrCreate<IPostRepository>(); }
         }
 
-        private static ICategoryRepository CategoryRepository
-        {
-            get { return ServiceProvider.Provider.GetOrCreate<ICategoryRepository>(); }
-        }
-
         public void DeactivateAccount()
         {
             throw new NotImplementedException();
@@ -52,32 +47,12 @@ namespace TagKid.Domain
             return new ProfileDO(user);
         }
 
-        public Core.Models.Database.Category CreateCategory(string name, string description, Core.Models.Database.AccessLevel accessLevel)
+        public Taga.Core.Repository.IPage<Notification> GetAllNotifications(int pageIndex, int pageSize)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateCategory(Core.Models.Database.Category category)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteCategory(long categoryId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Core.Models.Database.Category[] GetCategories()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Taga.Core.Repository.IPage<Core.Models.Database.Notification> GetAllNotifications(int pageIndex, int pageSize)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Taga.Core.Repository.IPage<Core.Models.Database.Notification> GetUnreadNotifications(int pageIndex, int pageSize)
+        public Taga.Core.Repository.IPage<Notification> GetUnreadNotifications(int pageIndex, int pageSize)
         {
             throw new NotImplementedException();
         }

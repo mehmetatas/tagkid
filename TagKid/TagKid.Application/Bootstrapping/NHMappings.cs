@@ -48,19 +48,11 @@ namespace TagKid.Application.Bootstrapping
     {
     }
 
-    public class CategoryMap : TagaClassMap<Category>
-    {
-    }
-
     public class ConfirmationCodeMap : TagaClassMap<ConfirmationCode>
     {
     }
 
     public class FollowUserMap : TagaClassMap<FollowUser>
-    {
-    }
-
-    public class FollowCategoryMap : TagaClassMap<FollowCategory>
     {
     }
 

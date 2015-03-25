@@ -31,11 +31,6 @@ namespace TagKid.Domain
             get { return ServiceProvider.Provider.GetOrCreate<IPostRepository>(); }
         }
 
-        private static ICategoryRepository CategoryRepository
-        {
-            get { return ServiceProvider.Provider.GetOrCreate<ICategoryRepository>(); }
-        }
-
         private static ICommentRepository CommentRepository
         {
             get { return ServiceProvider.Provider.GetOrCreate<ICommentRepository>(); }
@@ -47,10 +42,6 @@ namespace TagKid.Domain
             post.HtmlContent = HtmlBuilder.ToHtml(post.EditorContent);
             post.Status = PostStatus.Draft;
             post.AccessLevel = AccessLevel.Public;
-            post.CategoryId = post.Category.Id;
-            post.RetaggedPostId = post.RetaggedPost == null
-                ? (long?)null
-                : post.RetaggedPost.Id;
 
             if (post.CreateDate == default(DateTime))
             {
@@ -66,10 +57,6 @@ namespace TagKid.Domain
             post.HtmlContent = HtmlBuilder.ToHtml(post.EditorContent);
             post.Status = PostStatus.Published;
             post.AccessLevel = AccessLevel.Public;
-            post.CategoryId = post.Category.Id;
-            post.RetaggedPostId = post.RetaggedPost == null
-                ? (long?)null
-                : post.RetaggedPost.Id;
 
             if (post.CreateDate == default(DateTime))
             {
@@ -97,9 +84,9 @@ namespace TagKid.Domain
             return PostDO.Create(posts, infos);
         }
 
-        public virtual PostDO[] GetPostsOfUser(long userId, long categoryId, long maxPostId)
+        public virtual PostDO[] GetPostsOfUser(long userId, long maxPostId)
         {
-            var posts = PostRepository.GetPostsOfUser(userId, categoryId, PageSize, maxPostId);
+            var posts = PostRepository.GetPostsOfUser(userId, PageSize, maxPostId);
          
             var infos = posts.Any()
                 ? PostRepository.GetPostInfo(RequestContext.User.Id, posts.Select(p => p.Id).ToArray())
@@ -131,18 +118,6 @@ namespace TagKid.Domain
         public virtual Tag[] SearchTags(string name)
         {
             throw new NotImplementedException();
-        }
-
-        public Category[] GetCategoriesOfUser(long userId)
-        {
-            return CategoryRepository.GetCategories(userId);
-        }
-
-        public void CreateCategory(Category category)
-        {
-            category.UserId = RequestContext.User.Id;
-            category.Status = CategoryStatus.Active;
-            CategoryRepository.Save(category);
         }
 
         public Comment[] GetComments(long postId, long maxCommentId = 0)

@@ -172,10 +172,8 @@
     <Content Include="res\img\logo.png" />
     <Content Include="res\js\app.js" />
     <Content Include="res\js\controllers\controls\editor.js" />
-    <Content Include="res\js\controllers\modals\new_category.js" />
     <Content Include="res\js\controllers\modals\terms_and_policy.js" />
     <Content Include="res\js\controllers\pages\activation.js" />
-    <Content Include="res\js\controllers\pages\category.js" />
     <Content Include="res\js\controllers\pages\forgotpwd.js" />
     <Content Include="res\js\controllers\pages\signin.js" />
     <Content Include="res\js\controllers\pages\signup.js" />
@@ -551,7 +549,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\taga.pubxml" />
-    <Content Include="Views\Modals\NewCategory.cshtml" />
     <Content Include="Views\Pages\Timeline.cshtml" />
     <Content Include="Views\Layout\Aside.cshtml" />
     <Content Include="Views\Layout\Header.cshtml" />

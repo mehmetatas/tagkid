@@ -13,10 +13,6 @@ namespace TagKid.Core.Service
 
         Response Publish(PublishRequest request);
 
-        Response CreateCategory(CreateCategoryRequest request);
-
-        Response GetCategories(GetCategoriesRequest request);
-
         Response GetComments(GetCommentsRequest request);
 
         Response LikeUnlike(LikeUnlikeRequest request);

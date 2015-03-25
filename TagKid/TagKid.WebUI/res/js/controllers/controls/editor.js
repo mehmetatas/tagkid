@@ -1,8 +1,5 @@
 ﻿app.controller('EditorCtrl', [
     '$scope', '$modal', 'tagkid', 'postService', function ($scope, $modal, tagkid, postService) {
-        postService.getCategories(function (resp) {
-            $scope.categories = resp.Data;
-        });
 
         var editor = tkEditor.create('#tk-editor', '#tk-preview', '#tk-title');
 
@@ -19,7 +16,6 @@
         $scope.post = {
             Title: '',
             EditorContent: '',
-            Category: '',
             Tags: [],
             EditorType: 0
         };
@@ -42,28 +38,8 @@
             return false;
         };
 
-        $scope.categories = [];
-
-        $scope.selectCategory = function (cat) {
-            $scope.post.Category = cat;
-        };
-
-        $scope.showNewCategoryPopup = function () {
-            $modal.open({
-                templateUrl: 'newCategoryModalContent.html',
-                controller: 'NewCategoryModalCtrl'
-            }).result.then(function (newCategory) {
-                postService.createCategory({ Category: newCategory }, function (resp) {
-                    newCategory.Id = resp.Data;
-                    $scope.categories.push(newCategory);
-                    $scope.post.Category = newCategory;
-                });
-            });
-        };
-
         $scope.cancel = function () {
             if (confirm('Are you sure you want to cancel changes?')) {
-                $scope.post.Category = null;
                 $scope.post.Tags = [];
                 $scope.post.Title = '';
                 $scope.post.EditorContent = '';

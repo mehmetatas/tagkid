@@ -13,12 +13,6 @@
             getPosts: function (req, success, error) {
                 tagkid.get('post', 'posts', req, success, error);
             },
-            getCategories: function (req, success, error) {
-                tagkid.get('post', 'categories', req, success, error);
-            },
-            createCategory: function (req, success, error) {
-                tagkid.post('post', 'createCategory', req, success, error);
-            },
             getComments: function (req, success, error, complete) {
                 tagkid.get('post', 'comments', req, success, error, complete);
             },

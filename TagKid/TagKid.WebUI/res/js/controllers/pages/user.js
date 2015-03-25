@@ -6,48 +6,11 @@
             $scope.profile.ProfileImageUrl = "/res/img/a2.jpg";
             $scope.profile.CoverImageUrl = "/res/img/cover.jpg";
 
-            loadCategories();
+            $scope.loadPosts();
         }, function () {
             alert('Unable to load prfile');
             tagkid.go('pages.timeline');
         });
-
-        var loadCategories = function () {
-            postService.getCategories({ UserId: $scope.profile.Id }, function (resp) {
-                $scope.categories.splice(0, $scope.categories.length);
-                for (var i = 0; i < resp.Data.length; i++) {
-                    var cat = resp.Data[i];
-
-                    $scope.categories.push(cat);
-
-                    if (cat.Name == $stateParams.category) {
-                        $scope.selectedCategory = cat;
-                    }
-                }
-                $scope.loadPosts();
-            });
-        };
-
-        $scope.categories = [];
-        $scope.selectedCategory = null;
-
-        $scope.showAllCategories = function () {
-            $scope.posts.splice(0, $scope.posts.length);
-            $scope.selectedCategory = null;
-            $scope.loadPosts();
-        }
-
-        $scope.selectCategory = function (categoryId) {
-            $scope.posts.splice(0, $scope.posts.length);
-            for (var i = 0; i < $scope.categories.length; i++) {
-                var cat = $scope.categories[i];
-                if (cat.Id == categoryId) {
-                    $scope.selectedCategory = cat;
-                    break;
-                }
-            }
-            $scope.loadPosts();
-        };
 
         $scope.morePostsButtonText = 'Loading posts...';
         $scope.disableMorePosts = true;
@@ -65,8 +28,7 @@
 
             postService.getPosts({
                 UserId: $scope.profile.Id,
-                MaxPostId: maxId,
-                CategoryId: $scope.selectedCategory ? $scope.selectedCategory.Id : 0
+                MaxPostId: maxId
             },
                 function (resp) {
                     var posts = resp.Data;

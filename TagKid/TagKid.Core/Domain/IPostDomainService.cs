@@ -14,21 +14,13 @@ namespace TagKid.Core.Domain
 
         PostDO[] GetTimeline(long maxPostId = 0);
 
-        PostDO[] GetPostsOfUser(long userId, long categoryId, long maxPostId);
+        PostDO[] GetPostsOfUser(long userId, long maxPostId);
 
         IPage<Post> SearchByTag(long tagId, int pageIndex);
 
         Post[] ContinueSearchByTag(long tagId, long maxPostId);
 
-        IPage<Post> GetPostsOfCategory(long categoryId, int pageIndex);
-
-        Post[] ContinueGetPostsOfCategory(long categoryId, long maxPostId);
-
         Tag[] SearchTags(string name);
-
-        Category[] GetCategoriesOfUser(long userId);
-
-        void CreateCategory(Category category);
 
         Comment[] GetComments(long postId, long maxCommentId = 0);
 

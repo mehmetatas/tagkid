@@ -12,81 +12,77 @@
     <link rel="stylesheet" href="~/res/css/simple-line-icons.css" type="text/css" />
     <link rel="stylesheet" href="~/res/css/app.css" type="text/css" />
 </head>
-<body ng-controller="AppCtrl">
-    <!---->
-    <div id="app" class="app" ng-class="{'container':app.settings.container, 'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock}" ui-view></div>
+    <body ng-controller="AppCtrl" style="overflow:hidden">
+        <div id="app" class="app" ng-class="{'container':app.settings.container, 'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock}" ui-view></div>
+        <!-- jQuery -->
+        <script src="~/res/vendor/jquery/jquery.min.js"></script>
+        <script src="~/res/vendor/jquery/jquery-autogrow.js"></script>
+        <script src="~/res/vendor/jquery/jquery-cookie-1.4.1.js"></script>
 
-    <!-- jQuery -->
-    <script src="~/res/vendor/jquery/jquery.min.js"></script>
-    <script src="~/res/vendor/jquery/jquery-autogrow.js"></script>
-    <script src="~/res/vendor/jquery/jquery-cookie-1.4.1.js"></script>
+        <!-- Angular -->
+        <script src="~/res/vendor/angular/angular.js"></script>
 
-    <!-- Angular -->
-    <script src="~/res/vendor/angular/angular.js"></script>
+        <script src="~/res/vendor/angular/angular-animate/angular-animate.js"></script>
+        <script src="~/res/vendor/angular/angular-cookies/angular-cookies.js"></script>
+        <script src="~/res/vendor/angular/angular-resource/angular-resource.js"></script>
+        <script src="~/res/vendor/angular/angular-sanitize/angular-sanitize.js"></script>
+        <script src="~/res/vendor/angular/angular-touch/angular-touch.js"></script>
+        <script src="~/res/vendor/angular/angular-ui-router/angular-ui-router.js"></script>
+        <script src="~/res/vendor/angular/ngstorage/ngStorage.js"></script>
 
-    <script src="~/res/vendor/angular/angular-animate/angular-animate.js"></script>
-    <script src="~/res/vendor/angular/angular-cookies/angular-cookies.js"></script>
-    <script src="~/res/vendor/angular/angular-resource/angular-resource.js"></script>
-    <script src="~/res/vendor/angular/angular-sanitize/angular-sanitize.js"></script>
-    <script src="~/res/vendor/angular/angular-touch/angular-touch.js"></script>
-    <script src="~/res/vendor/angular/angular-ui-router/angular-ui-router.js"></script>
-    <script src="~/res/vendor/angular/ngstorage/ngStorage.js"></script>
-
-    <!-- bootstrap -->
-    <script src="~/res/vendor/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <!-- lazyload -->
-    @*<script src="~/res/vendor/angular/oclazyload/ocLazyLoad.js"></script>*@
-    <!-- translate -->
-    @*<script src="~/res/vendor/angular/angular-translate/angular-translate.js"></script>
+        <!-- bootstrap -->
+        <script src="~/res/vendor/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <!-- lazyload -->
+        @*<script src="~/res/vendor/angular/oclazyload/ocLazyLoad.js"></script>*@
+        <!-- translate -->
+        @*<script src="~/res/vendor/angular/angular-translate/angular-translate.js"></script>
         <script src="~/res/vendor/angular/angular-translate/loader-static-files.js"></script>
         <script src="~/res/vendor/angular/angular-translate/storage-cookie.js"></script>
         <script src="~/res/vendor/angular/angular-translate/storage-local.js"></script>*@
 
-    <!-- App -->
-    <script src="~/res/js/app.js"></script>
-    <script src="~/res/js/config.js"></script>
-    @*<script src="~/res/js/config.lazyload.js"></script>*@
-    <script src="~/res/js/config.router.js"></script>
-    <script src="~/res/js/main.js"></script>
-    <script src="~/res/js/services/ui-load.js"></script>
+        <!-- App -->
+        <script src="~/res/js/app.js"></script>
+        <script src="~/res/js/config.js"></script>
+        @*<script src="~/res/js/config.lazyload.js"></script>*@
+        <script src="~/res/js/config.router.js"></script>
+        <script src="~/res/js/main.js"></script>
+        <script src="~/res/js/services/ui-load.js"></script>
 
-    <script src="~/res/js/filters/fromNow.js"></script>
+        <script src="~/res/js/filters/fromNow.js"></script>
 
-    <script src="~/res/js/directives/setnganimate.js"></script>
-    <script src="~/res/js/directives/ui-butterbar.js"></script>
-    <script src="~/res/js/directives/ui-focus.js"></script>
-    <script src="~/res/js/directives/ui-fullscreen.js"></script>
-    @*<script src="~/res/js/directives/ui-jq.js"></script>*@
-    <script src="~/res/js/directives/ui-module.js"></script>
-    <script src="~/res/js/directives/ui-nav.js"></script>
-    <script src="~/res/js/directives/ui-scroll.js"></script>
-    <script src="~/res/js/directives/ui-shift.js"></script>
-    <script src="~/res/js/directives/ui-toggleclass.js"></script>
-    <script src="~/res/js/directives/ui-validate.js"></script>
-    <script src="~/res/js/controllers/bootstrap.js"></script>
-    <!-- Lazy loading -->
-    <script src="~/res/js/services/tagkid.js"></script>
-    <script src="~/res/js/services/auth.js"></script>
-    <script src="~/res/js/services/post.js"></script>
-    <script src="~/res/js/services/user.js"></script>
+        <script src="~/res/js/directives/setnganimate.js"></script>
+        <script src="~/res/js/directives/ui-butterbar.js"></script>
+        <script src="~/res/js/directives/ui-focus.js"></script>
+        <script src="~/res/js/directives/ui-fullscreen.js"></script>
+        @*<script src="~/res/js/directives/ui-jq.js"></script>*@
+        <script src="~/res/js/directives/ui-module.js"></script>
+        <script src="~/res/js/directives/ui-nav.js"></script>
+        <script src="~/res/js/directives/ui-scroll.js"></script>
+        <script src="~/res/js/directives/ui-shift.js"></script>
+        <script src="~/res/js/directives/ui-toggleclass.js"></script>
+        <script src="~/res/js/directives/ui-validate.js"></script>
+        <script src="~/res/js/controllers/bootstrap.js"></script>
+        <!-- Lazy loading -->
+        <script src="~/res/js/services/tagkid.js"></script>
+        <script src="~/res/js/services/auth.js"></script>
+        <script src="~/res/js/services/post.js"></script>
+        <script src="~/res/js/services/user.js"></script>
 
-    <script src="~/res/js/editor.js"></script>
+        <script src="~/res/js/editor.js"></script>
 
-    <script src="~/res/js/directives/tagkid-post.js"></script>
-    <script src="~/res/js/directives/tagkid-editor.js"></script>
+        <script src="~/res/js/directives/tagkid-post.js"></script>
+        <script src="~/res/js/directives/tagkid-editor.js"></script>
 
-    <script src="~/res/js/controllers/pages/timeline.js"></script>
-    <script src="~/res/js/controllers/pages/user.js"></script>
-    <script src="~/res/js/controllers/pages/tag.js"></script>
-    <script src="~/res/js/controllers/pages/category.js"></script>
-    <script src="~/res/js/controllers/pages/signin.js"></script>
-    <script src="~/res/js/controllers/pages/signup.js"></script>
-    <script src="~/res/js/controllers/pages/activation.js"></script>
-    <script src="~/res/js/controllers/pages/forgotpwd.js"></script>
+        <script src="~/res/js/controllers/pages/timeline.js"></script>
+        <script src="~/res/js/controllers/pages/user.js"></script>
+        <script src="~/res/js/controllers/pages/tag.js"></script>
+        <script src="~/res/js/controllers/pages/signin.js"></script>
+        <script src="~/res/js/controllers/pages/signup.js"></script>
+        <script src="~/res/js/controllers/pages/activation.js"></script>
+        <script src="~/res/js/controllers/pages/forgotpwd.js"></script>
 
-    <script src="~/res/js/controllers/controls/editor.js"></script>
+        <script src="~/res/js/controllers/controls/editor.js"></script>
 
-    <script src="~/res/js/controllers/modals/new_category.js"></script>
-    <script src="~/res/js/controllers/modals/terms_and_policy.js"></script>
-</body>
+        <script src="~/res/js/controllers/modals/terms_and_policy.js"></script>
+    </body>
 </html>

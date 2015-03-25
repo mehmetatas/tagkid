@@ -7,8 +7,6 @@ namespace TagKid.Core.Models.Database
     {
         public virtual long Id { get; set; }
         public virtual long UserId { get; set; }
-        public virtual long CategoryId { get; set; }
-        public virtual long? RetaggedPostId { get; set; }
         public virtual DateTime CreateDate { get; set; }
         public virtual DateTime? PublishDate { get; set; }
         public virtual DateTime? UpdateDate { get; set; }
@@ -20,8 +18,6 @@ namespace TagKid.Core.Models.Database
         public virtual PostStatus Status { get; set; }
 
         public virtual User User { get; set; }
-        public virtual Category Category { get; set; }
         public virtual List<Tag> Tags { get; set; }
-        public virtual Post RetaggedPost { get; set; }
     }
 }
