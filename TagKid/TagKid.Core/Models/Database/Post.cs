@@ -11,8 +11,6 @@ namespace TagKid.Core.Models.Database
         public virtual DateTime? PublishDate { get; set; }
         public virtual DateTime? UpdateDate { get; set; }
         public virtual string Title { get; set; }
-        public virtual EditorType EditorType { get; set; }
-        public virtual string EditorContent { get; set; }
         public virtual string HtmlContent { get; set; }
         public virtual AccessLevel AccessLevel { get; set; }
         public virtual PostStatus Status { get; set; }

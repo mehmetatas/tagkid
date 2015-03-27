@@ -5304,12 +5304,37 @@ a.text-#000000:hover {
     width: 100%;
     padding: 0;
     border: none;
-    border-radius: 5px;
-    border-radius: 5px;
 }
 
-    .tag-search .tags {
-        margin: 0;
-        padding: 0;
-        display: inline;
+/******************* textAngular *************/
+
+.ta-toolbar {
+    display: none;
+}
+
+    .ta-toolbar.focussed {
+        display: block;
+        border: none;
+        margin-bottom: 10px;
     }
+
+.form-control.ta-scroll-window {
+    min-height: 40px;
+    max-height: 400px;
+    border: none;
+}
+
+.ta-scroll-window > .ta-bind {
+    min-height: 40px;
+    max-height: 400px;
+    border: none;
+    padding: 0;
+}
+
+.ta-editor {
+    border: none;
+}
+
+.focussed.ta-root > .form-control.ta-scroll-window {
+    box-shadow: none;
+}

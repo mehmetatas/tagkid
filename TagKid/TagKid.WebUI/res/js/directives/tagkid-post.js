@@ -80,13 +80,18 @@
             scope.sendComment = sendComment;
             scope.to_trusted = to_trusted;
             scope.user = tagkid.user();
+            
+            scope.edit = function (p) {
+                scope.onEdit({ post: p });
+            };
         };
 
         return {
             restrict: 'E',
             link: linker,
             scope: {
-                post: '='
+                post: '=',
+                onEdit: '&'
             },
             templateUrl: '/Directives/Post'
         };

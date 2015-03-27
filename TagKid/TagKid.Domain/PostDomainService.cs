@@ -39,7 +39,6 @@ namespace TagKid.Domain
         public virtual void SaveAsDraft(Post post)
         {
             post.UserId = RequestContext.User.Id;
-            post.HtmlContent = HtmlBuilder.ToHtml(post.EditorContent);
             post.Status = PostStatus.Draft;
             post.AccessLevel = AccessLevel.Public;
 
@@ -54,7 +53,6 @@ namespace TagKid.Domain
         public void Publish(Post post)
         {
             post.UserId = RequestContext.User.Id;
-            post.HtmlContent = HtmlBuilder.ToHtml(post.EditorContent);
             post.Status = PostStatus.Published;
             post.AccessLevel = AccessLevel.Public;
 

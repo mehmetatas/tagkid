@@ -1,24 +1,18 @@
 ﻿<div>
-    <a class="pull-left thumb-sm avatar m-l-n-md">
-        <img ng-src="{{post.User.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
-    </a>
+    <span class="pull-left thumb-sm avatar m-l-n-md">
+        <a class="thumb-sm avatar" ui-sref="pages.user({username: post.User.Username})">
+            <img ng-src="{{post.User.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
+        </a>
+        <br>
+        <span class="m-t-sm badge bg-success" style="width: 40px">{{post.PublishDateText}}</span>
+    </span>
     <div class="m-l-lg panel b-a r-3x">
         <div class="panel-heading pos-rlt b-b b-light">
-            <span class="text-muted m-l-sm pull-right" ng-bind="post.PublishDate|date:'yyyy-MM-dd HH:mm'"></span>
-            <span class="text-muted m-l-sm pull-left">
-                <span class="arrow left pull-up"></span>
-                <a href ui-sref="pages.user({username: post.User.Username})">
-                    <span class="text-md font-bold" ng-bind="post.User.Fullname"></span>
-                    <span class="text-xs text-muted" ng-bind="'&#64;' + post.User.Username"></span>
-                </a>
-
-                <br />
-                <a href ng-repeat="tag in post.Tags" ui-sref="pages.tag({name: tag.Name})"><label class="label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
-            </span>
-            <div class="clearfix"></div>
+            <span class="arrow left pull-up"></span>
+            <h3 ng-bind="post.Title" class="m-t-none m-b-xs"></h3>
+            <a href ng-repeat="tag in post.Tags" class="btn btn-default btn-xs m-r-xs m-b-xs" ui-sref="pages.tag({name: tag.Name})" ng-bind="tag.Name"></a>
         </div>
         <div class="panel-body">
-            <h4 ng-bind="post.Title"></h4>
             <div ng-bind-html="to_trusted(post.HtmlContent)"></div>
             <div class="m-t-sm">
                 <a href class="btn btn-default btn-xs" ng-class="{active: post.Liked}" ng-disabled="post.sendingLike" ng-click="likeUnlike(post)">
@@ -26,7 +20,7 @@
                     <i class="fa fa-heart text-danger text-active"></i>
                     <span ng-bind="post.LikeCount"></span>
                 </a>
-                <a href class="btn btn-default btn-xs" ng-click="toggleComments(post);">
+                <a href class="btn btn-default btn-xs" ng-class="{active: post.ShowComments}" ng-click="toggleComments(post);">
                     <i class="fa fa-comments-o text-muted"></i>
                     <span ng-bind="post.CommentCount"></span>
                 </a>

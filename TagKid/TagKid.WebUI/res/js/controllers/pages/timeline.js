@@ -7,6 +7,48 @@
 
     $scope.user = tagkid.user();
 
+    $scope.removeTag = function(tag) {
+        var postTags = $scope.newPost.Tags;
+        for (var i = 0; i < postTags.length; i++) {
+            if (postTags[i].Name == tag.Name) {
+                postTags.splice(i, 1);
+                break;
+            }
+        }
+
+        setTimeout(function () {
+            $('#tk-tag-input').focus();
+        }, 100);
+    };
+
+    $scope.clear = function () {
+        if (confirm('Sure?')) {
+            $scope.newPost = { Tags: [] };
+        }
+    };
+
+    $scope.publish = function () {
+        postService.publish({
+            Post: $scope.newPost
+        }, function (resp) {
+            $scope.newPost = { Tags: [] };
+            resp.Data.User.ProfileImageUrl = '/res/img/a2.jpg';
+            $scope.posts.splice(0, 0, resp.Data);
+        });
+    };
+
+    $scope.edit = function (post) {
+        $scope.newPost.Title = post.Title;
+        $scope.newPost.HtmlContent = post.HtmlContent;
+        $scope.newPost.Tags = [];
+
+        for (var i = 0; i < post.Tags.length; i++) {
+            $scope.newPost.Tags.push(post.Tags[i]);
+        }
+    };
+
+    $scope.newPost = { Tags: [] };
+
     $scope.morePostsButtonText = 'Loading posts...';
     $scope.disableMorePosts = true;
     $scope.posts = [];

@@ -1,5 +1,9 @@
 ﻿using Taga.Core.DynamicProxy;
 using TagKid.Core.Domain;
+using TagKid.Core.Models;
+using TagKid.Core.Models.Database;
+using TagKid.Core.Models.Database.View;
+using TagKid.Core.Models.Domain;
 using TagKid.Core.Models.DTO.Messages;
 using TagKid.Core.Models.DTO.Messages.Post;
 using TagKid.Core.Service;
@@ -30,10 +34,22 @@ namespace TagKid.Service
 
         public virtual Response Publish(PublishRequest request)
         {
-            _postDomain.Publish(request.Post);
-            return Response.Success.WithData(request.Post);
-        }
+            var post = request.Post;
+            var user = RequestContext.User;
+            
+            _postDomain.Publish(post);
 
+            post.User = new User
+            {
+                Id = user.Id,
+                Fullname = user.Fullname,
+                Username = user.Username
+            };
+
+            var postDO = new PostDO(post, new PostInfo { PostId = post.Id });
+
+            return Response.Success.WithData(postDO);
+        }
 
         public virtual Response GetComments(GetCommentsRequest request)
         {

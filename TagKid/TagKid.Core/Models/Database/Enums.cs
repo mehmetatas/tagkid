@@ -28,13 +28,6 @@
         SystemError
     }
 
-    public enum EditorType
-    {
-        TagKid,
-        Cke,
-        MarkDown
-    }
-
     public enum UserType
     {
         User,
