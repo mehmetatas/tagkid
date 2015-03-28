@@ -13,7 +13,6 @@ namespace TagKid.Core.Models.Database
         public virtual string Title { get; set; }
         public virtual string HtmlContent { get; set; }
         public virtual AccessLevel AccessLevel { get; set; }
-        public virtual PostStatus Status { get; set; }
 
         public virtual User User { get; set; }
         public virtual List<Tag> Tags { get; set; }

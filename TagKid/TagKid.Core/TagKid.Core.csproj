@@ -74,7 +74,7 @@
     <Compile Include="Models\DTO\Messages\Post\GetTimelineRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\LikeUnlikeRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\SaveAsDraftRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\PublishRequest.cs" />
+    <Compile Include="Models\DTO\Messages\Post\SaveRequest.cs" />
     <Compile Include="Models\DTO\Messages\Response.cs" />
     <Compile Include="Models\DTO\Messages\User\GetProfile.cs" />
     <Compile Include="Service\IUserService.cs" />

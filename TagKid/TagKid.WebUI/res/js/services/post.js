@@ -1,11 +1,8 @@
 ﻿app.factory('postService', [
     'tagkid', function(tagkid) {
         return {
-            saveAsDraft: function (post, success, error) {
-                tagkid.post('post', 'saveAsDraft', post, success, error);
-            },
-            publish: function (post, success, error) {
-                tagkid.post('post', 'publish', post, success, error);
+            save: function (post, success, error) {
+                tagkid.post('post', 'save', post, success, error);
             },
             getTimeline: function (req, success, error) {
                 tagkid.get('post', 'timeline', req, success, error);
@@ -18,6 +15,9 @@
             },
             likeUnlike: function (req, success, error, complete) {
                 tagkid.post('post', 'like', req, success, error, complete);
+            },
+            searchTags: function (req, success, error, complete) {
+                tagkid.get('post', 'searchTags', req, success, error, complete);
             }
         };
     }

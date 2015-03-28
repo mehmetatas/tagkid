@@ -1,7 +1,7 @@
-﻿<div>
+﻿<div id="{{'post' + post.Id}}">
     <span class="pull-left thumb-sm avatar m-l-n-md">
         <a class="thumb-sm avatar" ui-sref="pages.user({username: post.User.Username})">
-            <img ng-src="{{post.User.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
+            <img ng-src="{{post.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
         </a>
         <br>
         <span class="m-t-sm badge bg-success" style="width: 40px">{{post.PublishDateText}}</span>

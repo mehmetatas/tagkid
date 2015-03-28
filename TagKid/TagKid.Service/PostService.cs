@@ -26,28 +26,9 @@ namespace TagKid.Service
             return Response.Success.WithData(posts);
         }
 
-        public virtual Response SaveAsDraft(SaveAsDraftRequest request)
+        public virtual Response Save(SaveRequest request)
         {
-            _postDomain.SaveAsDraft(request.Post);
-            return Response.Success.WithData(request.Post);
-        }
-
-        public virtual Response Publish(PublishRequest request)
-        {
-            var post = request.Post;
-            var user = RequestContext.User;
-            
-            _postDomain.Publish(post);
-
-            post.User = new User
-            {
-                Id = user.Id,
-                Fullname = user.Fullname,
-                Username = user.Username
-            };
-
-            var postDO = new PostDO(post, new PostInfo { PostId = post.Id });
-
+            var postDO = _postDomain.Save(request.Post);
             return Response.Success.WithData(postDO);
         }
 
@@ -66,6 +47,12 @@ namespace TagKid.Service
         public Response GetPosts(GetPostsRequest request)
         {
             var res = _postDomain.GetPostsOfUser(request.UserId, request.MaxPostId);
+            return Response.Success.WithData(res);
+        }
+
+        public Response SearchTags(SearchTagsRequest request)
+        {
+            var res = _postDomain.SearchTags(request.TagName);
             return Response.Success.WithData(res);
         }
     }

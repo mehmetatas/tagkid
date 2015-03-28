@@ -9,12 +9,11 @@ namespace TagKid.Core.Service
 
         Response GetPosts(GetPostsRequest request);
 
-        Response SaveAsDraft(SaveAsDraftRequest request);
-
-        Response Publish(PublishRequest request);
+        Response Save(SaveRequest request);
 
         Response GetComments(GetCommentsRequest request);
 
         Response LikeUnlike(LikeUnlikeRequest request);
+        Response SearchTags(SearchTagsRequest request);
     }
 }

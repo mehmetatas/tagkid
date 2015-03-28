@@ -2,25 +2,15 @@
     .directive('tkTagSearch', ['$modal', '$timeout', 'tagkid', 'postService', function ($modal, $timeout, tagkid, postService) {
         var allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890-.+#';
 
-        var tags = [
-            { Name: 'Java' },
-            { Name: 'Javascript' },
-            { Name: 'Python' },
-            { Name: 'C#' },
-            { Name: 'C++' },
-            { Name: 'C' },
-            { Name: 'PHP' },
-            { Name: 'Objective-C' },
-            { Name: 'SQL' },
-            { Name: 'NoSQL' },
-            { Name: 'Neo4j' },
-            { Name: 'Microsoft' },
-            { Name: 'Google' },
-            { Name: 'Apple' }
-        ];
-
         var linker = function (scope, element, attrs) {
             var $input = $(element).find('.tag-input');
+
+            var getChar = function(e) {
+                var code = e.keyCode;
+                if (e.charCode && code == 0)
+                    code = e.charCode;
+                return String.fromCharCode(code).toLowerCase();
+            };
 
             var fix = function () {
                 var text = scope.tagFilter.toLowerCase();
@@ -46,22 +36,70 @@
                     }
                 } while (len != text.length);
 
-                if (text !== scope.tagFilter) {
-                    var caretPos = $input.getCaretPosition();
-                    scope.tagFilter = text;
-                    $input.setCaretPosition(caretPos);
+                if (text === scope.tagFilter) {
+                    return;
                 }
+
+                var caretPos = $input.getCaretPosition();
+                scope.tagFilter = text;
+                $input.setCaretPosition(caretPos);
             };
 
+            var timeoutPromise;
+
             var fixAndSearch = function (e) {
-                if (e && (e.keyCode == 38 || e.keyCode == 40)) {
+                var c = getChar(e);
+                if (allowedChars.indexOf(c) == -1) {
                     e.preventDefault();
                     return;
                 }
+
+                fix();
+                //$timeout(fix, 50);
+
+                if (timeoutPromise) {
+                    $timeout.cancel(timeoutPromise);
+                }
+
+                timeoutPromise = $timeout(search, 250);
+            };
+
+            scope.selected = -1;
+            scope.searchResults = [];
+
+            var search = function () {
                 scope.selected = -1;
                 scope.searchResults.splice(0, scope.searchResults.length);
-                $timeout(fix, 50);
-                $timeout(scope.search, 150);
+
+                if (scope.tagFilter.length < 1) {
+                    return;
+                }
+
+                postService.searchTags({ TagName: scope.tagFilter }, function (resp) {
+                    var tagArr = resp.Data;
+
+                    for (var i = 0; i < tagArr.length; i++) {
+                        var alreadyAdded = false;
+                        for (var j = 0; j < scope.newPost.Tags.length; j++) {
+                            if (scope.newPost.Tags[j].Name == tagArr[i].Name) {
+                                alreadyAdded = true;
+                            }
+                        }
+
+                        if (!alreadyAdded) {
+                            scope.searchResults.push(tagArr[i]);
+                        }
+                    }
+                });
+            };
+
+            scope.addTag = function (tag) {
+                scope.newPost.Tags.push(tag);
+                scope.tagFilter = '';
+                scope.searchResults.splice(0, scope.searchResults.length);
+                $timeout(function () {
+                    $input.focus();
+                }, 100);
             };
 
             scope.removeTag = function (tag) {
@@ -74,37 +112,9 @@
                 }
 
                 $timeout(function () {
-                    element.focus();
+                    $input.focus();
                 }, 100);
             };
-
-            scope.searchResults = [];
-
-            scope.search = function () {
-                scope.searchResults.splice(0, scope.searchResults.length);
-                for (var i = 0; i < tags.length; i++) {
-                    if (tags[i].Name.toLowerCase().indexOf(scope.tagFilter.toLowerCase()) > -1) {
-                        var alreadyAdded = false;
-                        for (var j = 0; j < scope.newPost.Tags.length; j++) {
-                            if (scope.newPost.Tags[j].Name == tags[i].Name) {
-                                alreadyAdded = true;
-                            }
-                        }
-
-                        if (!alreadyAdded) {
-                            scope.searchResults.push(tags[i]);
-                        }
-                    }
-                }
-            };
-
-            scope.addTag = function (tag) {
-                scope.newPost.Tags.push(tag);
-                scope.tagFilter = '';
-                scope.searchResults.splice(0, scope.searchResults.length);
-            };
-
-            scope.selected = -1;
 
             scope.keydown = function (e) {
                 if (e.keyCode == 8) { // backspace
@@ -112,7 +122,7 @@
                         scope.newPost.Tags.splice(scope.newPost.Tags.length - 1, 1);
                     }
                 }
-                
+
                 else if (e.keyCode == 38) { // up
                     scope.selected--;
                     if (scope.selected < 0) {
@@ -130,7 +140,7 @@
             };
 
             scope.change = function () {
-                fixAndSearch();
+                $timeout(fix, 50);
             };
 
             scope.keyup = function (e) {
@@ -172,9 +182,16 @@
                     }
 
                     if (text.length > 0) {
-                        scope.tagFilter = '';
-                        scope.searchResults.splice(0, scope.searchResults.length);
-                        scope.newPost.Tags.push({ Id: 0, Name: text });
+                        var tag = { Id: 0, Name: text };
+
+                        for (var i = 0; i < scope.searchResults.length; i++) {
+                            if (scope.searchResults[i].Name == tag.Name) {
+                                tag = scope.searchResults[i];
+                                break;
+                            }
+                        }
+
+                        scope.addTag(tag);
                     } else {
                         scope.tagFilter = text;
                     }
@@ -205,8 +222,8 @@
                 '<span style="position: relative">' +
                 '<input ng-model="tagFilter" type="text" ng-keypress="keypress($event)" ng-keydown="keydown($event)" ng-change="change($event)" ng-keyup="keyup($event)" ng-paste="paste($event)" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="newPost.Tags.length >= 5" ng-show="newPost.Tags.length < 5" />' +
                 '<br>' +
-                '<div ng-show="searchResults.length > 0" class="list-group no-radius alt" style="position: absolute; top: 20px; left: 0; overflow: hidden; border: solid 1px; height: 200px; width: 150px; background-color: #fff; z-index: 1000">' +
-                '<a ng-class="{active: tag.selected}" class="list-group-item" ng-repeat="tag in searchResults" href ng-click="addTag(tag)" ng-bind="tag.Name"></a>' +
+                '<div ng-show="searchResults.length > 0" class="searchResults">' +
+                '<a ng-class="{active: tag.selected}" class="btn btn-default btn-xs m-xs" ng-repeat="tag in searchResults" href ng-click="addTag(tag)" ng-bind="tag.Name"></a>' +
                 '</div>' +
                 '</span>' +
                 '</div>',

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Taga.Core.Repository;
+using TagKid.Core.Models;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Models.Database.View;
 using TagKid.Core.Models.Filter;
@@ -55,7 +56,8 @@ namespace TagKid.Repository
             var query = from post in posts
                         from user in users
                         where
-                            post.UserId == user.Id
+                            post.UserId == user.Id &&
+                            (post.AccessLevel == AccessLevel.Public || post.UserId == RequestContext.User.Id)
                         orderby post.Id descending
                         select new { post, user };
 
@@ -157,7 +159,6 @@ on
             var query = from p in posts
                         from u in users
                         where p.UserId == u.Id &&
-                              p.Status == PostStatus.Published &&
                               p.AccessLevel == AccessLevel.Public &&
                               u.Status == UserStatus.Active
                         orderby p.Id descending
@@ -245,10 +246,10 @@ on
             }
         }
 
-        public int GetPostCount(long userId)
+        public int GetPublicPostCount(long userId)
         {
             return _repository.Select<Post>()
-                .Count(post => post.UserId == userId && post.Status == PostStatus.Published);
+                .Count(post => post.UserId == userId && post.AccessLevel == AccessLevel.Public);
         }
 
         public void Save(PostLike postLike)

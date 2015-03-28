@@ -5,4 +5,9 @@
         public long UserId { get; set; }
         public long MaxPostId { get; set; }
     }
+
+    public class SearchTagsRequest
+    {
+        public string TagName { get; set; }
+    }
 }

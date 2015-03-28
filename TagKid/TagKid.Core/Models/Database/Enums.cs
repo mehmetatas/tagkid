@@ -47,13 +47,6 @@
         Active
     }
 
-    public enum PostStatus
-    {
-        Published,
-        Draft,
-        Deleted,
-    }
-
     public enum CommentStatus
     {
         Deleted,
@@ -62,9 +55,8 @@
 
     public enum AccessLevel
     {
-        Public,
-        Protected,
-        Private
+        Private,
+        Public
     }
 
     public enum ConfirmationCodeStatus

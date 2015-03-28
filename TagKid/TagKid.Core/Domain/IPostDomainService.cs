@@ -6,11 +6,9 @@ namespace TagKid.Core.Domain
 {
     public interface IPostDomainService : ITagKidDomainService
     {
-        void SaveAsDraft(Post post);
+        PostDO Save(Post post);
 
-        void Publish(Post post);
-
-        Post Get(long postId);
+        PostDO Get(long postId);
 
         PostDO[] GetTimeline(long maxPostId = 0);
 

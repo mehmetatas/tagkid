@@ -3,6 +3,7 @@ using System.Linq;
 using Taga.Core.IoC;
 using Taga.Core.Repository;
 using TagKid.Core.Domain;
+using TagKid.Core.Exceptions;
 using TagKid.Core.Models;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Models.Database.View;
@@ -36,39 +37,51 @@ namespace TagKid.Domain
             get { return ServiceProvider.Provider.GetOrCreate<ICommentRepository>(); }
         }
 
-        public virtual void SaveAsDraft(Post post)
+        public virtual PostDO Save(Post post)
         {
-            post.UserId = RequestContext.User.Id;
-            post.Status = PostStatus.Draft;
-            post.AccessLevel = AccessLevel.Public;
+            if (post.Id > 0)
+            {
+                var tmp = PostRepository.GetById(post.Id);
 
-            if (post.CreateDate == default(DateTime))
+                if (tmp.UserId != RequestContext.User.Id)
+                {
+                    throw Errors.S_InvalidUserForPostEdit.ToException();
+                }
+
+                tmp.Title = post.Title;
+                tmp.Tags = post.Tags;
+                tmp.HtmlContent = post.HtmlContent;
+                tmp.AccessLevel = post.AccessLevel;
+                tmp.UpdateDate = DateTime.UtcNow;
+
+                post = tmp;
+            }
+            else
             {
                 post.CreateDate = DateTime.Now;
             }
 
-            PostRepository.Save(post);
-        }
-
-        public void Publish(Post post)
-        {
-            post.UserId = RequestContext.User.Id;
-            post.Status = PostStatus.Published;
-            post.AccessLevel = AccessLevel.Public;
-
-            if (post.CreateDate == default(DateTime))
+            if (!post.PublishDate.HasValue && post.AccessLevel == AccessLevel.Public)
             {
-                post.CreateDate = DateTime.Now;
+                post.PublishDate = DateTime.UtcNow;
             }
 
-            post.PublishDate = DateTime.Now;
+            post.User = RequestContext.User;
+            post.UserId = post.User.Id;
 
             PostRepository.Save(post);
+
+            var info = PostRepository.GetPostInfo(post.UserId, new[] { post.Id })
+                .FirstOrDefault();
+
+            return new PostDO(post, info);
         }
 
-        public virtual Post Get(long postId)
+        public virtual PostDO Get(long postId)
         {
-            throw new NotImplementedException();
+            var post = PostRepository.GetById(postId);
+            var info = PostRepository.GetPostInfo(RequestContext.User.Id, new[] { postId });
+            return new PostDO(post, info[0]);
         }
 
         public virtual PostDO[] GetTimeline(long maxPostId = 0)
@@ -76,7 +89,7 @@ namespace TagKid.Domain
             var posts = PostRepository.GetForUserId(RequestContext.User.Id, PageSize, maxPostId);
 
             var infos = posts.Any()
-                ? PostRepository.GetPostInfo(RequestContext.User.Id, posts.Select(p => p.Id).ToArray()) 
+                ? PostRepository.GetPostInfo(RequestContext.User.Id, posts.Select(p => p.Id).ToArray())
                 : new PostInfo[0];
 
             return PostDO.Create(posts, infos);
@@ -85,7 +98,7 @@ namespace TagKid.Domain
         public virtual PostDO[] GetPostsOfUser(long userId, long maxPostId)
         {
             var posts = PostRepository.GetPostsOfUser(userId, PageSize, maxPostId);
-         
+
             var infos = posts.Any()
                 ? PostRepository.GetPostInfo(RequestContext.User.Id, posts.Select(p => p.Id).ToArray())
                 : new PostInfo[0];
@@ -115,7 +128,7 @@ namespace TagKid.Domain
 
         public virtual Tag[] SearchTags(string name)
         {
-            throw new NotImplementedException();
+            return TagRepository.Search(name, 1, 10).Items.ToArray();
         }
 
         public Comment[] GetComments(long postId, long maxCommentId = 0)
@@ -140,7 +153,7 @@ namespace TagKid.Domain
                 likeCount++;
                 PostRepository.Like(postId, userId);
             }
-        
+
             return new LikeResultDO
             {
                 Liked = !liked,

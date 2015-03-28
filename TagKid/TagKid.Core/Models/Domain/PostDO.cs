@@ -31,6 +31,11 @@ namespace TagKid.Core.Models.Domain
         public int CommentCount { get; set; }
         public bool Liked { get; set; }
 
+        public string ProfileImageUrl
+        {
+            get { return "/res/img/a2.jpg"; }
+        }
+
         public string PublishDateText
         {
             get

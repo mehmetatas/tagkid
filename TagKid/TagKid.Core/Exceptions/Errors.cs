@@ -32,6 +32,7 @@ namespace TagKid.Core.Exceptions
         public static readonly Error S_UserInactive = new Error(101, "S_UserInactive");
         public static readonly Error S_InvalidUsernameOrPassword = new Error(102, "S_InvalidUsernameOrPassword");
         public static readonly Error S_InvalidActivationCode = new Error(103, "S_InvalidActivationCode");
+        public static readonly Error S_InvalidUserForPostEdit = new Error(104, "S_InvalidUserForPostEdit");
 
         #endregion
 

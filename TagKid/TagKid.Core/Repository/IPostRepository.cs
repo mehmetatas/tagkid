@@ -32,7 +32,7 @@ namespace TagKid.Core.Repository
         
         User[] GetLikers(long postId, int maxCount, DateTime maxLikeDate);
 
-        int GetPostCount(long userId);
+        int GetPublicPostCount(long userId);
 
         Post[] GetPostsOfUser(long userId, int maxCount, long maxPostId);
     }

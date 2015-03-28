@@ -20,8 +20,8 @@ angular.module('app', [
     $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function(taRegisterTool, taOptions){
         // $delegate is the taOptions we are decorating
         // register the tool with textAngular
-        taRegisterTool('colourRed', {
-            iconclass: "fa fa-square red",
+        taRegisterTool('insertImageResp', {
+            iconclass: "fa fa-picture-o",
             action: function () {
                 var url = prompt('Please enter the image image url:', 'http://');
                 var html = '<img class="img-responsive" src="' + url + '" />';

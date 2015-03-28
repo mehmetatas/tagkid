@@ -29,25 +29,23 @@
             postService.getPosts({
                 UserId: $scope.profile.Id,
                 MaxPostId: maxId
-            },
-                function (resp) {
-                    var posts = resp.Data;
-                    for (var i = 0; i < posts.length; i++) {
-                        var post = posts[i];
-                        post.User.ProfileImageUrl = '/res/img/a2.jpg';
-                        $scope.posts.push(post);
-                    }
+            }, function(resp) {
+                var posts = resp.Data;
+                for (var i = 0; i < posts.length; i++) {
+                    var post = posts[i];
+                    $scope.posts.push(post);
+                }
 
-                    $scope.disableMorePosts = posts.length < 10; // PageSize
-                    if ($scope.disableMorePosts) {
-                        $scope.morePostsButtonText = 'No more posts';
-                    } else {
-                        $scope.morePostsButtonText = 'Load more posts';
-                    }
-                }, function () {
-                    $scope.disableMorePosts = false;
+                $scope.disableMorePosts = posts.length < 10; // PageSize
+                if ($scope.disableMorePosts) {
+                    $scope.morePostsButtonText = 'No more posts';
+                } else {
                     $scope.morePostsButtonText = 'Load more posts';
-                    alert('unable to load timeline');
-                });
+                }
+            }, function() {
+                $scope.disableMorePosts = false;
+                $scope.morePostsButtonText = 'Load more posts';
+                alert('unable to load timeline');
+            });
         };
     }]);
