@@ -46,7 +46,9 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
             cfg.ControllerFor<IPostService>("post")
                 .ActionFor(s => s.Save(default(SaveRequest)), "save")
                 .ActionFor(s => s.GetTimeline(default(GetTimelineRequest)), "timeline", HttpMethodType.Get)
+                .ActionFor(s => s.GetAnonymousTimeline(), "anonymousTimeline", HttpMethodType.Get)
                 .ActionFor(s => s.GetComments(default(GetCommentsRequest)), "comments", HttpMethodType.Get)
+                .ActionFor(s => s.Comment(default(CommentRequest)), "comment")
                 .ActionFor(s => s.LikeUnlike(default(LikeUnlikeRequest)), "like")
                 .ActionFor(s => s.GetPosts(default(GetPostsRequest)), "posts", HttpMethodType.Get)
                 .ActionFor(s => s.SearchTags(default(SearchTagsRequest)), "searchTags", HttpMethodType.Get);

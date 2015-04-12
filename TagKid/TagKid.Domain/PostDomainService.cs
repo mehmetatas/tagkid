@@ -95,6 +95,18 @@ namespace TagKid.Domain
             return PostDO.Create(posts, infos);
         }
 
+        public PostDO[] GetAnonymousTimeline()
+        {
+            // Ten most popular posts of last 30 days
+            var posts = PostRepository.GetPopularPosts(30, 10);
+
+            var infos = posts.Any()
+                ? PostRepository.GetPostInfo(-1, posts.Select(p => p.Id).ToArray())
+                : new PostInfo[0];
+
+            return PostDO.Create(posts, infos);
+        }
+
         public virtual PostDO[] GetPostsOfUser(long userId, long maxPostId)
         {
             var posts = PostRepository.GetPostsOfUser(userId, PageSize, maxPostId);
@@ -159,6 +171,23 @@ namespace TagKid.Domain
                 Liked = !liked,
                 LikeCount = likeCount
             };
+        }
+
+        public Comment Comment(long postId, string content)
+        {
+            var comment = new Comment
+            {
+                Content = content.Replace("\n", "<br>"),
+                PostId = postId,
+                PublishDate = DateTime.UtcNow,
+                UserId = RequestContext.User.Id,
+                User = RequestContext.User,
+                Status = CommentStatus.Active
+            };
+
+            CommentRepository.Save(comment);
+
+            return comment;
         }
     }
 }

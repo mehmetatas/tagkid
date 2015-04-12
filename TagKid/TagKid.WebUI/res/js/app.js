@@ -23,13 +23,15 @@ angular.module('app', [
         taRegisterTool('insertImageResp', {
             iconclass: "fa fa-picture-o",
             action: function () {
-                var url = prompt('Please enter the image image url:', 'http://');
-                var html = '<img class="img-responsive" src="' + url + '" />';
-                this.$editor().wrapSelection('inserthtml', html);
+                var url = prompt('Please enter the image url: ', 'http://');
+                if (url) {
+                    var html = '<img class="img-responsive" src="' + url + '" />';
+                    this.$editor().wrapSelection('inserthtml', html);
+                }
             }
         });
         // add the button to the default toolbar definition
-        taOptions.toolbar[1].push('colourRed');
+        taOptions.toolbar[1].push('insertImageResp');
         return taOptions;
     }]);
 });

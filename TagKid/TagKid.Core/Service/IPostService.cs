@@ -15,5 +15,7 @@ namespace TagKid.Core.Service
 
         Response LikeUnlike(LikeUnlikeRequest request);
         Response SearchTags(SearchTagsRequest request);
+        Response GetAnonymousTimeline();
+        Response Comment(CommentRequest request);
     }
 }

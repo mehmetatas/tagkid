@@ -12,6 +12,10 @@
                 });
         };
 
+        $scope.signUpAnonymous = function () {
+            auth.signUpAnonymous();
+        };
+
         $scope.openTermsAndPolicy = function () {
             $modal.open({
                 templateUrl: 'termsAndPolicyModalContent.html',

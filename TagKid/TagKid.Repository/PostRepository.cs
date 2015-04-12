@@ -85,6 +85,41 @@ namespace TagKid.Repository
             return postArr;
         }
 
+        public Post[] GetPopularPosts(int lastDays, int maxCount)
+        {
+            var posts = _repository.Select<Post>();
+            var users = _repository.Select<User>();
+
+            var minDate = DateTime.UtcNow.Date.AddDays(-lastDays);
+
+            var query = from post in posts
+                        from user in users
+                        where
+                            post.UserId == user.Id &&
+                            post.PublishDate > minDate &&
+                            post.AccessLevel == AccessLevel.Public
+                        orderby post.Id descending // TODO: order by like count
+                        select new { post, user };
+
+            var postList = new List<Post>();
+
+            foreach (var item in query.Take(maxCount))
+            {
+                item.post.User = item.user;
+                if (item.post.PublishDate == null)
+                {
+                    item.post.PublishDate = item.post.CreateDate;
+                }
+                postList.Add(item.post);
+            }
+
+            var postArr = postList.ToArray();
+
+            SetTags(postArr);
+
+            return postArr;
+        }
+
         public Post[] GetPostsOfUser(long userId, int maxCount, long maxPostId)
         {
             var posts = _repository.Select<Post>();

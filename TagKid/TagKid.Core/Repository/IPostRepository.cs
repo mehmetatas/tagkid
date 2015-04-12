@@ -35,5 +35,7 @@ namespace TagKid.Core.Repository
         int GetPublicPostCount(long userId);
 
         Post[] GetPostsOfUser(long userId, int maxCount, long maxPostId);
+
+        Post[] GetPopularPosts(int lastDays, int maxCount);
     }
 }

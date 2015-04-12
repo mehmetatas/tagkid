@@ -1,5 +1,4 @@
 ﻿app.controller('TimelineCtrl', ['$scope', 'tagkid', 'postService', function ($scope, tagkid, postService) {
-    // $('textarea').autogrow();
 
     $(document).on('click', '.btn-comment', function () {
         $('#comments').toggle();
@@ -10,7 +9,7 @@
             $(".app-content-body").scrollTo("#" + id, 1000);
         }, 100);
     };
-
+    
     $scope.user = tagkid.user();
 
     $scope.removeTag = function (tag) {
@@ -93,33 +92,42 @@
     $scope.posts = [];
 
     $scope.loadTimeline = function () {
-        var maxId = 0;
-
-        if ($scope.posts.length > 0) {
-            maxId = $scope.posts[$scope.posts.length - 1].Id;
-        }
-
-        $scope.disableMorePosts = true;
-        $scope.morePostsButtonText = 'Loading posts...';
-
-        postService.getTimeline({ MaxPostId: maxId },
-            function (resp) {
-                var posts = resp.Data;
-                for (var i = 0; i < posts.length; i++) {
-                    $scope.posts.push(posts[i]);
-                }
-
-                $scope.disableMorePosts = posts.length < 10; // PageSize
-                if ($scope.disableMorePosts) {
-                    $scope.morePostsButtonText = 'No more posts';
-                } else {
-                    $scope.morePostsButtonText = 'Load more posts';
-                }
+        if ($scope.user.IsAnonymous) {
+            postService.getAnonymousTimeline({}, function (resp) {
+                $scope.posts = resp.Data;
             }, function () {
-                $scope.disableMorePosts = false;
-                $scope.morePostsButtonText = 'Load more posts';
                 alert('unable to load timeline');
             });
+        } else {
+            var maxId = 0;
+
+            if ($scope.posts.length > 0) {
+                maxId = $scope.posts[$scope.posts.length - 1].Id;
+            }
+
+            $scope.disableMorePosts = true;
+            $scope.morePostsButtonText = 'Loading posts...';
+
+            postService.getTimeline({ MaxPostId: maxId },
+                function(resp) {
+                    var posts = resp.Data;
+                    for (var i = 0; i < posts.length; i++) {
+                        $scope.posts.push(posts[i]);
+                    }
+
+                    $scope.disableMorePosts = posts.length < 10; // PageSize
+                    if ($scope.disableMorePosts) {
+                        $scope.morePostsButtonText = 'No more posts';
+                    } else {
+                        $scope.morePostsButtonText = 'Load more posts';
+                    }
+
+                }, function() {
+                    $scope.disableMorePosts = false;
+                    $scope.morePostsButtonText = 'Load more posts';
+                    alert('unable to load timeline');
+                });
+        }
     };
 
     $scope.loadTimeline();

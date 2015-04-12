@@ -69,6 +69,7 @@
     <Compile Include="Mailing\IMailService.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignInWithTokenRequest.cs" />
     <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
+    <Compile Include="Models\DTO\Messages\Post\CommentRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetCommentsRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetPostsRequest.cs" />
     <Compile Include="Models\DTO\Messages\Post\GetTimelineRequest.cs" />

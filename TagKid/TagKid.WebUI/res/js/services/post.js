@@ -7,11 +7,17 @@
             getTimeline: function (req, success, error) {
                 tagkid.get('post', 'timeline', req, success, error);
             },
+            getAnonymousTimeline: function (req, success, error) {
+                tagkid.get('post', 'anonymousTimeline', req, success, error);
+            },
             getPosts: function (req, success, error) {
                 tagkid.get('post', 'posts', req, success, error);
             },
             getComments: function (req, success, error, complete) {
                 tagkid.get('post', 'comments', req, success, error, complete);
+            },
+            postComment: function (req, success, error, complete) {
+                tagkid.post('post', 'comment', req, success, error, complete);
             },
             likeUnlike: function (req, success, error, complete) {
                 tagkid.post('post', 'like', req, success, error, complete);

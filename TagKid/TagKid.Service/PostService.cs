@@ -26,6 +26,12 @@ namespace TagKid.Service
             return Response.Success.WithData(posts);
         }
 
+        public virtual Response GetAnonymousTimeline()
+        {
+            var posts = _postDomain.GetAnonymousTimeline();
+            return Response.Success.WithData(posts);
+        }
+
         public virtual Response Save(SaveRequest request)
         {
             var postDO = _postDomain.Save(request.Post);
@@ -36,6 +42,12 @@ namespace TagKid.Service
         {
             var comments = _postDomain.GetComments(request.PostId, request.MaxCommentId);
             return Response.Success.WithData(comments);
+        }
+
+        public virtual Response Comment(CommentRequest request)
+        {
+            var comment = _postDomain.Comment(request.PostId, request.Comment);
+            return Response.Success.WithData(comment);
         }
 
         public virtual Response LikeUnlike(LikeUnlikeRequest request)

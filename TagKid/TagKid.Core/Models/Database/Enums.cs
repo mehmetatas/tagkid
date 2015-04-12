@@ -32,7 +32,8 @@
     {
         User,
         Admin,
-        Moderator
+        Moderator,
+        Anonymous
     }
 
     public enum CategoryStatus

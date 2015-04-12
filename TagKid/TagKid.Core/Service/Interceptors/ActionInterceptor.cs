@@ -107,6 +107,9 @@ namespace TagKid.Core.Service.Interceptors
                 .Add(s => s.SignInWithPassword(null))
                 .Add(s => s.SignInWithToken(null))
                 .Add(s => s.ActivateAccount(null));
+
+            new NoAuth<IPostService>()
+                .Add(s => s.GetAnonymousTimeline());
         }
 
         private class NoAuth<TService>

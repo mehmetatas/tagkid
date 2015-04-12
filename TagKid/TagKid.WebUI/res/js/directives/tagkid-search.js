@@ -5,13 +5,6 @@
         var linker = function (scope, element, attrs) {
             var $input = $(element).find('.tag-input');
 
-            var getChar = function(e) {
-                var code = e.keyCode;
-                if (e.charCode && code == 0)
-                    code = e.charCode;
-                return String.fromCharCode(code).toLowerCase();
-            };
-
             var fix = function () {
                 var text = scope.tagFilter.toLowerCase();
 
@@ -48,8 +41,19 @@
             var timeoutPromise;
 
             var fixAndSearch = function (e) {
-                var c = getChar(e);
-                if (allowedChars.indexOf(c) == -1) {
+                if (scope.tagFilter.length < 1) {
+                    scope.selected = -1;
+                    scope.searchResults.splice(0, scope.searchResults.length);
+
+                    return;
+                }
+
+                var code = e.keyCode;
+                if (e.charCode && code == 0)
+                    code = e.charCode;
+                var c = String.fromCharCode(code).toLowerCase();
+
+                if (allowedChars.indexOf(c) == -1 && code != 8) {
                     e.preventDefault();
                     return;
                 }
@@ -70,10 +74,6 @@
             var search = function () {
                 scope.selected = -1;
                 scope.searchResults.splice(0, scope.searchResults.length);
-
-                if (scope.tagFilter.length < 1) {
-                    return;
-                }
 
                 postService.searchTags({ TagName: scope.tagFilter }, function (resp) {
                     var tagArr = resp.Data;

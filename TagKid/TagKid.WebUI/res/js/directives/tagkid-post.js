@@ -63,12 +63,27 @@
             }
         };
 
-        var sendComment = function (post) {
-            alert('send comment ' + post.Title + ' : ' + post.NewComment);
-        };
-
         var to_trusted = function (content) {
             return $sce.trustAsHtml(content);
+        };
+
+        var commentKeyDown = function (e, post) {
+            if (e.keyCode == 13 && !e.shiftKey) {
+                e.preventDefault();
+                if (!post.NewComment || post.NewComment.length < 10) {
+                    alert('at least 10 characters please!');
+                    return;
+                }
+                postService.postComment({
+                    PostId: post.Id,
+                    Comment: post.NewComment
+                }, function (resp) {
+                    post.NewComment = '';
+                    var newComment = resp.Data;
+                    newComment.User.ProfileImageUrl = '/res/img/a2.jpg';
+                    post.Comments.splice(0, 0, newComment);
+                });
+            }
         };
 
         var linker = function (scope, element, attrs) {
@@ -77,10 +92,10 @@
             scope.loadComments = loadComments;
             scope.toggleComments = toggleComments;
             scope.likeUnlike = likeUnlike;
-            scope.sendComment = sendComment;
             scope.to_trusted = to_trusted;
+            scope.commentKeyDown = commentKeyDown;
             scope.user = tagkid.user();
-            
+
             scope.edit = function (p) {
                 scope.onEdit({ post: p });
             };

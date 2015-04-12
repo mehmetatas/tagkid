@@ -3,7 +3,7 @@
         <div class="padder">
             <div class="streamline b-l b-info m-l m-b padder-v">
                 <!-- New Post -->
-                <div id="postEdit">
+                <div id="postEdit" ng-if="!user.IsAnonymous" ng-hide="user.IsAnonymous">
                     <a ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
                         <img ng-src="{{user.ProfileImageUrl}}" ng-alt="{{user.Fullname}}">
                     </a>
@@ -28,7 +28,7 @@
                                          ta-toolbar-group-class="btn-group"
                                          ta-toolbar-button-class="btn btn-default btn-sm"
                                          ta-toolbar-button-active-class="active"
-                                         ta-toolbar="[['bold','italics','strikeThrough'],['ul','ol','pre'],['insertLink','insertImageResp','insertVideo']]"></div>
+                                         ta-toolbar="[['bold','italics','strikeThrough'],['ul','ol','pre'],['insertLink','insertImageResp']]"></div>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#" class="btn btn-default btn-sm" ng-click="clear();">
@@ -53,13 +53,13 @@
                 <!-- Posts -->
                 <tagkid-post ng-repeat="post in posts" on-edit="edit(post)" post="post"></tagkid-post>
             </div>
-            <div class="text-center">
+            <div class="text-center" ng-hide="user.IsAnonymous">
                 <button class="btn btn-default w-full" ng-click="loadTimeline();" ng-disabled="disableMorePosts" ng-bind="morePostsButtonText"></button>
             </div>
         </div>
     </div>
 
-    <div class="col w-lg lter b-l">
+    <div class="col w-md lter b-l">
         <div class="vbox">
             <div class="nav-tabs-alt">
                 <ul class="nav nav-tabs nav-justified">
@@ -151,9 +151,6 @@
                                     <a href class="btn btn-xs btn-success m-t-xs">Follow</a>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                 </div>

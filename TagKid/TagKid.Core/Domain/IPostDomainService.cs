@@ -12,6 +12,8 @@ namespace TagKid.Core.Domain
 
         PostDO[] GetTimeline(long maxPostId = 0);
 
+        PostDO[] GetAnonymousTimeline();
+
         PostDO[] GetPostsOfUser(long userId, long maxPostId);
 
         IPage<Post> SearchByTag(long tagId, int pageIndex);
@@ -23,5 +25,7 @@ namespace TagKid.Core.Domain
         Comment[] GetComments(long postId, long maxCommentId = 0);
 
         LikeResultDO LikeUnlike(long postId);
+
+        Comment Comment(long postId, string comment);
     }
 }
