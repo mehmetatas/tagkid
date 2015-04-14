@@ -167,7 +167,7 @@
     <!-- / search form -->
     <!-- nabar right -->
     <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" dropdown>
+        <li class="dropdown" dropdown ng-hide="user.IsAnonymous">
             <a href class="dropdown-toggle" dropdown-toggle>
                 <i class="icon-bell fa-fw"></i>
                 <span class="visible-xs-inline">Notifications</span>
@@ -204,7 +204,7 @@
             </div>
             <!-- / dropdown -->
         </li>
-        <li class="dropdown" dropdown>
+        <li class="dropdown" dropdown ng-hide="user.IsAnonymous">
             <a href class="dropdown-toggle clear" dropdown-toggle>
                 <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                     <img src="~/res/img/a0.jpg" alt="...">
@@ -241,6 +241,9 @@
                 </li>
             </ul>
             <!-- / dropdown -->
+        </li>
+        <li ng-show="user.IsAnonymous">
+            <a ng-click="signup();">Sign Up</a>
         </li>
     </ul>
     <!-- / navbar right -->

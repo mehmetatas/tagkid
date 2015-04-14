@@ -20,9 +20,6 @@
             $modal.open({
                 templateUrl: 'termsAndPolicyModalContent.html',
                 controller: 'TermsAndPolicyModalCtrl'
-            }).result.then(function (newCategory) {
-                $scope.categories.push(newCategory);
-                $scope.selectedCategory = newCategory;
             });
         };
     }

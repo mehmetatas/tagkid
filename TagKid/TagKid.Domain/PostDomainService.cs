@@ -95,7 +95,7 @@ namespace TagKid.Domain
             return PostDO.Create(posts, infos);
         }
 
-        public PostDO[] GetAnonymousTimeline()
+        public virtual PostDO[] GetAnonymousTimeline()
         {
             // Ten most popular posts of last 30 days
             var posts = PostRepository.GetPopularPosts(30, 10);
@@ -112,7 +112,7 @@ namespace TagKid.Domain
             var posts = PostRepository.GetPostsOfUser(userId, PageSize, maxPostId);
 
             var infos = posts.Any()
-                ? PostRepository.GetPostInfo(RequestContext.User.Id, posts.Select(p => p.Id).ToArray())
+                ? PostRepository.GetPostInfo(RequestContext.IsAuthenticated ? RequestContext.User.Id : -1, posts.Select(p => p.Id).ToArray())
                 : new PostInfo[0];
 
             return PostDO.Create(posts, infos);

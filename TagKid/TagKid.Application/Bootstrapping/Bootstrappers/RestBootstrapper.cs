@@ -28,17 +28,17 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
         private void BuildAuthService(ControllerConfigurator cfg)
         {
             cfg.ControllerFor<IAuthService>("auth")
-                .ActionFor(s => s.SignUpWithEmail(default(SignUpWithEmailRequest)), "signUpWithEmail")
-                .ActionFor(s => s.SignInWithPassword(default(SignInWithPasswordRequest)), "signInWithPassword")
-                .ActionFor(s => s.SignInWithToken(default(SignInWithTokenRequest)), "signInWithToken")
-                .ActionFor(s => s.SignOut(), "signOut")
-                .ActionFor(s => s.ActivateAccount(default(ActivateAccountRequest)), "activateAccount", HttpMethodType.Get);
+                .ActionFor(s => s.SignUpWithEmail(default(SignUpWithEmailRequest)), "signUpWithEmail").NoAuth()
+                .ActionFor(s => s.SignInWithPassword(default(SignInWithPasswordRequest)), "signInWithPassword").NoAuth()
+                .ActionFor(s => s.SignInWithToken(default(SignInWithTokenRequest)), "signInWithToken").NoAuth()
+                .ActionFor(s => s.SignOut(), "signOut").NoAuth()
+                .ActionFor(s => s.ActivateAccount(default(ActivateAccountRequest)), "activateAccount", HttpMethodType.Get).NoAuth();
         }
 
         private void BuildUserService(ControllerConfigurator cfg)
         {
             cfg.ControllerFor<IUserService>("user")
-                .ActionFor(s => s.GetProfile(default(GetProfileRequest)), "profile", HttpMethodType.Get);
+                .ActionFor(s => s.GetProfile(default(GetProfileRequest)), "profile", HttpMethodType.Get).NoAuth();
         }
 
         private void BuildPostService(ControllerConfigurator cfg)
@@ -46,12 +46,12 @@ namespace TagKid.Application.Bootstrapping.Bootstrappers
             cfg.ControllerFor<IPostService>("post")
                 .ActionFor(s => s.Save(default(SaveRequest)), "save")
                 .ActionFor(s => s.GetTimeline(default(GetTimelineRequest)), "timeline", HttpMethodType.Get)
-                .ActionFor(s => s.GetAnonymousTimeline(), "anonymousTimeline", HttpMethodType.Get)
-                .ActionFor(s => s.GetComments(default(GetCommentsRequest)), "comments", HttpMethodType.Get)
+                .ActionFor(s => s.GetAnonymousTimeline(), "anonymousTimeline", HttpMethodType.Get).NoAuth()
+                .ActionFor(s => s.GetComments(default(GetCommentsRequest)), "comments", HttpMethodType.Get).NoAuth()
                 .ActionFor(s => s.Comment(default(CommentRequest)), "comment")
                 .ActionFor(s => s.LikeUnlike(default(LikeUnlikeRequest)), "like")
-                .ActionFor(s => s.GetPosts(default(GetPostsRequest)), "posts", HttpMethodType.Get)
-                .ActionFor(s => s.SearchTags(default(SearchTagsRequest)), "searchTags", HttpMethodType.Get);
+                .ActionFor(s => s.GetPosts(default(GetPostsRequest)), "posts", HttpMethodType.Get).NoAuth()
+                .ActionFor(s => s.SearchTags(default(SearchTagsRequest)), "searchTags", HttpMethodType.Get).NoAuth();
         }
     }
 }

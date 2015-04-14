@@ -254,6 +254,11 @@ namespace TagKid.Domain
 
         public virtual void SignOut()
         {
+            if (!RequestContext.IsAuthenticated)
+            {
+                return;
+            }
+
             RemoveAuthToken(RequestContext.AuthToken.Guid);
             TokenRepository.Delete(RequestContext.AuthToken);
             RequestContext.AuthToken = null;

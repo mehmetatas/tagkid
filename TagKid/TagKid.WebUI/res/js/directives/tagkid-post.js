@@ -1,5 +1,5 @@
 ﻿angular.module('app')
-    .directive('tagkidPost', ['$compile', '$sce', 'tagkid', 'postService', function ($compile, $sce, tagkid, postService) {
+    .directive('tagkidPost', ['$compile', '$sce', 'tagkid', 'postService', 'signupDialog', function ($compile, $sce, tagkid, postService, signupDialog) {
         var likeUnlike = function (post) {
             post.sendingLike = true;
             postService.likeUnlike({ PostId: post.Id },
@@ -86,6 +86,10 @@
             }
         };
 
+        var showSignupDialog = function () {
+            signupDialog.show();
+        };
+
         var linker = function (scope, element, attrs) {
             scope.likeUnlike = likeUnlike;
             scope.retag = retag;
@@ -95,6 +99,7 @@
             scope.to_trusted = to_trusted;
             scope.commentKeyDown = commentKeyDown;
             scope.user = tagkid.user();
+            scope.showSignupDialog = showSignupDialog;
 
             scope.edit = function (p) {
                 scope.onEdit({ post: p });

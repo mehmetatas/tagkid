@@ -1,5 +1,17 @@
 ﻿app.service('tagkid', [
-    '$http', '$state', function ($http, $state) {
+    '$http', '$state', '$modal', function ($http, $state, $modal) {
+        var listeners = [];
+
+        var registerListener = function (listener) {
+            listeners.push(listener);
+        };
+
+        var notifyListeners = function () {
+            for (var i = 0; listeners && i < listeners.length; i++) {
+                listeners[i]();
+            }
+        };
+
         var cookies = {
             authToken: function (value) {
                 return $cookie('authToken', value);
@@ -8,7 +20,11 @@
                 return $cookie('authTokenId', value);
             },
             user: function (value) {
-                return $cookie('user', value);
+                var res = $cookie('user', value);
+                if (typeof (value) !== 'undefined') {
+                    notifyListeners();
+                }
+                return res;
             }
         };
 
@@ -63,6 +79,13 @@
                         if (success) {
                             success(resp, headers);
                         }
+                    } else if (resp.ResponseCode == 105) {
+                        $modal.open({
+                            templateUrl: '/Modals/Signup',
+                            controller: 'SignupModalCtrl'
+                        }).result.then(function() {
+                            $send(method, url, data, success, error, complete);
+                        });
                     } else {
                         var isSecurityError = resp.ResponseCode >= 100 && resp.ResponseCode < 200;
 
@@ -94,6 +117,7 @@
             go: $state.go,
             user: cookies.user,
             cookies: cookies,
+            registerListener: registerListener,
             post: function (controller, action, data, succes, error, complete) {
                 var url = '/api/' + controller + '/' + action;
                 return $send('POST', url, data, succes, error, complete);

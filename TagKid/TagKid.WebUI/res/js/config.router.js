@@ -57,33 +57,33 @@ angular.module('app')
                   controller: 'TagCtrl'
               });
 
-          $stateProvider.state('auth', {
-                  url: '',
-                  template: '<div ui-view class="fade-in-right-big smooth"></div>',
-                  onEnter: ['auth', function(auth) {
-                      auth.redirectIfLoggedIn();
-                  }]
-              })
-              .state('auth.signup', {
-                  url: '/signup',
-                  templateUrl: '/pages/signup',
-                  controller: 'SignUpCtrl'
-              })
-              .state('auth.signin', {
-                  url: '/signin',
-                  templateUrl: '/pages/signin',
-                  controller: 'SignInCtrl'
-              })
-              .state('auth.activation', {
-                  url: '/activation/:ccid/:cc',
-                  templateUrl: '/pages/activation',
-                  controller: 'ActivationCtrl'
-              })
-              .state('auth.forgotpwd', {
-                  url: '/forgotpwd',
-                  templateUrl: '/pages/forgotpwd',
-                  controller: 'ForgotPwdCtrl'
-              });
+          //$stateProvider.state('auth', {
+          //        url: '',
+          //        template: '<div ui-view class="fade-in-right-big smooth"></div>',
+          //        onEnter: ['auth', function(auth) {
+          //            auth.redirectIfLoggedIn();
+          //        }]
+          //    })
+          //    .state('auth.signup', {
+          //        url: '/signup',
+          //        templateUrl: '/pages/signup',
+          //        controller: 'SignUpCtrl'
+          //    })
+          //    .state('auth.signin', {
+          //        url: '/signin',
+          //        templateUrl: '/pages/signin',
+          //        controller: 'SignInCtrl'
+          //    })
+          //    .state('auth.activation', {
+          //        url: '/activation/:ccid/:cc',
+          //        templateUrl: '/pages/activation',
+          //        controller: 'ActivationCtrl'
+          //    })
+          //    .state('auth.forgotpwd', {
+          //        url: '/forgotpwd',
+          //        templateUrl: '/pages/forgotpwd',
+          //        controller: 'ForgotPwdCtrl'
+          //    });
       }
     ]
   );

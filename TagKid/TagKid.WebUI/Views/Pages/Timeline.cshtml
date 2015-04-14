@@ -3,9 +3,12 @@
         <div class="padder">
             <div class="streamline b-l b-info m-l m-b padder-v">
                 <!-- New Post -->
-                <div id="postEdit" ng-if="!user.IsAnonymous" ng-hide="user.IsAnonymous">
-                    <a ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
+                <div id="postEdit">
+                    <a ng-if="!user.IsAnonymous" ng-hide="user.IsAnonymous" ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
                         <img ng-src="{{user.ProfileImageUrl}}" ng-alt="{{user.Fullname}}">
+                    </a>
+                    <a ng-if="user.IsAnonymous" ng-show="user.IsAnonymous" ng-click="showSignupDialog()" class="pull-left thumb-sm avatar m-l-n-md">
+                        <img src="~/res/img/a2.jpg" />
                     </a>
                     <div class="m-l-lg panel b-a r-3x">
                         <div class="panel-heading pos-rlt b-b b-light">

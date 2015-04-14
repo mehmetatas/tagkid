@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="res\js\controllers\modals\signup.js" />
     <Content Include="res\js\directives\tagkid-search.js" />
     <Content Include="res\template-site\bower_components\angular-animate\angular-animate.js" />
     <Content Include="res\template-site\bower_components\angular-animate\angular-animate.min.js" />
@@ -2859,6 +2860,7 @@
     <Content Include="res\template-site\bower_components\videogular\LICENSE" />
     <Content Include="res\template-site\bower_components\videogular\package.json" />
     <Content Include="res\template-site\bower_components\videogular\README.md" />
+    <Content Include="Views\Modals\Signup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">

@@ -8,5 +8,10 @@ namespace TagKid.WebUI.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult Signup()
+        {
+            return PartialView();
+        }
     }
 }

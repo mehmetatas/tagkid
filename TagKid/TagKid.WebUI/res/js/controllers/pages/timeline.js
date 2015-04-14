@@ -1,4 +1,4 @@
-﻿app.controller('TimelineCtrl', ['$scope', 'tagkid', 'postService', function ($scope, tagkid, postService) {
+﻿app.controller('TimelineCtrl', ['$scope', 'tagkid', 'postService', 'signupDialog', function ($scope, tagkid, postService, signupDialog) {
 
     $(document).on('click', '.btn-comment', function () {
         $('#comments').toggle();
@@ -40,7 +40,7 @@
     $scope.save = function (level) {
         var post = $scope.newPost;
 
-        if (post.Title == '' || post.HtmlContent == '' || post.Tags.length < 0) {
+        if (post.Title == '' || post.HtmlContent == '' || post.Tags.length == 0) {
             alert('Title, content and at least one tag are mandatory!');
             return;
         }
@@ -85,6 +85,10 @@
         Title: '',
         HtmlContent: '',
         Tags: []
+    };
+
+    $scope.showSignupDialog = function() {
+        signupDialog.show();
     };
 
     $scope.morePostsButtonText = 'Loading posts...';

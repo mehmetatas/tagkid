@@ -5359,5 +5359,15 @@ a.text-#000000:hover {
     box-shadow: #1199c4;
     border-radius: 5px;
     padding: 5px;
+}
 
+.animated.ng-hide-remove {
+    -webkit-animation: ease-in-out fadeIn .5s;
+    animation: ease-in-out fadeIn .5s;
+}
+ 
+.animated.ng-hide-add {
+    -webkit-animation: ease-in-out fadeIn .5s;
+    animation: ease-in-out fadeIn .5s;
+    display: block !important;
 }

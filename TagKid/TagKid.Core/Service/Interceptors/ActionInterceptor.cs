@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Reflection;
 using Taga.Core.IoC;
 using Taga.Core.Logging;
@@ -44,8 +42,16 @@ namespace TagKid.Core.Service.Interceptors
 
             if (!NoAuthMethods.Contains(actionMethod))
             {
-                var authToken = new Guid(ctx.GetRequestHeader(AuthToken));
-                var authTokenId = Convert.ToInt64(ctx.GetRequestHeader(AuthTokenId));
+                var tokenHeader = ctx.GetRequestHeader(AuthToken);
+                var tokenIdHeader = ctx.GetRequestHeader(AuthTokenId);
+
+                if (String.IsNullOrWhiteSpace(tokenHeader) || String.IsNullOrWhiteSpace(tokenIdHeader))
+                {
+                    throw new TagKidException(Errors.S_ActionRequiresAuth);
+                }
+
+                var authToken = new Guid(tokenHeader);
+                var authTokenId = Convert.ToInt64(tokenIdHeader);
 
                 var authDomainService = _prov.GetOrCreate<IAuthDomainService>();
                 authDomainService.SetupRequestContext(authTokenId, authToken);
@@ -96,30 +102,6 @@ namespace TagKid.Core.Service.Interceptors
         private static void FlushLogs()
         {
             L.Flush(LogLevel.Debug, LogLevel.Warning);
-        }
-
-        private static readonly HashSet<MethodInfo> NoAuthMethods = new HashSet<MethodInfo>();
-
-        static ActionInterceptor()
-        {
-            new NoAuth<IAuthService>()
-                .Add(s => s.SignUpWithEmail(null))
-                .Add(s => s.SignInWithPassword(null))
-                .Add(s => s.SignInWithToken(null))
-                .Add(s => s.ActivateAccount(null));
-
-            new NoAuth<IPostService>()
-                .Add(s => s.GetAnonymousTimeline());
-        }
-
-        private class NoAuth<TService>
-        {
-            internal NoAuth<TService> Add(Expression<Action<TService>> expression)
-            {
-                var methodCall = (MethodCallExpression)expression.Body;
-                NoAuthMethods.Add(methodCall.Method);
-                return this;
-            }
         }
     }
 }
