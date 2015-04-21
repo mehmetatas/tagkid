@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Data;
+using NHibernate;
 using Taga.Core.Dynamix;
 using TagKid.Core.Models.Database;
+using TagKid.Framework.Bootstrapping;
+using TagKid.Framework.IoC;
 
 namespace TagKid.ConsoleApp
 {
@@ -13,8 +16,24 @@ namespace TagKid.ConsoleApp
             {
                 //var mapper = PocoMapper.For<User>();
                 //var user = mapper.Map<User>(new MockDataReader());
-                var d = new SecondDerivative();
-                d.GetChild();
+                //var d = new SecondDerivative();
+                //d.GetChild();
+
+                Bootstrapper.StartApp();
+
+                var factory = DependencyContainer.Current.Resolve<ISessionFactory>();
+
+                using (var session = factory.OpenStatelessSession())
+                {
+                    using (var tx = session.BeginTransaction())
+                    {
+                        session.Insert(new Framework.Models.Database.User
+                        {
+                            JoinDate = DateTime.Now
+                        });
+                        tx.Commit();
+                    }
+                }
 
                 Console.WriteLine("OK!");
             }

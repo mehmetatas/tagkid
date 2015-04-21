@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C2276BF3-7C94-4EFF-9DEB-B45DBF7845EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TagKid.Framework</RootNamespace>
+    <AssemblyName>TagKid.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bootstrapping\Bootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrappers\DatabaseBootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrappers\StartupBootstrapper.cs" />
+    <Compile Include="Bootstrapping\IBootstrapper.cs" />
+    <Compile Include="Context\CallContext.cs" />
+    <Compile Include="Context\ICallContext.cs" />
+    <Compile Include="Context\RuntimeContext.cs" />
+    <Compile Include="Context\WebCallContext.cs" />
+    <Compile Include="DynamicProxy\IDynamicProxyFactory.cs" />
+    <Compile Include="DynamicProxy\IInvocationContext.cs" />
+    <Compile Include="DynamicProxy\Impl\CastleDynamicProxyFactory.cs" />
+    <Compile Include="DynamicProxy\Impl\CastleInvocationContextAdapter.cs" />
+    <Compile Include="DynamicProxy\Impl\CastleProxyInterceptorAdapter.cs" />
+    <Compile Include="DynamicProxy\IProxyInterceptor.cs" />
+    <Compile Include="Exceptions\Error.cs" />
+    <Compile Include="Exceptions\Errors.cs" />
+    <Compile Include="Exceptions\TagKidException.cs" />
+    <Compile Include="IoC\DependencyContainer.cs" />
+    <Compile Include="IoC\DependencyScope.cs" />
+    <Compile Include="IoC\IDependencyContainer.cs" />
+    <Compile Include="IoC\Impl\CastleDependencyContainer.cs" />
+    <Compile Include="Json\IJsonSerializer.cs" />
+    <Compile Include="Json\Impl\NewtonsoftJsonSerializer.cs" />
+    <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Models\Database\Comment.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\ConfirmationCode.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\Enums.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\FollowUser.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\IEntity.cs" />
+    <Compile Include="Models\Database\Log.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\Login.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\Mappings\NHMappings.cs" />
+    <Compile Include="Models\Database\Notification.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\Post.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\PostLike.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\PostTag.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\PrivateMessage.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\Tag.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\TagPost.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\Token.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Models\Database\User.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IAdoRepository.cs" />
+    <Compile Include="Repository\Impl\AutoClassMap.cs" />
+    <Compile Include="Repository\Impl\NHAdoRepository.cs" />
+    <Compile Include="Repository\Impl\NHConnectionHelper.cs" />
+    <Compile Include="Repository\Impl\NHRepository.cs" />
+    <Compile Include="Repository\Impl\NHSession.cs" />
+    <Compile Include="Repository\Impl\NHUnitOfWork.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\Mapping\ColumnMapping.cs" />
+    <Compile Include="Repository\Mapping\DatabaseMapping.cs" />
+    <Compile Include="Repository\DbSystem.cs" />
+    <Compile Include="Repository\Mapping\IDatabaseNamingConvention.cs" />
+    <Compile Include="Repository\Mapping\IMappingProvider.cs" />
+    <Compile Include="Repository\Mapping\MappingProvider.cs" />
+    <Compile Include="Repository\Mapping\NamingConvention\MySqlNamingConvention.cs" />
+    <Compile Include="Repository\Mapping\NamingConvention\OracleNamingConvention.cs" />
+    <Compile Include="Repository\Mapping\NamingConvention\SqlServerNamingConvention.cs" />
+    <Compile Include="Repository\Mapping\TableMapping.cs" />
+    <Compile Include="Repository\Page.cs" />
+    <Compile Include="Utils\Cultures.cs" />
+    <Compile Include="Utils\ML.cs" />
+    <Compile Include="Utils\QueryStringUtil.cs" />
+    <Compile Include="Validation\CompositeValidator.cs" />
+    <Compile Include="Validation\IPropertyValidatorBuilder.cs" />
+    <Compile Include="Validation\IValidationRule.cs" />
+    <Compile Include="Validation\IValidationRuleBuilder.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\IValidatorBuilder.cs" />
+    <Compile Include="Validation\PropertyChainResolver.cs" />
+    <Compile Include="Validation\PropertyValidator.cs" />
+    <Compile Include="Validation\PropertyValidatorBuilder.cs" />
+    <Compile Include="Validation\ValidationResult.cs" />
+    <Compile Include="Validation\ValidationRuleBuilder.cs" />
+    <Compile Include="Validation\ValidationRules\CharsetRule.cs" />
+    <Compile Include="Validation\ValidationRules\ComparisonRule.cs" />
+    <Compile Include="Validation\ValidationRules\CustomRule.cs" />
+    <Compile Include="Validation\ValidationRules\EmailRule.cs" />
+    <Compile Include="Validation\ValidationRules\EqualsRule.cs" />
+    <Compile Include="Validation\ValidationRules\GreaterThanOrEqualsRule.cs" />
+    <Compile Include="Validation\ValidationRules\GreaterThanRule.cs" />
+    <Compile Include="Validation\ValidationRules\GuidRule.cs" />
+    <Compile Include="Validation\ValidationRules\InRule.cs" />
+    <Compile Include="Validation\ValidationRules\LessThanOrEqualsRule.cs" />
+    <Compile Include="Validation\ValidationRules\LessThanRule.cs" />
+    <Compile Include="Validation\ValidationRules\NotEqualsRule.cs" />
+    <Compile Include="Validation\ValidationRules\NotInRule.cs" />
+    <Compile Include="Validation\ValidationRules\NotNullRule.cs" />
+    <Compile Include="Validation\ValidationRules\NullRule.cs" />
+    <Compile Include="Validation\ValidationRules\RangeRule.cs" />
+    <Compile Include="Validation\ValidationRules\RegexRule.cs" />
+    <Compile Include="Validation\ValidationRules\StringLengthRule.cs" />
+    <Compile Include="Validation\ValidationRules\StringNotEmptyRule.cs" />
+    <Compile Include="Validation\ValidationUtils.cs" />
+    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="Validation\ValidatorBuilderExtensions.cs" />
+    <Compile Include="WebApi\Configuration\ActionConfigurator.cs" />
+    <Compile Include="WebApi\Configuration\ControllerConfigurator.cs" />
+    <Compile Include="WebApi\Configuration\MethodMapping.cs" />
+    <Compile Include="WebApi\Configuration\ServiceConfig.cs" />
+    <Compile Include="WebApi\Configuration\ServiceMapping.cs" />
+    <Compile Include="WebApi\Configuration\HttpMethod.cs" />
+    <Compile Include="WebApi\IActionInterceptor.cs" />
+    <Compile Include="WebApi\IActionInterceptorBuilder.cs" />
+    <Compile Include="WebApi\IActionInvoker.cs" />
+    <Compile Include="WebApi\IHttpHandler.cs" />
+    <Compile Include="WebApi\Impl\DefaultHttpHandler.cs" />
+    <Compile Include="WebApi\GenericWebApiHandler.cs" />
+    <Compile Include="WebApi\Impl\ParameterResolver.cs" />
+    <Compile Include="WebApi\IParameterResolver.cs" />
+    <Compile Include="WebApi\IRouteResolver.cs" />
+    <Compile Include="WebApi\RouteContext.cs" />
+    <Compile Include="WebApi\Impl\RouteResolver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Impl\" />
+    <Folder Include="Logging\Impl\" />
+    <Folder Include="Mail\Impl\" />
+    <Folder Include="Models\Domain\" />
+    <Folder Include="Models\Messages\" />
+    <Folder Include="Service\Impl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
