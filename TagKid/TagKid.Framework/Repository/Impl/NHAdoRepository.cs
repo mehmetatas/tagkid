@@ -5,35 +5,30 @@ namespace TagKid.Framework.Repository.Impl
 {
     public class NHAdoRepository : IAdoRepository
     {
-        private static INHSession Session
-        {
-            get { return NHUnitOfWork.Current.GetSession(true); }
-        }
-
         public object ExecuteScalar(string commandText, IDictionary<string, object> commandParameters = null, CommandType commandType = CommandType.Text)
         {
-            var cmd = PrepareCommand(commandText, commandParameters, commandType);
+            var cmd = PrepareCommand(commandText, commandParameters, commandType, true);
 
             return cmd.ExecuteScalar();
         }
 
         public int ExecuteNonQuery(string commandText, IDictionary<string, object> commandParameters = null, CommandType commandType = CommandType.Text)
         {
-            var cmd = PrepareCommand(commandText, commandParameters, commandType);
+            var cmd = PrepareCommand(commandText, commandParameters, commandType, true);
 
             return cmd.ExecuteNonQuery();
         }
 
         public IDataReader ExecuteReader(string commandText, IDictionary<string, object> commandParameters = null, CommandType commandType = CommandType.Text)
         {
-            var cmd = PrepareCommand(commandText, commandParameters, commandType);
+            var cmd = PrepareCommand(commandText, commandParameters, commandType, false);
 
             return cmd.ExecuteReader();
         }
 
-        private static IDbCommand PrepareCommand(string commandText, IDictionary<string, object> commandParameters, CommandType commandType)
+        private static IDbCommand PrepareCommand(string commandText, IDictionary<string, object> commandParameters, CommandType commandType, bool openTransaction)
         {
-            var cmd = Session.CreateCommand();
+            var cmd = NHUnitOfWork.Current.GetSession(openTransaction).CreateCommand();
 
             cmd.CommandText = commandText;
             cmd.CommandType = commandType;
@@ -48,6 +43,7 @@ namespace TagKid.Framework.Repository.Impl
                     cmd.Parameters.Add(param);
                 }
             }
+
             return cmd;
         }
     }

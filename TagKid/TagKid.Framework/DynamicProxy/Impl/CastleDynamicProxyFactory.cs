@@ -12,19 +12,18 @@ namespace TagKid.Framework.DynamicProxy.Impl
             _proxyGenerator = new ProxyGenerator();
         }
 
-        public object CreateClassProxy(Type classType, IProxyInterceptor interceptor)
+        public object Create(Type type, IProxyInterceptor interceptor, object target = null)
         {
-            return _proxyGenerator.CreateClassProxy(classType, new CastleProxyInterceptorAdapter(interceptor));
-        }
+            if (type.IsInterface)
+            {
+                return target == null
+                    ? _proxyGenerator.CreateInterfaceProxyWithoutTarget(type, new CastleProxyInterceptorAdapter(interceptor))
+                    : _proxyGenerator.CreateInterfaceProxyWithTarget(type, target, new CastleProxyInterceptorAdapter(interceptor));
+            }
 
-        public object CreateInterfaceProxyWithoutTarget(Type interfaceType, IProxyInterceptor interceptor)
-        {
-            return _proxyGenerator.CreateInterfaceProxyWithoutTarget(interfaceType, new CastleProxyInterceptorAdapter(interceptor));
-        }
-
-        public object CreateInterfaceProxyWithTarget(Type interfaceType, object target, IProxyInterceptor interceptor)
-        {
-            return _proxyGenerator.CreateInterfaceProxyWithTarget(interfaceType, target, new CastleProxyInterceptorAdapter(interceptor));
+            return target == null
+                ? _proxyGenerator.CreateClassProxy(type, new CastleProxyInterceptorAdapter(interceptor))
+                : _proxyGenerator.CreateClassProxyWithTarget(type, target, new CastleProxyInterceptorAdapter(interceptor));
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using TagKid.Framework.IoC;
 using TagKid.Framework.Json;
 using TagKid.Framework.Json.Impl;
-using TagKid.Framework.Repository.Mapping;
+using TagKid.Framework.WebApi;
+using TagKid.Framework.WebApi.Impl;
 
 namespace TagKid.Framework.Bootstrapping.Bootstrappers
 {
@@ -9,8 +10,11 @@ namespace TagKid.Framework.Bootstrapping.Bootstrappers
     {
         public void Bootstrap(IDependencyContainer container)
         {
-            container.RegisterSingleton<IMappingProvider, MappingProvider>();
             container.RegisterSingleton<IJsonSerializer, NewtonsoftJsonSerializer>();
+            container.RegisterSingleton<IRouteResolver, RouteResolver>();
+            container.RegisterSingleton<IParameterResolver, ParameterResolver>();
+            container.RegisterSingleton<IActionInvoker, ActionInvoker>();
+            container.RegisterSingleton<IHttpHandler, HttpHandler>();
         }
     }
 }

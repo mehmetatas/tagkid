@@ -6,14 +6,14 @@ using TagKid.Framework.Json;
 
 namespace TagKid.Framework.WebApi.Impl
 {
-    public class DefaultHttpHandler : IHttpHandler
+    public class HttpHandler : IHttpHandler
     {
         private readonly IJsonSerializer _json;
         private readonly IRouteResolver _routeResolver;
         private readonly IParameterResolver _parameterResolver;
         private readonly IActionInvoker _invoker;
 
-        public DefaultHttpHandler(IJsonSerializer json, IRouteResolver routeResolver, IParameterResolver parameterResolver, IActionInvoker invoker)
+        public HttpHandler(IJsonSerializer json, IRouteResolver routeResolver, IParameterResolver parameterResolver, IActionInvoker invoker)
         {
             _json = json;
             _routeResolver = routeResolver;
@@ -27,8 +27,9 @@ namespace TagKid.Framework.WebApi.Impl
 
             _parameterResolver.Resolve(routeContext);
 
-            var result = _invoker.InvokeAction(routeContext);
-            SetResponse(response, result);
+            _invoker.InvokeAction(routeContext);
+
+            SetResponse(response, routeContext.ReturnValue);
         }
         
         private void SetResponse(HttpResponseMessage response, object result)

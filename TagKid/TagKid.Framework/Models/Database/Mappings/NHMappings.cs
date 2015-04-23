@@ -2,55 +2,55 @@
 
 namespace TagKid.Framework.Models.Database.Mappings
 {
-    public class UserMap : AutoClassMap<User>
+    public class UserMap : NHAutoClassMap<User>
     {
     }
 
-    public class TagMap : AutoClassMap<Tag>
+    public class TagMap : NHAutoClassMap<Tag>
     {
     }
 
-    public class TokenMap : AutoClassMap<Token>
+    public class TokenMap : NHAutoClassMap<Token>
     {
     }
 
-    public class PostMap : AutoClassMap<Post>
+    public class PostMap : NHAutoClassMap<Post>
     {
     }
 
-    public class PostLikeMap : AutoClassMap<PostLike>
+    public class PostLikeMap : NHAutoClassMap<PostLike>
     {
     }
 
-    public class PostTagMap : AutoClassMap<PostTag>
+    public class PostTagMap : NHAutoClassMap<PostTag>
     {
     }
 
-    public class TagPostMap : AutoClassMap<TagPost>
+    public class TagPostMap : NHAutoClassMap<TagPost>
     {
     }
 
-    public class PrivateMessageMap : AutoClassMap<PrivateMessage>
+    public class PrivateMessageMap : NHAutoClassMap<PrivateMessage>
     {
     }
 
-    public class NotificationMap : AutoClassMap<Notification>
+    public class NotificationMap : NHAutoClassMap<Notification>
     {
     }
 
-    public class LoginMap : AutoClassMap<Login>
+    public class LoginMap : NHAutoClassMap<Login>
     {
     }
 
-    public class CommentMap : AutoClassMap<Comment>
+    public class CommentMap : NHAutoClassMap<Comment>
     {
     }
 
-    public class ConfirmationCodeMap : AutoClassMap<ConfirmationCode>
+    public class ConfirmationCodeMap : NHAutoClassMap<ConfirmationCode>
     {
     }
 
-    public class FollowUserMap : AutoClassMap<FollowUser>
+    public class FollowUserMap : NHAutoClassMap<FollowUser>
     {
     }
 }

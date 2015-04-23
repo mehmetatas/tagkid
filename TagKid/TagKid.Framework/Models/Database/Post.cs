@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TagKid.Framework.Models.Database
 {
-    public class Post
+    public class Post : IEntity
     {
         public virtual long Id { get; set; }
         public virtual long UserId { get; set; }
@@ -16,5 +16,6 @@ namespace TagKid.Framework.Models.Database
 
         public virtual User User { get; set; }
         public virtual List<Tag> Tags { get; set; }
+        public virtual List<PostLike> Likes { get; set; }
     }
 }

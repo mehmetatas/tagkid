@@ -158,7 +158,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IAdoRepository.cs" />
-    <Compile Include="Repository\Impl\AutoClassMap.cs" />
+    <Compile Include="Repository\Impl\NHAutoClassMap.cs" />
     <Compile Include="Repository\Impl\NHAdoRepository.cs" />
     <Compile Include="Repository\Impl\NHConnectionHelper.cs" />
     <Compile Include="Repository\Impl\NHRepository.cs" />
@@ -170,7 +170,6 @@
     <Compile Include="Repository\Mapping\DatabaseMapping.cs" />
     <Compile Include="Repository\DbSystem.cs" />
     <Compile Include="Repository\Mapping\IDatabaseNamingConvention.cs" />
-    <Compile Include="Repository\Mapping\IMappingProvider.cs" />
     <Compile Include="Repository\Mapping\MappingProvider.cs" />
     <Compile Include="Repository\Mapping\NamingConvention\MySqlNamingConvention.cs" />
     <Compile Include="Repository\Mapping\NamingConvention\OracleNamingConvention.cs" />
@@ -223,7 +222,8 @@
     <Compile Include="WebApi\IActionInterceptorBuilder.cs" />
     <Compile Include="WebApi\IActionInvoker.cs" />
     <Compile Include="WebApi\IHttpHandler.cs" />
-    <Compile Include="WebApi\Impl\DefaultHttpHandler.cs" />
+    <Compile Include="WebApi\Impl\ActionInvoker.cs" />
+    <Compile Include="WebApi\Impl\HttpHandler.cs" />
     <Compile Include="WebApi\GenericWebApiHandler.cs" />
     <Compile Include="WebApi\Impl\ParameterResolver.cs" />
     <Compile Include="WebApi\IParameterResolver.cs" />

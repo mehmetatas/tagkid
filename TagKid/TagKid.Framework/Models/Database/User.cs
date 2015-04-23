@@ -2,7 +2,7 @@
 
 namespace TagKid.Framework.Models.Database
 {
-    public class User
+    public class User : IEntity
     {
         public virtual long Id { get; set; }
         public virtual string Fullname { get; set; }

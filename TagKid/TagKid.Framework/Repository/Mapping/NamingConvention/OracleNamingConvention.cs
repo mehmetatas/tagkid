@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Globalization;
 using System.Text;
+using TagKid.Framework.Utils;
 
 namespace TagKid.Framework.Repository.Mapping.NamingConvention
 {
     public class OracleNamingConvention : IDatabaseNamingConvention
     {
-        public static readonly CultureInfo EnGb = new CultureInfo("en-GB");
-
         private readonly bool _plurizeTableName;
 
         public OracleNamingConvention(bool plurizeTableName)
@@ -45,7 +43,7 @@ namespace TagKid.Framework.Repository.Mapping.NamingConvention
                 var c = propertyName[i];
                 if (Char.IsLower(c))
                 {
-                    sb.Append(Char.ToUpper(c, EnGb));
+                    sb.Append(Char.ToUpper(c, Cultures.EnGb));
                 }
                 else
                 {

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
 using FluentNHibernate.Mapping;
-using TagKid.Framework.IoC;
 using TagKid.Framework.Repository.Mapping;
 
 namespace TagKid.Framework.Repository.Impl
 {
-    public abstract class AutoClassMap<T> : ClassMap<T> where T : class
+    public abstract class NHAutoClassMap<T> : ClassMap<T> where T : class
     {
-        protected AutoClassMap()
+        protected NHAutoClassMap()
         {
-            var mappingProv = DependencyContainer.Current.Resolve<IMappingProvider>();
+            var mappingProv = MappingProvider.Instance;
 
             var dbSystem = mappingProv.GetDatabaseMapping().DbSystem;
 

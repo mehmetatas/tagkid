@@ -17,8 +17,8 @@ namespace TagKid.Framework.Bootstrapping.Bootstrappers
             var sessionFactory = NHConnectionHelper.BuildSessionFactory<UserMap>("tagkid");
 
             container.RegisterTransient<IUnitOfWork, NHUnitOfWork>();
-            container.RegisterTransient<IRepository, NHRepository>();
-            container.RegisterTransient<IAdoRepository, NHAdoRepository>();
+            container.RegisterSingleton<IRepository, NHRepository>();
+            container.RegisterSingleton<IAdoRepository, NHAdoRepository>();
 
             container.RegisterSingleton(sessionFactory);
         }
@@ -42,8 +42,7 @@ namespace TagKid.Framework.Bootstrapping.Bootstrappers
                 .Map<Token>()
                 .Map<User>().ToTable("[User]");
 
-            var prov = DependencyContainer.Current.Resolve<IMappingProvider>();
-            prov.SetDatabaseMapping(dbMapping);
+            MappingProvider.Instance.SetDatabaseMapping(dbMapping);
         }
     }
 }

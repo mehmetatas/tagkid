@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Globalization;
 using System.Text;
+using TagKid.Framework.Utils;
 
 namespace TagKid.Framework.Repository.Mapping.NamingConvention
 {
     public class MySqlNamingConvention : IDatabaseNamingConvention
     {
-        public static readonly CultureInfo EnGb = new CultureInfo("en-GB");
-
         private readonly bool _plurizeTableName;
 
         public MySqlNamingConvention(bool plurizeTableName)
@@ -53,7 +51,7 @@ namespace TagKid.Framework.Repository.Mapping.NamingConvention
                     {
                         sb.Append("_");
                     }
-                    sb.Append(Char.ToLower(c, EnGb));
+                    sb.Append(Char.ToLower(c, Cultures.EnGb));
                 }
             }
 

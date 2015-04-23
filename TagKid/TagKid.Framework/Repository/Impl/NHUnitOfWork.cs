@@ -22,7 +22,7 @@ namespace TagKid.Framework.Repository.Impl
         {
             if (_session == null)
             {
-                _session = NHSession.Stateless(_sessionFactory);
+                _session = NHSession.Stateful(_sessionFactory);
             }
 
             if (_beginTransactionOnSessionOpen && openTransaction)
