@@ -42,7 +42,14 @@ namespace TagKid.Framework.Repository.Impl
                             compositeIdPart = CompositeId();
                         }
 
-                        compositeIdPart.KeyProperty(lambda, columnName);
+                        if (propInf.PropertyType.IsValueType || propInf.PropertyType == typeof(string))
+                        {
+                            compositeIdPart.KeyProperty(lambda, columnName);
+                        }
+                        else
+                        {
+                            compositeIdPart.KeyReference(lambda, columnName);
+                        }
                     }
                     else
                     {
@@ -67,11 +74,21 @@ namespace TagKid.Framework.Repository.Impl
                 }
                 else
                 {
-                    var propPart = Map(lambda, columnName);
-
-                    if (propInf.PropertyType.IsEnum)
+                    if (propInf.PropertyType.IsValueType || propInf.PropertyType == typeof(string) ||
+                        propInf.PropertyType == typeof(byte[]))
                     {
-                        propPart.CustomType(propInf.PropertyType);
+                        var propPart = Map(lambda, columnName);
+
+                        if (propInf.PropertyType.IsEnum)
+                        {
+                            propPart.CustomType(propInf.PropertyType);
+                        }
+                    }
+                    else
+                    {
+                        References(lambda, columnName)
+                            .Class(propInf.PropertyType)
+                            .Fetch.Join();
                     }
                 }
             }

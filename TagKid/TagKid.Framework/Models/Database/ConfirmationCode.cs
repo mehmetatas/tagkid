@@ -2,10 +2,10 @@
 
 namespace TagKid.Framework.Models.Database
 {
-    public class ConfirmationCode
+    public class ConfirmationCode : IEntity
     {
         public virtual long Id { get; set; }
-        public virtual long UserId { get; set; }
+        public virtual User User { get; set; }
         public virtual string Code { get; set; }
         public virtual DateTime SendDate { get; set; }
         public virtual DateTime ExpireDate { get; set; }

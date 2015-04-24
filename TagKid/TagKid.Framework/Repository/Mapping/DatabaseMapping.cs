@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using TagKid.Framework.Repository.Mapping.NamingConvention;
+using TagKid.Framework.Utils;
 
 namespace TagKid.Framework.Repository.Mapping
 {
@@ -113,18 +114,7 @@ namespace TagKid.Framework.Repository.Mapping
             
             foreach (var propExpression in idPropExpressions)
             {
-                MemberExpression memberExpression;
-                if (propExpression.Body is UnaryExpression)
-                {
-                    var unaryExp = (UnaryExpression) propExpression.Body;
-                    memberExpression = (MemberExpression) unaryExp.Operand;
-                }
-                else
-                {
-                    memberExpression = (MemberExpression) propExpression.Body;
-                }
-
-                var propInf = (PropertyInfo) memberExpression.Member;
+                var propInf = propExpression.GetPropertyInfo();
 
                 idPropNames.Add(propInf.Name);
             }

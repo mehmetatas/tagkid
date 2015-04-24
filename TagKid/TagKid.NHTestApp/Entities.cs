@@ -2,7 +2,12 @@ using System.Collections.Generic;
 
 namespace TagKid.NHTestApp
 {
-    public class Post
+    public interface IEntity
+    {
+        long Id { get; }
+    }
+
+    public class Post : IEntity
     {
         public virtual long Id { get; set; }
         public virtual string Title { get; set; }
@@ -11,13 +16,13 @@ namespace TagKid.NHTestApp
         public virtual IList<Tag> Tags { get; set; }
     }
 
-    public class User
+    public class User : IEntity
     {
         public virtual long Id { get; set; }
         public virtual string Username { get; set; }
     }
 
-    public class Tag
+    public class Tag : IEntity
     {
         public virtual long Id { get; set; }
         public virtual string Name { get; set; }
@@ -39,9 +44,19 @@ namespace TagKid.NHTestApp
         }
     }
 
-    //public class PostTag
-    //{
-    //    public virtual Post Post { get; set; }
-    //    public virtual Tag Tag { get; set; }
-    //}
+    public class PostTag
+    {
+        public virtual Post Post { get; set; }
+        public virtual Tag Tag { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+    }
 }

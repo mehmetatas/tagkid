@@ -18,15 +18,11 @@ namespace TagKid.Framework.Models.Database.Mappings
     {
     }
 
-    public class PostLikeMap : NHAutoClassMap<PostLike>
+    public class PostLikeMap : NHAutoClassMap<Like>
     {
     }
 
     public class PostTagMap : NHAutoClassMap<PostTag>
-    {
-    }
-
-    public class TagPostMap : NHAutoClassMap<TagPost>
     {
     }
 

@@ -14,7 +14,7 @@ namespace TagKid.Framework.Bootstrapping.Bootstrappers
         {
             InitTableMappings();
 
-            var sessionFactory = NHConnectionHelper.BuildSessionFactory<UserMap>("tagkid");
+            var sessionFactory = NHSessionFactoryBuilder.Build<UserMap>("tagkid");
 
             container.RegisterTransient<IUnitOfWork, NHUnitOfWork>();
             container.RegisterSingleton<IRepository, NHRepository>();
@@ -31,16 +31,16 @@ namespace TagKid.Framework.Bootstrapping.Bootstrappers
                 .Map<Comment>()
                 .Map<ConfirmationCode>()
                 .Map<Login>()
-                .Map<Notification>()
-                .Map<FollowUser>(fu => fu.FollowerUserId, fu => fu.FollowedUserId)
-                .Map<PostLike>(pl => pl.PostId, pl => pl.UserId)
+                .Map<Notification>();
+            dbMapping
+                .Map<FollowUser>(fu => fu.FollowerUser, fu => fu.FollowedUser)
+                .Map<Like>(pl => pl.Post, pl => pl.User)
                 .Map<Post>()
-                .Map<PostTag>(pt => pt.PostId, pt => pt.TagId)
-                .Map<TagPost>(tp => tp.TagId, tp => tp.PostId)
+                .Map<PostTag>(pt => pt.Post, pt => pt.Tag)
                 .Map<PrivateMessage>()
                 .Map<Tag>()
                 .Map<Token>()
-                .Map<User>().ToTable("[User]");
+                .Map<User>();
 
             MappingProvider.Instance.SetDatabaseMapping(dbMapping);
         }

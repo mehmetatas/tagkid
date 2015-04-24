@@ -128,7 +128,7 @@
       <SubType>
       </SubType>
     </Compile>
-    <Compile Include="Models\Database\PostLike.cs">
+    <Compile Include="Models\Database\Like.cs">
       <SubType>
       </SubType>
     </Compile>
@@ -144,10 +144,6 @@
       <SubType>
       </SubType>
     </Compile>
-    <Compile Include="Models\Database\TagPost.cs">
-      <SubType>
-      </SubType>
-    </Compile>
     <Compile Include="Models\Database\Token.cs">
       <SubType>
       </SubType>
@@ -157,10 +153,12 @@
       </SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Fetching\ManyToManyFetcher.cs" />
+    <Compile Include="Repository\Fetching\OneToMany.cs" />
     <Compile Include="Repository\IAdoRepository.cs" />
     <Compile Include="Repository\Impl\NHAutoClassMap.cs" />
     <Compile Include="Repository\Impl\NHAdoRepository.cs" />
-    <Compile Include="Repository\Impl\NHConnectionHelper.cs" />
+    <Compile Include="Repository\Impl\NHSessionFactoryBuilder.cs" />
     <Compile Include="Repository\Impl\NHRepository.cs" />
     <Compile Include="Repository\Impl\NHSession.cs" />
     <Compile Include="Repository\Impl\NHUnitOfWork.cs" />
@@ -179,6 +177,7 @@
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Utils\ML.cs" />
     <Compile Include="Utils\QueryStringUtil.cs" />
+    <Compile Include="Utils\ReflectionExtensions.cs" />
     <Compile Include="Validation\CompositeValidator.cs" />
     <Compile Include="Validation\IPropertyValidatorBuilder.cs" />
     <Compile Include="Validation\IValidationRule.cs" />

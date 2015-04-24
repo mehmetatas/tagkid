@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Castle.Core.Internal;
 
 namespace TagKid.Framework.Repository.Mapping
 {
@@ -100,12 +102,18 @@ namespace TagKid.Framework.Repository.Mapping
 
             foreach (var propInf in type.GetProperties())
             {
-                if (propInf.PropertyType.IsClass && propInf.PropertyType != typeof(string) && propInf.PropertyType != typeof(byte[]))
+                if (propInf.PropertyType.Is<IEnumerable>() && propInf.PropertyType != typeof(string) && propInf.PropertyType != typeof(byte[]))
                 {
                     continue;
                 }
 
                 var columnName = namingConvention.GetColumnName(propInf.Name);
+
+                if (!(propInf.PropertyType.IsValueType || propInf.PropertyType == typeof(string) ||
+                    propInf.PropertyType == typeof(byte[])))
+                {
+                    columnName += "Id";
+                }
 
                 var columnMapping = new ColumnMapping
                 {

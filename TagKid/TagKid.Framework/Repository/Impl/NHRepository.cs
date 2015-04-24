@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
+using NHibernate.Linq;
 
 namespace TagKid.Framework.Repository.Impl
 {
@@ -28,6 +30,14 @@ namespace TagKid.Framework.Repository.Impl
         public virtual IQueryable<T> Select<T>() where T : class, new()
         {
             return GetSession(false).Query<T>();
+        }
+    }
+
+    public static class NHibernateRepositoryExtensions
+    {
+        public static IQueryable<T> Join<T, TProp>(this IQueryable<T> query, Expression<Func<T, TProp>> propExp)
+        {
+            return query.Fetch(propExp);
         }
     }
 }

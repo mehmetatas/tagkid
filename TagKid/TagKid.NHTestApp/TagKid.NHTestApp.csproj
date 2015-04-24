@@ -52,6 +52,9 @@
   <ItemGroup>
     <Compile Include="ClassMaps.cs" />
     <Compile Include="Entities.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="ManyToMany.cs" />
+    <Compile Include="OneToMany.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

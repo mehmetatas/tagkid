@@ -3,85 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using TagKid.Framework.Models.Database;
-using TagKid.Framework.Repository.Fetching;
-using TagKid.Framework.Repository.Mapping;
-using TagKid.Framework.Utils;
+using NHibernate;
+using NHibernate.Linq;
 
-namespace TagKid.Framework.Repository
+namespace TagKid.NHTestApp
 {
     public interface IRepository
     {
         void Insert<T>(T entity) where T : class, new();
-
         void Update<T>(T entity) where T : class, new();
-
         void Delete<T>(T entity) where T : class, new();
-
         IQueryable<T> Select<T>() where T : class, new();
+    }
+
+    public class NHRepository : IRepository, IDisposable
+    {
+        private readonly IStatelessSession _session;
+
+        public NHRepository(ISessionFactory factory)
+        {
+            _session = factory.OpenStatelessSession();
+            _session.Transaction.Begin();
+        }
+
+        public void Insert<T>(T entity) where T : class, new()
+        {
+            _session.Insert(entity);
+        }
+
+        public void Update<T>(T entity) where T : class, new()
+        {
+            _session.Update(entity);
+        }
+
+        public void Delete<T>(T entity) where T : class, new()
+        {
+            _session.Delete(entity);
+        }
+
+        public IQueryable<T> Select<T>() where T : class, new()
+        {
+            return _session.Query<T>();
+        }
+
+        public void Dispose()
+        {
+            _session.Transaction.Commit();
+            _session.Dispose();
+        }
     }
 
     public static class RepositoryExtensions
     {
-        public static void Save<T>(this IRepository repo, T entity) where T : class, IEntity, new()
+        public static void Save<T>(this IRepository repository, T entity) where T : class, IEntity, new()
         {
-            var isNew = entity.Id == 0L;
-
-            if (isNew)
+            if (entity.Id == 0L)
             {
-                repo.Insert(entity);
+                repository.Insert(entity);
             }
             else
             {
-                repo.Update(entity);
+                repository.Update(entity);
             }
         }
 
-        public static void Delete<TEntity, TProp>(this IAdoRepository repo, Expression<Func<TEntity, TProp>> propExpression, params TProp[] values)
-            where TEntity : class, new()
+        public static IQueryable<T> Join<T, TProp>(this IQueryable<T> query, Expression<Func<T, TProp>> propExp)
         {
-            MemberExpression memberExp;
-
-            var body = propExpression.Body;
-            var unaryExpression = body as UnaryExpression;
-            if (unaryExpression != null)
-            {
-                memberExp = (MemberExpression)unaryExpression.Operand;
-            }
-            else
-            {
-                memberExp = (MemberExpression)body;
-            }
-
-            var propInf = (PropertyInfo)memberExp.Member;
-
-            var mappingProv = MappingProvider.Instance;
-
-            var tableMapping = mappingProv.GetTableMapping<TEntity>();
-
-            var columnMapping = tableMapping.Columns.First(cm => cm.PropertyInfo == propInf);
-
-            var paramNames = Enumerable.Range(0, values.Length).Select(i => String.Format("p_{0}", i)).ToArray();
-
-            var sql = new StringBuilder("DELETE FROM ")
-                .Append(tableMapping.TableName)
-                .Append(" WHERE ")
-                .Append(columnMapping.ColumnName)
-                .Append(" IN (")
-                .Append(String.Join(",", paramNames.Select(p => String.Format("@{0}", p))))
-                .Append(")")
-                .ToString();
-
-            var args = Enumerable.Range(0, values.Length).ToDictionary(i => paramNames[i], i => (object)values[i]);
-
-            repo.ExecuteNonQuery(sql, args);
+            return query.Fetch(propExp);
         }
 
         public static void Fetch<TEntity, TProp>(this IRepository repo, Expression<Func<TEntity, TProp>> propExpression, params TEntity[] entities)
             where TEntity : class, IEntity, new()
         {
-            repo.Fetch(propExpression, (IList<TEntity>)entities);
+            repo.Fetch(propExpression, (IList<TEntity>) entities);
         }
 
         public static void Fetch<TEntity, TProp>(this IRepository repo, Expression<Func<TEntity, TProp>> propExpression, IList<TEntity> entities)
@@ -91,6 +85,7 @@ namespace TagKid.Framework.Repository
             fetcher.Fetch(repo, entities);
         }
     }
+
     public static class Fetchers
     {
         private static readonly IDictionary<string, object> Cache = new /*Concurrent*/Dictionary<string, object>();
@@ -103,7 +98,7 @@ namespace TagKid.Framework.Repository
             {
                 throw new NotSupportedException("No fetcher registered for: " + key);
             }
-            return (IFetcher<T>)Cache[key];
+            return (IFetcher<T>) Cache[key];
         }
 
         public static void RegisterOneToMany<TParent, TChild>(Expression<Func<TParent, IList<TChild>>> propExp,
@@ -136,8 +131,19 @@ namespace TagKid.Framework.Repository
 
         private static string MakeKey<T, TProp>(Expression<Func<T, TProp>> propExp)
         {
-            var propInf = propExp.GetPropertyInfo();
-            return typeof(T).FullName + "." + propInf.Name;
+            MemberExpression memberExp;
+
+            var unaryExpression = propExp.Body as UnaryExpression;
+            if (unaryExpression == null)
+            {
+                memberExp = (MemberExpression)propExp.Body;
+            }
+            else
+            {
+                memberExp = (MemberExpression)unaryExpression.Operand;
+            }
+
+            return typeof(T).FullName + "." + memberExp.Member.Name;
         }
     }
 

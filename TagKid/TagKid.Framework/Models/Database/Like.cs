@@ -1,13 +1,16 @@
-﻿namespace TagKid.Framework.Models.Database
+﻿using System;
+
+namespace TagKid.Framework.Models.Database
 {
-    public class PostTag
+    public class Like
     {
         public virtual Post Post { get; set; }
-        public virtual Tag Tag { get; set; }
+        public virtual User User { get; set; }
+        public virtual DateTime LikedDate { get; set; }
 
         public override bool Equals(object obj)
         {
-            var that = obj as PostTag;
+            var that = obj as Like;
 
             if (that == null)
             {
@@ -15,13 +18,13 @@
             }
 
             return that.Post.Id == Post.Id &&
-                   that.Tag.Id == Tag.Id;
+                   that.User.Id == User.Id;
         }
 
         public override int GetHashCode()
         {
             return Post.Id.GetHashCode() * 7907 +
-                   Tag.Id.GetHashCode() * 7919;
+                   User.Id.GetHashCode() * 7919;
         }
     }
 }
