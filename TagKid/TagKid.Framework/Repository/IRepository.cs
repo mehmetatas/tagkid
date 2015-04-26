@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using TagKid.Framework.Models.Database;
 using TagKid.Framework.Repository.Fetching;
 using TagKid.Framework.Repository.Mapping;
 using TagKid.Framework.Utils;
@@ -20,6 +19,8 @@ namespace TagKid.Framework.Repository
         void Delete<T>(T entity) where T : class, new();
 
         IQueryable<T> Select<T>() where T : class, new();
+
+        T Get<T>(object id) where T : class, new();
     }
 
     public static class RepositoryExtensions
@@ -81,10 +82,10 @@ namespace TagKid.Framework.Repository
         public static void Fetch<TEntity, TProp>(this IRepository repo, Expression<Func<TEntity, TProp>> propExpression, params TEntity[] entities)
             where TEntity : class, IEntity, new()
         {
-            repo.Fetch(propExpression, (IList<TEntity>)entities);
+            repo.Fetch(entities, propExpression);
         }
 
-        public static void Fetch<TEntity, TProp>(this IRepository repo, Expression<Func<TEntity, TProp>> propExpression, IList<TEntity> entities)
+        public static void Fetch<TEntity, TProp>(this IRepository repo, IList<TEntity> entities, Expression<Func<TEntity, TProp>> propExpression)
             where TEntity : class, IEntity, new()
         {
             var fetcher = Fetchers.Get(propExpression);

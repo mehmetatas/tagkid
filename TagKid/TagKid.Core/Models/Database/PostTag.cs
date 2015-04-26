@@ -2,8 +2,8 @@
 {
     public class PostTag
     {
-        public virtual long PostId { get; set; }
-        public virtual long TagId { get; set; }
+        public virtual Post Post { get; set; }
+        public virtual Tag Tag { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -14,14 +14,14 @@
                 return false;
             }
 
-            return that.PostId == PostId &&
-                   that.TagId == TagId;
+            return that.Post.Id == Post.Id &&
+                   that.Tag.Id == Tag.Id;
         }
 
         public override int GetHashCode()
         {
-            return PostId.GetHashCode() * 7907 +
-                   TagId.GetHashCode() * 7919;
+            return Post.Id.GetHashCode() * 7907 +
+                   Tag.Id.GetHashCode() * 7919;
         }
     }
 }

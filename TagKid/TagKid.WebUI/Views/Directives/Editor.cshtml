@@ -1,45 +1,49 @@
-﻿<div>
-    <a ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
+﻿<div id="postEdit">
+    <a ng-if="!user.IsAnonymous" ng-hide="user.IsAnonymous" ui-sref="pages.user({username: user.Username})" class="pull-left thumb-sm avatar m-l-n-md">
         <img ng-src="{{user.ProfileImageUrl}}" ng-alt="{{user.Fullname}}">
     </a>
+    <a ng-if="user.IsAnonymous" ng-show="user.IsAnonymous" ng-click="showSignupDialog()" class="pull-left thumb-sm avatar m-l-n-md">
+        <img src="~/res/app/img/a0.jpg" />
+    </a>
     <div class="m-l-lg panel b-a r-3x">
-        <div class=" panel-heading pos-rlt b-b b-light">
-            <span class="text-muted m-l-sm pull-left">
-                <span class="arrow left pull-up"></span>
-                <a ui-sref="pages.user({username: user.Username})">
-                    <span class="text-md font-bold" ng-bind="user.Fullname"></span>
-                    <span class=" text-xs text-muted" ng-bind="'&#64;' + user.Username"></span>
-                </a>
+        <div class="panel-heading pos-rlt b-b b-light">
+            <span class="arrow left pull-up"></span>
+            <input type="text" id="tk-title" placeholder="Title here" class="r-t form-control no-border no-padder" style="font-size: 24px" ng-model="options.post.Title" />
 
-                <div class="tag-search">
-                    <span class="tags" ng-repeat="tag in post.Tags">
-                        <a ng-click="removeTag(tag)"><label class=" label bg-light m-r-xs" ng-bind="tag.Name"></label></a>
-                    </span>
-                    <input type="text" id="tk-tag-input" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="post.Tags.length >= 5" ng-show="post.Tags.length < 5" />
-                </div>
-            </span>
-            <div class="clearfix"></div>
+            <div tagkid-tag-search post="options.post"></div>
         </div>
         <div class="panel-body">
-            <input type="text" id="tk-title" placeholder="Title here" class="r-t form-control no-border text-lg no-padder" ng-model="post.Title" />
-            <textarea id="tk-editor" class="form-control no-border r-b no-padder" style="margin-top: -1px" rows="3" placeholder="Your post here" ng-model="post.EditorContent"></textarea>
-            <div id="tk-preview" style="display: none;"></div>
-            <div class="m-t-sm">
-                <a href id="tk-preview-btn" class="btn btn-default btn-xs" ng-click="toggleEditor();">
-                    <i class="fa fa-list-alt text-muted text"></i> Preview
-                </a>
-                <a href id="tk-edit-btn" class="btn btn-default btn-xs" style="display: none" ng-click="toggleEditor();">
-                    <i class="fa fa-edit text-muted text"></i> Edit
-                </a>
-                <a href="#" class="btn btn-default btn-xs" ng-click="cancel();">
-                    <i class="fa fa-trash text-muted text"></i> Cancel
-                </a>
-                <a href="#" class="btn btn-default btn-xs" ng-click="saveAsDraft();" style="display: none">
-                    <i class="fa fa-save text-muted"></i> Save As Draft
-                </a>
-                <a href="#" class="btn btn-default btn-xs" ng-click="publish();">
-                    <i class="fa fa-mail-forward text-muted"></i> Publish
-                </a>
+            <div text-angular
+                 ta-target-toolbars="toolbar"
+                 placeholder="Write something..."
+                 ng-model="options.post.HtmlContent"></div>
+
+            <div>
+                <div class="pull-left m-n">
+                    <div text-angular-toolbar
+                         name="toolbar"
+                         ta-toolbar-class="btn-toolbar"
+                         ta-toolbar-group-class="btn-group"
+                         ta-toolbar-button-class="btn btn-default btn-sm"
+                         ta-toolbar-button-active-class="active"
+                         ta-toolbar="[['bold','italics','strikeThrough'],['ul','ol','pre'],['insertLink','insertImageResp']]"></div>
+                </div>
+                <div class="pull-right">
+                    <a href="#" class="btn btn-default btn-sm" ng-click="clear();">
+                        <i class="fa fa-trash"></i> Clear
+                    </a>
+
+                    <div class="btn-group dropdown" dropdown>
+                        <button class="btn btn-info btn-sm" ng-click="save(1);">
+                            <i class="fa fa-mail-forward text"></i> Post
+                        </button>
+                        <button class="btn btn-info btn-sm" dropdown-toggle><span class="caret"></span></button>
+                        <ul class="dropdown-menu text-xs">
+                            <li><a href ng-click="save(1);"><i class="fa fa-plus"></i> Public</a></li>
+                            <li><a href ng-click="save(0);"><i class="fa fa-minus"></i> Private</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

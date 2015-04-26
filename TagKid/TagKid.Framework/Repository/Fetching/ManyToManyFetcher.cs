@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using TagKid.Framework.Models.Database;
 
 namespace TagKid.Framework.Repository.Fetching
 {

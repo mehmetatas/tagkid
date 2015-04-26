@@ -3,8 +3,8 @@ namespace TagKid.Core.Models.Database
 {
     public class FollowUser
     {
-        public virtual long FollowerUserId { get; set; }
-        public virtual long FollowedUserId { get; set; }
+        public virtual User FollowerUser { get; set; }
+        public virtual User FollowedUser { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -15,14 +15,14 @@ namespace TagKid.Core.Models.Database
                 return false;
             }
 
-            return that.FollowerUserId == FollowerUserId &&
-                   that.FollowedUserId == FollowedUserId;
+            return that.FollowerUser.Id == FollowerUser.Id &&
+                   that.FollowedUser.Id == FollowedUser.Id;
         }
 
         public override int GetHashCode()
         {
-            return FollowerUserId.GetHashCode() * 7907 +
-                   FollowedUserId.GetHashCode() * 7919;
+            return FollowerUser.Id.GetHashCode() * 7907 +
+                   FollowedUser.Id.GetHashCode() * 7919;
         }
     }
 }

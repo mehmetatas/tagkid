@@ -1,8 +1,9 @@
 ﻿using System;
+using TagKid.Framework.Repository;
 
 namespace TagKid.Core.Models.Database
 {
-    public class User
+    public class User : IEntity
     {
         public virtual long Id { get; set; }
         public virtual string Fullname { get; set; }

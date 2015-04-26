@@ -5,8 +5,7 @@
         Active,
         Passive,
         AwaitingActivation,
-        Banned,
-        Deleted
+        Banned
     }
 
     public enum LoginType
@@ -35,25 +34,7 @@
         Moderator,
         Anonymous
     }
-
-    public enum CategoryStatus
-    {
-        Passive,
-        Active
-    }
-
-    public enum TagStatus
-    {
-        Passive,
-        Active
-    }
-
-    public enum CommentStatus
-    {
-        Deleted,
-        Active
-    }
-
+    
     public enum AccessLevel
     {
         Private,
@@ -87,8 +68,7 @@
     public enum NotificationStatus
     {
         Unread,
-        Read,
-        Deleted
+        Read
     }
 
     public enum PrivateMessageStatus

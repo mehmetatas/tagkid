@@ -13,5 +13,10 @@ namespace TagKid.WebUI.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult TagSearch()
+        {
+            return PartialView();
+        }
     }
 }

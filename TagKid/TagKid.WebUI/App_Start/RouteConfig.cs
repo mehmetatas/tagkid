@@ -13,28 +13,24 @@ namespace TagKid.WebUI
                 name: "Layout",
                 url: "Layout/{action}",
                 defaults: new { controller = "Layout" }
-
             );
 
             routes.MapRoute(
                 name: "Pages",
                 url: "Pages/{action}",
                 defaults: new { controller = "Pages" }
-
             );
 
             routes.MapRoute(
                 name: "Directives",
                 url: "Directives/{action}",
                 defaults: new { controller = "Directives" }
-
             );
 
             routes.MapRoute(
-                name: "Modals",
-                url: "Modals/{action}",
-                defaults: new { controller = "Modals" }
-
+                name: "Dialogs",
+                url: "Dialogs/{action}",
+                defaults: new { controller = "Dialogs" }
             );
 
             routes.MapRoute(

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A7A98564-FB0E-421B-A011-0D13FD8A20F9}</ProjectGuid>
+    <ProjectGuid>{98DE4062-5774-4E9F-AD95-D6C6CD77023F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TagKid.Core</RootNamespace>
@@ -30,11 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,119 +48,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cache\CacheBase.cs" />
-    <Compile Include="Database\Db.cs" />
-    <Compile Include="Database\IDb.cs" />
-    <Compile Include="Database\IReadonlyDb.cs" />
-    <Compile Include="Database\IReadWriteDb.cs" />
-    <Compile Include="Database\ITransactionalDb.cs" />
-    <Compile Include="Database\ReadonlyDb.cs" />
-    <Compile Include="Database\ReadWriteDb.cs" />
-    <Compile Include="Database\TagKidPropertyFilter.cs" />
-    <Compile Include="Database\TransactionalReadWriteDb.cs" />
-    <Compile Include="Domain\IAuthDomainService.cs" />
-    <Compile Include="Domain\IPostDomainService.cs" />
-    <Compile Include="Domain\ITagKidDomainService.cs" />
-    <Compile Include="Domain\IUserDomainService.cs" />
-    <Compile Include="Exceptions\ErrorType.cs" />
-    <Compile Include="Mailing\Commands\IMailCommand.cs" />
-    <Compile Include="Mailing\Commands\NewUserActivationMail.cs" />
-    <Compile Include="Mailing\MailService.cs" />
-    <Compile Include="Models\Domain\LikeResultDO.cs" />
-    <Compile Include="Models\Domain\ProfileDO.cs" />
-    <Compile Include="Models\Domain\PostDO.cs" />
-    <Compile Include="Models\Database\View\PostInfo.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\ActivateAccountRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\SignInWithPasswordRequest.cs" />
-    <Compile Include="Mailing\IMailService.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\SignInWithTokenRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\SignOut.cs" />
-    <Compile Include="Models\DTO\Messages\Post\CommentRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\GetCommentsRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\GetPostsRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\GetTimelineRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\LikeUnlikeRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\SaveAsDraftRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Post\SaveRequest.cs" />
-    <Compile Include="Models\DTO\Messages\Response.cs" />
-    <Compile Include="Models\DTO\Messages\User\GetProfile.cs" />
-    <Compile Include="Service\IUserService.cs" />
-    <Compile Include="Utils\Cultures.cs" />
-    <Compile Include="Exceptions\Error.cs" />
-    <Compile Include="Exceptions\Errors.cs" />
-    <Compile Include="Logging\DbLogger.cs" />
-    <Compile Include="Logging\L.cs" />
-    <Compile Include="Models\Database\FollowUser.cs" />
-    <Compile Include="Models\Database\Log.cs" />
-    <Compile Include="Models\Database\PostLike.cs" />
-    <Compile Include="Models\Database\TagPost.cs" />
-    <Compile Include="Models\DTO\Messages\Auth\SignUpWithEmailRequest.cs" />
-    <Compile Include="Utils\ML.cs" />
-    <Compile Include="Utils\StringBuilderExtensions.cs" />
-    <Compile Include="Utils\Strings.cs" />
-    <Compile Include="Models\RequestContext.cs" />
-    <Compile Include="Models\Database\Token.cs" />
+    <Compile Include="Bootstrapping\Bootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrappers\DatabaseBootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrappers\StartupBootstrapper.cs" />
+    <Compile Include="Bootstrapping\IBootstrapper.cs" />
     <Compile Include="Models\Database\Comment.cs" />
     <Compile Include="Models\Database\ConfirmationCode.cs" />
     <Compile Include="Models\Database\Enums.cs" />
-    <Compile Include="Models\Filter\BaseFilter.cs" />
-    <Compile Include="Models\Filter\PostFilter.cs" />
+    <Compile Include="Models\Database\FollowUser.cs" />
+    <Compile Include="Models\Database\Like.cs" />
+    <Compile Include="Models\Database\Log.cs" />
     <Compile Include="Models\Database\Login.cs" />
+    <Compile Include="Models\Database\Mappings\NHMappings.cs" />
     <Compile Include="Models\Database\Notification.cs" />
     <Compile Include="Models\Database\Post.cs" />
     <Compile Include="Models\Database\PostTag.cs" />
     <Compile Include="Models\Database\PrivateMessage.cs" />
     <Compile Include="Models\Database\Tag.cs" />
+    <Compile Include="Models\Database\Token.cs" />
     <Compile Include="Models\Database\User.cs" />
-    <Compile Include="Exceptions\TagKidException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ICommentRepository.cs" />
-    <Compile Include="Repository\IConfirmationCodeRepository.cs" />
-    <Compile Include="Repository\IFollowRepository.cs" />
-    <Compile Include="Repository\ILoginRepository.cs" />
-    <Compile Include="Repository\INotificationRepository.cs" />
-    <Compile Include="Repository\IPostRepository.cs" />
-    <Compile Include="Repository\IPrivateMessageRepository.cs" />
-    <Compile Include="Repository\ITagKidRepository.cs" />
-    <Compile Include="Repository\ITagRepository.cs" />
-    <Compile Include="Repository\ITokenRepository.cs" />
-    <Compile Include="Repository\IUserRepository.cs" />
-    <Compile Include="Service\IApiService.cs" />
-    <Compile Include="Service\IAuthService.cs" />
-    <Compile Include="Service\IPostService.cs" />
-    <Compile Include="Service\ITagKidService.cs" />
-    <Compile Include="Service\Interceptors\ActionInterceptor.cs" />
-    <Compile Include="Utils\DateTimeExtensions.cs" />
-    <Compile Include="Utils\HtmlBuilder.cs" />
-    <Compile Include="Utils\Util.cs" />
-    <Compile Include="Validation\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <Folder Include="Domain\Impl\" />
+    <Folder Include="Models\Domain\" />
+    <Folder Include="Models\Messages\" />
+    <Folder Include="Repository\Impl\" />
+    <Folder Include="Service\Impl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TagKid.Framework\TagKid.Framework.csproj">
+      <Project>{c2276bf3-7c94-4eff-9deb-b45dbf7845ec}</Project>
+      <Name>TagKid.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\taga\Taga.Core\Taga.Core.csproj">
-      <Project>{57206f02-5147-464f-93d1-f7705c2d9932}</Project>
-      <Name>Taga.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\taga\Taga.IoC.Ninject\Taga.IoC.Ninject.csproj">
-      <Project>{F8D70A49-69E7-4EBF-9B55-66F19827118C}</Project>
-      <Name>Taga.IoC.Ninject</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\taga\Taga.Json.Newtonsoft\Taga.Json.Newtonsoft.csproj">
-      <Project>{3DD5124F-DD57-4538-BC50-3375ECA17BEC}</Project>
-      <Name>Taga.Json.Newtonsoft</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\taga\Taga.Mapping.AutoMapper\Taga.Mapping.AutoMapper.csproj">
-      <Project>{16DEF608-1021-4A43-AE4D-88446A83F84D}</Project>
-      <Name>Taga.Mapping.AutoMapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\taga\Taga.Repository.NH\Taga.Repository.NH.csproj">
-      <Project>{e9eec4fa-4d1c-44c3-a44e-b39ee373675b}</Project>
-      <Name>Taga.Repository.NH</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

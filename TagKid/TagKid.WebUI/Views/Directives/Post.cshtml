@@ -1,7 +1,7 @@
 ﻿<div id="{{'post' + post.Id}}">
     <span class="pull-left thumb-sm avatar m-l-n-md">
         <a class="thumb-sm avatar" ui-sref="pages.user({username: post.User.Username})">
-            <img ng-src="{{post.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
+            <img ng-src="{{post.User.ProfileImageUrl}}" ng-alt="{{post.User.Fullname}}">
         </a>
         <br>
         <span class="m-t-sm badge bg-success" style="width: 40px">{{post.PublishDateText}}</span>
@@ -27,11 +27,6 @@
                 <a href class="btn btn-default btn-xs" ng-show="post.User.Username == user.Username" ng-click="edit(post);">
                     <i class="fa fa-edit text-muted text"></i> Edit
                 </a>
-                <a href class="btn btn-default btn-xs" style="display: none" ng-class="{active: post.Retagged}" ng-disabled="post.Retagged" ng-click="retag(post);">
-                    <i class="fa fa-mail-reply text-muted text"></i>
-                    <i class="fa fa-mail-reply text-info text-active"></i>
-                    <span ng-bind="post.RetagCount"></span>
-                </a>
             </div>
             <div style="max-height: 300px;" collapse="!post.ShowComments" class="m-t-md m-b-md text-xs scroll-y">
                 <div class="m-l-xs">
@@ -39,7 +34,7 @@
                         <img ng-src="{{user.ProfileImageUrl}}" alt="{{user.Fullname}}">
                     </a>
                     <a ng-if="user.IsAnonymous" ng-show="user.IsAnonymous" ng-click="showSignupDialog()" class="pull-left thumb-xxs avatar">
-                        <img src="~/res/img/a2.jpg" />
+                        <img src="~/res/app/img/a0.jpg" />
                     </a>
                     <div class="m-l-xxl panel b-a r-2x">
                         <div class="panel-heading pos-rlt">
@@ -62,7 +57,7 @@
                                 <span class="text-xxs text-muted" ng-bind="'&#64;' + comment.User.Username"></span>
                             </a>
                             <br />
-                            <span ng-bind-html="to_trusted(comment.Content)"></span>
+                            <span ng-bind="comment.Content"></span>
                         </div>
                     </div>
                 </div>

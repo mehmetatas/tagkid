@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
-using Taga.Core.Rest;
-using TagKid.Application.Bootstrapping;
+using TagKid.Core.Bootstrapping;
+using TagKid.Framework.WebApi;
 
 namespace TagKid.WebUI
 {
@@ -15,7 +15,7 @@ namespace TagKid.WebUI
                 "api/{*.}",
                 new { controller = "GenericHttpApi" },
                 null,
-                new GenericApiHandler(config)
+                new GenericWebApiHandler(config)
                 );
         }
     }

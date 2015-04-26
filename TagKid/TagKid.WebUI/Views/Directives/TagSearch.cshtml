@@ -1,0 +1,10 @@
+﻿<div class="tag-search">
+    <a class="btn btn-default btn-xs m-r-xs m-b-xs" ng-repeat="tag in post.Tags" ng-click="removeTag(tag)" ng-bind="tag.Name"></a>
+    <span style="position: relative">
+        <input ng-model="tagFilter" type="text" ng-keypress="keypress($event)" ng-keydown="keydown($event)" ng-change="change($event)" ng-keyup="keyup($event)" ng-paste="paste($event)" class="tag-input" placeholder="Tags here" maxlength="37" ng-disabled="post.Tags.length >= 5" ng-show="post.Tags.length < 5" />
+        <br>
+        <div ng-show="searchResults.length > 0" class="searchResults">
+            <a href ng-class="{active: tag.selected}" class="btn btn-default btn-xs m-xs" ng-repeat="tag in searchResults" ng-click="addTag(tag)" ng-bind="tag.Name"></a>
+        </div>
+    </span>
+</div>

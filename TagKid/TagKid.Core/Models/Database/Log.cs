@@ -1,5 +1,5 @@
 ﻿using System;
-using Taga.Core.Logging;
+using TagKid.Framework.Logging;
 
 namespace TagKid.Core.Models.Database
 {

@@ -1,15 +1,15 @@
 ﻿using System;
+using TagKid.Framework.Repository;
 
 namespace TagKid.Core.Models.Database
 {
-    public class Tag
+    public class Tag : IEntity
     {
         public virtual long Id { get; set; }
         public virtual string Name { get; set; }
         public virtual long Count { get; set; }
         public virtual string Hint { get; set; }
         public virtual string Description { get; set; }
-        public virtual TagStatus Status { get; set; }
 
         public override int GetHashCode()
         {
