@@ -38,7 +38,7 @@ namespace TagKid.Core.Providers.Impl
                     return;
                 }
 
-                throw Errors.S_LoginRequired.ToException();
+                throw Errors.Auth_LoginRequired.ToException();
             }
 
             var token = _repo.Select<Token>()
@@ -47,12 +47,27 @@ namespace TagKid.Core.Providers.Impl
 
             if (token == null)
             {
-                throw Errors.S_LoginRequired.ToException();
+                throw Errors.Auth_LoginRequired.ToException();
             }
 
             if (token.ExpireDate < DateTime.UtcNow)
             {
-                throw Errors.S_LoginTokenExpired.ToException();
+                throw Errors.Auth_LoginTokenExpired.ToException();
+            }
+
+            if (token.User.Status == UserStatus.AwaitingActivation)
+            {
+                throw Errors.Auth_UserAwaitingActivation.ToException();
+            }
+
+            if (token.User.Status == UserStatus.Passive)
+            {
+                throw Errors.Auth_UserInactive.ToException();
+            }
+
+            if (token.User.Status == UserStatus.Banned)
+            {
+                throw Errors.Auth_UserBanned.ToException();
             }
 
             TagKidContext.Current.User = token.User;

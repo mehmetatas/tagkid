@@ -54,6 +54,8 @@
     <Compile Include="Bootstrapping\Bootstrappers\ServiceBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\StartupBootstrapper.cs" />
     <Compile Include="Bootstrapping\IBootstrapper.cs" />
+    <Compile Include="Domain\IAuthDomain.cs" />
+    <Compile Include="Domain\Impl\AuthDomain.cs" />
     <Compile Include="Domain\Impl\PostDomain.cs" />
     <Compile Include="Domain\IPostDomain.cs" />
     <Compile Include="Exceptions\Errors.cs" />
@@ -77,9 +79,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\IAuthProvider.cs" />
     <Compile Include="Providers\Impl\AuthProvider.cs" />
+    <Compile Include="Providers\Impl\UserRepository.cs" />
     <Compile Include="Repository\Impl\PostRepository.cs" />
     <Compile Include="Repository\IPostRepository.cs" />
+    <Compile Include="Repository\IUserRepository.cs" />
+    <Compile Include="Service\IAuthService.cs" />
+    <Compile Include="Service\Impl\AuthService.cs" />
     <Compile Include="Service\Impl\PostService.cs" />
+    <Compile Include="Models\Messages\Auth\SignupRequest.cs" />
     <Compile Include="Service\Interceptors\SecurityInterceptor.cs" />
     <Compile Include="Service\Interceptors\TagKidActionInterceptor.cs" />
     <Compile Include="Service\Interceptors\TagKidActionInterceptorBuilder.cs" />
