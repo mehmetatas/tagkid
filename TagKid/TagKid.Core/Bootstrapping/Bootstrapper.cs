@@ -12,7 +12,8 @@ namespace TagKid.Core.Bootstrapping
 
             Bootstrap(
                 new StartupBootstrapper(),
-                new DatabaseBootstrapper());
+                new DatabaseBootstrapper(),
+                new ServiceBootstrapper());
         }
 
         public static void Bootstrap(params IBootstrapper[] bootstrappers)

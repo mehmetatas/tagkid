@@ -122,11 +122,13 @@
     <Content Include="res\app\js\controllers\dialog\authDialog.js" />
     <Content Include="res\app\js\controllers\layout\app.js" />
     <Content Include="res\app\js\controllers\pages\timeline.js" />
-    <Content Include="res\app\js\directives\tagkid-auth.js" />
     <Content Include="res\app\js\directives\tagkid-editor.js" />
     <Content Include="res\app\js\directives\tagkid-post.js" />
     <Content Include="res\app\js\directives\tagkid-tag-search.js" />
+    <Content Include="res\app\js\services\client\auth.js" />
     <Content Include="res\app\js\services\client\authDialog.js" />
+    <Content Include="res\app\js\services\client\tagkid.js" />
+    <Content Include="res\app\js\services\server\postService.js" />
     <Content Include="res\lib\angular-animate\angular-animate.min.js" />
     <Content Include="res\lib\angular-bootstrap\ui-bootstrap-tpls.min.js" />
     <Content Include="res\lib\angular-ui-router\angular-ui-router.min.js" />
@@ -149,9 +151,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="res\app\js\services\server\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\Layout\Aside.cshtml" />
   </ItemGroup>

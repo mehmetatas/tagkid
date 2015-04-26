@@ -1,5 +1,5 @@
 ﻿angular.module('app')
-    .directive('tagkidPost', ['$sce', function ($sce) {
+    .directive('tagkidPost', ['$sce', 'postService', function ($sce, postService) {
         var likeUnlike = function (post) {
             alert('like unlike');
         };

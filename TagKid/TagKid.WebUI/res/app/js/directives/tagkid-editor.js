@@ -1,7 +1,9 @@
 ﻿angular.module('app')
-    .directive('tagkidEditor', [function () {
+    .directive('tagkidEditor', ['postService', function (postService) {
+        var $scope;
+
         var save = function (accessLevel) {
-            alert('save');
+            postService.save({ Post: $scope.options.post });
         };
 
         var clear = function (accessLevel) {
@@ -26,6 +28,8 @@
             scope.edit = function (p) {
                 scope.onEdit({ post: p });
             };
+
+            $scope = scope;
         };
 
         return {

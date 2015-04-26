@@ -8,7 +8,7 @@ namespace TagKid.Framework.Exceptions
         private string _message;
         private object[] _messageArgs;
 
-        internal Error(int code, string messageCode)
+        protected internal Error(int code, string messageCode)
         {
             Code = code;
             MessageCode = messageCode;

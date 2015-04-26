@@ -10,7 +10,7 @@ using TagKid.Framework.Repository.Mapping.NamingConvention;
 
 namespace TagKid.Core.Bootstrapping.Bootstrappers
 {
-    public class DatabaseBootstrapper : IBootstrapper
+     class DatabaseBootstrapper : IBootstrapper
     {
         public void Bootstrap(IDependencyContainer container)
         {

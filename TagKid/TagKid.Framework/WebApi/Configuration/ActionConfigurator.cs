@@ -16,18 +16,17 @@ namespace TagKid.Framework.WebApi.Configuration
             _controllerConfigurator = serviceConfigurator;
         }
 
-        public ActionConfigurator<TNewService> ControllerFor<TNewService>(string controllerPath = null)
+        public ActionConfigurator<TNewService> ControllerFor<TNewService>(string controllerPath)
         {
             return _controllerConfigurator.ControllerFor<TNewService>(controllerPath);
         }
 
-        public ActionConfigurator<TService> ActionFor(Expression<Action<TService>> actionExpression,
-            string actionPath = null, HttpMethod httpMethod = HttpMethod.Post)
+        public ActionConfigurator<TService> ActionFor(Expression<Action<TService>> actionExpression, string actionPath, HttpMethod httpMethod)
         {
             return ActionFor((LambdaExpression)actionExpression, actionPath, httpMethod);
         }
 
-        public ActionConfigurator<TService> ActionFor<TResponse>(Expression<Func<TService, TResponse>> actionExpression, string actionPath = null, HttpMethod httpMethod = HttpMethod.Post)
+        public ActionConfigurator<TService> ActionFor<TResponse>(Expression<Func<TService, TResponse>> actionExpression, string actionPath, HttpMethod httpMethod)
         {
             return ActionFor((LambdaExpression)actionExpression, actionPath, httpMethod);
         }

@@ -1,4 +1,5 @@
-﻿using TagKid.Framework.IoC;
+﻿using TagKid.Core.Service.Interceptors;
+using TagKid.Framework.IoC;
 using TagKid.Framework.Json;
 using TagKid.Framework.Json.Newtonsoft;
 using TagKid.Framework.WebApi;
@@ -6,7 +7,7 @@ using TagKid.Framework.WebApi.Impl;
 
 namespace TagKid.Core.Bootstrapping.Bootstrappers
 {
-    public class StartupBootstrapper : IBootstrapper
+    class StartupBootstrapper : IBootstrapper
     {
         public void Bootstrap(IDependencyContainer container)
         {
@@ -15,6 +16,8 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
             container.RegisterSingleton<IParameterResolver, ParameterResolver>();
             container.RegisterSingleton<IActionInvoker, ActionInvoker>();
             container.RegisterSingleton<IHttpHandler, HttpHandler>();
+
+            container.RegisterTransient<IActionInterceptorBuilder, TagKidActionInterceptorBuilder>();
         }
     }
 }

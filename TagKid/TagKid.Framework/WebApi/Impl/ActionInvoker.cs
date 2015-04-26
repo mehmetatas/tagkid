@@ -22,16 +22,10 @@ namespace TagKid.Framework.WebApi.Impl
             {
                 try
                 {
-                    var retVal = interceptor.BeforeCall(ctx);
+                    ctx.ReturnValue = interceptor.BeforeCall(ctx) ??
+                                      ctx.Method.Method.Invoke(serviceInstance, ctx.Parameters);
 
-                    if (retVal == null)
-                    {
-                        retVal = ctx.Method.Method.Invoke(serviceInstance, ctx.Parameters);
-                    }
-                    
                     interceptor.AfterCall(ctx);
-
-                    ctx.ReturnValue = retVal; 
                 }
                 catch (Exception ex)
                 {
