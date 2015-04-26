@@ -1,14 +1,11 @@
 ﻿var authDialogCtrl = function ($scope, $modalInstance) {
-    $scope.close = function () {
-        $modalInstance.close();
-    };
-
     $scope.signupReq = {};
     $scope.signinReq = {};
     $scope.forgotPwdReq = {};
 
     $scope.toSignin = function (fromSignup) {
         $scope.mode = 1;
+        $scope.passwordSent = false;
 
         if (fromSignup) {
             if ($scope.signupReq.Email) {
@@ -43,6 +40,9 @@
         }
     };
 
+    $scope.passwordSent = false;
+    $scope.signupOk = false;
+
     $scope.toForgotPwd = function () {
         $scope.mode = 2;
 
@@ -52,16 +52,18 @@
     };
 
     $scope.sendNewPassword = function () {
-        alert('TODO: Send New Password');
+        alert('send new password');
         $scope.passwordSent = true;
     };
 
     $scope.signin = function () {
         alert('signin');
+        $modalInstance.close();
     };
 
     $scope.signup = function () {
         alert('signup');
+        $scope.signupOk = true;
     };
 
     $scope.openTermsAndPolicy = function () {

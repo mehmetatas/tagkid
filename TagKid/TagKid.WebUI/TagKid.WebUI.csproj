@@ -151,7 +151,9 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Dialogs\Auth.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Layout\Aside.cshtml" />
   </ItemGroup>

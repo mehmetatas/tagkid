@@ -1,37 +1,56 @@
-﻿using TagKid.Framework.Repository;
-using TagKid.Framework.WebApi;
+﻿using TagKid.Framework.WebApi;
 
 namespace TagKid.Core.Service.Interceptors
 {
     public class TagKidActionInterceptor : IActionInterceptor
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IActionInterceptor[] _interceptors;
 
-        public TagKidActionInterceptor(IUnitOfWork uow)
+        public TagKidActionInterceptor(params IActionInterceptor[] interceptors)
         {
-            _uow = uow;
+            _interceptors = interceptors;
         }
 
         public object BeforeCall(RouteContext ctx)
         {
-            _uow.BeginTransaction();
+            foreach (var interceptor in _interceptors)
+            {
+                var res = interceptor.BeforeCall(ctx);
+                if (res != null)
+                {
+                    return res;
+                }
+            }
             return null;
         }
 
         public void AfterCall(RouteContext ctx)
         {
-            _uow.Commit();
+            foreach (var interceptor in _interceptors)
+            {
+                interceptor.AfterCall(ctx);
+            }
         }
 
         public object OnException(RouteContext ctx)
         {
-            _uow.Rollback();
+            foreach (var interceptor in _interceptors)
+            {
+                var res = interceptor.OnException(ctx);
+                if (res != null)
+                {
+                    return res;
+                }
+            }
             return null;
         }
 
         public void Dispose()
         {
-            _uow.Dispose();
+            foreach (var interceptor in _interceptors)
+            {
+                interceptor.Dispose();
+            }
         }
     }
 }

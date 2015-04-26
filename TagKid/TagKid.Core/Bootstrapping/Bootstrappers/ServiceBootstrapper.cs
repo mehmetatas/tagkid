@@ -1,6 +1,5 @@
 ﻿using TagKid.Core.Models.Messages.Post;
 using TagKid.Core.Service;
-using TagKid.Core.Service.Impl;
 using TagKid.Framework.IoC;
 using TagKid.Framework.WebApi.Configuration;
 
@@ -15,8 +14,6 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
             BuildPostService(builder);
 
             builder.Build();
-
-            container.RegisterTransient<IPostService, PostService>();
         }
 
         private void BuildPostService(ControllerConfigurator builder)

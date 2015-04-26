@@ -1,5 +1,5 @@
 ﻿angular.module('app').service('tagkid', [
-    '$http', 'auth', function ($http, auth) {
+    '$http', 'auth', 'authDialog', function ($http, auth, authDialog) {
         var send = function(method, controller, action, data, success, error, complete) {
             var token = auth.token();
 
@@ -22,6 +22,15 @@
                     if (resp.ResponseCode == 0 && success) {
                         success(resp);
                     } else if (resp.ResponseCode != 0) {
+                        // No login / Token expired
+                        if (resp.ResponseCode == 100 || resp.ResponseCode == 101) {
+                            authDialog.show(function () {
+                                send(method, controller, action, data, success, error, complete);
+                            });
+
+                            return;
+                        }
+
                         if (error) {
                             error(resp);
                         } else {

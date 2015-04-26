@@ -1,4 +1,12 @@
-﻿using TagKid.Core.Service.Interceptors;
+﻿using TagKid.Core.Domain;
+using TagKid.Core.Domain.Impl;
+using TagKid.Core.Providers;
+using TagKid.Core.Providers.Impl;
+using TagKid.Core.Repository;
+using TagKid.Core.Repository.Impl;
+using TagKid.Core.Service;
+using TagKid.Core.Service.Impl;
+using TagKid.Core.Service.Interceptors;
 using TagKid.Framework.IoC;
 using TagKid.Framework.Json;
 using TagKid.Framework.Json.Newtonsoft;
@@ -18,6 +26,12 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
             container.RegisterSingleton<IHttpHandler, HttpHandler>();
 
             container.RegisterTransient<IActionInterceptorBuilder, TagKidActionInterceptorBuilder>();
+
+            container.RegisterTransient<IAuthProvider, AuthProvider>();
+
+            container.RegisterTransient<IPostService, PostService>();
+            container.RegisterTransient<IPostDomain, PostDomain>();
+            container.RegisterTransient<IPostRepository, PostRepository>();
         }
     }
 }

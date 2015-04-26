@@ -42,20 +42,7 @@ namespace TagKid.Framework.Repository
         public static void Delete<TEntity, TProp>(this IAdoRepository repo, Expression<Func<TEntity, TProp>> propExpression, params TProp[] values)
             where TEntity : class, new()
         {
-            MemberExpression memberExp;
-
-            var body = propExpression.Body;
-            var unaryExpression = body as UnaryExpression;
-            if (unaryExpression != null)
-            {
-                memberExp = (MemberExpression)unaryExpression.Operand;
-            }
-            else
-            {
-                memberExp = (MemberExpression)body;
-            }
-
-            var propInf = (PropertyInfo)memberExp.Member;
+            var propInf = propExpression.GetPropertyInfo();
 
             var mappingProv = MappingProvider.Instance;
 
