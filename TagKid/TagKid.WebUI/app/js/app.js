@@ -28,11 +28,11 @@ var App = angular.module('singular', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCo
       viewAnimation: 'ng-fadeInLeft2',
       layout: {
         isFixed: true,
-        isBoxed: false,
+        isBoxed: true,
         isRTL: false
       },
       sidebar: {
-        isCollapsed: false,
+        isCollapsed: true,
         slide: false
       },
       themeId: 0,
@@ -1730,7 +1730,7 @@ App.service('language', ["$translate", function($translate) {
 
 App.controller('HeaderNavController', ['$scope', function($scope) {
   'use strict';
-  $scope.headerMenuCollapsed = true;
+  $scope.headerMenuCollapsed = false;
 
   $scope.toggleHeaderMenu = function() {
     $scope.headerMenuCollapsed = !$scope.headerMenuCollapsed;
