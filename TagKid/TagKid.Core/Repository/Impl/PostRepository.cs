@@ -1,37 +1,38 @@
-﻿using System.Linq;
+﻿using DummyOrm.Db;
+using System.Linq;
 using TagKid.Core.Models.Database;
-using TagKid.Framework.Repository;
 
 namespace TagKid.Core.Repository.Impl
 {
     public class PostRepository : IPostRepository
     {
-        private readonly IRepository _repo;
-        private readonly IAdoRepository _adoRepo;
+        private readonly IDb _db;
 
-        public PostRepository(IRepository repo, IAdoRepository adoRepo)
+        public PostRepository(IDb db)
         {
-            _repo = repo;
-            _adoRepo = adoRepo;
+            _db = db;
         }
 
         public Post GetPostById(long id)
         {
-            return _repo.Get<Post>(id);
+            return _db.GetById<Post>(id);
         }
 
         public void Save(Post post)
         {
             if (post.Id > 0)
             {
-                _adoRepo.Delete<PostTag, Post>(pt => pt.Post, post);
+                _db.DeleteMany<PostTag>(pt => pt.Post.Id == post.Id);
+                _db.Update(post);
             }
-
-            _repo.Save(post);
+            else
+            {
+                _db.Insert(post);
+            }
 
             var tagNames = post.Tags.Select(t => t.Name).ToArray();
 
-            var existingTags = _repo.Select<Tag>()
+            var existingTags = _db.Select<Tag>()
                 .Where(t => tagNames.Contains(t.Name))
                 .ToList();
 
@@ -41,19 +42,19 @@ namespace TagKid.Core.Repository.Impl
                 if (existingTag == null)
                 {
                     tag.Count = 1;
-                    _repo.Insert(tag);
+                    _db.Insert(tag);
                 }
                 else
                 {
                     tag.Id = existingTag.Id;
                     existingTag.Count += 1;
-                    _repo.Update(existingTag);
+                    _db.Update(existingTag);
                 }
             }
 
             foreach (var tag in post.Tags)
             {
-                _repo.Insert(new PostTag
+                _db.Insert(new PostTag
                 {
                     Post = post,
                     Tag = tag

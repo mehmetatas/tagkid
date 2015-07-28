@@ -1,9 +1,7 @@
 ﻿using System;
-using TagKid.Framework.Repository;
-
 namespace TagKid.Core.Models.Database
 {
-    public class Login : IEntity
+    public class Login 
     {
         public virtual long Id { get; set; }
         public virtual User User { get; set; }

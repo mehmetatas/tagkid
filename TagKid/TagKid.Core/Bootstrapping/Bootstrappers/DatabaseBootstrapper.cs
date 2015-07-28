@@ -1,54 +1,32 @@
-﻿using System.Linq;
+﻿using DummyOrm.Db;
 using TagKid.Framework.IoC;
 using TagKid.Core.Models.Database;
-using TagKid.Core.Models.Database.Mappings;
-using TagKid.Framework.Repository;
-using TagKid.Framework.Repository.Fetching;
-using TagKid.Framework.Repository.NH;
-using TagKid.Framework.Repository.Mapping;
-using TagKid.Framework.Repository.Mapping.NamingConvention;
 
 namespace TagKid.Core.Bootstrapping.Bootstrappers
 {
-     class DatabaseBootstrapper : IBootstrapper
+    class DatabaseBootstrapper : IBootstrapper
     {
         public void Bootstrap(IDependencyContainer container)
         {
-            InitTableMappings();
+            var dbFactory = InitTableMappings();
 
-            var sessionFactory = NHSessionFactoryBuilder.Build<UserMap>("tagkid");
-
-            container.RegisterTransient<IUnitOfWork, NHUnitOfWork>();
-            container.RegisterSingleton<IRepository, NHRepository>();
-            container.RegisterSingleton<IAdoRepository, NHAdoRepository>();
-
-            container.RegisterSingleton(sessionFactory);
+            container.RegisterSingleton(dbFactory);
         }
 
-        private static void InitTableMappings()
+        private static IDbFactory InitTableMappings()
         {
-            var dbMapping = DatabaseMapping
-                .For(DbSystem.SqlServer)
-                .WithNamingConvention(new SqlServerNamingConvention(false))
-                .Map<Comment>()
-                .Map<ConfirmationCode>()
-                .Map<Login>()
-                .Map<Notification>()
-                .Map<FollowUser>(fu => fu.FollowerUser, fu => fu.FollowedUser)
-                .Map<Like>(pl => pl.Post, pl => pl.User)
-                .Map<Post>()
-                .Map<PostTag>(pt => pt.Post, pt => pt.Tag)
-                .Map<PrivateMessage>()
-                .Map<Tag>()
-                .Map<Token>()
-                .Map<User>();
+            var builder = Db.Setup(new TagKidDbProvider());
 
-            Fetchers.RegisterManyToMany<Post, Tag, PostTag>(p => p.Tags,
-                postIds => (pt => postIds.Contains(pt.Post.Id)),
-                () => pt => new ManyToManyItem<Tag> { ParentId = pt.Post.Id, Child = pt.Tag },
-                (post, tags) => post.Tags = tags);
+            builder.Table<Post>()
+                .Table<User>()
+                .Table<Tag>()
+                .Table<PostTag>()
+                .Table<Like>()
+                .Table<FollowUser>();
 
-            MappingProvider.Instance.SetDatabaseMapping(dbMapping);
+            return builder
+                .ManyToMany<Post, PostTag>(p => p.Tags)
+                .BuildFactory();
         }
     }
 }

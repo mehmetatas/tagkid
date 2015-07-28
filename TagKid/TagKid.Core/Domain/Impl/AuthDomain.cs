@@ -16,8 +16,6 @@ namespace TagKid.Core.Domain.Impl
 
         public void Signup(string fullname, string email, string username, string password)
         {
-            // TODO: Validations
-
             var user = _userRepo.GetByEmail(email);
             if (user != null)
             {

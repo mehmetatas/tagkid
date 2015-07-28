@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NHibernate.Linq;
+using DummyOrm.Db;
 using TagKid.Core.Context;
 using TagKid.Core.Exceptions;
 using TagKid.Core.Models.Database;
-using TagKid.Framework.Repository;
 using TagKid.Framework.WebApi;
 using TagKid.Framework.WebApi.Configuration;
 
@@ -13,11 +12,11 @@ namespace TagKid.Core.Providers.Impl
 {
     public class AuthProvider : IAuthProvider
     {
-        private readonly IRepository _repo;
+        private readonly IDb _db;
 
-        public AuthProvider(IRepository repo)
+        public AuthProvider(IDb repo)
         {
-            _repo = repo;
+            _db = repo;
         }
 
         public void AuthRoute(RouteContext ctx)
@@ -41,8 +40,8 @@ namespace TagKid.Core.Providers.Impl
                 throw Errors.Auth_LoginRequired.ToException();
             }
 
-            var token = _repo.Select<Token>()
-                .Fetch(t => t.User)
+            var token = _db.Select<Token>()
+                .Join(t => t.User)
                 .FirstOrDefault(t => t.Guid == tokenGuid);
 
             if (token == null)

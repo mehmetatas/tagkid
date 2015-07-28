@@ -1,9 +1,8 @@
 ﻿using System;
-using TagKid.Framework.Repository;
 
 namespace TagKid.Core.Models.Database
 {
-    public class ConfirmationCode : IEntity
+    public class ConfirmationCode
     {
         public virtual long Id { get; set; }
         public virtual User User { get; set; }

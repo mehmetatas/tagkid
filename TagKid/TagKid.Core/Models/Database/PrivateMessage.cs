@@ -1,9 +1,7 @@
 ﻿using System;
-using TagKid.Framework.Repository;
-
 namespace TagKid.Core.Models.Database
 {
-    public class PrivateMessage : IEntity
+    public class PrivateMessage
     {
         public virtual long Id { get; set; }
         public virtual User ToUser { get; set; }

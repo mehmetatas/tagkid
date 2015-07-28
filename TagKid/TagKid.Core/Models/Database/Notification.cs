@@ -1,9 +1,7 @@
 ﻿using System;
-using TagKid.Framework.Repository;
-
 namespace TagKid.Core.Models.Database
 {
-    public class Notification : IEntity
+    public class Notification
     {
         public virtual long Id { get; set; }
         public virtual User ToUser { get; set; }

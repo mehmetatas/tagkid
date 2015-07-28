@@ -1,9 +1,8 @@
 ﻿using System;
-using TagKid.Framework.Repository;
 
 namespace TagKid.Core.Models.Database
 {
-    public class Comment : IEntity
+    public class Comment
     {
         public virtual long Id { get; set; }
         public virtual Post Post { get; set; }

@@ -36,24 +36,11 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,11 +51,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\CallContext.cs" />
@@ -93,29 +75,7 @@
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogLevel.cs" />
-    <Compile Include="Repository\IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Fetching\ManyToManyFetcher.cs" />
-    <Compile Include="Repository\Fetching\OneToMany.cs" />
-    <Compile Include="Repository\IAdoRepository.cs" />
-    <Compile Include="Repository\NH\NHAutoClassMap.cs" />
-    <Compile Include="Repository\NH\NHAdoRepository.cs" />
-    <Compile Include="Repository\NH\NHSessionFactoryBuilder.cs" />
-    <Compile Include="Repository\NH\NHRepository.cs" />
-    <Compile Include="Repository\NH\NHSession.cs" />
-    <Compile Include="Repository\NH\NHUnitOfWork.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\IUnitOfWork.cs" />
-    <Compile Include="Repository\Mapping\ColumnMapping.cs" />
-    <Compile Include="Repository\Mapping\DatabaseMapping.cs" />
-    <Compile Include="Repository\DbSystem.cs" />
-    <Compile Include="Repository\Mapping\IDatabaseNamingConvention.cs" />
-    <Compile Include="Repository\Mapping\MappingProvider.cs" />
-    <Compile Include="Repository\Mapping\NamingConvention\MySqlNamingConvention.cs" />
-    <Compile Include="Repository\Mapping\NamingConvention\OracleNamingConvention.cs" />
-    <Compile Include="Repository\Mapping\NamingConvention\SqlServerNamingConvention.cs" />
-    <Compile Include="Repository\Mapping\TableMapping.cs" />
-    <Compile Include="Repository\Page.cs" />
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Utils\ML.cs" />
     <Compile Include="Utils\QueryStringUtil.cs" />

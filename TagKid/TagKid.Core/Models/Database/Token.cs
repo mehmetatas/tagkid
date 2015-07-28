@@ -1,9 +1,8 @@
 ﻿using System;
-using TagKid.Framework.Repository;
 
 namespace TagKid.Core.Models.Database
 {
-    public class Token : IEntity
+    public class Token
     {
         public virtual long Id { get; set; }
         public virtual Guid Guid { get; set; }

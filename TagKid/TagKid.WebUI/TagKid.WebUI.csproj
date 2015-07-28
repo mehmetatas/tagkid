@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,21 +7,18 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B0276009-3442-46E7-AAC6-D695AD6B6172}</ProjectGuid>
+    <ProjectGuid>{3757CA7B-606E-453B-942E-DC1C66520BF4}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TagKid.WebUI</RootNamespace>
     <AssemblyName>TagKid.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
-    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,188 +38,654 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Infrastructure">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Razor">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Net.Http">
-    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\DirectivesController.cs" />
-    <Compile Include="Controllers\DialogsController.cs" />
-    <Compile Include="Controllers\LayoutController.cs" />
-    <Compile Include="Controllers\PagesController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Content Include="app\css\app.css" />
+    <Content Include="app\css\apprtl.css" />
+    <Content Include="app\img\bg1.jpg" />
+    <Content Include="app\img\bg2.jpg" />
+    <Content Include="app\img\bg3.jpg" />
+    <Content Include="app\img\dummy.png" />
+    <Content Include="app\img\logo-single.png" />
+    <Content Include="app\img\logo.png" />
+    <Content Include="app\img\mb-sample.jpg" />
+    <Content Include="app\img\user\01.jpg" />
+    <Content Include="app\img\user\02.jpg" />
+    <Content Include="app\img\user\03.jpg" />
+    <Content Include="app\img\user\04.jpg" />
+    <Content Include="app\img\user\05.jpg" />
+    <Content Include="app\img\user\06.jpg" />
+    <Content Include="app\img\user\07.jpg" />
+    <Content Include="app\img\user\08.jpg" />
+    <Content Include="app\js\sparklines\jquery.sparkline.min.js" />
+    <Content Include="app\vendor\angular-knob\src\angular-knob.js" />
+    <Content Include="app\vendor\angularjs-toaster\toaster.css" />
+    <Content Include="app\vendor\angularjs-toaster\toaster.js" />
+    <Content Include="app\vendor\animate.css\animate.min.css" />
+    <Content Include="app\vendor\bootstrap-wysiwyg\bootstrap-wysiwyg.js" />
+    <Content Include="app\vendor\bootstrap-wysiwyg\external\jquery.hotkeys.js" />
+    <Content Include="app\vendor\feather\webfont\feather-webfont\feather.css" />
+    <Content Include="app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.svg" />
+    <Content Include="app\vendor\fontawesome\css\font-awesome.min.css" />
+    <Content Include="app\vendor\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="app\vendor\jquery-knob\dist\jquery.knob.min.js" />
+    <Content Include="app\vendor\moment\min\moment-with-locales.min.js" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.svg" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.svg" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.svg" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.svg" />
+    <Content Include="app\vendor\open-sans-fontface\open-sans.css" />
+    <Content Include="app\vendor\screenfull\dist\screenfull.min.js" />
+    <Content Include="app\vendor\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="app\vendor\weather-icons\css\weather-icons.min.css" />
+    <Content Include="app\vendor\weather-icons\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="app\views\app.html" />
+    <Content Include="app\views\bootstrap-ui.html" />
+    <Content Include="app\views\buttons.html" />
+    <Content Include="app\views\calendar.html" />
+    <Content Include="app\views\charts.html" />
+    <Content Include="app\views\dashboard.html" />
+    <Content Include="app\views\documentation.html" />
+    <Content Include="app\views\form-inputs.html" />
+    <Content Include="app\views\form-validation.html" />
+    <Content Include="app\views\form-wizard.html" />
+    <Content Include="app\views\grid-masonry.html" />
+    <Content Include="app\views\grid.html" />
+    <Content Include="app\views\icons-climacon.html" />
+    <Content Include="app\views\icons-fa.html" />
+    <Content Include="app\views\icons-feather.html" />
+    <Content Include="app\views\icons-weather.html" />
+    <Content Include="app\views\invoice.html" />
+    <Content Include="app\views\mailbox-compose.html" />
+    <Content Include="app\views\mailbox-folder.html" />
+    <Content Include="app\views\mailbox-view-mail.html" />
+    <Content Include="app\views\mailbox.html" />
+    <Content Include="app\views\maps-google.html" />
+    <Content Include="app\views\maps-vector.html" />
+    <Content Include="app\views\notifications.html" />
+    <Content Include="app\views\palette.html" />
+    <Content Include="app\views\panels.html" />
+    <Content Include="app\views\partials\contacts.html" />
+    <Content Include="app\views\partials\footer.html" />
+    <Content Include="app\views\partials\settings.html" />
+    <Content Include="app\views\partials\sidebar.html" />
+    <Content Include="app\views\partials\summary.html" />
+    <Content Include="app\views\partials\top-navbar.html" />
+    <Content Include="app\views\portlets.html" />
+    <Content Include="app\views\price-table.html" />
+    <Content Include="app\views\search.html" />
+    <Content Include="app\views\table-ngtable.html" />
+    <Content Include="app\views\table-responsive.html" />
+    <Content Include="app\views\tasks.html" />
+    <Content Include="app\views\template.html" />
+    <Content Include="app\views\typo.html" />
+    <Content Include="index.html" />
+    <Content Include="singular\app\css\app.css" />
+    <Content Include="singular\app\css\apprtl.css" />
+    <Content Include="singular\app\img\bg1.jpg" />
+    <Content Include="singular\app\img\bg2.jpg" />
+    <Content Include="singular\app\img\bg3.jpg" />
+    <Content Include="singular\app\img\dummy.png" />
+    <Content Include="singular\app\img\logo-single.png" />
+    <Content Include="singular\app\img\logo.png" />
+    <Content Include="singular\app\img\mb-sample.jpg" />
+    <Content Include="singular\app\img\user\01.jpg" />
+    <Content Include="singular\app\img\user\02.jpg" />
+    <Content Include="singular\app\img\user\03.jpg" />
+    <Content Include="singular\app\img\user\04.jpg" />
+    <Content Include="singular\app\img\user\05.jpg" />
+    <Content Include="singular\app\img\user\06.jpg" />
+    <Content Include="singular\app\img\user\07.jpg" />
+    <Content Include="singular\app\img\user\08.jpg" />
+    <Content Include="app\js\app.js" />
+    <Content Include="app\js\base.js" />
+    <Content Include="singular\app\js\app.js" />
+    <Content Include="singular\app\js\base.js" />
+    <Content Include="singular\app\js\gmap\load-google-maps.js" />
+    <Content Include="singular\app\js\modernizr\modernizr.custom.js" />
+    <Content Include="singular\app\js\sparklines\jquery.sparkline.min.js" />
+    <Content Include="singular\app\pages\lock.html" />
+    <Content Include="singular\app\pages\login.html" />
+    <Content Include="singular\app\pages\page-footer.html" />
+    <Content Include="singular\app\pages\page.html" />
+    <Content Include="singular\app\pages\recover.html" />
+    <Content Include="singular\app\pages\register.html" />
+    <Content Include="singular\app\vendor\angular-chosen\angular-chosen.js" />
+    <Content Include="singular\app\vendor\angular-knob\src\angular-knob.js" />
+    <Content Include="singular\app\vendor\angular-ui-calendar\src\calendar.js" />
+    <Content Include="singular\app\vendor\AngularGM\angular-gm.min.js" />
+    <Content Include="singular\app\vendor\angularjs-toaster\toaster.css" />
+    <Content Include="singular\app\vendor\angularjs-toaster\toaster.js" />
+    <Content Include="singular\app\vendor\animate.css\animate.min.css" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloud.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzle.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleMoon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleMoonAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleMoonAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleMoonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleSun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleSunAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleSunAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleSunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFog.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogMoon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogMoonAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogMoonAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogMoonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogSun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogSunAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogSunAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudFogSunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudHailAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudHailAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudHailAltMoon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudHailAltMoonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudHailAltSun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudHailAltSunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudLightning.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudLightningFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudLightningMoon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudLightningMoonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudLightningSun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudLightningSunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudMoon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudMoonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRain.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainMoon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainMoonAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainMoonAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainMoonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainSun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainSunAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainSunAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudRainSunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnow.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowMoon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowMoonAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowMoonAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowMoonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowSun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowSunAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowSunAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSnowSunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudSunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\moon.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\moonFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\moonPhase.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\moonPhaseFull.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\snowflake.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\snowflakeFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sun.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunrise.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunriseAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunriseAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunriseFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunset.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunsetAlt.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunsetAltFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\sunsetFill.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\thermometer0.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\thermometer100.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\thermometer25.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\thermometer50.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\thermometer75.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\tornado.svg" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\wind.svg" />
+    <Content Include="singular\app\vendor\bootstrap-wysiwyg\bootstrap-wysiwyg.js" />
+    <Content Include="singular\app\vendor\bootstrap-wysiwyg\external\jquery.hotkeys.js" />
+    <Content Include="singular\app\vendor\chosen_v1.2.0\chosen-sprite.png" />
+    <Content Include="singular\app\vendor\chosen_v1.2.0\chosen.jquery.min.js" />
+    <Content Include="singular\app\vendor\chosen_v1.2.0\chosen.min.css" />
+    <Content Include="singular\app\vendor\feather\webfont\feather-webfont\feather.css" />
+    <Content Include="singular\app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.svg" />
+    <Content Include="singular\app\vendor\flatdoc\flatdoc.js" />
+    <Content Include="singular\app\vendor\flot-spline\js\jquery.flot.spline.min.js" />
+    <Content Include="singular\app\vendor\flot.tooltip\js\jquery.flot.tooltip.min.js" />
+    <Content Include="singular\app\vendor\Flot\jquery.flot.categories.js" />
+    <Content Include="singular\app\vendor\Flot\jquery.flot.js" />
+    <Content Include="singular\app\vendor\Flot\jquery.flot.pie.js" />
+    <Content Include="singular\app\vendor\Flot\jquery.flot.resize.js" />
+    <Content Include="singular\app\vendor\Flot\jquery.flot.time.js" />
+    <Content Include="singular\app\vendor\fontawesome\css\font-awesome.min.css" />
+    <Content Include="singular\app\vendor\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="singular\app\vendor\fullcalendar\dist\fullcalendar.css" />
+    <Content Include="singular\app\vendor\fullcalendar\dist\fullcalendar.min.js" />
+    <Content Include="singular\app\vendor\fullcalendar\dist\gcal.js" />
+    <Content Include="singular\app\vendor\ika.jvectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="singular\app\vendor\ika.jvectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="singular\app\vendor\ika.jvectormap\jquery-jvectormap-us-mill-en.js" />
+    <Content Include="singular\app\vendor\ika.jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="singular\app\vendor\jquery-knob\dist\jquery.knob.min.js" />
+    <Content Include="singular\app\vendor\jquery-ui\jquery-ui.min.js" />
+    <Content Include="singular\app\vendor\jquery.inputmask\dist\jquery.inputmask.bundle.min.js" />
+    <Content Include="singular\app\vendor\jqueryui-touch-punch\jquery.ui.touch-punch.min.js" />
+    <Content Include="singular\app\vendor\moment\min\moment-with-locales.min.js" />
+    <Content Include="singular\app\vendor\ng-table-export\ng-table-export.js" />
+    <Content Include="singular\app\vendor\ng-table\ng-table.min.css" />
+    <Content Include="singular\app\vendor\ng-table\ng-table.min.js" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.svg" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.svg" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.svg" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.svg" />
+    <Content Include="singular\app\vendor\open-sans-fontface\open-sans.css" />
+    <Content Include="singular\app\vendor\screenfull\dist\screenfull.min.js" />
+    <Content Include="singular\app\vendor\seiyria-bootstrap-slider\dist\bootstrap-slider.min.js" />
+    <Content Include="singular\app\vendor\seiyria-bootstrap-slider\dist\css\bootstrap-slider.min.css" />
+    <Content Include="singular\app\vendor\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="singular\app\vendor\weather-icons\css\weather-icons.min.css" />
+    <Content Include="singular\app\vendor\weather-icons\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="singular\app\views\app.html" />
+    <Content Include="singular\app\views\bootstrap-ui.html" />
+    <Content Include="singular\app\views\buttons.html" />
+    <Content Include="singular\app\views\calendar.html" />
+    <Content Include="singular\app\views\charts.html" />
+    <Content Include="singular\app\views\dashboard.html" />
+    <Content Include="singular\app\views\documentation.html" />
+    <Content Include="singular\app\views\form-inputs.html" />
+    <Content Include="singular\app\views\form-validation.html" />
+    <Content Include="singular\app\views\form-wizard.html" />
+    <Content Include="singular\app\views\grid-masonry.html" />
+    <Content Include="singular\app\views\grid.html" />
+    <Content Include="singular\app\views\icons-climacon.html" />
+    <Content Include="singular\app\views\icons-fa.html" />
+    <Content Include="singular\app\views\icons-feather.html" />
+    <Content Include="singular\app\views\icons-weather.html" />
+    <Content Include="singular\app\views\invoice.html" />
+    <Content Include="singular\app\views\mailbox-compose.html" />
+    <Content Include="singular\app\views\mailbox-folder.html" />
+    <Content Include="singular\app\views\mailbox-view-mail.html" />
+    <Content Include="singular\app\views\mailbox.html" />
+    <Content Include="singular\app\views\maps-google.html" />
+    <Content Include="singular\app\views\maps-vector.html" />
+    <Content Include="singular\app\views\notifications.html" />
+    <Content Include="singular\app\views\palette.html" />
+    <Content Include="singular\app\views\panels.html" />
+    <Content Include="singular\app\views\partials\contacts.html" />
+    <Content Include="singular\app\views\partials\footer.html" />
+    <Content Include="singular\app\views\partials\settings.html" />
+    <Content Include="singular\app\views\partials\sidebar.html" />
+    <Content Include="singular\app\views\partials\summary.html" />
+    <Content Include="singular\app\views\partials\top-navbar.html" />
+    <Content Include="singular\app\views\portlets.html" />
+    <Content Include="singular\app\views\price-table.html" />
+    <Content Include="singular\app\views\search.html" />
+    <Content Include="singular\app\views\table-ngtable.html" />
+    <Content Include="singular\app\views\table-responsive.html" />
+    <Content Include="singular\app\views\tasks.html" />
+    <Content Include="singular\app\views\template.html" />
+    <Content Include="singular\app\views\typo.html" />
+    <Content Include="singular\index.html" />
+    <Content Include="singular\master\gulpfile.js" />
+    <Content Include="singular\master\js\app.init.js" />
+    <Content Include="singular\master\js\modules\apps\CalendarController.js" />
+    <Content Include="singular\master\js\modules\apps\MailboxController.js" />
+    <Content Include="singular\master\js\modules\apps\TasksController.js" />
+    <Content Include="singular\master\js\modules\charts\ChartsController.js" />
+    <Content Include="singular\master\js\modules\charts\FlotChartDirective.js" />
+    <Content Include="singular\master\js\modules\charts\FlotChartOptionsServices.js" />
+    <Content Include="singular\master\js\modules\charts\SparklinesDirective.js" />
+    <Content Include="singular\master\js\modules\common\directives\AnimateEnabledDirective.js" />
+    <Content Include="singular\master\js\modules\common\directives\EmptyAnchorDirective.js" />
+    <Content Include="singular\master\js\modules\common\directives\FullscreenDirective.js" />
+    <Content Include="singular\master\js\modules\common\directives\ResetKeyDirective.js" />
+    <Content Include="singular\master\js\modules\common\directives\ToggleStateDirective.js" />
+    <Content Include="singular\master\js\modules\common\filters\TitleCaseFilter.js" />
+    <Content Include="singular\master\js\modules\common\services\BrowserDetectionService.js" />
+    <Content Include="singular\master\js\modules\common\services\ColorsService.js" />
+    <Content Include="singular\master\js\modules\common\services\SupportService.js" />
+    <Content Include="singular\master\js\modules\common\services\ToggleStateService.js" />
+    <Content Include="singular\master\js\modules\common\services\TouchDragService.js" />
+    <Content Include="singular\master\js\modules\config.js" />
+    <Content Include="singular\master\js\modules\constants.js" />
+    <Content Include="singular\master\js\modules\dashboard\DashboardController.js" />
+    <Content Include="singular\master\js\modules\docs\FlatDocDirective.js" />
+    <Content Include="singular\master\js\modules\forms\BootstrapSliderDirective.js" />
+    <Content Include="singular\master\js\modules\forms\FormInputController.js" />
+    <Content Include="singular\master\js\modules\forms\FormValidationController.js" />
+    <Content Include="singular\master\js\modules\forms\MaskedDirective.js" />
+    <Content Include="singular\master\js\modules\forms\SearchFormController.js" />
+    <Content Include="singular\master\js\modules\forms\WysiwygDirective.js" />
+    <Content Include="singular\master\js\modules\icons\ClimaconDirective.js" />
+    <Content Include="singular\master\js\modules\language\LanguageService.js" />
+    <Content Include="singular\master\js\modules\layout\HeaderNavController.js" />
+    <Content Include="singular\master\js\modules\layout\SettingsController.js" />
+    <Content Include="singular\master\js\modules\layout\SummaryController.js" />
+    <Content Include="singular\master\js\modules\maps\GoogleMapController.js" />
+    <Content Include="singular\master\js\modules\maps\VectorMapController.js" />
+    <Content Include="singular\master\js\modules\maps\VectorMapDirective.js" />
+    <Content Include="singular\master\js\modules\portlets\PortletsDirective.js" />
+    <Content Include="singular\master\js\modules\sidebar\SidebarController.js" />
+    <Content Include="singular\master\js\modules\sidebar\SidebarDirective.js" />
+    <Content Include="singular\master\js\modules\sidebar\SidebarMenuService.js" />
+    <Content Include="singular\master\js\modules\tables\AngularTableController.js" />
+    <Content Include="singular\master\js\modules\tables\CheckAllTableDirective.js" />
+    <Content Include="singular\master\js\modules\tables\ResponsiveTableController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoAlertCtrl.js" />
+    <Content Include="singular\master\js\modules\ui\DemoButtonsController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoCarouselController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoDatepickerController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoPaginationController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoPopoverController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoProgressController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoRatingController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoTimepickerController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoToasterController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoTooltipController.js" />
+    <Content Include="singular\master\js\modules\ui\DemoTypeaheadController.js" />
+    <Content Include="singular\master\js\modules\ui\ModalController.js" />
+    <Content Include="singular\master\js\modules\ui\NotificationController.js" />
+    <Content Include="singular\master\js\modules\ui\ScrollableDirective.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Global.asax" />
-    <Content Include="res\app\css\custom.css" />
-    <Content Include="res\app\js\app.jquery.js" />
-    <Content Include="res\app\js\app.js" />
-    <Content Include="res\app\css\app.css" />
-    <Content Include="res\app\img\a0.jpg" />
-    <Content Include="res\app\js\controllers\dialog\authDialog.js" />
-    <Content Include="res\app\js\controllers\layout\app.js" />
-    <Content Include="res\app\js\controllers\pages\timeline.js" />
-    <Content Include="res\app\js\directives\tagkid-editor.js" />
-    <Content Include="res\app\js\directives\tagkid-post.js" />
-    <Content Include="res\app\js\directives\tagkid-tag-search.js" />
-    <Content Include="res\app\js\services\client\auth.js" />
-    <Content Include="res\app\js\services\client\authDialog.js" />
-    <Content Include="res\app\js\services\client\tagkid.js" />
-    <Content Include="res\app\js\services\server\postService.js" />
-    <Content Include="res\lib\angular-animate\angular-animate.min.js" />
-    <Content Include="res\lib\angular-bootstrap\ui-bootstrap-tpls.min.js" />
-    <Content Include="res\lib\angular-ui-router\angular-ui-router.min.js" />
-    <Content Include="res\lib\angular\angular.min.js" />
-    <Content Include="res\lib\bootstrap\bootstrap.min.css" />
-    <Content Include="res\lib\font-awesome\css\font-awesome.css" />
-    <Content Include="res\lib\font-awesome\css\font-awesome.min.css" />
-    <Content Include="res\lib\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="res\lib\jquery\jquery.min.js" />
-    <Content Include="res\lib\angular-textAngular\textAngular-rangy.min.js" />
-    <Content Include="res\lib\angular-textAngular\textAngular-sanitize.min.js" />
-    <Content Include="res\lib\angular-textAngular\textAngular.css" />
-    <Content Include="res\lib\angular-textAngular\textAngular.min.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
+    <Content Include="singular\app\documentation\readme.md" />
+    <Content Include="singular\app\langs\en.json" />
+    <Content Include="singular\app\langs\es.json" />
+    <Content Include="singular\app\langs\pt.json" />
+    <Content Include="singular\app\langs\zh-cn.json" />
+    <Content Include="singular\app\vendor\animated-climacons\svgs\cloudDrizzleAlt" />
+    <Content Include="singular\app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.eot" />
+    <Content Include="singular\app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.ttf" />
+    <Content Include="singular\app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.woff" />
+    <Content Include="singular\app\vendor\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="singular\app\vendor\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="singular\app\vendor\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="singular\app\vendor\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.eot" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.ttf" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.woff" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.eot" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.ttf" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.woff" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.eot" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.ttf" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.woff" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.eot" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.ttf" />
+    <Content Include="singular\app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.woff" />
+    <Content Include="singular\app\vendor\weather-icons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="singular\app\vendor\weather-icons\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="singular\app\vendor\weather-icons\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="singular\app\vendor\weather-icons\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="singular\master\bower.json" />
+    <Content Include="singular\master\jade\index.jade" />
+    <Content Include="singular\master\jade\pages\lock.jade" />
+    <Content Include="singular\master\jade\pages\login.jade" />
+    <Content Include="singular\master\jade\pages\page-footer.jade" />
+    <Content Include="singular\master\jade\pages\page.jade" />
+    <Content Include="singular\master\jade\pages\recover.jade" />
+    <Content Include="singular\master\jade\pages\register.jade" />
+    <Content Include="singular\master\jade\views\app.jade" />
+    <Content Include="singular\master\jade\views\bootstrap-ui.jade" />
+    <Content Include="singular\master\jade\views\buttons.jade" />
+    <Content Include="singular\master\jade\views\calendar.jade" />
+    <Content Include="singular\master\jade\views\charts.jade" />
+    <Content Include="singular\master\jade\views\dashboard.jade" />
+    <Content Include="singular\master\jade\views\documentation.jade" />
+    <Content Include="singular\master\jade\views\form-inputs.jade" />
+    <Content Include="singular\master\jade\views\form-validation.jade" />
+    <Content Include="singular\master\jade\views\form-wizard.jade" />
+    <Content Include="singular\master\jade\views\grid-masonry.jade" />
+    <Content Include="singular\master\jade\views\grid.jade" />
+    <Content Include="singular\master\jade\views\icons-climacon.jade" />
+    <Content Include="singular\master\jade\views\icons-fa.jade" />
+    <Content Include="singular\master\jade\views\icons-feather.jade" />
+    <Content Include="singular\master\jade\views\icons-weather.jade" />
+    <Content Include="singular\master\jade\views\invoice.jade" />
+    <Content Include="singular\master\jade\views\mailbox-compose.jade" />
+    <Content Include="singular\master\jade\views\mailbox-folder.jade" />
+    <Content Include="singular\master\jade\views\mailbox-view-mail.jade" />
+    <Content Include="singular\master\jade\views\mailbox.jade" />
+    <Content Include="singular\master\jade\views\maps-google.jade" />
+    <Content Include="singular\master\jade\views\maps-vector.jade" />
+    <Content Include="singular\master\jade\views\notifications.jade" />
+    <Content Include="singular\master\jade\views\palette.jade" />
+    <Content Include="singular\master\jade\views\panels.jade" />
+    <Content Include="singular\master\jade\views\partials\contacts.jade" />
+    <Content Include="singular\master\jade\views\partials\footer.jade" />
+    <Content Include="singular\master\jade\views\partials\settings.jade" />
+    <Content Include="singular\master\jade\views\partials\sidebar.jade" />
+    <Content Include="singular\master\jade\views\partials\summary.jade" />
+    <Content Include="singular\master\jade\views\partials\top-navbar.jade" />
+    <Content Include="singular\master\jade\views\portlets.jade" />
+    <Content Include="singular\master\jade\views\price-table.jade" />
+    <Content Include="singular\master\jade\views\search.jade" />
+    <Content Include="singular\master\jade\views\table-ngtable.jade" />
+    <Content Include="singular\master\jade\views\table-responsive.jade" />
+    <Content Include="singular\master\jade\views\tasks.jade" />
+    <Content Include="singular\master\jade\views\template.jade" />
+    <Content Include="singular\master\jade\views\typo.jade" />
+    <Content Include="singular\master\js\custom\PUT-HERE-YOUR-OWN-JS" />
+    <Content Include="singular\master\less\app.less" />
+    <Content Include="singular\master\less\app\alerts.less" />
+    <Content Include="singular\master\less\app\animate.less" />
+    <Content Include="singular\master\less\app\bootstrap-reset.less" />
+    <Content Include="singular\master\less\app\bootstrap-variables.less" />
+    <Content Include="singular\master\less\app\button-extra.less" />
+    <Content Include="singular\master\less\app\button-switch.less" />
+    <Content Include="singular\master\less\app\calendar.less" />
+    <Content Include="singular\master\less\app\charts.less" />
+    <Content Include="singular\master\less\app\chat.less" />
+    <Content Include="singular\master\less\app\datepicker.less" />
+    <Content Include="singular\master\less\app\docs.less" />
+    <Content Include="singular\master\less\app\dropdown-extra.less" />
+    <Content Include="singular\master\less\app\feather-icons.less" />
+    <Content Include="singular\master\less\app\font.less" />
+    <Content Include="singular\master\less\app\form-extras.less" />
+    <Content Include="singular\master\less\app\form-input.less" />
+    <Content Include="singular\master\less\app\form-switch.less" />
+    <Content Include="singular\master\less\app\form-validation.less" />
+    <Content Include="singular\master\less\app\form-wizard.less" />
+    <Content Include="singular\master\less\app\gmap.less" />
+    <Content Include="singular\master\less\app\grid-table.less" />
+    <Content Include="singular\master\less\app\layout.less" />
+    <Content Include="singular\master\less\app\loading-bar.less" />
+    <Content Include="singular\master\less\app\mailbox.less" />
+    <Content Include="singular\master\less\app\masonry-grid.less" />
+    <Content Include="singular\master\less\app\media-queries.less" />
+    <Content Include="singular\master\less\app\palette.less" />
+    <Content Include="singular\master\less\app\panels-extra.less" />
+    <Content Include="singular\master\less\app\placeholder.less" />
+    <Content Include="singular\master\less\app\plugins.less" />
+    <Content Include="singular\master\less\app\points.less" />
+    <Content Include="singular\master\less\app\portlets.less" />
+    <Content Include="singular\master\less\app\print.less" />
+    <Content Include="singular\master\less\app\progress-extra.less" />
+    <Content Include="singular\master\less\app\row-extra.less" />
+    <Content Include="singular\master\less\app\settings.less" />
+    <Content Include="singular\master\less\app\sidebar.less" />
+    <Content Include="singular\master\less\app\slim-scroll.less" />
+    <Content Include="singular\master\less\app\table-ngtable.less" />
+    <Content Include="singular\master\less\app\table-responsive.less" />
+    <Content Include="singular\master\less\app\tasks.less" />
+    <Content Include="singular\master\less\app\timeline.less" />
+    <Content Include="singular\master\less\app\toaster.less" />
+    <Content Include="singular\master\less\app\topnavbar.less" />
+    <Content Include="singular\master\less\app\transition" />
+    <Content Include="singular\master\less\app\typeahead.less" />
+    <Content Include="singular\master\less\app\utils-background.less" />
+    <Content Include="singular\master\less\app\utils.less" />
+    <Content Include="singular\master\less\app\vector-map.less" />
+    <Content Include="singular\master\less\bootstrap\.csscomb.json" />
+    <Content Include="singular\master\less\bootstrap\.csslintrc" />
+    <Content Include="singular\master\less\bootstrap\alerts.less" />
+    <Content Include="singular\master\less\bootstrap\badges.less" />
+    <Content Include="singular\master\less\bootstrap\bootstrap.less" />
+    <Content Include="singular\master\less\bootstrap\breadcrumbs.less" />
+    <Content Include="singular\master\less\bootstrap\button-groups.less" />
+    <Content Include="singular\master\less\bootstrap\buttons.less" />
+    <Content Include="singular\master\less\bootstrap\carousel.less" />
+    <Content Include="singular\master\less\bootstrap\close.less" />
+    <Content Include="singular\master\less\bootstrap\code.less" />
+    <Content Include="singular\master\less\bootstrap\component-animations.less" />
+    <Content Include="singular\master\less\bootstrap\dropdowns.less" />
+    <Content Include="singular\master\less\bootstrap\forms.less" />
+    <Content Include="singular\master\less\bootstrap\glyphicons.less" />
+    <Content Include="singular\master\less\bootstrap\grid.less" />
+    <Content Include="singular\master\less\bootstrap\input-groups.less" />
+    <Content Include="singular\master\less\bootstrap\jumbotron.less" />
+    <Content Include="singular\master\less\bootstrap\labels.less" />
+    <Content Include="singular\master\less\bootstrap\list-group.less" />
+    <Content Include="singular\master\less\bootstrap\media.less" />
+    <Content Include="singular\master\less\bootstrap\mixins.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\alerts.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\background-variant.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\border-radius.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\buttons.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\center-block.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\clearfix.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\forms.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\gradients.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\grid-framework.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\grid.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\hide-text.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\image.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\labels.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\list-group.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\nav-divider.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\opacity.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\pagination.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\panels.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\progress-bar.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\reset-filter.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\resize.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\size.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\tab-focus.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\table-row.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\text-overflow.less" />
+    <Content Include="singular\master\less\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="singular\master\less\bootstrap\modals.less" />
+    <Content Include="singular\master\less\bootstrap\navbar.less" />
+    <Content Include="singular\master\less\bootstrap\navs.less" />
+    <Content Include="singular\master\less\bootstrap\normalize.less" />
+    <Content Include="singular\master\less\bootstrap\pager.less" />
+    <Content Include="singular\master\less\bootstrap\pagination.less" />
+    <Content Include="singular\master\less\bootstrap\panels.less" />
+    <Content Include="singular\master\less\bootstrap\popovers.less" />
+    <Content Include="singular\master\less\bootstrap\print.less" />
+    <Content Include="singular\master\less\bootstrap\progress-bars.less" />
+    <Content Include="singular\master\less\bootstrap\responsive-embed.less" />
+    <Content Include="singular\master\less\bootstrap\responsive-utilities.less" />
+    <Content Include="singular\master\less\bootstrap\scaffolding.less" />
+    <Content Include="singular\master\less\bootstrap\tables.less" />
+    <Content Include="singular\master\less\bootstrap\theme.less" />
+    <Content Include="singular\master\less\bootstrap\thumbnails.less" />
+    <Content Include="singular\master\less\bootstrap\tooltip.less" />
+    <Content Include="singular\master\less\bootstrap\type.less" />
+    <Content Include="singular\master\less\bootstrap\utilities.less" />
+    <Content Include="singular\master\less\bootstrap\variables.less" />
+    <Content Include="singular\master\less\bootstrap\wells.less" />
+    <Content Include="singular\master\package.json" />
+    <Content Include="singular\master\vendor.json" />
+    <Content Include="singular\server\calendar\external-calendar.json" />
+    <Content Include="singular\server\chart\area.json" />
+    <Content Include="singular\server\chart\bar.json" />
+    <Content Include="singular\server\chart\barstacked.json" />
+    <Content Include="singular\server\chart\donut.json" />
+    <Content Include="singular\server\chart\line-single.json" />
+    <Content Include="singular\server\chart\line.json" />
+    <Content Include="singular\server\chart\pie.json" />
+    <Content Include="singular\server\chart\spline.json" />
+    <Content Include="singular\server\sidebar\sidebar-items.json" />
+    <Content Include="server\calendar\external-calendar.json" />
+    <Content Include="server\chart\area.json" />
+    <Content Include="server\chart\bar.json" />
+    <Content Include="server\chart\barstacked.json" />
+    <Content Include="server\chart\donut.json" />
+    <Content Include="server\chart\line-single.json" />
+    <Content Include="server\chart\line.json" />
+    <Content Include="server\chart\pie.json" />
+    <Content Include="server\chart\spline.json" />
+    <Content Include="server\sidebar\sidebar-items.json" />
+    <Content Include="app\langs\en.json" />
+    <Content Include="app\langs\es.json" />
+    <Content Include="app\langs\pt.json" />
+    <Content Include="app\langs\zh-cn.json" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.eot" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.ttf" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Italic\OpenSans-Italic.woff" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.eot" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.ttf" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Light\OpenSans-Light.woff" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.eot" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.ttf" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Regular\OpenSans-Regular.woff" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.eot" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.ttf" />
+    <Content Include="app\vendor\open-sans-fontface\fonts\Semibold\OpenSans-Semibold.woff" />
+    <Content Include="app\vendor\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="app\vendor\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="app\vendor\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="app\vendor\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="app\vendor\weather-icons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="app\vendor\weather-icons\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="app\vendor\weather-icons\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="app\vendor\weather-icons\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.eot" />
+    <Content Include="app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.ttf" />
+    <Content Include="app\vendor\feather\webfont\feather-webfont\fonts\feather-webfont.woff" />
+    <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
+    </None>
+    <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config" />
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Dialogs\Auth.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Layout\Aside.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Layout\Header.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Layout\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Layout\Main.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Layout\Nav.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Pages\Timeline.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="res\lib\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="res\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="res\lib\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="res\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="res\lib\font-awesome\fonts\FontAwesome.otf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TagKid.Core\TagKid.Core.csproj">
-      <Project>{98de4062-5774-4e9f-ad95-d6c6cd77023f}</Project>
-      <Name>TagKid.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TagKid.Framework\TagKid.Framework.csproj">
-      <Project>{c2276bf3-7c94-4eff-9deb-b45dbf7845ec}</Project>
-      <Name>TagKid.Framework</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="res\app\js\app.routes.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Directives\Post.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Directives\Editor.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Directives\TagSearch.cshtml" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
-  </Target>
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50600</DevelopmentServerPort>
+          <DevelopmentServerPort>50442</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50000/</IISUrl>
+          <IISUrl>http://local.tagkid.com/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -238,5 +700,6 @@
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-  </Target> -->
+  </Target>
+  -->
 </Project>

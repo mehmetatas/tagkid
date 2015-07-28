@@ -1,24 +1,24 @@
-﻿using TagKid.Core.Providers;
-using TagKid.Framework.Repository;
+﻿using DummyOrm.Db;
+using TagKid.Core.Providers;
 using TagKid.Framework.WebApi;
 
 namespace TagKid.Core.Service.Interceptors
 {
     public class TagKidActionInterceptorBuilder : IActionInterceptorBuilder
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IDbFactory _dbFactory;
         private readonly IAuthProvider _authProvider;
 
-        public TagKidActionInterceptorBuilder(IUnitOfWork uow, IAuthProvider authProvider)
+        public TagKidActionInterceptorBuilder(IDbFactory uow, IAuthProvider authProvider)
         {
-            _uow = uow;
+            _dbFactory = uow;
             _authProvider = authProvider;
         }
 
         public IActionInterceptor Build(RouteContext context)
         {
             return new TagKidActionInterceptor(
-                new UnitOfWorkInterceptor(_uow),
+                new UnitOfWorkInterceptor(_dbFactory),
                 new SecurityInterceptor(_authProvider));
         }
     }
