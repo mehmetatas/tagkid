@@ -357,7 +357,7 @@ html {
 }
 body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.52857143;
   color: #585f69;
   background-color: #f7f9fb;
@@ -9905,7 +9905,7 @@ fieldset[disabled] .calendar-app .fc-button.active {
   overflow: hidden;
   vertical-align: bottom;
   padding: 0;
-  max-width: 28ch;
+  max-width: 50ch;
 }
 .mb-mails .mb-mail-preview {
   clear: both;

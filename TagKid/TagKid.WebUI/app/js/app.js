@@ -631,6 +631,21 @@ App.controller('MailboxFolderController', ["$scope", "$stateParams", "$state", "
     // Replace this code with a request to your mails API
     // It expects to receive the following object format
 
+      var reasons = [
+      {},
+      {
+          reason: 'Mehmet Ataş Favorited',
+          reasonClass: 'fa-star'
+      },
+      {
+          reason: 'Seda Çetinkata Forwarded',
+          reasonClass: 'fa-mail-forward'
+      },
+      {
+          reason: 'Volkan Köseoğlu Commented',
+          reasonClass: 'fa-comment-o'
+      }];
+
     // only populate inbox for demo
     $scope.mails['inbox'] = [
       {
@@ -657,6 +672,11 @@ App.controller('MailboxFolderController', ["$scope", "$stateParams", "$state", "
       m.from.avatar = 'app/img/user/0'+(Math.floor((Math.random() * 8))+1)+'.jpg';
       m.time = moment().subtract(i,'hours').format('hh:mm a');
       m.id = i + 1;
+
+      var reason = reasons[(Math.floor((Math.random() * (reasons.length))))];
+      m.reason = reason.reason;
+      m.reasonClass = reason.reasonClass;
+
       $scope.mails['inbox'].push(m);
     }
     $scope.mails['inbox'][0].unread=true;
