@@ -1,25 +1,44 @@
 ﻿<!DOCTYPE html>
-<!--[if IE 9 ]>    <html class="ie9" lang="en" data-ng-app="singular"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en" data-ng-app="singular">
-<!--<![endif]-->
-
+<html lang="en" data-ng-app="app">
 <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-   <meta name="description" content="{{app.description}}">
-   <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
-   <title data-ng-bind="pageTitle()">tagkid.com</title>
-   <!-- App CSS-->
-   <link rel="stylesheet" href="app/css/app.css" data-ng-if="!app.layout.isRTL">
-   <link rel="stylesheet" href="app/css/apprtl.css" data-ng-if="app.layout.isRTL">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
+    <title>pasbox.com</title>
+
+    <link rel="stylesheet" href="app/css/app.css">
 </head>
+<body class="layout-fixed" data-ng-class="{ 'aside-collapsed' : app.sidebar.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'in-app': $state.includes('app')}">
+    <div data-ui-view="" data-autoscroll="false" class="app-container ng-fadeInLeft2"></div>
+    
+    <!-- lib -->
+    <script src="lib/js/base.js"></script>
+    
+    <!-- app -->
+    <script src="app/js/app.init.js"></script>
+    <script src="app/js/app.config.js"></script>
+    <script src="app/js/app.constants.js"></script>
+    <script src="app/js/app.ctrl.js"></script>
 
-<body data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.sidebar.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'aside-slide' : app.sidebar.slide, 'in-app': $state.includes('app')}">
-   <div data-ui-view="" data-autoscroll="false" data-ng-class="app.viewAnimation" class="app-container"></div>
-   <!-- App Scripts-->
-   <script src="app/js/base.js"></script>
-   <script src="app/js/app.js"></script>
+    <!-- controllers -->
+    <script src="app/js/controllers/sidebarCtrl.js"></script>
+    <script src="app/js/controllers/headerCtrl.js"></script>
+    <script src="app/js/controllers/searchFormCtrl.js"></script>
+    <script src="app/js/controllers/mailboxCtrl.js"></script>
+
+    <!-- directives -->
+    <script src="app/js/directives/sideBar.js"></script>
+    <script src="app/js/directives/href.js"></script>
+    <script src="app/js/directives/toggleState.js"></script>
+    <script src="app/js/directives/scrollable.js"></script>
+
+    <!-- filters -->
+    <script src="app/js/filters/titlecase.js"></script>
+
+    <!-- services -->
+    <script src="app/js/services/toggleStateService.js"></script>
+    <script src="app/js/services/support.js"></script>
+    <script src="app/js/services/sidebarMenu.js"></script>
 </body>
-
 </html>

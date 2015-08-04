@@ -357,7 +357,7 @@ html {
 }
 body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.52857143;
   color: #585f69;
   background-color: #f7f9fb;
@@ -6000,43 +6000,7 @@ input[type="number"] {
 .media-heading a {
   text-decoration: none;
 }
-/* Open Sans @font-face kit */
-/* BEGIN Light */
-@font-face {
-  font-family: 'Open Sans';
-  src: url('../vendor/open-sans-fontface/fonts/Light/OpenSans-Light.eot');
-  src: url('../vendor/open-sans-fontface/fonts/Light/OpenSans-Light.eot?#iefix') format('embedded-opentype'), url('../vendor/open-sans-fontface/fonts/Light/OpenSans-Light.woff') format('woff'), url('../vendor/open-sans-fontface/fonts/Light/OpenSans-Light.ttf') format('truetype'), url('../vendor/open-sans-fontface/fonts/Light/OpenSans-Light.svg#OpenSansLight') format('svg');
-  font-weight: 300;
-  font-style: normal;
-}
-/* END Light */
-/* BEGIN Regular */
-@font-face {
-  font-family: 'Open Sans';
-  src: url('../vendor/open-sans-fontface/fonts/Regular/OpenSans-Regular.eot');
-  src: url('../vendor/open-sans-fontface/fonts/Regular/OpenSans-Regular.eot?#iefix') format('embedded-opentype'), url('../vendor/open-sans-fontface/fonts/Regular/OpenSans-Regular.woff') format('woff'), url('../vendor/open-sans-fontface/fonts/Regular/OpenSans-Regular.ttf') format('truetype'), url('../vendor/open-sans-fontface/fonts/Regular/OpenSans-Regular.svg#OpenSansRegular') format('svg');
-  font-weight: 400;
-  font-style: normal;
-}
-/* END Regular */
-/* BEGIN Italic */
-@font-face {
-  font-family: 'Open Sans';
-  src: url('../vendor/open-sans-fontface/fonts/Italic/OpenSans-Italic.eot');
-  src: url('../vendor/open-sans-fontface/fonts/Italic/OpenSans-Italic.eot?#iefix') format('embedded-opentype'), url('../vendor/open-sans-fontface/fonts/Italic/OpenSans-Italic.woff') format('woff'), url('../vendor/open-sans-fontface/fonts/Italic/OpenSans-Italic.ttf') format('truetype'), url('../vendor/open-sans-fontface/fonts/Italic/OpenSans-Italic.svg#OpenSansItalic') format('svg');
-  font-weight: 400;
-  font-style: italic;
-}
-/* END Italic */
-/* BEGIN Semibold */
-@font-face {
-  font-family: 'Open Sans';
-  src: url('../vendor/open-sans-fontface/fonts/Semibold/OpenSans-Semibold.eot');
-  src: url('../vendor/open-sans-fontface/fonts/Semibold/OpenSans-Semibold.eot?#iefix') format('embedded-opentype'), url('../vendor/open-sans-fontface/fonts/Semibold/OpenSans-Semibold.woff') format('woff'), url('../vendor/open-sans-fontface/fonts/Semibold/OpenSans-Semibold.ttf') format('truetype'), url('../vendor/open-sans-fontface/fonts/Semibold/OpenSans-Semibold.svg#OpenSansSemibold') format('svg');
-  font-weight: 600;
-  font-style: normal;
-}
-/* END Semibold */
+
 /* ========================================================================
    Component: layout.less
  ========================================================================== */
@@ -6103,7 +6067,7 @@ body {
 @media only screen and (min-width: 768px) {
   .app-container > section,
   .app-container > footer {
-    margin-left: 0;
+    margin-left: 220px;
   }
 }
 .app {
@@ -6162,7 +6126,7 @@ body {
   }
   .no-csstransforms3d .aside-toggled .app-container > section,
   .no-csstransforms3d .aside-toggled .app-container > footer {
-    margin-left: 0;
+    margin-left: 220px;
   }
   .no-csstransforms3d .aside-toggled .app-container > aside {
     margin-left: 0;
@@ -6192,8 +6156,8 @@ body {
   }
   .csstransforms3d .aside-toggled .app-container > section,
   .csstransforms3d .aside-toggled .app-container > footer {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(220px, 0, 0);
+    transform: translate3d(220px, 0, 0);
   }
   .csstransforms3d .aside-toggled .app-container > aside {
     -webkit-transform: translate3d(0, 0, 0);
@@ -6209,10 +6173,10 @@ body {
   }
   .aside-collapsed .app-container > section,
   .aside-collapsed .app-container > footer {
-    margin-left: 0;
+    margin-left: 65px;
   }
 }
-@media (max-width: 1140px) {
+@media (max-width: 1240px) {
   .layout-fixed.aside-toggled {
     overflow-y: hidden;
   }
@@ -6238,7 +6202,7 @@ body {
   padding-top: 60px;
 }
 .layout-boxed .app-container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -6247,7 +6211,7 @@ body {
 }
 .layout-boxed .app-container > header {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
 }
 .layout-boxed.in-app .app-container {
   box-shadow: 0 0 13px rgba(0, 0, 0, 0.25);
@@ -9905,7 +9869,7 @@ fieldset[disabled] .calendar-app .fc-button.active {
   overflow: hidden;
   vertical-align: bottom;
   padding: 0;
-  max-width: 50ch;
+  max-width: 28ch;
 }
 .mb-mails .mb-mail-preview {
   clear: both;
