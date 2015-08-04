@@ -22,7 +22,7 @@
 
 
         // default route to dashboard
-        $urlRouterProvider.otherwise('/page/login');
+        $urlRouterProvider.otherwise('/app/mailbox/');
 
         // 
         // app Routes
@@ -52,6 +52,8 @@
                     url: '/lock',
                     templateUrl: basepath('pages/lock.html')
                 })
+                // App
+                // ----------------------------------- 
                 .state('app', {
                     url: '/app',
                     abstract: true,
@@ -62,41 +64,17 @@
                 // Mailbox
                 // ----------------------------------- 
                 .state('app.mailbox', {
-                    url: '/mailbox',
-                    abstract: true,
+                    url: '/mailbox/:folder',
                     templateUrl: basepath('mailbox.html'),
                     resolve: requireDeps('moment')
                 })
-                .state('app.mailbox.folder', {
-                    url: '/folder',
-                    abstract: true
-                })
-                .state('app.mailbox.folder.list', {
-                    url: '/:folder',
-                    views: {
-                        'container@app.mailbox': {
-                            templateUrl: basepath('mailbox-folder.html')
-                        }
-                    }
-                })
-                .state('app.mailbox.folder.list.view', {
+                .state('app.mailbox.view', {
                     url: '/:id',
                     views: {
-                        'mails@app.mailbox.folder.list': {
+                        'mails@app.mailbox': {
                             templateUrl: basepath('mailbox-view-mail.html')
                         }
-                    },
-                    resolve: requireDeps('wysiwyg')
-                })
-                .state('app.mailbox.compose', {
-                    url: '/compose',
-                    views: {
-                        'container@app.mailbox': {
-                            templateUrl: basepath('mailbox-compose.html')
-                        }
-                    },
-                    controller: 'NullController',
-                    resolve: requireDeps('wysiwyg')
+                    }
                 })
             // 
             // CUSTOM RESOLVE FUNCTION

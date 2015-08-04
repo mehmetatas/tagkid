@@ -60,7 +60,6 @@
     <Content Include="app\css\app.css" />
     <Content Include="app\html\app.html" />
     <Content Include="app\html\mailbox-compose.html" />
-    <Content Include="app\html\mailbox-folder.html" />
     <Content Include="app\html\mailbox-view-mail.html" />
     <Content Include="app\html\mailbox.html" />
     <Content Include="app\html\pages\lock.html" />
@@ -69,12 +68,9 @@
     <Content Include="app\html\pages\page.html" />
     <Content Include="app\html\pages\recover.html" />
     <Content Include="app\html\pages\register.html" />
-    <Content Include="app\html\partials\contacts.html" />
     <Content Include="app\html\partials\footer.html" />
     <Content Include="app\html\partials\header.html" />
-    <Content Include="app\html\partials\settings.html" />
     <Content Include="app\html\partials\sidebar.html" />
-    <Content Include="app\html\partials\summary.html" />
     <Content Include="app\img\bg1.jpg" />
     <Content Include="app\img\bg2.jpg" />
     <Content Include="app\img\bg3.jpg" />

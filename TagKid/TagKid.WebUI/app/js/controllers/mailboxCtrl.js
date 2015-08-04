@@ -63,7 +63,7 @@ app.controller('MailboxFolderController', ["$scope", "$stateParams", "$state", "
         // toggle mail open state
         toggleMailPanel(true);
         // load the mail into the view
-        $state.go('app.mailbox.folder.list.view', { id: id });
+        $state.go('app.mailbox.view', { id: id });
         // close the folder (when collapsed)
         $scope.$emit('closeFolderNav');
         // mark mail as read

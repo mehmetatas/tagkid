@@ -118,8 +118,8 @@
       // mailbox folder
       $scope.mailboxFolders = [
         { name: 'inbox', count: 3, icon: 'fa-inbox' },
-        { name: 'sent', count: 8, icon: 'fa-paper-plane-o' },
+        { name: 'suggested', count: 8, icon: 'fa-lightbulb-o' },
+        { name: 'favorited', count: 12, icon: 'fa-star-o' },
         { name: 'draft', count: 1, icon: 'fa-edit' },
-        { name: 'trash', count: 12, icon: 'fa-trash-o' }
       ];
   }]);

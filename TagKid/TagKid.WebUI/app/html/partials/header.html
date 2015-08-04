@@ -20,7 +20,7 @@
     </div>
     <!-- END navbar header-->
     <!-- START Nav wrapper-->
-    <div collapse="headerMenuCollapsed" class="nav-wrapper collapse navbar-collapse">
+    <div collapse="headerMenuCollapsed" class="nav-wrapper collapse navbar-collapse" style="font-size: 1.1em">
         <!-- START Left navbar-->
         <ul class="nav navbar-nav">
             <li>
@@ -36,10 +36,10 @@
             <div class="form-group">
                 <div data-ng-controller="searchFormCtrl" class="input-group">
                     <span class="input-group-addon">
-                        <em class="icon-search"></em>
+                        <em class="fa fa-search"></em>
                     </span>
-                    <input type="text" data-ng-model="routeSelected" typeahead="state for state in states | filter:$viewValue | limitTo:8" placeholder="{{ 'topbar.search.PLACEHOLDER' | translate }}" typeahead-on-select="onRouteSelect($item, $model, $label)"
-                           class="form-control" />
+                    <input type="text" data-ng-model="routeSelected" placeholder="@username, tag, title" typeahead="state for state in states | filter:$viewValue | limitTo:8" typeahead-on-select="onRouteSelect($item, $model, $label)"
+                           class="form-control bg-light" />
                 </div>
             </div>
             <button type="submit" class="hidden btn btn-default">Submit</button>
@@ -51,10 +51,9 @@
             <li class="dropdown dropdown-list">
                 <a href="#" dropdown-animate="" class="dropdown-toggle">
                     <div class="point-pin">
-                        <em class="icon-mail fa-fw"></em>
-                        <div class="point point-success point-lg"></div>
+                        <em class="fa fa-bell-o"></em>
                     </div>
-                    <span class="visible-xs-inline ml">View Alerts</span>
+                    <span class="ml">Notifications</span>
                 </a>
                 <!-- START Dropdown menu-->
                 <ul offcanvas-dropdown="" class="dropdown-menu fadeInLeft2 animated">
@@ -183,25 +182,12 @@
                     </li>
                 </ul>
             </li>
-            <!-- Fullscreen (only desktops)-->
             <li class="visible-lg">
-                <a href="#" toggle-fullscreen="toggle-fullscreen">
-                    <em class="fa fa-expand"></em>
-                </a>
-            </li>
-            <li class="visible-lg">
-                <a href="#" ng-click="app.layout.isBoxed=!app.layout.isBoxed">
+                <a href="#" ng-click="app.layout.isBoxed =! app.layout.isBoxed">
                     <em class="fa fa-arrows-h"></em>
+                    <span class="ml" ng-bind="app.layout.isBoxed ? 'Expand':'Box'"></span>
                 </a>
             </li>
-            <!-- START lock screen-->
-            <li>
-                <a ui-sref="page.lock" title="Lock screen">
-                    <em class="icon-lock fa-fw"></em>
-                    <span class="visible-xs-inline ml">Lock Screen</span>
-                </a>
-            </li>
-            <!-- END lock screen-->
             <!-- END Alert menu-->
         </ul>
         <!-- END Right Navbar-->

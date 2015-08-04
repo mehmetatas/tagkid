@@ -1,53 +1,44 @@
 <!-- START Sidebar-->
 <div data-ng-controller="sidebarCtrl" class="sidebar-wrapper">
-   <side-bar>
-      <div class="sidebar-nav">
-         <!-- START sidebar buttons-->
-         <div class="sidebar-buttons">
-            <div compile="app/views/partials/summary.html" class="btn-sidebar">
-               <img data-ng-src="{{user.picture}}" alt="" class="mb center-block img-circle img-responsive thumb64" />
-               <div class="text-center">
-                  <h4 class="text-bold m0">{{user.name}}</h4>
-                  <small>{{user.job}}</small>
-               </div>
+    <side-bar>
+        <div class="sidebar-nav">
+            <!-- START sidebar buttons-->
+            <div class="sidebar-buttons">
+                <a href="#">
+                    <img data-ng-src="{{user.picture}}" alt="" class="mb center-block img-circle img-responsive thumb64" />
+                    <div class="text-center">
+                        <h4 class="text-bold m0">{{user.name}}</h4>
+                        <small>{{user.job}}</small>
+                    </div>
+                </a>
+                <a href="#" class="text-sm btn btn-sidebar pull-left">
+                    <em class="fa fa-gear fa-2x"></em>
+                </a>
             </div>
-            <div class="text-center">
-               <div class="text-muted mt-sm clearfix">
-                  <a href="#" compile="app/views/partials/contacts.html" class="text-sm btn-sidebar pull-left">
-                     <em class="fa fa-fw"></em>
-                  </a>
-                  <a href="#" compile="app/views/partials/settings.html" class="text-sm btn-sidebar pull-right">
-                     <em class="fa fa-fw"></em>
-                  </a>
-               </div>
-            </div>
-         </div>
-          <!-- END sidebar buttons-->
-          <hr class="hidden-collapsed" />
-          <ul class="nav">
-              <li>
-                  <div class="clearfix mb-lg">
-                      <a ui-sref="app.mailbox.compose" class="btn btn-info visible-lg visible-xs-inline-block visible-sm-inline-block visible-md-inline-block">
-                          <em class="icon-mail fa-fw"></em>
-                          <span>Compose</span>
-                      </a>
-                  </div>
-              </li>
-              <li>
-                  <div class="mb-boxes">
-                      <div class="panel panel-default m0">
-                          <div class="list-group">
-                              <a ui-sref="app.mailbox.folder.list({folder: folder.name})" ui-sref-opts="{notify: true}" ui-sref-active="active" data-ng-repeat="folder in mailboxFolders" class="list-group-item">
-                                  <span class="label label-primary pull-right">{{ folder.count }}</span>
-                                  <em data-ng-class="folder.icon" class="fa fa-fw fa-lg"></em>
-                                  <span>{{ folder.name | titlecase }}</span>
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-              </li>
-          </ul>
-      </div>
-   </side-bar>
+            <!-- END sidebar buttons-->
+            <hr class="hidden-collapsed" />
+            <ul class="nav">
+                <li>
+                    <div class="clearfix mb-lg">
+                        <a ui-sref="app.mailbox.compose" class="btn btn-info visible-lg visible-xs-inline-block visible-sm-inline-block visible-md-inline-block">
+                            <em class="icon-mail fa-fw"></em>
+                            <span>Compose</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="panel panel-default m0">
+                        <div class="list-group">
+                            <a ui-sref="app.mailbox({folder: folder.name})" ui-sref-opts="{notify: true}" ui-sref-active="active" data-ng-repeat="folder in mailboxFolders" class="list-group-item">
+                                <span class="label label-success pull-right">{{ folder.count }}</span>
+                                <em data-ng-class="folder.icon" class="fa fa-fw fa-lg"></em>
+                                <span>{{ folder.name | titlecase }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </side-bar>
 </div>
 <!-- END Sidebar-->
