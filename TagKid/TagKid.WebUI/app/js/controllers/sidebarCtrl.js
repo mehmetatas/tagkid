@@ -1,6 +1,9 @@
 ﻿app.controller('sidebarCtrl', ['$rootScope', '$scope', '$location', '$http', '$timeout', 'sidebarMenu', 'appMediaquery', '$window',
   function ($rootScope, $scope, $location, $http, $timeout, sidebarMenu, appMediaquery, $window) {
       'use strict';
+
+      $scope.app = $rootScope.app;
+
       var currentState = $rootScope.$state.current.name;
       var $win = $($window);
       var $html = $('html');
@@ -120,6 +123,6 @@
         { name: 'inbox', count: 3, icon: 'fa-inbox' },
         { name: 'suggested', count: 8, icon: 'fa-lightbulb-o' },
         { name: 'favorited', count: 12, icon: 'fa-star-o' },
-        { name: 'draft', count: 1, icon: 'fa-edit' },
+        { name: 'draft', count: 1, icon: 'fa-edit' }
       ];
   }]);

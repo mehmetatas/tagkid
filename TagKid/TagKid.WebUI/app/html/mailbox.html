@@ -15,19 +15,21 @@
                     <table data-ng-if="mailList.length" class="table mb-mails">
                         <tbody>
                             <tr data-ng-repeat="mail in mailList" data-ng-class="{'mb-unread' : mail.unread}">
-                                <td>
-                                    <div class="point-pin">
-                                        <img data-ng-src="{{mail.from.avatar}}" alt="Mail Avatar" class="img-circle thumb32" />
-                                        <div class="point point-success point-lg"></div>
-                                    </div>
+                                <td style="vertical-align: top">
+                                    <img data-ng-src="{{mail.from.avatar}}" alt="Mail Avatar" class="img-circle thumb32" />
+                                    <br>
+                                    <div class="mb-mail-date">{{mail.time}}</div>
                                 </td>
                                 <td>
-                                    <div class="mb-mail-date">{{mail.time}}</div>
-                                    <div class="pull-left">
-                                        <a href="#" data-ng-click="openMail(mail.id)" class="mb-mail-from">{{mail.from.name}}</a>
+                                    <a href="#" data-ng-click="openMail(mail.id)">
                                         <div class="mb-mail-subject">{{mail.subject}}</div>
-                                    </div>
-                                    <div class="mb-mail-preview">{{mail.excerpt}}</div>
+                                        <span class="mb-mail-from">
+                                            @{{mail.from.name}}
+                                        </span>
+                                        <p class="mb-mail-preview">{{mail.excerpt}}</p>
+                                    </a>
+                                    <br/>
+                                    <a href="#" ng-repeat="tag in mail.tags" class="btn btn-xs btn-default">{{tag}}</a>
                                 </td>
                             </tr>
                         </tbody>

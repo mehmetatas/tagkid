@@ -9846,30 +9846,25 @@ fieldset[disabled] .calendar-app .fc-button.active {
 }
 .mb-mails .mb-mail-date {
   display: block;
-  float: right;
   color: #8394a9;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 10px;
 }
 .mb-mails .mb-mail-from {
   display: block;
+  color: #8394a9;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.mb-mails .mb-mail-subject {
   color: #2b3d51;
   font-size: 17px;
   font-weight: 600;
   line-height: 1.2;
-}
-.mb-mails .mb-mail-subject {
-  color: #2b3d51;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.8;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   padding: 0 .2em;
   overflow: hidden;
   vertical-align: bottom;
   padding: 0;
-  max-width: 28ch;
 }
 .mb-mails .mb-mail-preview {
   clear: both;

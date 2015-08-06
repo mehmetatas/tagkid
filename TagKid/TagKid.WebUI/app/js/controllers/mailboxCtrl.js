@@ -18,6 +18,7 @@ app.controller('MailboxFolderController', ["$scope", "$stateParams", "$state", "
 
         // Replace this code with a request to your mails API
         // It expects to receive the following object format
+        var tags = ["c#", "java", "python", "oop", "c++", "design-patterns", ".net", "mvc", "sql", "mysql", "php", "asp.net"];
 
         // only populate inbox for demo
         $scope.mails['inbox'] = [
@@ -43,8 +44,20 @@ app.controller('MailboxFolderController', ["$scope", "$stateParams", "$state", "
             m.from.email = m.from.name.toLowerCase().replace(' ', '') + '@example.com';
             m.subject = azarnsubj[(Math.floor((Math.random() * (azarnsubj.length))))];
             m.from.avatar = 'app/img/user/0' + (Math.floor((Math.random() * 8)) + 1) + '.jpg';
-            m.time = moment().subtract(i, 'hours').format('hh:mm a');
+            m.time = moment().subtract(i * (Math.floor((Math.random() * 10000)) + 1), 'minutes').fromNow();
             m.id = i + 1;
+
+            var sentenceCount = Math.floor((Math.random() * 8)) + 1;
+            while (sentenceCount-- > 0) {
+                m.excerpt += azarnsubj[(Math.floor((Math.random() * (azarnsubj.length))))];
+            }
+
+            var tagCount = Math.floor((Math.random() * 5)) + 2;
+            m.tags = [];
+            while (tagCount-- > 0) {
+                m.tags.push(tags[(Math.floor((Math.random() * (tags.length))))]);
+            }
+
             $scope.mails['inbox'].push(m);
         }
         $scope.mails['inbox'][0].unread = true;

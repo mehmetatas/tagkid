@@ -22,7 +22,7 @@
 
 
         // default route to dashboard
-        $urlRouterProvider.otherwise('/app/mailbox/');
+        $urlRouterProvider.otherwise('/app/mailbox/inbox');
 
         // 
         // app Routes
@@ -73,6 +73,14 @@
                     views: {
                         'mails@app.mailbox': {
                             templateUrl: basepath('mailbox-view-mail.html')
+                        }
+                    }
+                })
+                .state('app.mailbox.compose', {
+                    url: '/compose',
+                    views: {
+                        'mails@app.mailbox': {
+                            templateUrl: basepath('mailbox-compose.html')
                         }
                     }
                 })

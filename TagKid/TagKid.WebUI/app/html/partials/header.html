@@ -20,7 +20,7 @@
     </div>
     <!-- END navbar header-->
     <!-- START Nav wrapper-->
-    <div collapse="headerMenuCollapsed" class="nav-wrapper collapse navbar-collapse" style="font-size: 1.1em">
+    <div collapse="headerMenuCollapsed" class="nav-wrapper collapse navbar-collapse" style="font-size: 1.5em">
         <!-- START Left navbar-->
         <ul class="nav navbar-nav">
             <li>
@@ -38,7 +38,9 @@
                     <span class="input-group-addon">
                         <em class="fa fa-search"></em>
                     </span>
-                    <input type="text" data-ng-model="routeSelected" placeholder="@username, tag, title" typeahead="state for state in states | filter:$viewValue | limitTo:8" typeahead-on-select="onRouteSelect($item, $model, $label)"
+                    <input type="text" data-ng-model="routeSelected" placeholder="@username, tag, title"
+                           typeahead="state for state in states | filter:$viewValue | limitTo:8"
+                           typeahead-on-select="onRouteSelect($item, $model, $label)"
                            class="form-control bg-light" />
                 </div>
             </div>
@@ -47,13 +49,16 @@
         <!-- END Top navbar search form-->
         <!-- START Right Navbar-->
         <ul class="nav navbar-nav navbar-right">
+            <li class="visible-lg">
+                <a href="#" ng-click="app.layout.isBoxed =! app.layout.isBoxed">
+                    <em class="fa fa-arrows-h"></em>
+                </a>
+            </li>
             <!-- START Alert menu-->
             <li class="dropdown dropdown-list">
                 <a href="#" dropdown-animate="" class="dropdown-toggle">
-                    <div class="point-pin">
-                        <em class="fa fa-bell-o"></em>
-                    </div>
-                    <span class="ml">Notifications</span>
+                    <em class="fa fa-bell-o"></em>
+                    <span class="visible-xs-inline ml">Notifications</span>
                 </a>
                 <!-- START Dropdown menu-->
                 <ul offcanvas-dropdown="" class="dropdown-menu fadeInLeft2 animated">
@@ -182,10 +187,68 @@
                     </li>
                 </ul>
             </li>
-            <li class="visible-lg">
-                <a href="#" ng-click="app.layout.isBoxed =! app.layout.isBoxed">
-                    <em class="fa fa-arrows-h"></em>
-                    <span class="ml" ng-bind="app.layout.isBoxed ? 'Expand':'Box'"></span>
+            <li class="dropdown dropdown-list">
+                <a href="#" dropdown-animate="" class="dropdown-toggle">
+                    <em class="fa fa-user"></em>
+                    <span class="visible-xs-inline ml">Profile</span>
+                </a>
+                <ul offcanvas-dropdown="" class="dropdown-menu fadeInLeft2 animated">
+                    <!-- START list item-->
+                    <li>
+                        <a href="#" class="p bg-gray-lighter">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img src="/app/img/user/02.jpg" class="img-circle thumb32" />
+                                </div>
+                                <div class="media-body clearfix">
+                                    <p class="m0">Mehmet Atas</p>
+                                    <p class="m0 text-gray text-sm">@mehmetatas</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="p">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <em class="fa fa-gear"></em>
+                                </div>
+                                <div class="media-body clearfix">
+                                    <p class="m0">Settings</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="p">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <em class="fa fa-question"></em>
+                                </div>
+                                <div class="media-body clearfix">
+                                    <p class="m0">Help</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="p">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <em class="fa fa-sign-out"></em>
+                                </div>
+                                <div class="media-body clearfix">
+                                    <p class="m0">Signout</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" ui-sref="app.mailbox.compose">
+                    <em class="fa fa-plus"></em>
+                    <span class="visible-xs-inline ml">Compose</span>
                 </a>
             </li>
             <!-- END Alert menu-->
