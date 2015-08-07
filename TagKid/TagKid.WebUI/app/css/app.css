@@ -6574,11 +6574,10 @@ body {
     width: 64px;
   }
   .aside-collapsed .sidebar > .sidebar-nav > .nav > li > a {
-    padding: 20px 0;
+    padding-top: 20px;
     text-align: center;
   }
   .aside-collapsed .sidebar > .sidebar-nav > .nav > li > a > .sidebar-item-icon {
-    font-size: 1.6em;
     width: auto;
   }
   .aside-collapsed .sidebar > .sidebar-nav > .nav > li > a:focus > .sidebar-item-icon {

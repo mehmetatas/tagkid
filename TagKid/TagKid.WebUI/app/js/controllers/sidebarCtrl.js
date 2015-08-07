@@ -1,5 +1,5 @@
-﻿app.controller('sidebarCtrl', ['$rootScope', '$scope', '$location', '$http', '$timeout', 'sidebarMenu', 'appMediaquery', '$window',
-  function ($rootScope, $scope, $location, $http, $timeout, sidebarMenu, appMediaquery, $window) {
+﻿app.controller('sidebarCtrl', ['$rootScope', '$scope', '$location', '$http', '$timeout', 'appMediaquery', '$window',
+  function ($rootScope, $scope, $location, $http, $timeout, appMediaquery, $window) {
       'use strict';
 
       $scope.app = $rootScope.app;
@@ -59,10 +59,6 @@
       var $win = $($window);
       var $html = $('html');
       var $body = $('body');
-
-      // Load menu from json file
-      // ----------------------------------- 
-      sidebarMenu.load();
 
       // Adjustment on route changes
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {

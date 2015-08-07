@@ -97,8 +97,6 @@
     <Content Include="app\js\directives\scrollable.js" />
     <Content Include="app\js\directives\sideBar.js" />
     <Content Include="app\js\directives\toggleState.js" />
-    <Content Include="app\js\filters\titlecase.js" />
-    <Content Include="app\js\services\sidebarMenu.js" />
     <Content Include="app\js\services\support.js" />
     <Content Include="app\js\services\toggleStateService.js" />
     <Content Include="index.html" />
@@ -653,6 +651,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\js\factories\" />
+    <Folder Include="app\js\filters\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

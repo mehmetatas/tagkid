@@ -5,7 +5,6 @@ app.directive('sideBar', ['$rootScope', '$window', '$timeout', '$compile', 'appM
 
         var $win = $($window);
         var $html = $('html');
-        var $body = $('body');
         var $scope;
         var $sidebar;
         var $sidebarNav;
@@ -217,22 +216,20 @@ app.directive('sideBar', ['$rootScope', '$window', '$timeout', '$compile', 'appM
                 sidebarCloseFloatItem();
             });
         }
-
-
+        
         function isTouch() {
             return $html.hasClass('touch');
         }
+
         function isSidebarCollapsed() {
             return $rootScope.app.sidebar.isCollapsed;
         }
-        function isSidebarToggled() {
-            return $body.hasClass('aside-toggled');
-        }
+
         function isMobile() {
             return $win.width() < appMediaquery.tablet;
         }
+
         function isSidebarSlider() {
             return $rootScope.app.sidebar.slide;
         }
-
     }]);
