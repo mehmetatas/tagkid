@@ -1,6 +1,6 @@
 ﻿app.config([
-    '$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'appDependencies',
-    function($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider, appDependencies) {
+    '$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$locationProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'appDependencies',
+    function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $locationProvider, $filterProvider, $provide, $ocLazyLoadProvider, appDependencies) {
         'use strict';
 
         app.controller = $controllerProvider.register;
@@ -11,6 +11,11 @@
         app.constant = $provide.constant;
         app.value = $provide.value;
 
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+
         // LAZY LOAD MODULES
         // ----------------------------------- 
 
@@ -19,10 +24,9 @@
             events: true,
             modules: appDependencies.modules
         });
-
-
+        
         // default route to dashboard
-        $urlRouterProvider.otherwise('/app/mailbox/inbox');
+        $urlRouterProvider.otherwise('/mailbox/inbox');
 
         // 
         // app Routes
@@ -32,7 +36,8 @@
                 // Single Page Routes
                 // ----------------------------------- 
                 .state('page', {
-                    url: '/page',
+                    url: '',
+                    abstract: true,
                     templateUrl: basepath('pages/page.html'),
                     resolve: requireDeps('icons', 'animate')
                 })
@@ -48,14 +53,10 @@
                     url: '/recover',
                     templateUrl: basepath('pages/recover.html')
                 })
-                .state('page.lock', {
-                    url: '/lock',
-                    templateUrl: basepath('pages/lock.html')
-                })
                 // App
                 // ----------------------------------- 
                 .state('app', {
-                    url: '/app',
+                    url: '',
                     abstract: true,
                     templateUrl: basepath('app.html'),
                     controller: 'appController',

@@ -62,7 +62,6 @@
     <Content Include="app\html\mailbox-compose.html" />
     <Content Include="app\html\mailbox-view-mail.html" />
     <Content Include="app\html\mailbox.html" />
-    <Content Include="app\html\pages\lock.html" />
     <Content Include="app\html\pages\login.html" />
     <Content Include="app\html\pages\page-footer.html" />
     <Content Include="app\html\pages\page.html" />

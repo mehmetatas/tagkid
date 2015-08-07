@@ -6435,9 +6435,8 @@ body {
   position: relative;
 }
 .sidebar > .sidebar-nav > .nav > li > a {
-  padding: 12px 15px;
-  letter-spacing: .025em;
-  font-weight: bold;
+  font-size: 1.1em;
+  font-weight: normal;
 }
 .sidebar > .sidebar-nav > .nav > li > a:focus,
 .sidebar > .sidebar-nav > .nav > li > a:hover {
@@ -6446,6 +6445,7 @@ body {
 }
 .sidebar > .sidebar-nav > .nav > li > a > .sidebar-item-icon {
   width: 1.7em;
+  font-size: 1.2em;
   display: inline-block;
   font-style: normal;
   font-weight: normal;

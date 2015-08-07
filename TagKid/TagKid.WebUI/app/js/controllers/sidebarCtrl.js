@@ -4,6 +4,57 @@
 
       $scope.app = $rootScope.app;
 
+      $scope.menuItems = [
+          {
+              "text": "Inbox",
+              "sref": "app.mailbox({folder: 'inbox'})",
+              "icon": "fa-inbox",
+              "alert": { "text": "3", "class": "label-success" }
+          },
+          {
+              "text": "Suggested",
+              "sref": "app.mailbox({folder: 'suggested'})",
+              "icon": "fa-lightbulb-o",
+              "alert": { "text": "14", "class": "label-success" }
+          },
+          {
+              "text": "Favorites",
+              "sref": "app.mailbox({folder: 'favorites'})",
+              "icon": "fa-star-o",
+              "alert": { "text": "21", "class": "label-success" }
+          },
+          {
+              "text": "Drafts",
+              "sref": "app.mailbox({folder: 'drafts'})",
+              "icon": "fa-edit",
+              "alert": { "text": "2", "class": "label-success" }
+          },
+          {
+              "type": "separator"
+          },
+          {
+              "text": "Microsoft",
+              "sref": "#",
+              "icon": "fa-windows",
+              "alert": { "text": "12", "class": "label-success" },
+              "subnav": [
+                  { "text": "C#", "sref": "app.mailbox({folder: 'csharp'})", "alert": { "text": "4", "class": "label-primary" } },
+                  { "text": "ASP.NET", "sref": "app.mailbox({folder: 'aspnet'})", "alert": { "text": "1", "class": "label-primary" } },
+                  { "text": "Sql Server", "sref": "app.mailbox({folder: 'sqlserver'})", "alert": { "text": "7", "class": "label-primary" } }
+              ]
+          },
+          {
+              "text": "Game Programming",
+              "sref": "#",
+              "icon": "fa-gamepad",
+              "subnav": [
+                  { "text": "LibGDX", "sref": "app.mailbox({folder: 'libgdx'})" },
+                  { "text": "RoboVM", "sref": "app.mailbox({folder: 'robovm'})" },
+                  { "text": "Open GL", "sref": "app.mailbox({folder: 'opengl'})" }
+              ]
+          }
+      ];
+
       var currentState = $rootScope.$state.current.name;
       var $win = $($window);
       var $html = $('html');
