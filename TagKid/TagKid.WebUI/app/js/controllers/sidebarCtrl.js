@@ -52,6 +52,20 @@
                   { "text": "RoboVM", "sref": "app.mailbox({folder: 'robovm'})" },
                   { "text": "Open GL", "sref": "app.mailbox({folder: 'opengl'})" }
               ]
+          },
+          {
+              "type": "separator"
+          },
+          {
+              "text": "Private Folder",
+              "sref": "#",
+              "icon": "fa-lock",
+              "alert": { "text": "12", "class": "label-success" },
+              "subnav": [
+                  { "text": "Photography", "sref": "app.mailbox({folder: 'photography'})", "alert": { "text": "4", "class": "label-primary" } },
+                  { "text": "Guitar", "sref": "app.mailbox({folder: 'guitar'})", "alert": { "text": "1", "class": "label-primary" } },
+                  { "text": "Drums", "sref": "app.mailbox({folder: 'drums'})", "alert": { "text": "7", "class": "label-primary" } }
+              ]
           }
       ];
 

@@ -857,9 +857,9 @@ pre code {
     width: 970px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .container {
-    width: 1170px;
+    width: 1210px;
   }
 }
 .container-fluid {
@@ -1350,7 +1350,7 @@ pre code {
     margin-left: 0%;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
     float: left;
   }
@@ -5657,7 +5657,7 @@ button.close {
     display: inline-block !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1239px) {
   .visible-md {
     display: block !important;
   }
@@ -5672,22 +5672,22 @@ button.close {
     display: table-cell !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1239px) {
   .visible-md-block {
     display: block !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1239px) {
   .visible-md-inline {
     display: inline !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1239px) {
   .visible-md-inline-block {
     display: inline-block !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .visible-lg {
     display: block !important;
   }
@@ -5702,17 +5702,17 @@ button.close {
     display: table-cell !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .visible-lg-block {
     display: block !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .visible-lg-inline {
     display: inline !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .visible-lg-inline-block {
     display: inline-block !important;
   }
@@ -5727,12 +5727,12 @@ button.close {
     display: none !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1239px) {
   .hidden-md {
     display: none !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .hidden-lg {
     display: none !important;
   }
@@ -8495,7 +8495,7 @@ fieldset[disabled] .btn-orange.active {
     width: 7%;
   }
 }
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1240px) {
   .row-masonry-xl-1 {
     -moz-column-count: 1;
     -webkit-column-count: 1;
@@ -9807,7 +9807,7 @@ fieldset[disabled] .calendar-app .fc-button.active {
   margin: 0;
   padding-bottom: 20px;
 }
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1240px) {
   .mb-boxes {
     height: auto !important;
     display: block;
