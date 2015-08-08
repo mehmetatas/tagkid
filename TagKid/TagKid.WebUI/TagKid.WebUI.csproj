@@ -91,6 +91,7 @@
     <Content Include="app\js\app.init.js" />
     <Content Include="app\js\controllers\headerCtrl.js" />
     <Content Include="app\js\controllers\mailboxCtrl.js" />
+    <Content Include="app\js\controllers\mailViewCtrl.js" />
     <Content Include="app\js\controllers\searchFormCtrl.js" />
     <Content Include="app\js\controllers\sidebarCtrl.js" />
     <Content Include="app\js\directives\href.js" />

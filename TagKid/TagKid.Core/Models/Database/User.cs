@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TagKid.Core.Models.Database
 {
@@ -13,5 +14,7 @@ namespace TagKid.Core.Models.Database
         public virtual string FacebookId { get; set; }
         public virtual UserType Type { get; set; }
         public virtual UserStatus Status { get; set; }
+
+        public List<Folder> Folders { get; set; }
     }
 }

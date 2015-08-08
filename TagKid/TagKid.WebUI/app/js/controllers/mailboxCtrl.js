@@ -1,5 +1,4 @@
-﻿
-app.controller('MailboxFolderController', ["$scope", "$stateParams", "$state", "appMediaquery", "$window", "$timeout", function ($scope, $stateParams, $state, appMediaquery, $window, $timeout) {
+﻿app.controller('mailboxCtrl', ["$scope", "$stateParams", "$state", "appMediaquery", "$window", "$timeout", function ($scope, $stateParams, $state, appMediaquery, $window, $timeout) {
 
     var $win = angular.element($window);
 
@@ -96,12 +95,5 @@ app.controller('MailboxFolderController', ["$scope", "$stateParams", "$state", "
         if ($win.width() < appMediaquery['tablet'])
             $scope.mailPanelOpened = state;
     }
-
-}]);
-
-app.controller('MailboxViewController', ["$scope", "$stateParams", "$state", function ($scope, $stateParams, $state) {
-
-    // move the current viewing mail data to the inner view scope
-    $scope.viewMail = $scope.mailList[$stateParams.id];
 
 }]);

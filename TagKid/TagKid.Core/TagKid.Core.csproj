@@ -50,6 +50,7 @@
     <Compile Include="Models\Database\Comment.cs" />
     <Compile Include="Models\Database\ConfirmationCode.cs" />
     <Compile Include="Models\Database\Enums.cs" />
+    <Compile Include="Models\Database\Folder.cs" />
     <Compile Include="Models\Database\FollowUser.cs" />
     <Compile Include="Models\Database\Like.cs" />
     <Compile Include="Models\Database\Log.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Models\Database\Post.cs" />
     <Compile Include="Models\Database\PostTag.cs" />
     <Compile Include="Models\Database\PrivateMessage.cs" />
+    <Compile Include="Models\Database\SubFolder.cs" />
+    <Compile Include="Models\Database\SubFolderPost.cs" />
     <Compile Include="Models\Database\Tag.cs" />
     <Compile Include="Models\Database\Token.cs" />
     <Compile Include="Models\Database\User.cs" />
