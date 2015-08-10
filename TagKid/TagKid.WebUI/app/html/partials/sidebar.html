@@ -2,15 +2,21 @@
     <side-bar>
         <div class="sidebar-nav">
             <ul class="nav">
+                <li ng-hide="menuItems">
+                    <div class="p center-block">
+                        <spinner></spinner>
+                        <div class="text-center">Loading your folders</div>
+                    </div>
+                </li>
                 <li data-ng-class="getSidebarItemClass(item)" data-ng-repeat="item in menuItems" data-ng-include="'sidebar-items.html'" data-ng-click="toggleCollapse($index)" data-ng-switch="item.type"></li>
                 <li>
                     <hr data-ng-hide="app.sidebar.isCollapsed" />
                 </li>
                 <li class="text-center">
-                    <button class="btn btn-primary">
-                        <em class="fa fa-plus"></em>
-                        <span data-ng-hide="app.sidebar.isCollapsed" class="hidden-xs">New Folder</span>
-                        <span class="visible-xs-inline">New Folder</span>
+                    <button class="btn btn-primary" ng-click="editFolders()">
+                        <em class="fa fa-list"></em>
+                        <span data-ng-hide="app.sidebar.isCollapsed" class="hidden-xs">Edit Folders</span>
+                        <span class="visible-xs-inline">Edit Folders</span>
                     </button>
                 </li>
             </ul>

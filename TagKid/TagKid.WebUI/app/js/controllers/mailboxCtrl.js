@@ -19,6 +19,19 @@
         // It expects to receive the following object format
         var tags = ["c#", "java", "python", "oop", "c++", "design-patterns", ".net", "mvc", "sql", "mysql", "php", "asp.net"];
 
+        var bodyParts = [
+            '<p><img src="/app/img/mb-sample.jpg" alt="Mailbox image" class="img-responsive" /></p>',
+            '<p><img src="/app/img/bg1.jpg" alt="Mailbox image" class="img-responsive" /></p>',
+            '<p><img src="/app/img/bg2.jpg" alt="Mailbox image" class="img-responsive" /></p>',
+            '<p><img src="/app/img/bg3.jpg" alt="Mailbox image" class="img-responsive" /></p>',
+            '<p>Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat, sagittis non lectus.</p>',
+            '<p>Donec consequat massa vel orci laoreet vehicula. Aenean sollicitudin facilisis tortor eu mollis.</p>',
+            '<p>Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.   Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.</p>',
+            '<p>Donec consequat massa vel orci laoreet vehicula.  Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Donec consequat massa vel orci laoreet vehicula.  Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Aenean sollicitudin facilisis tortor eu mollis. Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.   Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.Donec consequat massa vel orci laoreet vehicula. Donec consequat massa vel orci laoreet vehicula.  Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Donec consequat massa vel orci laoreet vehicula.  Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Aenean sollicitudin facilisis tortor eu mollis.Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo.</p>',
+            '<p>Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.   Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Donec consequat massa vel orci laoreet vehicula. Donec consequat massa vel orci laoreet vehicula.  Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Donec consequat massa vel orci laoreet vehicula.  Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Aenean sollicitudin facilisis tortor eu mollis.Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.   Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Donec consequat massa vel orci laoreet vehicula. Donec consequat massa vel orci laoreet vehicula.  Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Donec consequat massa vel orci laoreet vehicula.  Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Aenean sollicitudin facilisis tortor eu mollis. Donec consequat massa vel orci laoreet vehicula.</p>',
+            '<p>Donec consequat massa vel orci laoreet vehicula. Aenean sollicitudin facilisis tortor eu mollis.  vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum   vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum   vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum </p>'
+        ];
+
         // only populate inbox for demo
         $scope.mails['inbox'] = [
           {
@@ -31,6 +44,11 @@
                   email: 'mail@example.com',
                   avatar: 'app/img/user/01.jpg'
               },
+              tags: [tags[4], tags[2]],
+              body: '<p><img src="/app/img/bg1.jpg" alt="Mailbox image" class="img-responsive" /></p>'+
+                  '<p>Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat, sagittis non lectus.</p>'+
+              '<p>Donec consequat massa vel orci laoreet vehicula. Aenean sollicitudin facilisis tortor eu mollis.</p>'+
+              '<p>Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.   Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus. Pellentesque vitae turpis id lorem dictum suscipit vitae sit amet leo. Duis imperdiet, enim vitae euismod mattis, lectus nibh interdum felis, quis eleifend orci orci sed quam. Fusce a egestas turpis. Etiam tellus nulla, dictum in pellentesque feugiat,sagittis non lectus.</p>',
               unread: false
           }
         ];
@@ -55,6 +73,12 @@
             m.tags = [];
             while (tagCount-- > 0) {
                 m.tags.push(tags[(Math.floor((Math.random() * (tags.length))))]);
+            }
+
+            var bodyCount = Math.floor((Math.random() * 10)) + 3;
+            m.body = '';
+            while (bodyCount-- > 0) {
+                m.body += (bodyParts[(Math.floor((Math.random() * (bodyParts.length))))]);
             }
 
             $scope.mails['inbox'].push(m);

@@ -2,7 +2,8 @@
     this.openAuthDialog = function (callback) {
         $modal.open({
             templateUrl: '/app/html/dialogs/auth.html',
-            controller: 'authDialogCtrl'
+            controller: 'authDialogCtrl',
+            size: 'sm'
         }).result.then(callback);
     };
 }]);
