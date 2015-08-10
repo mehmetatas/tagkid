@@ -67,8 +67,7 @@
 
     // requested folder mails to display in the view
     $scope.mailList = $scope.mails[$scope.folder];
-
-
+    
     // Show and hide mail content
     // ----------------------------------- 
     $scope.openMail = function (id) {
@@ -76,8 +75,6 @@
         toggleMailPanel(true);
         // load the mail into the view
         $state.go('app.mailbox.view', { id: id });
-        // close the folder (when collapsed)
-        $scope.$emit('closeFolderNav');
         // mark mail as read
         $timeout(function () {
             $scope.mailList[id].unread = false;
@@ -86,7 +83,6 @@
 
     $scope.backToFolder = function () {
         toggleMailPanel(false);
-        $scope.$emit('closeFolderNav');
     };
 
     // enable the open state to slide the mails panel 
@@ -95,5 +91,4 @@
         if ($win.width() < appMediaquery['tablet'])
             $scope.mailPanelOpened = state;
     }
-
 }]);

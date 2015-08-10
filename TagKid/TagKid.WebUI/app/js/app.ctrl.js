@@ -1,4 +1,4 @@
-﻿app.controller('appController', [
+﻿app.controller('appCtrl', [
     '$rootScope', '$scope', '$state', '$window', '$localStorage', '$timeout', 'toggleStateService', 'cfpLoadingBar', 'support',
     function($rootScope, $scope, $state, $window, $localStorage, $timeout, toggle, cfpLoadingBar, support) {
         "use strict";
@@ -16,31 +16,19 @@
                     cfpLoadingBar.start();
                 }, 0); // sets a latency Threshold
         });
-        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            $window.scrollTo(0, 0);
             event.targetScope.$watch("$viewContentLoaded", function() {
                 $timeout.cancel(latency);
                 cfpLoadingBar.complete();
             });
         });
-
-        // State Events Hooks
-        // ----------------------------------- 
-
-        // Hook not found
-        $rootScope.$on('$stateNotFound',
-            function(event, unfoundState, fromState, fromParams) {
-                console.log(unfoundState.to); // "lazy.state"
-                console.log(unfoundState.toParams); // {a:1, b:2}
-                console.log(unfoundState.options); // {inherit:false} + default options
-            });
-
-        // Hook success
-        $rootScope.$on('$stateChangeSuccess',
-            function(event, toState, toParams, fromState, fromParams) {
-                // display new view from top
-                $window.scrollTo(0, 0);
-            });
-
+        $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+            console.log(unfoundState.to); // "lazy.state"
+            console.log(unfoundState.toParams); // {a:1, b:2}
+            console.log(unfoundState.options); // {inherit:false} + default options
+        });
+        
         // Create your own per page title here
         $rootScope.pageTitle = function() {
             return $rootScope.app.name + ' - ' + $rootScope.app.description;

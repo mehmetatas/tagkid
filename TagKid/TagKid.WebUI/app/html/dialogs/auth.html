@@ -1,0 +1,80 @@
+﻿<div class="center-block mt-xl mb-xl wd-xl">
+    <div class="panel panel-inverse">
+        <div class="panel-heading text-center">
+            <img src="/app/img/logo-single.png" alt="Image" class="center-block img-rounded" />
+        </div>
+        <div class="panel-body">
+            <div id="login" ng-show="!mode" class="ng-fadeOutZoom ng-fadeInDown">
+                <p class="text-center pv text-bold">LOGIN</p>
+                <form role="form" class="mb-lg">
+                    <div class="form-group has-feedback">
+                        <input placeholder="email or username" autocomplete="off" class="form-control" ng-model="loginReq.EmailOrUsername" />
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" placeholder="password" class="form-control" ng-model="loginReq.Password" />
+                        <span class="fa fa-lock form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="checkbox c-checkbox pull-left mt0">
+                        <label>
+                            <input type="checkbox" value="" />
+                            <span class="fa fa-check"></span>Remember me
+                        </label>
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-block btn-info mt-lg" ng-click="login()">Login</button>
+                </form>
+                <p class="text-center text-muted">Or</p>
+                <a ng-click="toRegistration()" class="btn btn-block btn-default">
+                    <strong>Register an Account</strong>
+                </a>
+                <div class="text-center mt">
+                    <a href="#" ng-click="toRecover()" class="text-muted">I forgot my password!</a>
+                </div>
+            </div>
+            <div id="register" ng-show="mode==1" class="ng-fadeOutZoom">
+                <p class="text-center pv text-bold">REGISTER NEW ACCOUNT</p>
+                <form role="form" class="mb-lg">
+                    <div class="form-group has-feedback">
+                        <input type="email" placeholder="email" autocomplete="off" class="form-control" ng-model="registerReq.Email" />
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" placeholder="username" autocomplete="off" class="form-control" ng-model="registerReq.Username" />
+                        <span class="fa fa-user form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" placeholder="password" autocomplete="off" class="form-control" ng-model="registerReq.Password" />
+                        <span class="fa fa-lock form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="clearfix">
+                        <div class="checkbox c-checkbox pull-left mt0">
+                            <label>
+                                <input type="checkbox" value="" />
+                                <span class="fa fa-check"></span>I agree with the <a href="#" ng-click="openTerms()">terms</a>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary mt-lg" ng-click="register()">Create account</button>
+                </form>
+                <div class="text-center mt">
+                    <a href="#" ng-click="toLogin(true)" class="text-muted">I already registered!</a>
+                </div>
+            </div>
+            <div id="recover" ng-show="mode==2" class="ng-fadeOutZoom">
+                <p class="text-center pv text-bold">RESET PASSWORD</p>
+                <form role="form">
+                    <p class="text-center">We will send you instructions to reset your password.</p>
+                    <div class="form-group has-feedback">
+                        <input type="email" placeholder="email" autocomplete="off" class="form-control" ng-model="recoverReq.Email" />
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block" ng-click="recoverPassword()">Send</button>
+                </form>
+                <div class="text-center mt">
+                    <a href="#" ng-click="toLogin(false)" class="text-muted">Oh, I remembered that!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

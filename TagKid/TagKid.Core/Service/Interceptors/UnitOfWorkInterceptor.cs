@@ -1,5 +1,6 @@
 ﻿using DummyOrm.Db;
 using TagKid.Framework.WebApi;
+using TagKid.Framework.WebApi.Configuration;
 
 namespace TagKid.Core.Service.Interceptors
 {
@@ -16,7 +17,10 @@ namespace TagKid.Core.Service.Interceptors
         public object BeforeCall(RouteContext ctx)
         {
             _db = _factory.Create();
-            _db.BeginTransaction();
+            if (ctx.Method.HttpMethod != HttpMethod.Get)
+            {
+                _db.BeginTransaction();
+            }
             return null;
         }
 

@@ -32,34 +32,11 @@
         // app Routes
         // -----------------------------------   
         $stateProvider
-                // 
-                // Single Page Routes
-                // ----------------------------------- 
-                .state('page', {
-                    url: '',
-                    abstract: true,
-                    templateUrl: basepath('pages/page.html'),
-                    resolve: requireDeps('icons', 'animate')
-                })
-                .state('page.login', {
-                    url: '/login',
-                    templateUrl: basepath('pages/login.html')
-                })
-                .state('page.register', {
-                    url: '/register',
-                    templateUrl: basepath('pages/register.html')
-                })
-                .state('page.recover', {
-                    url: '/recover',
-                    templateUrl: basepath('pages/recover.html')
-                })
-                // App
-                // ----------------------------------- 
                 .state('app', {
                     url: '',
                     abstract: true,
                     templateUrl: basepath('app.html'),
-                    controller: 'appController',
+                    controller: 'appCtrl',
                     resolve: requireDeps('icons', 'screenfull', 'sparklines', 'slimscroll', 'toaster', 'ui.knob', 'animate')
                 })
                 // Mailbox

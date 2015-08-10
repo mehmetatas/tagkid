@@ -23,7 +23,9 @@ app.run([
         // Scope Globals
         // ----------------------------------- 
         $rootScope.app = {
-            name: 'pasbox',
+            name: 'tagkid',
+            year: new Date().getFullYear(),
+            description: 'tag your knowledge!',
             layout: {
                 isBoxed: true
             },
