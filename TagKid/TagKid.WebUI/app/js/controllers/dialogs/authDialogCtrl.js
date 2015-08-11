@@ -3,6 +3,8 @@
     $scope.loginReq = {};
     $scope.recoverReq = {};
 
+    $scope.mode = 1;
+
     $scope.toLogin = function (fromRegistration) {
         $scope.mode = 0;
 

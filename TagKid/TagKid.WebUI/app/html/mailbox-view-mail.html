@@ -2,7 +2,7 @@
 <div data-ng-click="backToFolder()" class="mb-panel-back">
     <em class="fa fa-angle-left fa-fw"></em>Back to {{ folder }}
 </div>
-<div class="panel panel-default" data-ng-controller="mailViewCtrl">
+<div class="panel panel-default">
     <div class="panel-body">
         <div class="clearfix mb">
             <div class="btn-group pull-left">
@@ -22,7 +22,7 @@
                 </a>
             </div>
         </div>
-        <scrollable height="650">
+        <!--<scrollable height="650">-->
             <h3>{{viewMail.subject}}</h3>
             <div style="font-size: 1.1em">
                 <p><img src="/app/img/bg3.jpg" alt="Mailbox image" class="img-responsive" /></p>
@@ -433,6 +433,6 @@
                     </div>
                 </div>
             </div>
-        </scrollable>
+        <!--</scrollable>-->
     </div>
 </div>

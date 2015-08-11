@@ -3,11 +3,7 @@
     scripts: {
         'animate': ['lib/animate.css/animate.min.css'],
         'icons': ['lib/fontawesome/css/font-awesome.min.css'],
-        'sparklines': ['lib/sparklines/jquery.sparkline.min.js'],
-        'wysiwyg': ['lib/bootstrap-wysiwyg/bootstrap-wysiwyg.js',
-                               'lib/bootstrap-wysiwyg/external/jquery.hotkeys.js'],
         'slimscroll': ['lib/slimscroll/jquery.slimscroll.min.js'],
-        'screenfull': ['lib/screenfull/dist/screenfull.min.js'],
         'moment': ['lib/moment/min/moment-with-locales.min.js']
     },
     // Angular based script (use the right module name)
@@ -15,10 +11,6 @@
       {
           name: 'toaster', files: ['lib/angularjs-toaster/toaster.js',
                                              'lib/angularjs-toaster/toaster.css']
-      },
-      {
-          name: 'ui.knob', files: ['lib/angular-knob/src/angular-knob.js',
-                                             'lib/jquery-knob/dist/jquery.knob.min.js']
       }
     ]
 })

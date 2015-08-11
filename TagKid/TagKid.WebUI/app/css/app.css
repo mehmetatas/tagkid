@@ -6072,8 +6072,13 @@ body {
 }
 .app {
   padding: 20px;
-  padding-bottom: 80px;
   width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .app {
+      padding: 3px;
+  }
 }
 .app > h3 {
   margin: 0;

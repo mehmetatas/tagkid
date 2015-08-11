@@ -24,7 +24,7 @@
             events: true,
             modules: appDependencies.modules
         });
-        
+
         // default route to dashboard
         $urlRouterProvider.otherwise('/mailbox/inbox');
 
@@ -37,53 +37,30 @@
                     abstract: true,
                     templateUrl: basepath('app.html'),
                     controller: 'appCtrl',
-                    resolve: requireDeps('icons', 'screenfull', 'sparklines', 'slimscroll', 'toaster', 'ui.knob', 'animate')
+                    resolve: requireDeps('icons', 'slimscroll', 'toaster', 'animate')
                 })
                 // Mailbox
                 // ----------------------------------- 
                 .state('app.mailbox', {
                     url: '/mailbox/:folder',
                     templateUrl: basepath('mailbox.html'),
+                    controller: 'mailboxCtrl',
                     resolve: requireDeps('moment')
                 })
                 .state('app.mailbox.view', {
                     url: '/:id',
+                    controller: 'mailViewCtrl',
                     views: {
                         'mails@app.mailbox': {
                             templateUrl: basepath('mailbox-view-mail.html')
                         }
                     }
-                })
-                .state('app.mailbox.compose', {
-                    url: '/compose',
-                    views: {
-                        'mails@app.mailbox': {
-                            templateUrl: basepath('mailbox-compose.html')
-                        }
-                    }
-                })
-            // 
-            // CUSTOM RESOLVE FUNCTION
-            //   Add your own resolve properties
-            //   following this object extend
-            //   method
-            // ----------------------------------- 
-            // .state('app.yourRouteState', {
-            //   url: '/route_url',
-            //   templateUrl: 'your_template.html',
-            //   controller: 'yourController',
-            //   resolve: angular.extend(
-            //     requireDeps(...), {
-            //     // YOUR CUSTOM RESOLVES HERE
-            //     }
-            //   )
-            // })
-            ;
+                });
 
 
         // Change here your views base path
         function basepath(uri) {
-            return 'app/html/' + uri;
+            return '/app/html/' + uri;
         }
 
         // Generates a resolve object by passing script names
@@ -93,7 +70,7 @@
             var _args = arguments;
             return {
                 deps: [
-                    '$ocLazyLoad', '$q', function($ocLL, $q) {
+                    '$ocLazyLoad', '$q', function ($ocLL, $q) {
                         // Creates a promise chain for each argument
                         var promise = $q.when(1); // empty promise
                         for (var i = 0, len = _args.length; i < len; i++) {
@@ -107,7 +84,7 @@
                             if (typeof _arg == 'function')
                                 return promise.then(_arg);
                             else
-                                return promise.then(function() {
+                                return promise.then(function () {
                                     // if is a module, pass the name. If not, pass the array
                                     var whatToLoad = getRequired(_arg);
                                     // simple error check
@@ -136,11 +113,11 @@
 
     }
 ]).config([
-    '$tooltipProvider', function($tooltipProvider) {
+    '$tooltipProvider', function ($tooltipProvider) {
         $tooltipProvider.options({ appendToBody: true });
     }
 ]).config([
-    'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    'cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeBar = true;
         cfpLoadingBarProvider.includeSpinner = false;
         cfpLoadingBarProvider.latencyThreshold = 500;
