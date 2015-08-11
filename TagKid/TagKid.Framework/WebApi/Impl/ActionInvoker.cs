@@ -30,35 +30,36 @@ namespace TagKid.Framework.WebApi.Impl
                 catch (Exception ex)
                 {
                     ctx.Exception = ex;
-                    HandleException(interceptor, ctx);
+                    if (!HandleException(interceptor, ctx))
+                    {
+                        throw;
+                    }
                 }
             }
         }
 
-        private void HandleException(IActionInterceptor interceptor, RouteContext ctx)
+        private static bool HandleException(IActionInterceptor interceptor, RouteContext ctx)
         {
-            var ex = ctx.Exception;
+            var result = interceptor.OnException(ctx);
+            if (result != null)
+            {
+                ctx.ReturnValue = result;
+            }
 
+            var ex = ctx.Exception;
             while (ex is TargetInvocationException && ex.InnerException != null)
             {
                 ex = ex.InnerException;
             }
 
-            var result = interceptor.OnException(ctx);
-
-            if (result != null)
+            var knownEx = ex as Error;
+            if (knownEx == null)
             {
-                ctx.ReturnValue = result;
-                return;
+                return false;
             }
 
-            var knownEx = ex as TagKidException;
-            if (knownEx != null)
-            {
-                throw knownEx;
-            }
-
-            throw Errors.Unknown.ToException();
+            ctx.ReturnValue = Response.Error(knownEx);
+            return true;
         }
     }
 }

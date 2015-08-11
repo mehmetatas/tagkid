@@ -1,14 +1,14 @@
-﻿using DummyOrm.Db;
-using System.Linq;
+﻿using System.Linq;
 using TagKid.Core.Models.Database;
+using TagKid.Framework.UnitOfWork;
 
 namespace TagKid.Core.Repository.Impl
 {
     public class PostRepository : IPostRepository
     {
-        private readonly IDb _db;
+        private readonly IRepository _db;
 
-        public PostRepository(IDb db)
+        public PostRepository(IRepository db)
         {
             _db = db;
         }

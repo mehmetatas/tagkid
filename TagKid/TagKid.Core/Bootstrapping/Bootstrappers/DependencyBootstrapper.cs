@@ -10,12 +10,14 @@ using TagKid.Core.Service.Interceptors;
 using TagKid.Framework.IoC;
 using TagKid.Framework.Json;
 using TagKid.Framework.Json.Newtonsoft;
+using TagKid.Framework.UnitOfWork;
+using TagKid.Framework.UnitOfWork.Impl;
 using TagKid.Framework.WebApi;
 using TagKid.Framework.WebApi.Impl;
 
 namespace TagKid.Core.Bootstrapping.Bootstrappers
 {
-    class StartupBootstrapper : IBootstrapper
+    class DependencyBootstrapper : IBootstrapper
     {
         public void Bootstrap(IDependencyContainer container)
         {
@@ -24,14 +26,16 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
             container.RegisterSingleton<IParameterResolver, ParameterResolver>();
             container.RegisterSingleton<IActionInvoker, ActionInvoker>();
             container.RegisterSingleton<IHttpHandler, HttpHandler>();
+            container.RegisterSingleton<IAuthProvider, AuthProvider>();
 
-            container.RegisterTransient<IActionInterceptorBuilder, TagKidActionInterceptorBuilder>();
+            container.RegisterTransient<IUnitOfWork, UnitOfWork>();
+            container.RegisterSingleton<IRepository, Framework.UnitOfWork.Impl.Repository>();
+            container.RegisterSingleton<IAdoRepository, AdoRepository>();
+            container.RegisterSingleton<IActionInterceptorBuilder, TagKidActionInterceptorBuilder>();
 
-            container.RegisterTransient<IAuthProvider, AuthProvider>();
-
-            container.RegisterTransient<IPostService, PostService>();
-            container.RegisterTransient<IPostDomain, PostDomain>();
-            container.RegisterTransient<IPostRepository, PostRepository>();
+            container.RegisterSingleton<IPostService, PostService>();
+            container.RegisterSingleton<IPostDomain, PostDomain>();
+            container.RegisterSingleton<IPostRepository, PostRepository>();
         }
     }
 }

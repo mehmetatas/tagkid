@@ -1,6 +1,6 @@
 ﻿using TagKid.Core.Domain;
-using TagKid.Core.Models.Messages;
 using TagKid.Core.Models.Messages.Auth;
+using TagKid.Framework.WebApi;
 
 namespace TagKid.Core.Service.Impl
 {

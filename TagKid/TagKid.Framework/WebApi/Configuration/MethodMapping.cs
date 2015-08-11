@@ -7,5 +7,6 @@ namespace TagKid.Framework.WebApi.Configuration
         public string MethodRoute { get; set; }
         public MethodInfo Method { get; set; }
         public HttpMethod HttpMethod { get; set; }
+        public bool NoAuth { get; set; }
     }
 }

@@ -38,25 +38,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="app\css\app.css" />
     <Content Include="app\css\custom.css" />
     <Content Include="app\html\app.html" />
@@ -100,6 +81,7 @@
     <Content Include="app\js\services\support.js" />
     <Content Include="app\js\services\tagkid.js" />
     <Content Include="app\js\services\toggleStateService.js" />
+    <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="launch\launch.html" />
     <Content Include="launch\files\analytics.js" />
@@ -149,6 +131,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +141,7 @@
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.woff" />
     <Content Include="lib\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -166,6 +152,37 @@
   <ItemGroup>
     <Folder Include="app\js\factories\" />
     <Folder Include="app\js\filters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TagKid.Core\TagKid.Core.csproj">
+      <Project>{98DE4062-5774-4E9F-AD95-D6C6CD77023F}</Project>
+      <Name>TagKid.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TagKid.Framework\TagKid.Framework.csproj">
+      <Project>{C2276BF3-7C94-4EFF-9DEB-B45DBF7845EC}</Project>
+      <Name>TagKid.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,6 @@
 ﻿using TagKid.Framework.Exceptions;
 
-namespace TagKid.Core.Models.Messages
+namespace TagKid.Framework.WebApi
 {
     public class Response
     {

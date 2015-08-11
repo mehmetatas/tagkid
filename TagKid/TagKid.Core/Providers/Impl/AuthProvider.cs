@@ -12,64 +12,67 @@ namespace TagKid.Core.Providers.Impl
 {
     public class AuthProvider : IAuthProvider
     {
-        private readonly IDb _db;
+        private readonly IDbFactory _dbFactory;
 
-        public AuthProvider(IDb repo)
+        public AuthProvider(IDbFactory dbFactory)
         {
-            _db = repo;
+            _dbFactory = dbFactory;
         }
 
         public void AuthRoute(RouteContext ctx)
         {
-            var tokenGuid = Guid.Empty;
-
-            IEnumerable<string> headerValues;
-            if (ctx.Request.Headers.TryGetValues("tagkid-auth-token", out headerValues))
+            using (var db = _dbFactory.Create())
             {
-                var authToken = headerValues.FirstOrDefault();
-                Guid.TryParse(authToken, out tokenGuid);
-            }
+                var tokenGuid = Guid.Empty;
 
-            if (tokenGuid == Guid.Empty)
-            {
-                if (NoAuthMethods.Contains(ctx.Method.Method))
+                IEnumerable<string> headerValues;
+                if (ctx.Request.Headers.TryGetValues("tagkid-auth-token", out headerValues))
                 {
-                    return;
+                    var authToken = headerValues.FirstOrDefault();
+                    Guid.TryParse(authToken, out tokenGuid);
                 }
 
-                throw Errors.Auth_LoginRequired.ToException();
+                if (tokenGuid == Guid.Empty)
+                {
+                    if (ctx.Method.NoAuth)
+                    {
+                        return;
+                    }
+
+                    throw Errors.Auth_LoginRequired;
+                }
+
+                var token = db.Select<Token>()
+                    .Join(t => t.User)
+                    .FirstOrDefault(t => t.Guid == tokenGuid);
+
+                if (token == null)
+                {
+                    throw Errors.Auth_LoginRequired;
+                }
+
+                if (token.ExpireDate < DateTime.UtcNow)
+                {
+                    throw Errors.Auth_LoginTokenExpired;
+                }
+
+                if (token.User.Status == UserStatus.AwaitingActivation)
+                {
+                    throw Errors.Auth_UserAwaitingActivation;
+                }
+
+                if (token.User.Status == UserStatus.Passive)
+                {
+                    throw Errors.Auth_UserInactive;
+                }
+
+                if (token.User.Status == UserStatus.Banned)
+                {
+                    throw Errors.Auth_UserBanned;
+                }
+
+                TagKidContext.Current.User = token.User;
             }
-
-            var token = _db.Select<Token>()
-                .Join(t => t.User)
-                .FirstOrDefault(t => t.Guid == tokenGuid);
-
-            if (token == null)
-            {
-                throw Errors.Auth_LoginRequired.ToException();
-            }
-
-            if (token.ExpireDate < DateTime.UtcNow)
-            {
-                throw Errors.Auth_LoginTokenExpired.ToException();
-            }
-
-            if (token.User.Status == UserStatus.AwaitingActivation)
-            {
-                throw Errors.Auth_UserAwaitingActivation.ToException();
-            }
-
-            if (token.User.Status == UserStatus.Passive)
-            {
-                throw Errors.Auth_UserInactive.ToException();
-            }
-
-            if (token.User.Status == UserStatus.Banned)
-            {
-                throw Errors.Auth_UserBanned.ToException();
-            }
-
-            TagKidContext.Current.User = token.User;
         }
     }
 }

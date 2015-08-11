@@ -1,6 +1,7 @@
 ﻿using TagKid.Core.Domain;
-using TagKid.Core.Models.Messages;
+using TagKid.Core.Models.Database;
 using TagKid.Core.Models.Messages.Post;
+using TagKid.Framework.WebApi;
 
 namespace TagKid.Core.Service.Impl
 {
@@ -17,6 +18,15 @@ namespace TagKid.Core.Service.Impl
         {
             _domain.Save(request.Post);
             return Response.Success;
+        }
+        
+        public Response Dummy(DummyRequest request)
+        {
+            return Response.Success.WithData(new User
+            {
+                Id = request.Id,
+                Email = "taga@mail.com"
+            });
         }
     }
 }

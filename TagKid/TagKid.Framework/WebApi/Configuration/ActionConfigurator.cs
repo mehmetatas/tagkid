@@ -33,7 +33,7 @@ namespace TagKid.Framework.WebApi.Configuration
 
         public ActionConfigurator<TService> NoAuth()
         {
-            NoAuthMethods.Add(_currentMethodMapping.Method);
+            _currentMethodMapping.NoAuth = true;
             return this;
         }
 
@@ -75,21 +75,6 @@ namespace TagKid.Framework.WebApi.Configuration
         public ServiceConfig Build()
         {
             return _controllerConfigurator.Build();
-        }
-    }
-
-    public static class NoAuthMethods
-    {
-        private static readonly HashSet<MethodInfo> Methods = new HashSet<MethodInfo>();
-
-        public static void Add(MethodInfo method)
-        {
-            Methods.Add(method);    
-        }
-
-        public static bool Contains(MethodInfo method)
-        {
-            return Methods.Contains(method);
         }
     }
 }

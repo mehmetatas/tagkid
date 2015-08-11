@@ -7,7 +7,7 @@ using TagKid.Framework.IoC;
 
 namespace TagKid.Framework.WebApi
 {
-    public class GenericWebApiHandler : DelegatingHandler
+    internal class GenericWebApiHandler : DelegatingHandler
     {
         public GenericWebApiHandler(HttpConfiguration httpConfig)
         {

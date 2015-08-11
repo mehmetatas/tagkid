@@ -19,13 +19,13 @@ namespace TagKid.Core.Domain.Impl
             var user = _userRepo.GetByEmail(email);
             if (user != null)
             {
-                throw Errors.Auth_EmailAlreadyExists.ToException();
+                throw Errors.Auth_EmailAlreadyExists;
             }
 
             user = _userRepo.GetByUsername(username);
             if (user != null)
             {
-                throw Errors.Auth_UsernameAlreadyExists.ToException();
+                throw Errors.Auth_UsernameAlreadyExists;
             }
 
             user = new User

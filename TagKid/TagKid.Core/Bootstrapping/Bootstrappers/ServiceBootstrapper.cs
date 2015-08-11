@@ -19,7 +19,8 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
         private void BuildPostService(ControllerConfigurator builder)
         {
             builder.ControllerFor<IPostService>("post")
-                .ActionFor(p => p.Save(default(SaveRequest)), "save", HttpMethod.Post);
+                .ActionFor(p => p.Save(default(SaveRequest)), "save", HttpMethod.Post)
+                .ActionFor(p => p.Dummy(default(DummyRequest)), "dummy", HttpMethod.Get).NoAuth();
         }
     }
 }

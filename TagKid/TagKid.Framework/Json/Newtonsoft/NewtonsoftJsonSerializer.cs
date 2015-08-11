@@ -14,6 +14,15 @@ namespace TagKid.Framework.Json.Newtonsoft
         {
             ContractResolver = AllPropertiesResolver.Instance,
             MaxDepth = 50,
+            TypeNameHandling = TypeNameHandling.None,
+            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+        };
+
+        private static readonly JsonSerializerSettings DeserializerSettings = new JsonSerializerSettings
+        {
+            ContractResolver = AllPropertiesResolver.Instance,
+            MaxDepth = 50,
             TypeNameHandling = TypeNameHandling.All,
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects
@@ -26,7 +35,7 @@ namespace TagKid.Framework.Json.Newtonsoft
 
         public object Deserialize(string json, Type targetType)
         {
-            return JsonConvert.DeserializeObject(json, targetType, SerializerSettings);
+            return JsonConvert.DeserializeObject(json, targetType, DeserializerSettings);
         }
 
         class AllPropertiesResolver : DefaultContractResolver

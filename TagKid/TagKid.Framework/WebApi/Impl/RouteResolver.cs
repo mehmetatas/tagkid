@@ -25,7 +25,7 @@ namespace TagKid.Framework.WebApi.Impl
 
             if (indexOfApi < 0)
             {
-                throw Errors.F_RouteResolvingError.ToException();
+                throw Errors.F_RouteResolvingError;
             }
 
             // api/service/method
@@ -33,7 +33,7 @@ namespace TagKid.Framework.WebApi.Impl
 
             if (segments.Length < indexOfApi + 3 || segments.Length > indexOfApi + 4)
             {
-                throw Errors.F_RouteResolvingError.ToException();
+                throw Errors.F_RouteResolvingError;
             }
 
             var serviceRoute = segments[indexOfApi + 1].Trim('/');
@@ -68,14 +68,14 @@ namespace TagKid.Framework.WebApi.Impl
 
             if (service == null)
             {
-                throw Errors.F_RouteResolvingError.ToException();
+                throw Errors.F_RouteResolvingError;
             }
 
             var method = service.MethodMappings.SingleOrDefault(m => m.MethodRoute == methodRoute && m.HttpMethod == httpMethod);
 
             if (method == null)
             {
-                throw Errors.F_RouteResolvingError.ToException();
+                throw Errors.F_RouteResolvingError;
             }
 
             return new RouteContext

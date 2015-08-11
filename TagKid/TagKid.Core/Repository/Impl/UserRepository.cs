@@ -1,13 +1,14 @@
 ﻿using DummyOrm.Db;
 using TagKid.Core.Models.Database;
+using TagKid.Framework.UnitOfWork;
 
 namespace TagKid.Core.Repository.Impl
 {
     public class UserRepository : IUserRepository
     {
-        private readonly IDb _db;
+        private readonly IRepository _db;
 
-        public UserRepository(IDb db)
+        public UserRepository(IRepository db)
         {
             _db = db;
         }

@@ -38,4 +38,9 @@
       'desktop': 992,
       'tablet': 768,
       'mobile': 480
+  })
+  // Error Codes
+  .constant('err', {
+      Auth_LoginRequired: 100,
+      Auth_LoginTokenExpired: 101
   });

@@ -1,4 +1,5 @@
-﻿using DummyOrm.Db;
+﻿using TagKid.Framework.IoC;
+using TagKid.Framework.UnitOfWork;
 using TagKid.Framework.WebApi;
 using TagKid.Framework.WebApi.Configuration;
 
@@ -6,38 +7,33 @@ namespace TagKid.Core.Service.Interceptors
 {
     public class UnitOfWorkInterceptor : IActionInterceptor
     {
-        private IDb _db;
-        private readonly IDbFactory _factory;
-
-        public UnitOfWorkInterceptor(IDbFactory uow)
-        {
-            _factory = uow;
-        }
+        private IUnitOfWork _uow;
 
         public object BeforeCall(RouteContext ctx)
         {
-            _db = _factory.Create();
+            _uow = DependencyContainer.Current.Resolve<IUnitOfWork>();
+
             if (ctx.Method.HttpMethod != HttpMethod.Get)
             {
-                _db.BeginTransaction();
+                _uow.BeginTransaction();
             }
             return null;
         }
 
         public void AfterCall(RouteContext ctx)
         {
-            _db.Commit();
+            _uow.Commit();
         }
 
         public object OnException(RouteContext ctx)
         {
-            _db.Rollback();
+            _uow.Rollback();
             return null;
         }
 
         public void Dispose()
         {
-            _db.Dispose();
+            _uow.Dispose();
         }
     }
 }

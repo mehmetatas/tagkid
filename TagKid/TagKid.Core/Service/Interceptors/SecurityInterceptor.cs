@@ -27,8 +27,8 @@ namespace TagKid.Core.Service.Interceptors
 
         public object OnException(RouteContext ctx)
         {
-            var ex = ctx.Exception as TagKidException;
-            return ex == null ? null : Response.Error(ex.Error);
+            var ex = ctx.Exception as Error ?? Errors.Unknown;
+            return Response.Error(ex);
         }
 
         public void Dispose()

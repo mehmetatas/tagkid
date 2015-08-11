@@ -1,6 +1,7 @@
 ﻿using TagKid.Core.Bootstrapping.Bootstrappers;
 using TagKid.Framework.IoC;
 using TagKid.Framework.IoC.Castle;
+using TagKid.Framework.WebApi;
 
 namespace TagKid.Core.Bootstrapping
 {
@@ -11,9 +12,11 @@ namespace TagKid.Core.Bootstrapping
             DependencyContainer.Init(new CastleDependencyContainer());
 
             Bootstrap(
-                new StartupBootstrapper(),
+                new DependencyBootstrapper(),
                 new DatabaseBootstrapper(),
                 new ServiceBootstrapper());
+
+            WebApi.Init();
         }
 
         public static void Bootstrap(params IBootstrapper[] bootstrappers)

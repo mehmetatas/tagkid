@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using TagKid.Framework.Exceptions;
 using TagKid.Framework.Json;
 
 namespace TagKid.Framework.WebApi.Impl
@@ -23,13 +24,21 @@ namespace TagKid.Framework.WebApi.Impl
 
         public void Handle(HttpRequestMessage request, HttpResponseMessage response)
         {
-            var routeContext = _routeResolver.Resolve(request);
+            try
+            {
+                var routeContext = _routeResolver.Resolve(request);
 
-            _parameterResolver.Resolve(routeContext);
+                _parameterResolver.Resolve(routeContext);
 
-            _invoker.InvokeAction(routeContext);
+                _invoker.InvokeAction(routeContext);
 
-            SetResponse(response, routeContext.ReturnValue);
+                SetResponse(response, routeContext.ReturnValue);
+            }
+            catch (Exception ex)
+            {
+                var err = ex as Error ?? Errors.Unknown;
+                SetResponse(response, Response.Error(err));
+            }
         }
         
         private void SetResponse(HttpResponseMessage response, object result)
