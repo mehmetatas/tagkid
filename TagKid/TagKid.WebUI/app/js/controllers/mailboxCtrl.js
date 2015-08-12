@@ -18,7 +18,7 @@
         // Replace this code with a request to your mails API
         // It expects to receive the following object format
         var tags = ["c#", "java", "python", "oop", "c++", "design-patterns", ".net", "mvc", "sql", "mysql", "php", "asp.net"];
-
+        var panelTypes = ["panel-danger", "panel-warning", "panel-info", "panel-default", "panel-success", "panel-primary"];
         var bodyParts = [
             '<p><img src="/app/img/mb-sample.jpg" alt="Mailbox image" class="img-responsive" /></p>',
             '<p><img src="/app/img/bg1.jpg" alt="Mailbox image" class="img-responsive" /></p>',
@@ -69,7 +69,7 @@
                 m.excerpt += azarnsubj[(Math.floor((Math.random() * (azarnsubj.length))))];
             }
 
-            var tagCount = Math.floor((Math.random() * 5)) + 2;
+            var tagCount = Math.floor((Math.random() * 5) + 2);
             m.tags = [];
             while (tagCount-- > 0) {
                 m.tags.push(tags[(Math.floor((Math.random() * (tags.length))))]);
@@ -80,6 +80,8 @@
             while (bodyCount-- > 0) {
                 m.body += (bodyParts[(Math.floor((Math.random() * (bodyParts.length))))]);
             }
+
+            m.panelType = (panelTypes[(Math.floor((Math.random() * (panelTypes.length))))]);
 
             $scope.mails['inbox'].push(m);
         }

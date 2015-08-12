@@ -9855,20 +9855,14 @@ fieldset[disabled] .calendar-app .fc-button.active {
 }
 .mb-mails .mb-mail-from {
   display: block;
-  color: #8394a9;
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 1.7;
+  font-size: 12px;
+  font-weight: 400;
 }
 .mb-mails .mb-mail-subject {
-  color: #2b3d51;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1.2;
-  padding: 0 .2em;
   overflow: hidden;
   vertical-align: bottom;
-  padding: 0;
 }
 .mb-mails .mb-mail-preview {
   clear: both;
@@ -9876,7 +9870,7 @@ fieldset[disabled] .calendar-app .fc-button.active {
   color: #8394a9;
 }
 .mb-mails .mb-unread {
-  background-color: #f4f5f5;
+    border: 2px solid #08f;
 }
 .mb-panel {
   position: relative;
@@ -9925,9 +9919,9 @@ fieldset[disabled] .calendar-app .fc-button.active {
 }
 @media only screen and (min-width: 768px) {
   .mb-panel > .mb-panel-inner > .mb-panel-list {
-    border-right: 1px solid #e6e9ee;
+    /*border-right: 1px solid #e6e9ee;
+    border-left: 1px solid #e6e9ee;*/
     padding-right: 15px;
-    border-left: 1px solid #e6e9ee;
     padding-left: 15px;
   }
 }
