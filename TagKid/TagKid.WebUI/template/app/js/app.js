@@ -35,11 +35,11 @@ var App = angular.module('singular', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCo
         isCollapsed: false,
         slide: false
       },
-      themeId: 0,
+      themeId: 7,
       theme: {
-        sidebar: 'bg-inverse',
-        brand:   'bg-inverse',
-        topbar:  'bg-white'
+        sidebar: 'bg-white br',
+        brand:   'bg-primary',
+        topbar:  'bg-primary'
       }
     };
     
@@ -179,13 +179,11 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
         })
         .state('app.buttons', {
             url: '/buttons',
-            templateUrl: basepath('buttons.html'),
-            controller: 'NullController'
+            templateUrl: basepath('buttons.html')
         })
         .state('app.palette', {
             url: '/palette',
-            templateUrl: basepath('palette.html'),
-            controller: 'NullController'
+            templateUrl: basepath('palette.html')
         })
         .state('app.notifications', {
             url: '/notifications',
@@ -194,120 +192,99 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
         })
         .state('app.bootstrapui', {
             url: '/bootstrapui',
-            templateUrl: basepath('bootstrap-ui.html'),
-            controller: 'NullController'
+            templateUrl: basepath('bootstrap-ui.html')
         })
         .state('app.panels', {
             url: '/panels',
-            templateUrl: basepath('panels.html'),
-            controller: 'NullController'
+            templateUrl: basepath('panels.html')
         })
         .state('app.portlets', {
             url: '/portlets',
             templateUrl: basepath('portlets.html'),
-            controller: 'NullController',
             resolve: requireDeps('jquery-ui')
         })
         .state('app.maps-google', {
             url: '/maps-google',
             templateUrl: basepath('maps-google.html'),
-            controller: 'NullController',
             resolve: requireDeps('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'AngularGM')
         })
         .state('app.maps-vector', {
             url: '/maps-vector',
             templateUrl: basepath('maps-vector.html'),
-            resolve: requireDeps('vector-map')
+            resolve: requireDeps('vector-map', 'vector-map-maps')
         })
         .state('app.grid', {
             url: '/grid',
-            templateUrl: basepath('grid.html'),
-            controller: 'NullController'
+            templateUrl: basepath('grid.html')
         })
         .state('app.grid-masonry', {
             url: '/grid-masonry',
-            templateUrl: basepath('grid-masonry.html'),
-            controller: 'NullController'
+            templateUrl: basepath('grid-masonry.html')
         })
         .state('app.typo', {
             url: '/typo',
-            templateUrl: basepath('typo.html'),
-            controller: 'NullController'
+            templateUrl: basepath('typo.html')
         })
         .state('app.icons-feather', {
             url: '/icons-feather',
-            templateUrl: basepath('icons-feather.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-feather.html')
         })
         .state('app.icons-fa', {
             url: '/icons-fa',
-            templateUrl: basepath('icons-fa.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-fa.html')
         })
         .state('app.icons-weather', {
             url: '/icons-weather',
-            templateUrl: basepath('icons-weather.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-weather.html')
         })
         .state('app.icons-climacon', {
             url: '/icons-climacon',
-            templateUrl: basepath('icons-climacon.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-climacon.html')
         })
         .state('app.form-inputs', {
             url: '/form-inputs',
             templateUrl: basepath('form-inputs.html'),
-            controller: 'NullController',
             resolve: requireDeps('moment', 'inputmask', 'angular-chosen', 'slider', 'wysiwyg')
         })
         .state('app.form-validation', {
             url: '/form-validation',
-            templateUrl: basepath('form-validation.html'),
-            controller: 'NullController'
+            templateUrl: basepath('form-validation.html')
         })
         .state('app.form-wizard', {
             url: '/form-wizard',
-            templateUrl: basepath('form-wizard.html'),
-            controller: 'NullController'
+            templateUrl: basepath('form-wizard.html')
         })
         .state('app.charts', {
             url: '/charts',
             templateUrl: basepath('charts.html'),
-            controller: 'NullController',
             resolve: requireDeps('flot-chart','flot-chart-plugins')
         })
         .state('app.table-responsive', {
             url: '/table-responsive',
-            templateUrl: basepath('table-responsive.html'),
-            controller: 'NullController'
+            templateUrl: basepath('table-responsive.html')
         })
         .state('app.table-ngtable', {
             url: '/table-ngtable',
             templateUrl: basepath('table-ngtable.html'),
-            controller: 'NullController',
             resolve: requireDeps('ngTable', 'ngTableExport')
         })
         .state('app.calendar', {
             url: '/calendar',
             templateUrl: basepath('calendar.html'),
-            controller: 'NullController',
             resolve: requireDeps('jquery-ui', 'moment', 'ui.calendar', 'gcal')
         })
         .state('app.invoice', {
             url: '/invoice',
-            templateUrl: basepath('invoice.html'),
-            controller: 'NullController'
+            templateUrl: basepath('invoice.html')
         })
         .state('app.search', {
             url: '/search',
             templateUrl: basepath('search.html'),
-            controller: 'NullController',
             resolve: requireDeps('moment',  'angular-chosen', 'slider')
         })
         .state('app.price', {
             url: '/price',
-            templateUrl: basepath('price-table.html'),
-            controller: 'NullController'
+            templateUrl: basepath('price-table.html')
         })
         .state('app.tasks', {
             url: '/tasks',
@@ -316,13 +293,11 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
         })
         .state('app.template', {
             url: '/template',
-            templateUrl: basepath('template.html'),
-            controller: 'NullController'
+            templateUrl: basepath('template.html')
         })
         .state('app.documentation', {
             url: '/documentation',
             templateUrl: basepath('documentation.html'),
-            controller: 'NullController',
             resolve: requireDeps('flatdoc')
         })
         // Mailbox
@@ -361,7 +336,6 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
                 templateUrl: basepath('mailbox-compose.html')
               }
             },
-            controller: 'NullController',
             resolve: requireDeps('wysiwyg')
         })
         // 
@@ -474,8 +448,7 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.latencyThreshold = 500;
     cfpLoadingBarProvider.parentSelector = '.app-container > section';
-  }])
-.controller('NullController', function() {});
+}]);
 
 /**=========================================================
  * Module: constants.js
@@ -498,9 +471,9 @@ App
       'slimscroll':         ['app/vendor/slimscroll/jquery.slimscroll.min.js'],
       'screenfull':         ['app/vendor/screenfull/dist/screenfull.min.js'],
       'vector-map':         ['app/vendor/ika.jvectormap/jquery-jvectormap-1.2.2.min.js',
-                             'app/vendor/ika.jvectormap/jquery-jvectormap-world-mill-en.js',
-                             'app/vendor/ika.jvectormap/jquery-jvectormap-us-mill-en.js',
                              'app/vendor/ika.jvectormap/jquery-jvectormap-1.2.2.css'],
+      'vector-map-maps':    ['app/vendor/ika.jvectormap/jquery-jvectormap-world-mill-en.js',
+                             'app/vendor/ika.jvectormap/jquery-jvectormap-us-mill-en.js'],
       'loadGoogleMapsJS':   ['app/js/gmap/load-google-maps.js'],
       'flot-chart':         ['app/vendor/Flot/jquery.flot.js'],
       'flot-chart-plugins': ['app/vendor/flot.tooltip/js/jquery.flot.tooltip.min.js',
@@ -522,7 +495,7 @@ App
                                           'app/vendor/angularjs-toaster/toaster.css']},
       {name: 'ui.knob',           files: ['app/vendor/angular-knob/src/angular-knob.js',
                                           'app/vendor/jquery-knob/dist/jquery.knob.min.js']},
-      {name: 'angularFileUpload', files: ['app/vendor/angular-file-upload/angular-file-upload.min.js']},
+      {name: 'angularFileUpload', files: ['app/vendor/angular-file-upload/dist/angular-file-upload.min.js']},
       {name: 'angular-chosen',    files: ['app/vendor/chosen_v1.2.0/chosen.jquery.min.js',
                                           'app/vendor/chosen_v1.2.0/chosen.min.css',
                                           'app/vendor/angular-chosen/angular-chosen.js']},
@@ -1369,6 +1342,50 @@ App.directive('sparkline', ['$timeout', '$window', function($timeout, $window){
 
 }]);
 
+/**=========================================================
+ * Module: FlatDocDirective.js
+ * Creates the flatdoc markup and initializes the plugin
+ =========================================================*/
+
+App.directive('flatdoc', ["$document", function($document) {
+  'use strict';
+  return {
+    restrict: "EA",
+    template: ["<div role='flatdoc'>",
+                  "<div role='flatdoc-menu' ui-scrollfix='+1'></div>",
+                  "<div role='flatdoc-content'></div>",
+               "</div>"].join('\n'),
+    link: function(scope, element, attrs) {
+
+      var $root = $('html, body');
+      
+      Flatdoc.run({
+        fetcher: Flatdoc.file(attrs.src)
+      });
+
+      angular.element($document).on('flatdoc:ready', function() {
+        
+        var docMenu = element.find('[role="flatdoc-menu"]');
+        
+        docMenu.find('a').on('click', function(e) {
+          e.preventDefault(); e.stopPropagation();
+          
+          var $this = $(this);
+          
+          docMenu.find('a.active').removeClass('active');
+          $this.addClass('active');
+
+          $root.animate({
+                scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
+            }, 800);
+        });
+
+      });
+    }
+  };
+
+}])
+;
 App.controller('DashboardController', ['$scope', 'colors', 'flotOptions', function($scope, colors, flotOptions) {
   'use strict';
   // KNOB Charts
@@ -1434,50 +1451,6 @@ App.controller('DashboardController', ['$scope', 'colors', 'flotOptions', functi
   };
 
 }]);
-/**=========================================================
- * Module: FlatDocDirective.js
- * Creates the flatdoc markup and initializes the plugin
- =========================================================*/
-
-App.directive('flatdoc', ["$document", function($document) {
-  'use strict';
-  return {
-    restrict: "EA",
-    template: ["<div role='flatdoc'>",
-                  "<div role='flatdoc-menu' ui-scrollfix='+1'></div>",
-                  "<div role='flatdoc-content'></div>",
-               "</div>"].join('\n'),
-    link: function(scope, element, attrs) {
-
-      var $root = $('html, body');
-      
-      Flatdoc.run({
-        fetcher: Flatdoc.file(attrs.src)
-      });
-
-      angular.element($document).on('flatdoc:ready', function() {
-        
-        var docMenu = element.find('[role="flatdoc-menu"]');
-        
-        docMenu.find('a').on('click', function(e) {
-          e.preventDefault(); e.stopPropagation();
-          
-          var $this = $(this);
-          
-          docMenu.find('a.active').removeClass('active');
-          $this.addClass('active');
-
-          $root.animate({
-                scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
-            }, 800);
-        });
-
-      });
-    }
-  };
-
-}])
-;
 /**=========================================================
  * Module: BootstrapSliderDirective
  * Initializes the jQuery UI slider controls
@@ -1941,6 +1914,301 @@ App.controller('SummaryController', ["$scope", "colors", function($scope, colors
   $scope.sparkData3 = [1,2,3,4,5,6,7,8,9];
 
 }]);
+/**=========================================================
+ * Module: GoogleMapController.js
+ * Google Map plugin controller
+ =========================================================*/
+
+App.controller('GoogleMapController', GoogleMapController);
+
+function GoogleMapController($scope) {
+  'use strict';
+  var vm = this;
+  // Demo 1
+  // ----------------------------------- 
+
+  $scope.$watch(function(){
+    return vm.center;
+   }, function(center) {
+     if (center) {
+       vm.centerLat = center.lat();
+       vm.centerLng = center.lng();
+     }
+  });
+  
+  this.updateCenter = function(lat, lng) {
+    vm.center = new google.maps.LatLng(lat, lng);
+  };
+
+  // Demo 2
+  // ----------------------------------- 
+
+  this.options = {
+    map: {
+      center: new google.maps.LatLng(48, -121),
+      zoom: 6,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    },
+  };
+  
+  this.volcanoes = [
+    {
+      id: 0,
+      name: 'Mount Rainier',
+      img: 'http://www.thetrackerfoundation.org/Images/MountRainier_SM.jpg',
+      elevationMeters: 4392,
+      location: {
+        lat: 46.852947,
+        lng: -121.760424
+      }
+    },
+    {
+      id: 1,
+      name: 'Mount Baker',
+      img: 'http://www.destination360.com/north-america/us/washington/images/s/washington-mt-baker-ski.jpg',
+      elevationMeters: 3287,
+      location: {
+        lat: 48.776797,
+        lng: -121.814467
+      }
+    },
+    {
+      id: 2,
+      name: 'Glacier Peak',
+      img: 'http://www.rhinoclimbs.com/Images/Glacier.9.jpg',
+      elevationMeters: 3207,
+      location: {
+        lat: 48.111844,
+        lng: -121.11412
+      }
+    }
+  ];
+  
+  this.triggerOpenInfoWindow = function(volcano) {
+    vm.markerEvents = [
+      {
+        event: 'openinfowindow',
+        ids: [volcano.id]
+      },
+    ];
+  };
+
+  // Demo 3
+  // ----------------------------------- 
+
+  this.options3 = {
+    map: {
+      center: new google.maps.LatLng(48, -121),
+      zoom: 6,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    },
+    notselected: {
+      icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png'
+    },
+    selected: {
+      icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png'
+    }
+  };
+
+  // add to global scope so the map plugin can see the mutated object
+  // when we broadcast the changes
+  $scope.volcanoes = this.volcanoes;
+
+  this.getVolcanoOpts = function(volcan) {
+    return angular.extend(
+     { title: volcan.name },
+     volcan.selected ? vm.options3.selected :
+        vm.options3.notselected
+    );
+  };
+  
+  this.selectVolcano = function(volcan) {
+    if (vm.volcan) {
+      vm.volcan.selected = false;
+    }
+    vm.volcan = volcan;
+    vm.volcan.selected = true;
+
+    $scope.$broadcast('gmMarkersUpdate', 'volcanoes');
+
+  };
+
+}
+GoogleMapController.$inject = ["$scope"];
+/**=========================================================
+ * Module: VectorMapController.js
+ * jVector Maps support
+ =========================================================*/
+
+App.controller('VectorMapController', VectorMapController);
+
+function VectorMapController($scope, colors) {
+  'use strict';
+  var vm = this;
+  
+  // SERIES & MARKERS FOR WORLD MAP
+  // ----------------------------------- 
+
+  this.seriesData = {
+    'AU': 15710,    // Australia
+    'RU': 17312,    // Russia
+    'CN': 123370,    // China
+    'US': 12337,     // USA
+    'AR': 18613,    // Argentina
+    'CO': 12170,   // Colombia
+    'DE': 1358,    // Germany
+    'FR': 1479,    // France
+    'GB': 16311,    // Great Britain
+    'IN': 19814,    // India
+    'SA': 12137      // Saudi Arabia
+  };
+  
+  this.markersData = [
+    { latLng:[41.90, 12.45],  name:'Vatican City'          },
+    { latLng:[43.73, 7.41],   name:'Monaco'                },
+    { latLng:[-0.52, 166.93], name:'Nauru'                 },
+    { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+    { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+    { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+    { latLng:[3.2,73.22],     name:'Maldives'              },
+    { latLng:[35.88,14.5],    name:'Malta'                 },
+    { latLng:[41.0,-71.06],   name:'New England'           },
+    { latLng:[12.05,-61.75],  name:'Grenada'               },
+    { latLng:[13.16,-59.55],  name:'Barbados'              },
+    { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+    { latLng:[-4.61,55.45],   name:'Seychelles'            },
+    { latLng:[7.35,134.46],   name:'Palau'                 },
+    { latLng:[42.5,1.51],     name:'Andorra'               }
+  ];
+  
+  // set options will be reused later
+  this.mapOptions = {
+      height:          500,
+      map:             'world_mill_en',
+      backgroundColor: 'transparent',
+      zoomMin:         0,
+      zoomMax:         8,
+      zoomOnScroll:    false,
+      regionStyle: {
+        initial: {
+          'fill':           colors.byName('gray-dark'),
+          'fill-opacity':   1,
+          'stroke':         'none',
+          'stroke-width':   1.5,
+          'stroke-opacity': 1
+        },
+        hover: {
+          'fill-opacity': 0.8
+        },
+        selected: {
+          fill: 'blue'
+        },
+        selectedHover: {
+        }
+      },
+      focusOn:{ x:0.4, y:0.6, scale: 1},
+      markerStyle: {
+        initial: {
+          fill: colors.byName('warning'),
+          stroke: colors.byName('warning')
+        }
+      },
+      onRegionLabelShow: function(e, el, code) {
+        if ( vm.seriesData && vm.seriesData[code] )
+          el.html(el.html() + ': ' + vm.seriesData[code] + ' visitors');
+      },
+      markers: vm.markersData,
+      series: {
+          regions: [{
+              values: vm.seriesData,
+              scale: [ colors.byName('gray-darker') ],
+              normalizeFunction: 'polynomial'
+          }]
+      },
+    };
+
+  // USA MAP
+  // ----------------------------------- 
+  this.usaMarkersData = [
+    {latLng: [33.9783241, -84.4783064],               name: 'Mark_1'},
+    {latLng: [30.51220349999999, -97.67312530000001], name: 'Mark_2'},
+    {latLng: [39.4014955, -76.6019125],               name: 'Mark_3'},
+    {latLng: [33.37857109999999, -86.80439],          name: 'Mark_4'},
+    {latLng: [43.1938516, -71.5723953],               name: 'Mark_5'},
+    {latLng: [43.0026291, -78.8223134],               name: 'Mark_6'},
+    {latLng: [33.836081, -81.1637245],                name: 'Mark_7'},
+    {latLng: [41.7435073, -88.0118473],               name: 'Mark_8'},
+    {latLng: [39.1031182, -84.5120196],               name: 'Mark_9'},
+    {latLng: [41.6661573, -81.339552],                name: 'Mark_10'},
+    {latLng: [39.9611755, -82.99879419999999],        name: 'Mark_11'},
+    {latLng: [32.735687, -97.10806559999999],         name: 'Mark_12'},
+    {latLng: [39.9205411, -105.0866504],              name: 'Mark_13'},
+    {latLng: [42.8105356, -83.0790865],               name: 'Mark_14'},
+    {latLng: [41.754166, -72.624443],                 name: 'Mark_15'},
+    {latLng: [29.7355047, -94.97742740000001],        name: 'Mark_16'},
+    {latLng: [39.978371, -86.1180435],                name: 'Mark_17'},
+    {latLng: [30.3321838, -81.65565099999999],        name: 'Mark_18'},
+    {latLng: [39.0653602, -94.5624426],               name: 'Mark_19'},
+    {latLng: [36.0849963, -115.1511364],              name: 'Mark_20'},
+    {latLng: [34.0596149, -118.1122679],              name: 'Mark_21'},
+    {latLng: [38.3964426, -85.4375574],               name: 'Mark_22'}
+  ];
+
+  this.mapOptions2 = angular.extend({}, this.mapOptions,
+    {
+      map: 'us_mill_en',
+      regionStyle: {
+        initial: {
+          'fill':           colors.byName('info')
+        }
+      },
+      focusOn:{ x:0.5, y:0.5, scale: 1.2},
+      markerStyle: {
+        initial: {
+          fill: colors.byName('turquoise'),
+          stroke: colors.byName('turquoise'),
+          r: 10
+        },
+        hover: {
+            stroke: colors.byName('success'),
+            'stroke-width': 2
+          },
+      },
+      markers: this.usaMarkersData,
+      series: {}
+    }
+  );
+}
+VectorMapController.$inject = ["$scope", "colors"];
+
+/**=========================================================
+ * Module: VectorMapDirective
+ * Init jQuery Vector Map plugin
+ =========================================================*/
+
+App.directive('vectorMap', function(){
+  'use strict';
+
+  return {
+    restrict: 'EA',
+    scope: {
+      mapOptions: '='
+    },
+    compile: function(tElement, tAttrs, transclude) {
+      return {
+        post: function(scope, element) {
+          var options     = scope.mapOptions,
+              mapHeight   = options.height || '300';
+          
+          element.css('height', mapHeight);
+          
+          element.vectorMap(options);
+        }
+      };
+    }
+  };
+
+});
 /**=========================================================
  * Module: PortletsController.js
  * Drag and drop any panel based on jQueryUI portlets
@@ -2425,301 +2693,6 @@ App.service('sidebarMemu', ["$rootScope", "$http", function($rootScope, $http) {
   };
 
 }]);
-/**=========================================================
- * Module: GoogleMapController.js
- * Google Map plugin controller
- =========================================================*/
-
-App.controller('GoogleMapController', GoogleMapController);
-
-function GoogleMapController($scope) {
-  'use strict';
-  var vm = this;
-  // Demo 1
-  // ----------------------------------- 
-
-  $scope.$watch(function(){
-    return vm.center;
-   }, function(center) {
-     if (center) {
-       vm.centerLat = center.lat();
-       vm.centerLng = center.lng();
-     }
-  });
-  
-  this.updateCenter = function(lat, lng) {
-    vm.center = new google.maps.LatLng(lat, lng);
-  };
-
-  // Demo 2
-  // ----------------------------------- 
-
-  this.options = {
-    map: {
-      center: new google.maps.LatLng(48, -121),
-      zoom: 6,
-      mapTypeId: google.maps.MapTypeId.TERRAIN
-    },
-  };
-  
-  this.volcanoes = [
-    {
-      id: 0,
-      name: 'Mount Rainier',
-      img: 'http://www.thetrackerfoundation.org/Images/MountRainier_SM.jpg',
-      elevationMeters: 4392,
-      location: {
-        lat: 46.852947,
-        lng: -121.760424
-      }
-    },
-    {
-      id: 1,
-      name: 'Mount Baker',
-      img: 'http://www.destination360.com/north-america/us/washington/images/s/washington-mt-baker-ski.jpg',
-      elevationMeters: 3287,
-      location: {
-        lat: 48.776797,
-        lng: -121.814467
-      }
-    },
-    {
-      id: 2,
-      name: 'Glacier Peak',
-      img: 'http://www.rhinoclimbs.com/Images/Glacier.9.jpg',
-      elevationMeters: 3207,
-      location: {
-        lat: 48.111844,
-        lng: -121.11412
-      }
-    }
-  ];
-  
-  this.triggerOpenInfoWindow = function(volcano) {
-    vm.markerEvents = [
-      {
-        event: 'openinfowindow',
-        ids: [volcano.id]
-      },
-    ];
-  };
-
-  // Demo 3
-  // ----------------------------------- 
-
-  this.options3 = {
-    map: {
-      center: new google.maps.LatLng(48, -121),
-      zoom: 6,
-      mapTypeId: google.maps.MapTypeId.TERRAIN
-    },
-    notselected: {
-      icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png'
-    },
-    selected: {
-      icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png'
-    }
-  };
-
-  // add to global scope so the map plugin can see the mutated object
-  // when we broadcast the changes
-  $scope.volcanoes = this.volcanoes;
-
-  this.getVolcanoOpts = function(volcan) {
-    return angular.extend(
-     { title: volcan.name },
-     volcan.selected ? vm.options3.selected :
-        vm.options3.notselected
-    );
-  };
-  
-  this.selectVolcano = function(volcan) {
-    if (vm.volcan) {
-      vm.volcan.selected = false;
-    }
-    vm.volcan = volcan;
-    vm.volcan.selected = true;
-
-    $scope.$broadcast('gmMarkersUpdate', 'volcanoes');
-
-  };
-
-}
-GoogleMapController.$inject = ["$scope"];
-/**=========================================================
- * Module: VectorMapController.js
- * jVector Maps support
- =========================================================*/
-
-App.controller('VectorMapController', VectorMapController);
-
-function VectorMapController($scope, colors) {
-  'use strict';
-  var vm = this;
-  
-  // SERIES & MARKERS FOR WORLD MAP
-  // ----------------------------------- 
-
-  this.seriesData = {
-    'AU': 15710,    // Australia
-    'RU': 17312,    // Russia
-    'CN': 123370,    // China
-    'US': 12337,     // USA
-    'AR': 18613,    // Argentina
-    'CO': 12170,   // Colombia
-    'DE': 1358,    // Germany
-    'FR': 1479,    // France
-    'GB': 16311,    // Great Britain
-    'IN': 19814,    // India
-    'SA': 12137      // Saudi Arabia
-  };
-  
-  this.markersData = [
-    { latLng:[41.90, 12.45],  name:'Vatican City'          },
-    { latLng:[43.73, 7.41],   name:'Monaco'                },
-    { latLng:[-0.52, 166.93], name:'Nauru'                 },
-    { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-    { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-    { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-    { latLng:[3.2,73.22],     name:'Maldives'              },
-    { latLng:[35.88,14.5],    name:'Malta'                 },
-    { latLng:[41.0,-71.06],   name:'New England'           },
-    { latLng:[12.05,-61.75],  name:'Grenada'               },
-    { latLng:[13.16,-59.55],  name:'Barbados'              },
-    { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-    { latLng:[-4.61,55.45],   name:'Seychelles'            },
-    { latLng:[7.35,134.46],   name:'Palau'                 },
-    { latLng:[42.5,1.51],     name:'Andorra'               }
-  ];
-  
-  // set options will be reused later
-  this.mapOptions = {
-      height:          500,
-      map:             'world_mill_en',
-      backgroundColor: 'transparent',
-      zoomMin:         0,
-      zoomMax:         8,
-      zoomOnScroll:    false,
-      regionStyle: {
-        initial: {
-          'fill':           colors.byName('gray-dark'),
-          'fill-opacity':   1,
-          'stroke':         'none',
-          'stroke-width':   1.5,
-          'stroke-opacity': 1
-        },
-        hover: {
-          'fill-opacity': 0.8
-        },
-        selected: {
-          fill: 'blue'
-        },
-        selectedHover: {
-        }
-      },
-      focusOn:{ x:0.4, y:0.6, scale: 1},
-      markerStyle: {
-        initial: {
-          fill: colors.byName('warning'),
-          stroke: colors.byName('warning')
-        }
-      },
-      onRegionLabelShow: function(e, el, code) {
-        if ( vm.seriesData && vm.seriesData[code] )
-          el.html(el.html() + ': ' + vm.seriesData[code] + ' visitors');
-      },
-      markers: vm.markersData,
-      series: {
-          regions: [{
-              values: vm.seriesData,
-              scale: [ colors.byName('gray-darker') ],
-              normalizeFunction: 'polynomial'
-          }]
-      },
-    };
-
-  // USA MAP
-  // ----------------------------------- 
-  this.usaMarkersData = [
-    {latLng: [33.9783241, -84.4783064],               name: 'Mark_1'},
-    {latLng: [30.51220349999999, -97.67312530000001], name: 'Mark_2'},
-    {latLng: [39.4014955, -76.6019125],               name: 'Mark_3'},
-    {latLng: [33.37857109999999, -86.80439],          name: 'Mark_4'},
-    {latLng: [43.1938516, -71.5723953],               name: 'Mark_5'},
-    {latLng: [43.0026291, -78.8223134],               name: 'Mark_6'},
-    {latLng: [33.836081, -81.1637245],                name: 'Mark_7'},
-    {latLng: [41.7435073, -88.0118473],               name: 'Mark_8'},
-    {latLng: [39.1031182, -84.5120196],               name: 'Mark_9'},
-    {latLng: [41.6661573, -81.339552],                name: 'Mark_10'},
-    {latLng: [39.9611755, -82.99879419999999],        name: 'Mark_11'},
-    {latLng: [32.735687, -97.10806559999999],         name: 'Mark_12'},
-    {latLng: [39.9205411, -105.0866504],              name: 'Mark_13'},
-    {latLng: [42.8105356, -83.0790865],               name: 'Mark_14'},
-    {latLng: [41.754166, -72.624443],                 name: 'Mark_15'},
-    {latLng: [29.7355047, -94.97742740000001],        name: 'Mark_16'},
-    {latLng: [39.978371, -86.1180435],                name: 'Mark_17'},
-    {latLng: [30.3321838, -81.65565099999999],        name: 'Mark_18'},
-    {latLng: [39.0653602, -94.5624426],               name: 'Mark_19'},
-    {latLng: [36.0849963, -115.1511364],              name: 'Mark_20'},
-    {latLng: [34.0596149, -118.1122679],              name: 'Mark_21'},
-    {latLng: [38.3964426, -85.4375574],               name: 'Mark_22'}
-  ];
-
-  this.mapOptions2 = angular.extend({}, this.mapOptions,
-    {
-      map: 'us_mill_en',
-      regionStyle: {
-        initial: {
-          'fill':           colors.byName('info')
-        }
-      },
-      focusOn:{ x:0.5, y:0.5, scale: 1.2},
-      markerStyle: {
-        initial: {
-          fill: colors.byName('turquoise'),
-          stroke: colors.byName('turquoise'),
-          r: 10
-        },
-        hover: {
-            stroke: colors.byName('success'),
-            'stroke-width': 2
-          },
-      },
-      markers: this.usaMarkersData,
-      series: {}
-    }
-  );
-}
-VectorMapController.$inject = ["$scope", "colors"];
-
-/**=========================================================
- * Module: VectorMapDirective
- * Init jQuery Vector Map plugin
- =========================================================*/
-
-App.directive('vectorMap', function(){
-  'use strict';
-
-  return {
-    restrict: 'EA',
-    scope: {
-      mapOptions: '='
-    },
-    compile: function(tElement, tAttrs, transclude) {
-      return {
-        post: function(scope, element) {
-          var options     = scope.mapOptions,
-              mapHeight   = options.height || '300';
-          
-          element.css('height', mapHeight);
-          
-          element.vectorMap(options);
-        }
-      };
-    }
-  };
-
-});
 /**=========================================================
  * Module: AngularTableController.js
  * Controller for ngTables
@@ -3322,20 +3295,6 @@ App.directive('scrollable', function() {
   };
 });
 /**=========================================================
- * Module: TitleCaseFilter.js
- * Convert any case to title
- =========================================================*/
-
-App.filter('titlecase', function() {
-  'use strict';
-  return function(s) {
-      s = ( s === undefined || s === null ) ? '' : s;
-      return s.toString().toLowerCase().replace( /\b([a-z])/g, function(ch) {
-          return ch.toUpperCase();
-      });
-  };
-});
-/**=========================================================
  * Module: AnimateEnabledDirective.js
  * Enable or disables ngAnimate for element with directive
  =========================================================*/
@@ -3387,6 +3346,10 @@ App.directive('toggleFullscreen', function() {
     restrict: 'A',
     link: function(scope, element, attrs) {
 
+      // fullscreen not supported on ie
+      if( /Edge\/|Trident\/|MSIE /.test(window.navigator.userAgent) )
+        return $('[toggle-fullscreen]').addClass('hide');
+      
       if (screenfull.enabled) {
 
         element.on('click', function (e) {
@@ -3481,6 +3444,20 @@ App.directive('toggleState', ['toggleStateService', function(toggle) {
   
 }]);
 
+/**=========================================================
+ * Module: TitleCaseFilter.js
+ * Convert any case to title
+ =========================================================*/
+
+App.filter('titlecase', function() {
+  'use strict';
+  return function(s) {
+      s = ( s === undefined || s === null ) ? '' : s;
+      return s.toString().toLowerCase().replace( /\b([a-z])/g, function(ch) {
+          return ch.toUpperCase();
+      });
+  };
+});
 /**=========================================================
  * Module: BrowserDetectionService.js
  * Browser detection service

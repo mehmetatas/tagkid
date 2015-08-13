@@ -46,13 +46,11 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
         })
         .state('app.buttons', {
             url: '/buttons',
-            templateUrl: basepath('buttons.html'),
-            controller: 'NullController'
+            templateUrl: basepath('buttons.html')
         })
         .state('app.palette', {
             url: '/palette',
-            templateUrl: basepath('palette.html'),
-            controller: 'NullController'
+            templateUrl: basepath('palette.html')
         })
         .state('app.notifications', {
             url: '/notifications',
@@ -61,120 +59,99 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
         })
         .state('app.bootstrapui', {
             url: '/bootstrapui',
-            templateUrl: basepath('bootstrap-ui.html'),
-            controller: 'NullController'
+            templateUrl: basepath('bootstrap-ui.html')
         })
         .state('app.panels', {
             url: '/panels',
-            templateUrl: basepath('panels.html'),
-            controller: 'NullController'
+            templateUrl: basepath('panels.html')
         })
         .state('app.portlets', {
             url: '/portlets',
             templateUrl: basepath('portlets.html'),
-            controller: 'NullController',
             resolve: requireDeps('jquery-ui')
         })
         .state('app.maps-google', {
             url: '/maps-google',
             templateUrl: basepath('maps-google.html'),
-            controller: 'NullController',
             resolve: requireDeps('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'AngularGM')
         })
         .state('app.maps-vector', {
             url: '/maps-vector',
             templateUrl: basepath('maps-vector.html'),
-            resolve: requireDeps('vector-map')
+            resolve: requireDeps('vector-map', 'vector-map-maps')
         })
         .state('app.grid', {
             url: '/grid',
-            templateUrl: basepath('grid.html'),
-            controller: 'NullController'
+            templateUrl: basepath('grid.html')
         })
         .state('app.grid-masonry', {
             url: '/grid-masonry',
-            templateUrl: basepath('grid-masonry.html'),
-            controller: 'NullController'
+            templateUrl: basepath('grid-masonry.html')
         })
         .state('app.typo', {
             url: '/typo',
-            templateUrl: basepath('typo.html'),
-            controller: 'NullController'
+            templateUrl: basepath('typo.html')
         })
         .state('app.icons-feather', {
             url: '/icons-feather',
-            templateUrl: basepath('icons-feather.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-feather.html')
         })
         .state('app.icons-fa', {
             url: '/icons-fa',
-            templateUrl: basepath('icons-fa.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-fa.html')
         })
         .state('app.icons-weather', {
             url: '/icons-weather',
-            templateUrl: basepath('icons-weather.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-weather.html')
         })
         .state('app.icons-climacon', {
             url: '/icons-climacon',
-            templateUrl: basepath('icons-climacon.html'),
-            controller: 'NullController'
+            templateUrl: basepath('icons-climacon.html')
         })
         .state('app.form-inputs', {
             url: '/form-inputs',
             templateUrl: basepath('form-inputs.html'),
-            controller: 'NullController',
             resolve: requireDeps('moment', 'inputmask', 'angular-chosen', 'slider', 'wysiwyg')
         })
         .state('app.form-validation', {
             url: '/form-validation',
-            templateUrl: basepath('form-validation.html'),
-            controller: 'NullController'
+            templateUrl: basepath('form-validation.html')
         })
         .state('app.form-wizard', {
             url: '/form-wizard',
-            templateUrl: basepath('form-wizard.html'),
-            controller: 'NullController'
+            templateUrl: basepath('form-wizard.html')
         })
         .state('app.charts', {
             url: '/charts',
             templateUrl: basepath('charts.html'),
-            controller: 'NullController',
             resolve: requireDeps('flot-chart','flot-chart-plugins')
         })
         .state('app.table-responsive', {
             url: '/table-responsive',
-            templateUrl: basepath('table-responsive.html'),
-            controller: 'NullController'
+            templateUrl: basepath('table-responsive.html')
         })
         .state('app.table-ngtable', {
             url: '/table-ngtable',
             templateUrl: basepath('table-ngtable.html'),
-            controller: 'NullController',
             resolve: requireDeps('ngTable', 'ngTableExport')
         })
         .state('app.calendar', {
             url: '/calendar',
             templateUrl: basepath('calendar.html'),
-            controller: 'NullController',
             resolve: requireDeps('jquery-ui', 'moment', 'ui.calendar', 'gcal')
         })
         .state('app.invoice', {
             url: '/invoice',
-            templateUrl: basepath('invoice.html'),
-            controller: 'NullController'
+            templateUrl: basepath('invoice.html')
         })
         .state('app.search', {
             url: '/search',
             templateUrl: basepath('search.html'),
-            controller: 'NullController',
             resolve: requireDeps('moment',  'angular-chosen', 'slider')
         })
         .state('app.price', {
             url: '/price',
-            templateUrl: basepath('price-table.html'),
-            controller: 'NullController'
+            templateUrl: basepath('price-table.html')
         })
         .state('app.tasks', {
             url: '/tasks',
@@ -183,13 +160,11 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
         })
         .state('app.template', {
             url: '/template',
-            templateUrl: basepath('template.html'),
-            controller: 'NullController'
+            templateUrl: basepath('template.html')
         })
         .state('app.documentation', {
             url: '/documentation',
             templateUrl: basepath('documentation.html'),
-            controller: 'NullController',
             resolve: requireDeps('flatdoc')
         })
         // Mailbox
@@ -228,7 +203,6 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
                 templateUrl: basepath('mailbox-compose.html')
               }
             },
-            controller: 'NullController',
             resolve: requireDeps('wysiwyg')
         })
         // 
@@ -341,5 +315,4 @@ App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$comp
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.latencyThreshold = 500;
     cfpLoadingBarProvider.parentSelector = '.app-container > section';
-  }])
-.controller('NullController', function() {});
+}]);

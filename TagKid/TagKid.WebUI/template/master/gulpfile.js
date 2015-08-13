@@ -19,6 +19,7 @@ var gulp        = require('gulp'),
     ngAnnotate  = require('gulp-ng-annotate'),
     webserver   = require('gulp-webserver'),
     markdownpdf = require('gulp-markdown-pdf'),
+    expectFile  = require('gulp-expect-file'),
     PluginError = gutil.PluginError;
 
 
@@ -89,29 +90,29 @@ var vendor = {
     // modernizr custom build
     '../app/js/modernizr/modernizr.custom.js',
     // jQuery
-    './bower_components/jquery/dist/jquery.js',
+    'bower_components/jquery/dist/jquery.js',
     // Angular
-    './bower_components/angular/angular.js',
-    './bower_components/angular-route/angular-route.js',
-    './bower_components/angular-cookies/angular-cookies.js',
-    './bower_components/angular-animate/angular-animate.js',
-    './bower_components/angular-ui-router/release/angular-ui-router.js',
+    'bower_components/angular/angular.js',
+    'bower_components/angular-route/angular-route.js',
+    'bower_components/angular-cookies/angular-cookies.js',
+    'bower_components/angular-animate/angular-animate.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.js',
     // Angular storage
-    './bower_components/ngstorage/ngStorage.js',
+    'bower_components/ngstorage/ngStorage.js',
     // Angular UI Utils
-    './bower_components/angular-ui-utils/ui-utils.js',
+    'bower_components/angular-ui-utils/ui-utils.js',
     // Angular Translate
-    './bower_components/angular-translate/angular-translate.js',
-    './bower_components/angular-translate-loader-url/angular-translate-loader-url.js',
-    './bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
-    './bower_components/angular-translate-storage-local/angular-translate-storage-local.js',
-    './bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+    'bower_components/angular-translate/angular-translate.js',
+    'bower_components/angular-translate-loader-url/angular-translate-loader-url.js',
+    'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+    'bower_components/angular-translate-storage-local/angular-translate-storage-local.js',
+    'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
     // oclazyload
-    './bower_components/oclazyload/dist/ocLazyLoad.js',
+    'bower_components/oclazyload/dist/ocLazyLoad.js',
     // UI Bootstrap
-    './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
     // Loading Bar
-    './bower_components/angular-loading-bar/build/loading-bar.js'
+    'bower_components/angular-loading-bar/build/loading-bar.js'
   ],
 };
 
@@ -248,6 +249,7 @@ gulp.task('set:dev', function() {
 // generates base.js file
 gulp.task('vendor:base', function() {
     return gulp.src(vendor.baseInclude)
+        .pipe( expectFile(vendor.baseInclude) )
         .pipe(concat(vendor.baseFile))
         .on("error", handleError)
         .pipe( uglify() )
@@ -262,6 +264,7 @@ gulp.task('vendor:copy', function() {
       path = require('path');
 
   gulp.src(vendorSrc, {base: 'bower_components'})
+      .pipe( expectFile(vendorSrc) )
       .pipe( gulp.dest(vendor.folder) )
       ;
 

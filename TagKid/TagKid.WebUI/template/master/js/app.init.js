@@ -35,11 +35,11 @@ var App = angular.module('singular', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCo
         isCollapsed: false,
         slide: false
       },
-      themeId: 0,
+      themeId: 7,
       theme: {
-        sidebar: 'bg-inverse',
-        brand:   'bg-inverse',
-        topbar:  'bg-white'
+        sidebar: 'bg-white br',
+        brand:   'bg-primary',
+        topbar:  'bg-primary'
       }
     };
     

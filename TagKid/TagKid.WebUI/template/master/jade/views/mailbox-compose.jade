@@ -24,14 +24,14 @@
         // The wysiswyg toolbar buttons
         .btn-toolbar.mb(data-role='editor-toolbar', data-target='#editor')
           .btn-group(dropdown='dropdown')
-            a.btn.btn-default.dropdown-toggle(data-toggle='dropdown', tooltip='Font')
+            a.btn.btn-default.dropdown-toggle(dropdown-toggle="", tooltip='Font')
               em.fa.fa-font
               b.caret
             ul.dropdown-menu
               li(ng-repeat="ff in form.editorFontFamilyList")
                 a(href='', data-edit='fontName {{ff}}', ng-attr-style="font-family: '{{ff}}';") {{ff}}
           .btn-group.dropdown
-            button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', tooltip='Font Size')
+            button.btn.btn-default.dropdown-toggle(type='button', dropdown-toggle="", tooltip='Font Size')
               em.fa.fa-text-height
               b.caret
             ul.dropdown-menu
@@ -65,7 +65,7 @@
             a.btn.btn-default(data-edit='justifyfull', tooltip='Justify (Ctrl/Cmd+J)')
               em.fa.fa-align-justify
           .btn-group.dropdown
-            a.btn.btn-default.dropdown-toggle(data-toggle='dropdown', tooltip='Hyperlink')
+            a.btn.btn-default.dropdown-toggle(dropdown-toggle="", tooltip='Hyperlink')
               em.fa.fa-link
             .dropdown-menu
               .input-group.m-l-xs.m-r-xs

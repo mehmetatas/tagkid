@@ -1,7 +1,7 @@
 mixin dropdown_button(type)
   // START button group
   .btn-group.mb-sm.mr(dropdown='dropdown')
-    button.btn.dropdown-toggle(type='button', ng-disabled='disabled', class="btn-#{type}")
+    button.btn.dropdown-toggle(type='button', ng-disabled='disabled', class="btn-#{type}", dropdown-toggle="")
       = type
       | &nbsp;
       span.caret
@@ -21,7 +21,7 @@ mixin dropdown_split(type)
   // START button group
   .btn-group(dropdown='dropdown').mb.mr
     button.btn(type='button', class="btn-#{type}") Action
-    button.btn.dropdown-toggle(type='button', class="btn-#{type}")
+    button.btn.dropdown-toggle(type='button', class="btn-#{type}", dropdown-toggle="")
       span.caret
       span.sr-only= type
     ul.dropdown-menu(role='menu')
@@ -40,7 +40,7 @@ mixin build-anim-panel(animation)
   .p
     // START button group
     .btn-group.mr(dropdown='dropdown')
-      button.btn.btn-default.dropdown-toggle.btn-block
+      button.btn.btn-default.dropdown-toggle.btn-block(dropdown-toggle="")
         = animation
         | &nbsp;
         b.caret

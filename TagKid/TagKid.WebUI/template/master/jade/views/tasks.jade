@@ -19,7 +19,7 @@ h3 Tasks List
   .task-item-list
     .lead.text-muted.text-center(ng-show='!taskctrl.tasksList.length') Start creating a new task..
     accordion(close-others="true")
-      accordion-group.task-item(ng-repeat='item in taskctrl.tasksList', ng-class="{'task-complete': item.complete}", is-disabled="item.complete")
+      accordion-group.task-item(ng-repeat='item in taskctrl.tasksList', class="{{item.complete ? 'task-complete':''}}", is-disabled="item.complete")
         accordion-heading
           span.close(ng-click='taskctrl.removeTask($index, $event)', ng-hide="!item.complete")
             em.fa.fa-times

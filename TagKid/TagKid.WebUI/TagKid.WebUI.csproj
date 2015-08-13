@@ -137,11 +137,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.eot" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="lib\fontawesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="lib\fontawesome\fonts\FontAwesome.otf" />
-    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\tagkid.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

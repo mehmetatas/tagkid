@@ -40,8 +40,8 @@ nav.navbar.topnavbar(role='navigation', ng-controller="HeaderNavController")
     // START Right Navbar
     ul.nav.navbar-nav.navbar-right
       // START Alert menu
-      li.dropdown.dropdown-list
-        a.dropdown-toggle(href='#', dropdown-animate="")
+      li.dropdown.dropdown-list(dropdown="")
+        a.dropdown-toggle(href='', dropdown-animate="", dropdown-toggle="")
           .point-pin
             em.icon-mail.fa-fw
             .point.point-success.point-lg

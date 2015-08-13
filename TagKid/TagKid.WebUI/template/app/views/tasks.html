@@ -10,7 +10,7 @@
    <div class="task-item-list">
       <div data-ng-show="!taskctrl.tasksList.length" class="lead text-muted text-center">Start creating a new task..</div>
       <accordion close-others="true">
-         <accordion-group data-ng-repeat="item in taskctrl.tasksList" data-ng-class="{'task-complete': item.complete}" is-disabled="item.complete" class="task-item">
+         <accordion-group data-ng-repeat="item in taskctrl.tasksList" is-disabled="item.complete" class="task-item {{item.complete ? 'task-complete':'' }}">
             <accordion-heading>
                <span data-ng-click="taskctrl.removeTask($index, $event)" data-ng-hide="!item.complete" class="close">
                   <em class="fa fa-times"></em>

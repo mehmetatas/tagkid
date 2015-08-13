@@ -5,7 +5,7 @@
 <div class="row">
    <div class="col-lg-6">
       <h4 class="page-header mt0">Carousel</h4>
-      <div data-ng-controller="CarouselDemoCtrl" animate-enabled="false">
+      <div data-ng-controller="CarouselDemoCtrl">
          <carousel interval="myInterval">
             <slide data-ng-repeat="slide in slides" active="slide.active">
                <img data-ng-src="{{slide.image}}" style="margin: auto;" alt="" class="wd-wide" />
@@ -102,7 +102,7 @@
 <!-- END row-->
 <!-- START row-->
 <div class="row">
-   <div class="col-lg-6">
+   <div class="col-lg-8">
       <h4 class="page-header">Calendar</h4>
       <div data-ng-controller="DatepickerDemoCtrl">
          <div class="well well-sm">
@@ -149,10 +149,10 @@
          </div>
       </div>
    </div>
-   <div class="col-lg-6">
+   <div class="col-lg-4">
       <h4 class="page-header">Time picker</h4>
       <div data-ng-controller="TimepickerDemoCtrl">
-         <timepicker data-ng-model="mytime" data-ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+         <timepicker data-ng-model="mytime" data-ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" class="time-picker"></timepicker>
          <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
          <div class="row">
             <div class="col-xs-6">Hours step is:

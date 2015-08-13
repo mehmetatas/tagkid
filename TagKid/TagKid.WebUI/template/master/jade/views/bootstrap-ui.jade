@@ -5,7 +5,7 @@ h3 Bootstrap UI
 .row
   .col-lg-6
     h4.page-header.mt0 Carousel
-    div(ng-controller='CarouselDemoCtrl', animate-enabled="false")
+    div(ng-controller='CarouselDemoCtrl')
       carousel(interval='myInterval')
         slide(ng-repeat='slide in slides', active='slide.active')
           img.wd-wide(ng-src='{{slide.image}}', style='margin: auto;', alt="")
@@ -83,7 +83,7 @@ br
 // END row
 // START row
 .row
-  .col-lg-6
+  .col-lg-8
     h4.page-header Calendar
     div(ng-controller='DatepickerDemoCtrl')
       .well.well-sm
@@ -113,10 +113,10 @@ br
           button.btn.btn-sm.btn-default(type='button', ng-click="dt = '2009-08-24'") 2009-08-24
           button.btn.btn-sm.btn-purple(type='button', ng-click='clear()') Clear
           button.btn.btn-sm.btn-default(type='button', ng-click='toggleMin()', tooltip='After today restriction') Min date
-  .col-lg-6
+  .col-lg-4
     h4.page-header Time picker
     div(ng-controller='TimepickerDemoCtrl')
-      timepicker(ng-model='mytime', ng-change='changed()', hour-step='hstep', minute-step='mstep', show-meridian='ismeridian')
+      timepicker.time-picker(ng-model='mytime', ng-change='changed()', hour-step='hstep', minute-step='mstep', show-meridian='ismeridian')
       pre.alert.alert-info.
         Time is: {{mytime | date:'shortTime' }}        
       .row

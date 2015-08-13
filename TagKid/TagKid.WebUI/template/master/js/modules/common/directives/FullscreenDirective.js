@@ -10,6 +10,10 @@ App.directive('toggleFullscreen', function() {
     restrict: 'A',
     link: function(scope, element, attrs) {
 
+      // fullscreen not supported on ie
+      if( /Edge\/|Trident\/|MSIE /.test(window.navigator.userAgent) )
+        return $('[toggle-fullscreen]').addClass('hide');
+      
       if (screenfull.enabled) {
 
         element.on('click', function (e) {
