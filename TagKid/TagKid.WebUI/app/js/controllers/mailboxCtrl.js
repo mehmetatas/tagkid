@@ -72,10 +72,17 @@
             var tagCount = Math.floor((Math.random() * 5) + 2);
             m.tags = [];
             while (tagCount-- > 0) {
-                m.tags.push(tags[(Math.floor((Math.random() * (tags.length))))]);
+                var tag = tags[(Math.floor((Math.random() * (tags.length))))];
+                if (m.tags.indexOf(tag) == -1)
+                    m.tags.push(tag);
             }
 
             var bodyCount = Math.floor((Math.random() * 10)) + 3;
+
+            if (bodyCount < 10) {
+                m.excerptImg = "/app/img/bg" + ((i % 3) + 1) + ".jpg";
+            }
+
             m.body = '';
             while (bodyCount-- > 0) {
                 m.body += (bodyParts[(Math.floor((Math.random() * (bodyParts.length))))]);

@@ -49,9 +49,9 @@
                 })
                 .state('app.mailbox.view', {
                     url: '/:id',
-                    controller: 'mailViewCtrl',
                     views: {
                         'mails@app.mailbox': {
+                            controller: 'mailViewCtrl',
                             templateUrl: basepath('mailbox-view-mail.html')
                         }
                     }

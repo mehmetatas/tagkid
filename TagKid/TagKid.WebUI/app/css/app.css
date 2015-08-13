@@ -10258,11 +10258,10 @@ fieldset[disabled] .calendar-app .fc-button.active {
   font-size: 14px;
   font-weight: 600;
   overflow: hidden;
-  vertical-align: bottom;
+  vertical-align: top;
 }
 .mb-mails .mb-mail-preview {
   clear: both;
-  margin-top: 10px;
   color: #8394a9;
 }
 .mb-mails .mb-unread {

@@ -9,19 +9,25 @@
                 <p data-ng-if="!mailList.length" class="lead text-center text-muted mt-xl">No Mail</p>
                 <div class="mb-mails">
                     <div data-ng-repeat="mail in mailList" class="panel" ng-class="mail.panelType + (mail.unread ? ' mb-unread' : '')">
-                        <div class="panel-heading">
-                            <img data-ng-src="{{mail.from.avatar}}" alt="Mail Avatar" class="img-circle thumb32" />
-                            <div style="display: inline-block">
-                                <div class="mb-mail-subject">{{mail.subject}}</div>
-                                <span class="mb-mail-from">
-                                    {{mail.from.name}} - {{mail.time}}
-                                </span>
-                            </div>
-                            <div class="clearfix"></div>
+                        <div class="panel-heading p-sm">
+                            <table class="mt-sm">
+                                <tr>
+                                    <td style="vertical-align: top">
+                                        <img data-ng-src="{{mail.from.avatar}}" alt="Mail Avatar" class="img-circle thumb32" />
+                                    </td>
+                                    <td style="vertical-align: top;" class="pl pt0">
+                                        <span class="mb-mail-subject" style="line-height: 1">{{mail.subject}}</span>
+                                        <span class="mb-mail-from">
+                                            {{mail.from.name}} - {{mail.time}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body p">
                             <a href="#" data-ng-click="openMail(mail.id)">
-                                <p class="mb-mail-preview">{{mail.excerpt}}</p>
+                                <img ng-show="mail.excerptImg" ng-src="{{mail.excerptImg}}" class="img-responsive mb" />
+                                <p class="mb-mail-preview m0">{{mail.excerpt}}</p>
                             </a>
                         </div>
                         <div class="panel-footer">
