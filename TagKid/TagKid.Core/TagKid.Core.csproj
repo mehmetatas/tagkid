@@ -65,6 +65,7 @@
     <Compile Include="Models\Database\Token.cs" />
     <Compile Include="Models\Database\User.cs" />
     <Compile Include="Models\Messages\Post\SaveRequest.cs" />
+    <Compile Include="Models\Messages\ValidationExtensions\ValidationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\IAuthProvider.cs" />
     <Compile Include="Providers\Impl\AuthProvider.cs" />
@@ -74,14 +75,15 @@
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Service\IAuthService.cs" />
     <Compile Include="Service\Impl\AuthService.cs" />
-    <Compile Include="Service\Impl\PostService.cs" />
     <Compile Include="Models\Messages\Auth\SignupRequest.cs" />
+    <Compile Include="Service\Impl\PostService.cs" />
     <Compile Include="Service\Interceptors\SecurityInterceptor.cs" />
     <Compile Include="Service\Interceptors\TagKidActionInterceptor.cs" />
     <Compile Include="Service\Interceptors\TagKidActionInterceptorBuilder.cs" />
     <Compile Include="Service\Interceptors\UnitOfWorkInterceptor.cs" />
-    <Compile Include="Service\IPostService.cs" />
     <Compile Include="Context\TagKidContext.cs" />
+    <Compile Include="Service\Interceptors\ValidationInterceptor.cs" />
+    <Compile Include="Service\IPostService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Domain\" />

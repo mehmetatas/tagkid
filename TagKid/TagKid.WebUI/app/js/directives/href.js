@@ -1,12 +1,12 @@
-﻿app.directive('href', function () {
-    'use strict';
+﻿app.directive("href", function () {
+    "use strict";
     return {
-        restrict: 'A',
+        restrict: "A",
         compile: function (element, attr) {
             return function (scope, element) {
-                if ((attr.ngClick || attr.href === '' || attr.href === '#')
-                    && (!element.hasClass('dropdown-toggle'))) {
-                    element.on('click', function (e) {
+                if ((attr.ngClick || attr.href === "" || attr.href === "#")
+                    && (!element.hasClass("dropdown-toggle"))) {
+                    element.on("click", function (e) {
                         e.preventDefault();
                         // e.stopPropagation();
                     });

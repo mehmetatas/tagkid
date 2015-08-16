@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using TagKid.Framework.Exceptions;
 
 namespace TagKid.Framework.Validation
 {
@@ -6,9 +7,9 @@ namespace TagKid.Framework.Validation
     {
         private readonly PropertyInfo[] _propInfoChain;
         private readonly IValidationRule _rule;
-        private readonly object _error;
+        private readonly Error _error;
 
-        public PropertyValidator(PropertyInfo[] propInfoChain, IValidationRule rule, object error)
+        public PropertyValidator(PropertyInfo[] propInfoChain, IValidationRule rule, Error error)
         {
             _propInfoChain = propInfoChain;
             _rule = rule;

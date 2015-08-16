@@ -1,6 +1,6 @@
-﻿app.controller('sidebarCtrl', ['$rootScope', '$scope', '$location', '$http', '$timeout', 'appMediaquery', '$window',
+﻿app.controller("sidebarCtrl", ["$rootScope", "$scope", "$location", "$http", "$timeout", "appMediaquery", "$window",
   function ($rootScope, $scope, $location, $http, $timeout, appMediaquery, $window) {
-      'use strict';
+      "use strict";
 
       $scope.app = $rootScope.app;
 
@@ -74,33 +74,33 @@
       $timeout(loadMenuItems, 2000);
 
       $scope.editFolders = function() {
-          alert('edit folders');
+          alert("edit folders");
       };
 
       var currentState = $rootScope.$state.current.name;
       var $win = $($window);
-      var $body = $('body');
+      var $body = $("body");
 
       // Adjustment on route changes
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
           currentState = toState.name;
           // Hide sidebar automatically on mobile
-          $('body.aside-toggled').removeClass('aside-toggled');
+          $("body.aside-toggled").removeClass("aside-toggled");
 
-          $rootScope.$broadcast('closeSidebarMenu');
+          $rootScope.$broadcast("closeSidebarMenu");
       });
 
       // Normalize state on resize to avoid multiple checks
-      $win.on('resize', function () {
+      $win.on("resize", function () {
           if (isMobile())
-              $body.removeClass('aside-collapsed');
+              $body.removeClass("aside-collapsed");
           else
-              $body.removeClass('aside-toggled');
+              $body.removeClass("aside-toggled");
       });
 
-      $rootScope.$watch('app.sidebar.isCollapsed', function (newValue, oldValue) {
+      $rootScope.$watch("app.sidebar.isCollapsed", function (newValue, oldValue) {
           // Close subnav when sidebar change from collapsed to normal
-          $rootScope.$broadcast('closeSidebarMenu');
+          $rootScope.$broadcast("closeSidebarMenu");
       });
 
       // Check item and children active state
@@ -108,7 +108,7 @@
           if (!item || !item.sref)
               return;
 
-          var path = item.sref, prefix = '#';
+          var path = item.sref, prefix = "#";
           if (path === prefix) {
               var foundActive = false;
               angular.forEach(item.subnav, function (value, key) {
@@ -122,8 +122,8 @@
       };
 
       $scope.getSidebarItemClass = function (item) {
-          return (item.type == 'heading' ? 'nav-heading' : '') +
-                 (isActive(item) ? ' active' : '');
+          return (item.type == "heading" ? "nav-heading" : "") +
+                 (isActive(item) ? " active" : "");
       };
 
       // Handle sidebar collapse items

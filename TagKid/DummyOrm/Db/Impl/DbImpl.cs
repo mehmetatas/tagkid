@@ -11,21 +11,32 @@ namespace DummyOrm.Db.Impl
     public class DbImpl : IDb, ICommandExecutor
     {
         private IDbTransaction _tran;
-        private readonly IDbConnection _conn;
+        private IDbConnection _conn;
         private readonly IDbMeta _meta;
 
         protected internal DbImpl(IDbMeta meta)
         {
             _meta = meta;
-            _conn = meta.DbProvider.CreateConnection();
-            _conn.Open();
+        }
+
+        private IDbConnection OpenedConnection
+        {
+            get
+            {
+                if (_conn == null)
+                {
+                    _conn = _meta.DbProvider.CreateConnection();
+                    _conn.Open();
+                }
+                return _conn;
+            }
         }
 
         public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             if (_tran == null)
             {
-                _tran = _conn.BeginTransaction(isolationLevel);
+                _tran = OpenedConnection.BeginTransaction(isolationLevel);
             }
         }
 
@@ -149,7 +160,11 @@ namespace DummyOrm.Db.Impl
 
         public virtual void Dispose()
         {
-            _conn.Dispose();
+            if (_conn != null)
+            {
+                _conn.Dispose();
+            }
+
             if (_tran != null)
             {
                 _tran.Dispose();
@@ -171,6 +186,14 @@ namespace DummyOrm.Db.Impl
             return ExecuteScalar(cmd);
         }
 
+        private IDataReader ExecuteReaderInternal(Command cmd)
+        {
+            using (var dbCmd = CreateCommand(cmd))
+            {
+                return dbCmd.ExecuteReader();
+            }
+        }
+
         private ISimpleCommandBuilder SimpleCmd<T>() where T : class, new()
         {
             return _meta.GetTable<T>().SimpleCommandBuilder;
@@ -178,7 +201,7 @@ namespace DummyOrm.Db.Impl
 
         private IDbCommand CreateCommand(Command cmd)
         {
-            var dbCmd = _conn.CreateCommand();
+            var dbCmd = OpenedConnection.CreateCommand();
 
             dbCmd.Transaction = _tran;
 
@@ -201,22 +224,8 @@ namespace DummyOrm.Db.Impl
 
                 dbCmd.Parameters.Add(param);
             }
-#if DEBUG
-            Console.WriteLine(dbCmd.CommandText);
-            //foreach (var param in dbCmd.Parameters.Cast<IDbDataParameter>())
-            //{
-            //    Console.WriteLine("{0}: {1}", param.ParameterName, param.Value);
-            //}
-#endif
-            return dbCmd;
-        }
 
-        private IDataReader ExecuteReaderInternal(Command cmd)
-        {
-            using (var dbCmd = CreateCommand(cmd))
-            {
-                return dbCmd.ExecuteReader();
-            }
+            return dbCmd;
         }
     }
 }

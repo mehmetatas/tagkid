@@ -1,29 +1,29 @@
-﻿app.controller('appCtrl', [
-    '$rootScope', '$scope', '$state', '$window', '$localStorage', '$timeout', 'toggleStateService', 'cfpLoadingBar', 'support',
+﻿app.controller("appCtrl", [
+    "$rootScope", "$scope", "$state", "$window", "$localStorage", "$timeout", "toggleStateService", "cfpLoadingBar", "support",
     function($rootScope, $scope, $state, $window, $localStorage, $timeout, toggle, cfpLoadingBar, support) {
         "use strict";
 
         if (support.touch)
-            $('html').addClass('touch');
+            $("html").addClass("touch");
 
         // Loading bar transition
         // ----------------------------------- 
 
         var latency;
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            if ($('.app-container > section').length) // check if bar container exists
+        $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+            if ($(".app-container > section").length) // check if bar container exists
                 latency = $timeout(function() {
                     cfpLoadingBar.start();
                 }, 0); // sets a latency Threshold
         });
-        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams, fromState, fromParams) {
             $window.scrollTo(0, 0);
             event.targetScope.$watch("$viewContentLoaded", function() {
                 $timeout.cancel(latency);
                 cfpLoadingBar.complete();
             });
         });
-        $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+        $rootScope.$on("$stateNotFound", function (event, unfoundState, fromState, fromParams) {
             console.log(unfoundState.to); // "lazy.state"
             console.log(unfoundState.toParams); // {a:1, b:2}
             console.log(unfoundState.options); // {inherit:false} + default options
@@ -31,7 +31,7 @@
         
         // Create your own per page title here
         $rootScope.pageTitle = function() {
-            return $rootScope.app.name + ' - ' + $rootScope.app.description;
+            return $rootScope.app.name + " - " + $rootScope.app.description;
         };
 
         // Restore layout settings

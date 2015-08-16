@@ -20,12 +20,12 @@ $(document).ready(function(){
 		var winWidth = $(window).width();
 
 		if (winWidth > 979) {
-			$('.intro').css({
+			$(".intro").css({
 				'height': winHeight,
 			});
 			} else{
-			$('.intro').css({
-				'height': '536px'
+			$(".intro").css({
+				'height': "536px"
 			});
 		};
 
@@ -34,12 +34,12 @@ $(document).ready(function(){
 			var winWidth = $(window).width();
 
 			if (winWidth > 979) {
-				$('.intro').css({
+				$(".intro").css({
 					'height': winHeight
 				});
 				} else{
-				$('.intro').css({
-					'height': '536px'
+				$(".intro").css({
+					'height': "536px"
 				});
 			};
 		});

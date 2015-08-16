@@ -97,6 +97,7 @@
     <Compile Include="Validation\PropertyChainResolver.cs" />
     <Compile Include="Validation\PropertyValidator.cs" />
     <Compile Include="Validation\PropertyValidatorBuilder.cs" />
+    <Compile Include="Validation\ValidationManager.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
     <Compile Include="Validation\ValidationRuleBuilder.cs" />
     <Compile Include="Validation\ValidationRules\CharsetRule.cs" />

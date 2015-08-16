@@ -1,5 +1,5 @@
-﻿app.controller('headerCtrl', ['$scope', '$rootScope', 'dialogService', function ($scope, $rootScope, dialogService) {
-    'use strict';
+﻿app.controller("headerCtrl", ["$scope", "$rootScope", "dialogService", function ($scope, $rootScope, dialogService) {
+    "use strict";
     $scope.app = $rootScope.app;
     $scope.user = $rootScope.user;
 
@@ -11,7 +11,7 @@
 
     $scope.auth = function () {
         dialogService.openAuthDialog(function () {
-            alert('ok!');
+            alert("ok!");
         });
     };
 }]);

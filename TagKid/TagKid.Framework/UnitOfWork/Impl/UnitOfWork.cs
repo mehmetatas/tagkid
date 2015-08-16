@@ -12,6 +12,9 @@ namespace TagKid.Framework.UnitOfWork.Impl
     {
         private readonly IDbFactory _factory;
 
+        private bool _isTransactional;
+        private IsolationLevel _isolationLevel;
+
         private IDb _db;
         internal IDb Db
         {
@@ -24,9 +27,18 @@ namespace TagKid.Framework.UnitOfWork.Impl
             Push(this);
         }
 
+        internal void EnsureTransaction()
+        {
+            if (_isTransactional)
+            {
+                Db.BeginTransaction(_isolationLevel);
+            }
+        }
+
         public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
-           Db.BeginTransaction(isolationLevel);
+            _isTransactional = true;
+            _isolationLevel = isolationLevel;
         }
 
         public void Rollback()
@@ -105,23 +117,32 @@ namespace TagKid.Framework.UnitOfWork.Impl
             }
         }
 
+        private void EnsureTransaction()
+        {
+            UnitOfWork.Current.EnsureTransaction();
+        }
+
         public void Insert<T>(T entity) where T : class, new()
         {
+            EnsureTransaction();
             Db.Insert(entity);
         }
 
         public void Update<T>(T entity) where T : class, new()
         {
+            EnsureTransaction();
             Db.Update(entity);
         }
 
         public void Delete<T>(T entity) where T : class, new()
         {
+            EnsureTransaction();
             Db.Delete(entity);
         }
 
         public void DeleteMany<T>(Expression<Func<T, bool>> filter) where T : class, new()
         {
+            EnsureTransaction();
             Db.DeleteMany(filter);
         }
 
@@ -157,6 +178,11 @@ namespace TagKid.Framework.UnitOfWork.Impl
             get { return UnitOfWork.Current.Db; }
         }
 
+        private void EnsureTransaction()
+        {
+            UnitOfWork.Current.EnsureTransaction();
+        }
+
         public IList<T> ExecuteQuery<T>(Command cmd) where T : class, new()
         {
             return Db.ExecuteQuery<T>(cmd);
@@ -164,11 +190,13 @@ namespace TagKid.Framework.UnitOfWork.Impl
 
         public int ExecuteNonQuery(Command cmd)
         {
+            EnsureTransaction();
             return Db.ExecuteNonQuery(cmd);
         }
 
         public object ExecuteScalar(Command cmd)
         {
+            EnsureTransaction();
             return Db.ExecuteScalar(cmd);
         }
     }

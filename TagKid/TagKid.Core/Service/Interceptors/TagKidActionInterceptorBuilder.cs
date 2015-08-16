@@ -15,6 +15,7 @@ namespace TagKid.Core.Service.Interceptors
         public IActionInterceptor Build(RouteContext context)
         {
             return new TagKidActionInterceptor(
+                new ValidationInterceptor(),
                 new UnitOfWorkInterceptor(),
                 new SecurityInterceptor(_authProvider));
         }

@@ -1,20 +1,20 @@
-﻿app.service('toggleStateService', ['$rootScope', function ($rootScope) {
-    'use strict';
-    var storageKeyName = 'toggleState';
+﻿app.service("toggleStateService", ["$rootScope", function ($rootScope) {
+    "use strict";
+    var storageKeyName = "toggleState";
 
     // Helper object to check for words in a phrase //
     var WordChecker = {
         hasWord: function (phrase, word) {
-            return new RegExp('(^|\\s)' + word + '(\\s|$)').test(phrase);
+            return new RegExp("(^|\\s)" + word + "(\\s|$)").test(phrase);
         },
         addWord: function (phrase, word) {
             if (!this.hasWord(phrase, word)) {
-                return (phrase + (phrase ? ' ' : '') + word);
+                return (phrase + (phrase ? " " : "") + word);
             }
         },
         removeWord: function (phrase, word) {
             if (this.hasWord(phrase, word)) {
-                return phrase.replace(new RegExp('(^|\\s)*' + word + '(\\s|$)*', 'g'), '');
+                return phrase.replace(new RegExp("(^|\\s)*" + word + "(\\s|$)*", "g"), "");
             }
         }
     };

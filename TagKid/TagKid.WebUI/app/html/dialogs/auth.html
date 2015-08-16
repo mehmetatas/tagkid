@@ -36,6 +36,10 @@
                 <p class="text-center pv text-bold">REGISTER NEW ACCOUNT</p>
                 <form role="form" class="mb-lg">
                     <div class="form-group has-feedback">
+                        <input type="text" placeholder="fullname" class="form-control" ng-model="registerReq.Fullname" />
+                        <span class="fa fa-user form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="form-group has-feedback">
                         <input type="email" placeholder="email" autocomplete="off" class="form-control" ng-model="registerReq.Email" />
                         <span class="fa fa-envelope form-control-feedback text-muted"></span>
                     </div>

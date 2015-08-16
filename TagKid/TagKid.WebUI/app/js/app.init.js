@@ -1,19 +1,19 @@
 ﻿
-var app = angular.module('app', [
-    'ngRoute',
-    'ngAnimate',
-    'ngStorage',
-    'ngCookies',
-    'pascalprecht.translate',
-    'ui.bootstrap',
-    'ui.router',
-    'oc.lazyLoad',
-    'cfp.loadingBar',
-    'ui.utils'
+var app = angular.module("app", [
+    "ngRoute",
+    "ngAnimate",
+    "ngStorage",
+    "ngCookies",
+    "pascalprecht.translate",
+    "ui.bootstrap",
+    "ui.router",
+    "oc.lazyLoad",
+    "cfp.loadingBar",
+    "ui.utils"
 ]);
 
 app.run([
-    "$rootScope", "$state", "$stateParams", '$localStorage',
+    "$rootScope", "$state", "$stateParams", "$localStorage",
     function($rootScope, $state, $stateParams, $localStorage) {
         // Set reference to access them from any scope
         $rootScope.$state = $state;
@@ -23,9 +23,9 @@ app.run([
         // Scope Globals
         // ----------------------------------- 
         $rootScope.app = {
-            name: 'tagkid',
+            name: "tagkid",
             year: new Date().getFullYear(),
-            description: 'tag your knowledge!',
+            description: "tag your knowledge!",
             layout: {
                 isBoxed: true
             },
@@ -36,9 +36,9 @@ app.run([
 
         // User information
         $rootScope.user = {
-            name: 'Jimmie Stevens',
-            job: 'Developer',
-            picture: 'app/img/user/02.jpg'
+            name: "Jimmie Stevens",
+            job: "Developer",
+            picture: "app/img/user/02.jpg"
         };
     }
 ]);

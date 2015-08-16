@@ -14,7 +14,7 @@ namespace TagKid.Core.Domain.Impl
             _userRepo = userRepo;
         }
 
-        public void Signup(string fullname, string email, string username, string password)
+        public void Register(string fullname, string email, string username, string password)
         {
             var user = _userRepo.GetByEmail(email);
             if (user != null)

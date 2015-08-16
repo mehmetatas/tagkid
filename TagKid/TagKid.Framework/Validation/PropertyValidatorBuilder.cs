@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using TagKid.Framework.Exceptions;
 
 namespace TagKid.Framework.Validation
 {
@@ -16,7 +17,7 @@ namespace TagKid.Framework.Validation
             _validator = new CompositeValidator();
         }
 
-        public IPropertyValidatorBuilder<TEntity, TProperty> AddRule(IValidationRule rule, object error)
+        public IPropertyValidatorBuilder<TEntity, TProperty> AddRule(IValidationRule rule, Error error)
         {
             _validator.AddValidator(new PropertyValidator(_propChain, rule, error));
             return this;

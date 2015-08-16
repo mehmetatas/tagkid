@@ -1,5 +1,5 @@
-﻿app.service('support', ["$document", "$window", function ($document, $window) {
-    'use strict';
+﻿app.service("support", ["$document", "$window", function ($document, $window) {
+    "use strict";
     var support = {};
     var doc = $document[0];
 
@@ -11,10 +11,10 @@
 
             var element = doc.body || doc.documentElement,
                 transEndEventNames = {
-                    WebkitTransition: 'webkitTransitionEnd',
-                    MozTransition: 'transitionend',
-                    OTransition: 'oTransitionEnd otransitionend',
-                    transition: 'transitionend'
+                    WebkitTransition: "webkitTransitionEnd",
+                    MozTransition: "transitionend",
+                    OTransition: "oTransitionEnd otransitionend",
+                    transition: "transitionend"
                 }, name;
 
             for (name in transEndEventNames) {
@@ -33,10 +33,10 @@
 
             var element = doc.body || doc.documentElement,
                 animEndEventNames = {
-                    WebkitAnimation: 'webkitAnimationEnd',
-                    MozAnimation: 'animationend',
-                    OAnimation: 'oAnimationEnd oanimationend',
-                    animation: 'animationend'
+                    WebkitAnimation: "webkitAnimationEnd",
+                    MozAnimation: "animationend",
+                    OAnimation: "oAnimationEnd oanimationend",
+                    animation: "animationend"
                 }, name;
 
             for (name in animEndEventNames) {
@@ -50,10 +50,10 @@
     // Check touch device
     // ----------------------------------- 
     support.touch = (
-        ('ontouchstart' in window && navigator.userAgent.toLowerCase().match(/mobile|tablet/)) ||
+        ("ontouchstart" in window && navigator.userAgent.toLowerCase().match(/mobile|tablet/)) ||
         ($window.DocumentTouch && document instanceof $window.DocumentTouch) ||
-        ($window.navigator['msPointerEnabled'] && $window.navigator['msMaxTouchPoints'] > 0) || //IE 10
-        ($window.navigator['pointerEnabled'] && $window.navigator['maxTouchPoints'] > 0) || //IE >=11
+        ($window.navigator["msPointerEnabled"] && $window.navigator["msMaxTouchPoints"] > 0) || //IE 10
+        ($window.navigator["pointerEnabled"] && $window.navigator["maxTouchPoints"] > 0) || //IE >=11
         false
     );
 

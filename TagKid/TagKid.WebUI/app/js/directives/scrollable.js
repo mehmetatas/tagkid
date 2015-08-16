@@ -1,19 +1,7 @@
-﻿//app.directive('scrollable', function () {
-//    'use strict';
-//    return {
-//        restrict: 'EA',
-//        link: function (scope, elem, attrs) {
-//            var defaultHeight = 285;
-//            attrs.height = attrs.height || defaultHeight;
-//            elem.slimScroll(attrs);
-//        }
-//    };
-//});
-
-app.directive('scrollable', function () {
-    'use strict';
+﻿app.directive("scrollable", function () {
+    "use strict";
     return {
-        restrict: 'EA',
+        restrict: "EA",
         link: function (scope, elem, attrs) {
             var defaultHeight = 285;
             attrs.height = attrs.height || defaultHeight;

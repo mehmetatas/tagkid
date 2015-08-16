@@ -1,8 +1,8 @@
-﻿app.controller('searchFormCtrl', ["$scope", "$state", function ($scope, $state) {
-    'use strict';
+﻿app.controller("searchFormCtrl", ["$scope", "$state", function ($scope, $state) {
+    "use strict";
 
     var routes = $state.get(),
-        blackList = ['app', 'page']; // routes that don't want to show
+        blackList = ["app", "page"]; // routes that don't want to show
 
     $scope.routeSelected = undefined;
 

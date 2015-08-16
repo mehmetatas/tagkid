@@ -1,17 +1,16 @@
-﻿angular.module('app').service('tagkid', [
-    '$http', 'err', 'auth', 'dialogService', function ($http, err, auth, dialogService) {
+﻿app.service("tagkid", ["$http", "err", "clientData", "dialogService", function ($http, err, clientData, dialogService) {
         var send = function (method, controller, action, data, success, error, complete) {
-            var token = auth.token();
+            var token = clientData.token();
 
             var opts = {
                 method: method,
-                url: '/api/' + controller + '/' + action,
+                url: "/api/" + controller + "/" + action,
                 headers: {
-                    'tagkid-auth-token': token || ''
+                    'tagkid-auth-token': token || ""
                 }
             };
 
-            if (method === 'GET' || method === 'DELETE') {
+            if (method === "GET" || method === "DELETE") {
                 opts.params = data;
             } else {
                 opts.data = data;
@@ -39,7 +38,7 @@
                     }
                 })
                 .error(function (resp, status, headers, config) {
-                    alert('Ooops! Something terribly went wrong :(');
+                    alert("Ooops! Something terribly went wrong :(");
                 })
                 .finally(function () {
                     if (complete) {
@@ -49,19 +48,19 @@
         };
 
         this.post = function (controller, action, data, success, error, complete) {
-            return send('POST', controller, action, data, success, error, complete);
+            return send("POST", controller, action, data, success, error, complete);
         };
 
         this.put = function (controller, action, data, success, error, complete) {
-            return send('PUT', controller, action, data, success, error, complete);
+            return send("PUT", controller, action, data, success, error, complete);
         };
 
         this.get = function (controller, action, data, success, error, complete) {
-            return send('GET', controller, action, data, success, error, complete);
+            return send("GET", controller, action, data, success, error, complete);
         };
 
         this.delete = function (controller, action, data, success, error, complete) {
-            return send('DELETE', controller, action, data, success, error, complete);
+            return send("DELETE", controller, action, data, success, error, complete);
         };
     }
 ]);

@@ -1,16 +1,17 @@
-﻿
+﻿using TagKid.Framework.Exceptions;
+
 namespace TagKid.Framework.Validation
 {
     public class ValidationResult
     {
         internal static readonly ValidationResult Successful = new ValidationResult();
 
-        internal static ValidationResult Failed(object error)
+        internal static ValidationResult Failed(Error error)
         {
             return new ValidationResult(error);
         }
 
-        private ValidationResult(object error)
+        private ValidationResult(Error error)
         {
             Error = error;
         }
@@ -20,7 +21,7 @@ namespace TagKid.Framework.Validation
 
         }
 
-        public object Error { get; private set; }
+        public Error Error { get; }
 
         public bool IsValid
         {

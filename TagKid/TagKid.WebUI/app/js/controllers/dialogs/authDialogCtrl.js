@@ -1,4 +1,4 @@
-﻿app.controller('authDialogCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+﻿app.controller("authDialogCtrl", ["$scope", "$modalInstance", "auth", function ($scope, $modalInstance, auth) {
     $scope.registerReq = {};
     $scope.loginReq = {};
     $scope.recoverReq = {};
@@ -30,7 +30,7 @@
         $scope.mode = 1;
 
         if ($scope.loginReq.EmailOrUsername) {
-            if ($scope.loginReq.EmailOrUsername.indexOf('@') > 0) {
+            if ($scope.loginReq.EmailOrUsername.indexOf("@") > 0) {
                 $scope.registerReq.Email = $scope.loginReq.EmailOrUsername;
             } else {
                 $scope.registerReq.Username = $scope.loginReq.EmailOrUsername;
@@ -44,24 +44,27 @@
     $scope.toRecover = function () {
         $scope.mode = 2;
 
-        if ($scope.loginReq.EmailOrUsername && $scope.loginReq.EmailOrUsername.indexOf('@') > 0) {
+        if ($scope.loginReq.EmailOrUsername && $scope.loginReq.EmailOrUsername.indexOf("@") > 0) {
             $scope.recoverReq.Email = $scope.loginReq.EmailOrUsername;
         }
     };
 
     $scope.login = function () {
-        alert('login: ' + JSON.stringify($scope.loginReq));
+        alert("login: " + JSON.stringify($scope.loginReq));
     };
 
     $scope.register = function () {
-        alert('register: ' + JSON.stringify($scope.registerReq));
+        alert("register: " + JSON.stringify($scope.registerReq));
+        auth.register($scope.registerReq, function () {
+            alert("registered!");
+        });
     };
 
     $scope.recoverPassword = function () {
-        alert('recover password: ' + JSON.stringify($scope.recoverReq));
+        alert("recover password: " + JSON.stringify($scope.recoverReq));
     };
 
     $scope.openTerms = function () {
-        alert('open terms and policy');
+        alert("open terms and policy");
     };
 }]);

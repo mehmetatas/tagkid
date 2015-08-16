@@ -35,7 +35,12 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
 
             container.RegisterSingleton<IPostService, PostService>();
             container.RegisterSingleton<IPostDomain, PostDomain>();
+
+            container.RegisterSingleton<IAuthService, AuthService>();
+            container.RegisterSingleton<IAuthDomain, AuthDomain>();
+
             container.RegisterSingleton<IPostRepository, PostRepository>();
+            container.RegisterSingleton<IUserRepository, UserRepository>();
         }
     }
 }

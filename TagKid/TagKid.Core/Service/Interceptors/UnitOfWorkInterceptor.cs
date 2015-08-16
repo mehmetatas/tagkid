@@ -1,5 +1,7 @@
-﻿using TagKid.Framework.IoC;
+﻿using System;
+using TagKid.Framework.IoC;
 using TagKid.Framework.UnitOfWork;
+using TagKid.Framework.Validation;
 using TagKid.Framework.WebApi;
 using TagKid.Framework.WebApi.Configuration;
 
@@ -22,18 +24,27 @@ namespace TagKid.Core.Service.Interceptors
 
         public void AfterCall(RouteContext ctx)
         {
-            _uow.Commit();
+            if (_uow != null)
+            {
+                _uow.Commit();
+            }
         }
 
         public object OnException(RouteContext ctx)
         {
-            _uow.Rollback();
+            if (_uow != null)
+            {
+                _uow.Rollback();
+            }
             return null;
         }
 
         public void Dispose()
         {
-            _uow.Dispose();
+            if (_uow != null)
+            {
+                _uow.Dispose();
+            }
         }
     }
 }

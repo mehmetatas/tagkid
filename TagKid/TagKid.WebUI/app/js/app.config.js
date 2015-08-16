@@ -1,7 +1,7 @@
 ﻿app.config([
-    '$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$locationProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'appDependencies',
+    "$stateProvider", "$urlRouterProvider", "$controllerProvider", "$compileProvider", "$locationProvider", "$filterProvider", "$provide", "$ocLazyLoadProvider", "appDependencies",
     function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $locationProvider, $filterProvider, $provide, $ocLazyLoadProvider, appDependencies) {
-        'use strict';
+        "use strict";
 
         app.controller = $controllerProvider.register;
         app.directive = $compileProvider.directive;
@@ -26,33 +26,43 @@
         });
 
         // default route to dashboard
-        $urlRouterProvider.otherwise('/mailbox/inbox');
+        $urlRouterProvider.otherwise("/mailbox/inbox");
 
         // 
         // app Routes
         // -----------------------------------   
         $stateProvider
-                .state('app', {
-                    url: '',
+                // activate
+                // ----------------------------------- 
+                .state("activate", {
+                    url: "/activate/:token",
+                    templateUrl: basepath("activate.html"),
+                    controller: "activateCtrl"
+                })
+                // App
+                // ----------------------------------- 
+                .state("app", {
+                    url: "",
                     abstract: true,
-                    templateUrl: basepath('app.html'),
-                    controller: 'appCtrl',
-                    resolve: requireDeps('icons', 'slimscroll', 'toaster', 'animate')
+                    templateUrl: basepath("app.html"),
+                    controller: "appCtrl",
+                    resolve: requireDeps("icons", "slimscroll", "toaster", "animate")
                 })
                 // Mailbox
                 // ----------------------------------- 
-                .state('app.mailbox', {
-                    url: '/mailbox/:folder',
-                    templateUrl: basepath('mailbox.html'),
-                    controller: 'mailboxCtrl',
-                    resolve: requireDeps('moment')
+                .state("app.mailbox", {
+                    url: "/:folder",
+                    params: { folder: "inbox" },
+                    templateUrl: basepath("mailbox.html"),
+                    controller: "mailboxCtrl",
+                    resolve: requireDeps("moment")
                 })
-                .state('app.mailbox.view', {
-                    url: '/:id',
+                .state("app.mailbox.view", {
+                    url: "/:id",
                     views: {
                         'mails@app.mailbox': {
-                            controller: 'mailViewCtrl',
-                            templateUrl: basepath('mailbox-view-mail.html')
+                            controller: "mailViewCtrl",
+                            templateUrl: basepath("mailbox-view-mail.html")
                         }
                     }
                 });
@@ -60,7 +70,7 @@
 
         // Change here your views base path
         function basepath(uri) {
-            return '/app/html/' + uri;
+            return "/app/html/" + uri;
         }
 
         // Generates a resolve object by passing script names
@@ -70,7 +80,7 @@
             var _args = arguments;
             return {
                 deps: [
-                    '$ocLazyLoad', '$q', function ($ocLL, $q) {
+                    "$ocLazyLoad", "$q", function ($ocLL, $q) {
                         // Creates a promise chain for each argument
                         var promise = $q.when(1); // empty promise
                         for (var i = 0, len = _args.length; i < len; i++) {
@@ -81,14 +91,14 @@
                         // creates promise to chain dynamically
                         function addThen(_arg) {
                             // also support a function that returns a promise
-                            if (typeof _arg == 'function')
+                            if (typeof _arg == "function")
                                 return promise.then(_arg);
                             else
                                 return promise.then(function () {
                                     // if is a module, pass the name. If not, pass the array
                                     var whatToLoad = getRequired(_arg);
                                     // simple error check
-                                    if (!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
+                                    if (!whatToLoad) return $.error("Route resolve: Bad resource name [" + _arg + "]");
                                     // finally, return a promise
                                     return $ocLL.load(whatToLoad);
                                 });
@@ -113,14 +123,14 @@
 
     }
 ]).config([
-    '$tooltipProvider', function ($tooltipProvider) {
+    "$tooltipProvider", function ($tooltipProvider) {
         $tooltipProvider.options({ appendToBody: true });
     }
 ]).config([
-    'cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+    "cfpLoadingBarProvider", function (cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeBar = true;
         cfpLoadingBarProvider.includeSpinner = false;
         cfpLoadingBarProvider.latencyThreshold = 500;
-        cfpLoadingBarProvider.parentSelector = '.app-container > section';
+        cfpLoadingBarProvider.parentSelector = ".app-container > section";
     }
 ]);

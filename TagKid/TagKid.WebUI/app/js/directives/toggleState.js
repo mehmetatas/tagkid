@@ -1,15 +1,15 @@
 ﻿
-app.directive('toggleState', ['toggleStateService', function (toggle) {
-    'use strict';
+app.directive("toggleState", ["toggleStateService", function (toggle) {
+    "use strict";
 
     return {
-        restrict: 'A',
+        restrict: "A",
         link: function (scope, element, attrs) {
 
-            var $body = angular.element('body');
+            var $body = angular.element("body");
 
             $(element)
-              .on('click', function (e) {
+              .on("click", function (e) {
                   e.preventDefault();
                   var classname = attrs.toggleState;
 
