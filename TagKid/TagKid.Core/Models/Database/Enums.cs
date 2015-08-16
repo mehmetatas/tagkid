@@ -51,7 +51,7 @@
 
     public enum ConfirmationReason
     {
-        NewUser,
+        Registration,
         PasswordRecovery,
         AccountReactivation
     }

@@ -6,5 +6,6 @@ namespace TagKid.Core.Service
     public interface IAuthService
     {
         Response Register(RegisterRequest request);
+        Response LoginWithPassword(LoginWithPasswordRequest request);
     }
 }

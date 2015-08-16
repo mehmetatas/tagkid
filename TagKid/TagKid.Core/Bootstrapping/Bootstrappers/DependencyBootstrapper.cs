@@ -41,6 +41,7 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
 
             container.RegisterSingleton<IPostRepository, PostRepository>();
             container.RegisterSingleton<IUserRepository, UserRepository>();
+            container.RegisterSingleton<IConfirmationCodeRepository, ConfirmationCodeRepository>();
         }
     }
 }

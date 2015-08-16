@@ -1,8 +1,10 @@
-﻿
+﻿using TagKid.Core.Models.Database;
+
 namespace TagKid.Core.Domain
 {
     public interface IAuthDomain
     {
         void Register(string fullname, string email, string username, string password);
+        User LoginWithPassword(string emailOrUsername, string password);
     }
 }

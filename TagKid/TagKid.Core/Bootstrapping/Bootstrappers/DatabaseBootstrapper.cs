@@ -21,6 +21,7 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
                 .Table<User>()
                 .Table<Tag>()
                 .Table<PostTag>()
+                .Table<ConfirmationCode>()
                 .Table<Like>()
                 .Table<FollowUser>();
 

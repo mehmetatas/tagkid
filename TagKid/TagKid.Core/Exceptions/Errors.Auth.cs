@@ -15,5 +15,8 @@ namespace TagKid.Core.Exceptions
         public static readonly Error Auth_InvalidEmailAddress = new Error(108, "Auth_InvalidEmailAddress");
         public static readonly Error Auth_PasswordPolicyError = new Error(109, "Auth_PasswordPolicyError");
         public static readonly Error Auth_FullnameCannotBeEmpty = new Error(110, "Auth_FullnameCannotBeEmpty");
+        public static readonly Error Auth_InvalidLogin = new Error(111, "Auth_InvalidLogin");
+        public static readonly Error Auth_EmailOrUsernameCannotBeEmpty = new Error(112, "Auth_EmailOrUsernameCannotBeEmpty");
+
     }
 }

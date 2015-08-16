@@ -6,7 +6,7 @@ namespace TagKid.Core.Models.Database
     {
         public virtual long Id { get; set; }
         public virtual User User { get; set; }
-        public virtual string Code { get; set; }
+        public virtual Guid Code { get; set; }
         public virtual DateTime SendDate { get; set; }
         public virtual DateTime ExpireDate { get; set; }
         public virtual DateTime? ConfirmDate { get; set; }
