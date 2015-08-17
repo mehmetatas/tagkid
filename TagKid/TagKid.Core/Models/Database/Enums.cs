@@ -45,7 +45,6 @@
     {
         AwaitingConfirmation,
         Confirmed,
-        Failed,
         Expired
     }
 

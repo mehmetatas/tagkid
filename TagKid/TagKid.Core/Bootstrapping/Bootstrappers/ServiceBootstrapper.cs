@@ -30,7 +30,9 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
         private void BuildAuthService(ControllerConfigurator builder)
         {
             builder.ControllerFor<IAuthService>("auth")
-                .ActionFor(s => s.Register(default(RegisterRequest)), "register", HttpMethod.Post).NoAuth();
+                .ActionFor(s => s.Register(default(RegisterRequest)), "register", HttpMethod.Post).NoAuth()
+                .ActionFor(s => s.ActivateRegistration(default(ActivateRegistrationRequest)), "activateRegistration", HttpMethod.Post).NoAuth()
+                .ActionFor(s => s.LoginWithPassword(default(LoginWithPasswordRequest)), "loginWithPassword", HttpMethod.Post).NoAuth();
         }
     }
 }

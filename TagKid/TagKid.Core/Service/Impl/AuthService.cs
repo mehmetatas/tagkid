@@ -1,4 +1,5 @@
-﻿using TagKid.Core.Domain;
+﻿using System;
+using TagKid.Core.Domain;
 using TagKid.Core.Models.Messages.Auth;
 using TagKid.Framework.WebApi;
 
@@ -16,6 +17,12 @@ namespace TagKid.Core.Service.Impl
         public Response Register(RegisterRequest request)
         {
             _auth.Register(request.Fullname, request.Email, request.Username, request.Password);
+            return Response.Success;
+        }
+
+        public Response ActivateRegistration(ActivateRegistrationRequest request)
+        {
+            _auth.ActivateRegistration(request.Id, request.Token);
             return Response.Success;
         }
 

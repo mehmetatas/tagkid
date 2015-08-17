@@ -17,6 +17,12 @@ namespace TagKid.Core.Exceptions
         public static readonly Error Auth_FullnameCannotBeEmpty = new Error(110, "Auth_FullnameCannotBeEmpty");
         public static readonly Error Auth_InvalidLogin = new Error(111, "Auth_InvalidLogin");
         public static readonly Error Auth_EmailOrUsernameCannotBeEmpty = new Error(112, "Auth_EmailOrUsernameCannotBeEmpty");
-
+        public static readonly Error Auth_ConfirmationCodeExpired = new Error(113, "Auth_ConfirmationCodeExpired");
+        public static readonly Error Auth_ConfirmationCodeAlreadyConfirmed = new Error(114, "Auth_ConfirmationCodeAlreadyConfirmed");
+        public static readonly Error Auth_ConfirmationCodeReasonMismatch = new Error(115, "Auth_ConfirmationCodeReasonMismatch");
+        public static readonly Error Auth_UserNotAwaitingActivation = new Error(116, "Auth_UserNotAwaitingActivation");
+        public static readonly Error Auth_ConfirmationCodeNotFound = new Error(117, "Auth_ConfirmationCodeNotFound");
+        public static readonly Error Auth_ConfirmationCodeMismatch = new Error(118, "Auth_ConfirmationCodeMismatch");
+        public static readonly Error Auth_InvalidConfirmationCodeId = new Error(119, "Auth_InvalidConfirmationCodeId");        
     }
 }

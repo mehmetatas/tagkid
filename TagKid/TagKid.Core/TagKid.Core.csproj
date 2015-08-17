@@ -36,7 +36,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrapping\Bootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrappers\Bootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\DatabaseBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\ServiceBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\DependencyBootstrapper.cs" />
@@ -64,6 +64,7 @@
     <Compile Include="Models\Database\Tag.cs" />
     <Compile Include="Models\Database\Token.cs" />
     <Compile Include="Models\Database\User.cs" />
+    <Compile Include="Models\Messages\Auth\ActivateRequest.cs" />
     <Compile Include="Models\Messages\Auth\LoginWithPasswordRequest.cs" />
     <Compile Include="Models\Messages\Post\SaveRequest.cs" />
     <Compile Include="Models\Messages\ValidationExtensions\ValidationExtensions.cs" />
