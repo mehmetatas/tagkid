@@ -50,11 +50,12 @@
     };
 
     $scope.login = function () {
-        alert("login: " + JSON.stringify($scope.loginReq));
+        auth.loginWithPassword($scope.loginReq, function() {
+            alert('logged in');
+        });
     };
 
     $scope.register = function () {
-        alert("register: " + JSON.stringify($scope.registerReq));
         auth.register($scope.registerReq, function () {
             alert("registered!");
         });

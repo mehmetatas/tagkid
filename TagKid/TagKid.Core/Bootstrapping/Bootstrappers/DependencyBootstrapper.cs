@@ -27,6 +27,7 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
             container.RegisterSingleton<IActionInvoker, ActionInvoker>();
             container.RegisterSingleton<IHttpHandler, HttpHandler>();
             container.RegisterSingleton<IAuthProvider, AuthProvider>();
+            container.RegisterSingleton<ICryptoProvider, CryptoProvider>();
 
             container.RegisterTransient<IUnitOfWork, UnitOfWork>();
             container.RegisterSingleton<IRepository, Framework.UnitOfWork.Impl.Repository>();

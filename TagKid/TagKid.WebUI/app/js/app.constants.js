@@ -42,5 +42,23 @@
   // Error Codes
   .constant("err", {
       Auth_LoginRequired: 100,
-      Auth_LoginTokenExpired: 101
+      Auth_LoginTokenExpired: 101,
+      Auth_UsernameAlreadyExists: 102,
+      Auth_EmailAlreadyExists: 103,
+      Auth_UserAwaitingActivation: 104,
+      Auth_UserInactive: 105,
+      Auth_UserBanned: 106,
+      Auth_UsernameCannotBeEmpty: 107,
+      Auth_InvalidEmailAddress: 108,
+      Auth_PasswordPolicyError: 109,
+      Auth_FullnameCannotBeEmpty: 110,
+      Auth_InvalidLogin: 111,
+      Auth_EmailOrUsernameCannotBeEmpty: 112,
+      Auth_ConfirmationCodeExpired: 113,
+      Auth_ConfirmationCodeAlreadyConfirmed: 114,
+      Auth_ConfirmationCodeReasonMismatch: 115,
+      Auth_UserNotAwaitingActivation: 116,
+      Auth_ConfirmationCodeNotFound: 117,
+      Auth_ConfirmationCodeMismatch: 118,
+      Auth_InvalidConfirmationCodeId: 119
   });

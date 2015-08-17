@@ -18,11 +18,11 @@
 
             return $http(opts)
                 .success(function (resp, status, headers, config) {
-                    if (resp.ResponseCode == 0 && success) {
+                    if (resp.ResponseCode === 0 && success) {
                         success(resp);
-                    } else if (resp.ResponseCode != 0) {
+                    } else if (resp.ResponseCode !== 0) {
                         // No login / Token expired
-                        if (resp.ResponseCode == err.Auth_LoginRequired || resp.ResponseCode == err.Auth_LoginTokenExpired) {
+                        if (resp.ResponseCode === err.Auth_LoginRequired || resp.ResponseCode === err.Auth_LoginTokenExpired) {
                             dialogService.openAuthDialog(function () {
                                 send(method, controller, action, data, success, error, complete);
                             });

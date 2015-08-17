@@ -35,7 +35,7 @@
                 // activate
                 // ----------------------------------- 
                 .state("activate", {
-                    url: "/activate/:token",
+                    url: "/activate/:id/:token",
                     templateUrl: basepath("activate.html"),
                     controller: "activateCtrl"
                 })
