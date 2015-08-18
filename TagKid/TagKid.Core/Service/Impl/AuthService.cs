@@ -16,7 +16,7 @@ namespace TagKid.Core.Service.Impl
 
         public Response Register(RegisterRequest request)
         {
-            _auth.Register(request.Fullname, request.Email, request.Username, request.Password);
+            _auth.Register(request.Email, request.Username, request.Password);
             return Response.Success;
         }
 

@@ -22,7 +22,7 @@ namespace TagKid.Core.Domain.Impl
             _crypto = crypto;
         }
 
-        public void Register(string fullname, string email, string username, string password)
+        public void Register(string email, string username, string password)
         {
             var user = _userRepo.GetByEmail(email);
             if (user != null)
@@ -38,7 +38,6 @@ namespace TagKid.Core.Domain.Impl
 
             user = new User
             {
-                Fullname = fullname,
                 Email = email,
                 Username = username,
                 Password = _crypto.ComputeHash(password),

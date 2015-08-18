@@ -41,6 +41,7 @@
   })
   // Error Codes
   .constant("err", {
+      UnknownError: -1,
       Auth_LoginRequired: 100,
       Auth_LoginTokenExpired: 101,
       Auth_UsernameAlreadyExists: 102,

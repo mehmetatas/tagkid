@@ -18,6 +18,9 @@ namespace TagKid.Framework.WebApi
         {
             return base.SendAsync(request, cancellationToken).ContinueWith(responseToCompleteTask =>
             {
+#if DEBUG
+                Thread.Sleep(1000);
+#endif
                 var response = responseToCompleteTask.Result;
 
                 var handler = DependencyContainer.Current.Resolve<IHttpHandler>();

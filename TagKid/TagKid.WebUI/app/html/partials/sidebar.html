@@ -3,9 +3,10 @@
         <div class="sidebar-nav">
             <ul class="nav">
                 <li ng-hide="menuItems">
-                    <div class="p center-block">
-                        <spinner></spinner>
-                        <div class="text-center">Loading your folders</div>
+                    <div class="p text-center">
+                        <spinner size="32"></spinner>
+                        <br>
+                        Loading your folders
                     </div>
                 </li>
                 <li data-ng-class="getSidebarItemClass(item)" data-ng-repeat="item in menuItems" data-ng-include="'sidebar-items.html'" data-ng-click="toggleCollapse($index)" data-ng-switch="item.type"></li>

@@ -1,9 +1,21 @@
 ﻿app.controller("authDialogCtrl", ["$scope", "$modalInstance", "auth", function ($scope, $modalInstance, auth) {
-    $scope.registerReq = {};
-    $scope.loginReq = {};
-    $scope.recoverReq = {};
+    function isValidEmail(email) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test(email);
+    }
 
-    $scope.mode = 1;
+    $scope.reset = function() {
+        $scope.registerReq = {};
+        $scope.loginReq = {};
+        $scope.recoverReq = {};
+
+        $scope.mode = 1;
+
+        $scope.registrationMode = 0;
+        $scope.registrationError = null;
+    };
+
+    $scope.reset();
 
     $scope.toLogin = function (fromRegistration) {
         $scope.mode = 0;
@@ -27,6 +39,7 @@
     };
 
     $scope.toRegistration = function () {
+        $scope.registrationError = null;
         $scope.mode = 1;
 
         if ($scope.loginReq.EmailOrUsername) {
@@ -56,9 +69,19 @@
     };
 
     $scope.register = function () {
+        $scope.registrationError = null;
+        $scope.registrationMode = 1;
+
         auth.register($scope.registerReq, function () {
-            alert("registered!");
+            $scope.registrationMode = 2;
+        }, function(resp) {
+            $scope.registrationMode = 0;
+            $scope.registrationError = resp.ResponseMessage;
         });
+    };
+    
+    $scope.connectWith = function () {
+        alert("show connect options");
     };
 
     $scope.recoverPassword = function () {

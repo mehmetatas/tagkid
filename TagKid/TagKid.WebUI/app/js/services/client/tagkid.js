@@ -38,7 +38,12 @@
                     }
                 })
                 .error(function (resp, status, headers, config) {
-                    alert("Ooops! Something terribly went wrong :(");
+                    if (error) {
+                        error({
+                            ResponseCode: err.UnknownError,
+                            ResponseMessage: "Ooops! Something terribly went wrong :("
+                        });
+                    }
                 })
                 .finally(function () {
                     if (complete) {

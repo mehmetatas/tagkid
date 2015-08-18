@@ -1,12 +1,14 @@
 ﻿<div class="center-block">
-    <div class="panel panel-primary m0">
-        <div class="panel-heading text-center">
-            <img src="/app/img/logo-single.png" alt="Image" class="center-block img-rounded" />
+    <div class="panel panel-primary m0 p0">
+        <div class="panel-heading pt-xl text-center text-bold">
+            <!--<img src="/app/img/logo-single.png" alt="Image" class="center-block img-rounded"/>-->
+            <p ng-show="!mode">LOGIN</p>
+            <p ng-show="mode==1">REGISTER NEW ACCOUNT</p>
+            <p ng-show="mode==2">RESET PASSWORD</p>
         </div>
         <div class="panel-body">
-            <div id="login" ng-show="!mode" class="ng-fadeOutZoom ng-fadeInDown">
-                <p class="text-center pv text-bold">LOGIN</p>
-                <form role="form" class="mb-lg">
+            <div id="login" ng-show="!mode">
+                <form role="form" class="mb">
                     <div class="form-group has-feedback">
                         <input placeholder="email or username" autocomplete="off" class="form-control" ng-model="loginReq.EmailOrUsername" />
                         <span class="fa fa-envelope form-control-feedback text-muted"></span>
@@ -21,54 +23,144 @@
                             <span class="fa fa-check"></span>Remember me
                         </label>
                     </div>
-                    <br />
-                    <button type="submit" class="btn btn-block btn-info mt-lg" ng-click="login()">Login</button>
+                    <button type="submit" class="btn btn-block btn-success mt-lg" ng-click="login()">Login</button>
                 </form>
-                <p class="text-center text-muted">Or</p>
-                <a ng-click="toRegistration()" class="btn btn-block btn-default">
-                    <strong>Register an Account</strong>
+                <div class="mb dropdown open" dropdown="dropdown">
+                    <button class="btn btn-primary dropdown-toggle btn-block" aria-expanded="true" aria-haspopup="true" dropdown-toggle="">
+                        Connect With
+                    </button>
+                    <ul class="dropdown-menu animated fadeIn" role="menu">
+                        <li>
+                            <a href="#" class="p-sm">
+                                <div class="media">
+                                    <div class="pull-left" style="width: 20px">
+                                        <em class="fa fa-facebook"></em>
+                                    </div>
+                                    <div class="media-body clearfix">
+                                        <p class="m0">Facebook</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="p-sm">
+                                <div class="media">
+                                    <div class="pull-left" style="width: 20px">
+                                        <em class="fa fa-twitter"></em>
+                                    </div>
+                                    <div class="media-body clearfix">
+                                        <p class="m0">Twitter</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="p-sm">
+                                <div class="media">
+                                    <div class="pull-left" style="width: 20px">
+                                        <em class="fa fa-google"></em>
+                                    </div>
+                                    <div class="media-body clearfix">
+                                        <p class="m0">Google</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a ng-click="toRegistration()" class="btn btn-block btn-info">
+                    Register an Account
                 </a>
                 <div class="text-center mt">
                     <a href="#" ng-click="toRecover()" class="text-muted">I forgot my password!</a>
                 </div>
             </div>
-            <div id="register" ng-show="mode==1" class="ng-fadeOutZoom">
-                <p class="text-center pv text-bold">REGISTER NEW ACCOUNT</p>
-                <form role="form" class="mb-lg">
+            <div id="register" ng-show="mode==1">
+                <div class="alert alert-danger" ng-show="registrationError" ng-click="registrationError=null">
+                    {{registrationError}}
+                </div>
+                <div class="alert alert-success" ng-show="registrationMode===2" ng-click="reset()">
+                    You are one step away from being registered.
+                    An activation email has been sent to the email adress you provided.
+                    Please check your email for activation.
+                </div>
+                <form role="form" class="mb" ng-hide="registrationMode===2">
                     <div class="form-group has-feedback">
-                        <input type="text" placeholder="fullname" class="form-control" ng-model="registerReq.Fullname" />
-                        <span class="fa fa-user form-control-feedback text-muted"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="email" placeholder="email" autocomplete="off" class="form-control" ng-model="registerReq.Email" />
+                        <input type="email" placeholder="email" autocomplete="off" class="form-control" ng-model="registerReq.Email" ng-blur="registrationError=null" ng-disabled="registrationMode===1" />
                         <span class="fa fa-envelope form-control-feedback text-muted"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="text" placeholder="username" autocomplete="off" class="form-control" ng-model="registerReq.Username" />
+                        <input type="text" placeholder="username" autocomplete="off" class="form-control" ng-model="registerReq.Username" ng-blur="registrationError=null" ng-disabled="registrationMode===1" />
                         <span class="fa fa-user form-control-feedback text-muted"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" placeholder="password" autocomplete="off" class="form-control" ng-model="registerReq.Password" />
+                        <input type="password" placeholder="password" autocomplete="off" class="form-control" ng-model="registerReq.Password" ng-blur="registrationError=null" ng-disabled="registrationMode===1" />
                         <span class="fa fa-lock form-control-feedback text-muted"></span>
                     </div>
                     <div class="clearfix">
-                        <div class="checkbox c-checkbox pull-left mt0">
+                        <div class="checkbox c-checkbox pull-left">
                             <label>
-                                <input type="checkbox" value="" />
-                                <span class="fa fa-check"></span>I agree with the <a href="#" ng-click="openTerms()">terms</a>
+                                <input type="checkbox" value="" ng-disabled="registrationMode===1" />
+                                <span class="fa fa-check"></span>I read, understand and accept <a href="#" ng-click="openTerms()">the terms</a>.
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-block btn-primary mt-lg" ng-click="register()">Create account</button>
+                    <button type="submit" class="btn btn-block btn-success mt" ng-click="register()" ng-disabled="registrationMode===1">
+                        <spinner style="position: absolute; right: 25px" ng-show="registrationMode===1" size="20"></spinner>
+                        <span ng-show="registrationMode===0">Register Account</span>
+                        <span ng-show="registrationMode===1"><i>Registering...</i></span>
+                    </button>
                 </form>
-                <div class="text-center mt">
+                <div class="text-center" ng-show="registrationMode===0">
+                    <div class="mb dropdown open" dropdown="dropdown">
+                        <button class="btn btn-primary dropdown-toggle btn-block" aria-expanded="true" aria-haspopup="true" dropdown-toggle="">
+                            Connect With
+                        </button>
+                        <ul class="dropdown-menu animated fadeIn" role="menu">
+                            <li>
+                                <a href="#" class="p-sm">
+                                    <div class="media">
+                                        <div class="pull-left" style="width: 20px">
+                                            <em class="fa fa-facebook"></em>
+                                        </div>
+                                        <div class="media-body clearfix">
+                                            <p class="m0">Facebook</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="p-sm">
+                                    <div class="media">
+                                        <div class="pull-left" style="width: 20px">
+                                            <em class="fa fa-twitter"></em>
+                                        </div>
+                                        <div class="media-body clearfix">
+                                            <p class="m0">Twitter</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="p-sm">
+                                    <div class="media">
+                                        <div class="pull-left" style="width: 20px">
+                                            <em class="fa fa-google"></em>
+                                        </div>
+                                        <div class="media-body clearfix">
+                                            <p class="m0">Google</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <a href="#" ng-click="toLogin(true)" class="text-muted">I already registered!</a>
                 </div>
             </div>
-            <div id="recover" ng-show="mode==2" class="ng-fadeOutZoom">
-                <p class="text-center pv text-bold">RESET PASSWORD</p>
+            <div id="recover" ng-show="mode==2">
                 <form role="form">
-                    <p class="text-center">We will send you instructions to reset your password.</p>
+                    <p class="text-center">We will send you a link to reset your password.</p>
                     <div class="form-group has-feedback">
                         <input type="email" placeholder="email" autocomplete="off" class="form-control" ng-model="recoverReq.Email" />
                         <span class="fa fa-envelope form-control-feedback text-muted"></span>
