@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TagKid.Framework.Validation.ValidationRules
 {
- public class CharsetRule : IValidationRule
+    public class CharsetRule : IValidationRule
     {
         private readonly string _charset;
         private readonly bool _caseSensitive;

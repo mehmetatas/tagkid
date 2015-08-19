@@ -81,6 +81,7 @@
     <Content Include="app\js\directives\spinner.js" />
     <Content Include="app\js\directives\toggleState.js" />
     <Content Include="app\js\services\client\clientData.js" />
+    <Content Include="app\js\services\client\validation.js" />
     <Content Include="app\js\services\server\auth.js" />
     <Content Include="app\js\services\client\dialogService.js" />
     <Content Include="app\js\services\client\support.js" />
