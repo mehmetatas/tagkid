@@ -15,6 +15,69 @@
             enabled: true,
             requireBase: false
         });
+        
+        function basepath(uri) {
+            return "/app/html/" + uri;
+        }
+
+        function ctrl(ctrlName) {
+            return "/app/js/controllers/" + ctrlName + ".js";
+        }
+
+        // Generates a resolve object by passing script names
+        // previously configured in constant.appDependencies
+        // Also accept functions that returns a promise
+        function requireDeps() {
+            var _args = arguments;
+
+            return {
+                deps: [
+                    "$ocLazyLoad", "$q", function ($ocLL, $q) {
+                        // check and returns required data
+                        // analyze module items with the form [name: '', files: []]
+                        // and also simple array of script files (for not angular js)
+                        function getRequired(name) {
+                            if (appDependencies.modules) {
+                                for (var m in appDependencies.modules) {
+                                    if (appDependencies.modules[m].name && appDependencies.modules[m].name === name) {
+                                        return appDependencies.modules[m];
+                                    }
+                                }
+                            }
+
+                            if (appDependencies.scripts[name]) {
+                                return appDependencies.scripts[name];
+                            }
+
+                            return name;
+                        }
+
+                        // creates promise to chain dynamically
+                        function addThen(arg) {
+                            // also support a function that returns a promise
+                            if (typeof arg == "function")
+                                return promise.then(arg);
+                            else
+                                return promise.then(function () {
+                                    // if is a module, pass the name. If not, pass the array
+                                    var whatToLoad = getRequired(arg);
+                                    // simple error check
+                                    if (!whatToLoad) return $.error("Route resolve: Bad resource name [" + arg + "]");
+                                    // finally, return a promise
+                                    return $ocLL.load(whatToLoad);
+                                });
+                        }
+
+                        // Creates a promise chain for each argument
+                        var promise = $q.when(1); // empty promise
+                        for (var i = 0, len = _args.length; i < len; i++) {
+                            promise = addThen(_args[i]);
+                        }
+                        return promise;
+                    }
+                ]
+            };
+        }
 
         // LAZY LOAD MODULES
         // ----------------------------------- 
@@ -37,7 +100,8 @@
                 .state("activate", {
                     url: "/activate/:id/:token",
                     templateUrl: basepath("activate.html"),
-                    controller: "activateCtrl"
+                    controller: "activateCtrl",
+                    resolve: requireDeps(ctrl("activateCtrl"))
                 })
                 // App
                 // ----------------------------------- 
@@ -55,72 +119,18 @@
                     params: { folder: "inbox" },
                     templateUrl: basepath("mailbox.html"),
                     controller: "mailboxCtrl",
-                    resolve: requireDeps("moment")
+                    resolve: requireDeps("moment", ctrl("mailboxCtrl"))
                 })
                 .state("app.mailbox.view", {
                     url: "/:id",
                     views: {
                         'mails@app.mailbox': {
                             controller: "mailViewCtrl",
+                            resolve: requireDeps(ctrl("mailViewCtrl")),
                             templateUrl: basepath("mailbox-view-mail.html")
                         }
                     }
                 });
-
-
-        // Change here your views base path
-        function basepath(uri) {
-            return "/app/html/" + uri;
-        }
-
-        // Generates a resolve object by passing script names
-        // previously configured in constant.appDependencies
-        // Also accept functions that returns a promise
-        function requireDeps() {
-            var _args = arguments;
-            return {
-                deps: [
-                    "$ocLazyLoad", "$q", function ($ocLL, $q) {
-                        // Creates a promise chain for each argument
-                        var promise = $q.when(1); // empty promise
-                        for (var i = 0, len = _args.length; i < len; i++) {
-                            promise = addThen(_args[i]);
-                        }
-                        return promise;
-
-                        // creates promise to chain dynamically
-                        function addThen(_arg) {
-                            // also support a function that returns a promise
-                            if (typeof _arg == "function")
-                                return promise.then(_arg);
-                            else
-                                return promise.then(function () {
-                                    // if is a module, pass the name. If not, pass the array
-                                    var whatToLoad = getRequired(_arg);
-                                    // simple error check
-                                    if (!whatToLoad) return $.error("Route resolve: Bad resource name [" + _arg + "]");
-                                    // finally, return a promise
-                                    return $ocLL.load(whatToLoad);
-                                });
-                        }
-
-                        // check and returns required data
-                        // analyze module items with the form [name: '', files: []]
-                        // and also simple array of script files (for not angular js)
-                        function getRequired(name) {
-                            if (appDependencies.modules)
-                                for (var m in appDependencies.modules)
-                                    if (appDependencies.modules[m].name && appDependencies.modules[m].name === name)
-                                        return appDependencies.modules[m];
-                            return appDependencies.scripts && appDependencies.scripts[name];
-                        }
-
-                    }
-                ]
-            };
-        }
-
-
     }
 ]).config([
     "$tooltipProvider", function ($tooltipProvider) {

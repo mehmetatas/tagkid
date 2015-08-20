@@ -8,10 +8,7 @@
     },
     // Angular based script (use the right module name)
     modules: [
-      {
-          name: "toaster", files: ["lib/angularjs-toaster/toaster.js",
-                                             "lib/angularjs-toaster/toaster.css"]
-      }
+      { name: "toaster", files: ["lib/angularjs-toaster/toaster.js", "lib/angularjs-toaster/toaster.css"] }
     ]
 })
   // Same colors as defined in the css

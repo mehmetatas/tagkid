@@ -80,13 +80,13 @@
     <Content Include="app\js\directives\sideBar.js" />
     <Content Include="app\js\directives\spinner.js" />
     <Content Include="app\js\directives\toggleState.js" />
-    <Content Include="app\js\services\client\clientData.js" />
-    <Content Include="app\js\services\client\validation.js" />
-    <Content Include="app\js\services\server\auth.js" />
-    <Content Include="app\js\services\client\dialogService.js" />
-    <Content Include="app\js\services\client\support.js" />
-    <Content Include="app\js\services\client\tagkid.js" />
-    <Content Include="app\js\services\client\toggleStateService.js" />
+    <Content Include="app\js\services\clientData.js" />
+    <Content Include="app\js\services\server.js" />
+    <Content Include="app\js\services\validation.js" />
+    <Content Include="app\js\services\dialogService.js" />
+    <Content Include="app\js\services\support.js" />
+    <Content Include="app\js\services\tagkid.js" />
+    <Content Include="app\js\services\toggleStateService.js" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="launch\launch.html" />
@@ -217,6 +217,9 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)TagKid.ConsoleApp\bin\Debug\TagKid.ConsoleApp.exe" -postbuild</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
