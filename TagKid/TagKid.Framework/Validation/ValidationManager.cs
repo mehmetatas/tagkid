@@ -21,6 +21,11 @@ namespace TagKid.Framework.Validation
             }
         }
 
+        public static IValidator GetValidator(Type requestType)
+        {
+            return Validators[requestType] as IValidator;
+        }
+
         public static void Validate(object value)
         {
             if (value == null)
@@ -28,7 +33,7 @@ namespace TagKid.Framework.Validation
                 throw Errors.F_NullRequest;
             }
 
-            var validator = Validators[value.GetType()] as IValidator;
+            var validator = GetValidator(value.GetType());
 
             if (validator != null)
             {

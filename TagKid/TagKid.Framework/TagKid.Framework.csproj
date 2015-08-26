@@ -88,7 +88,8 @@
     <Compile Include="Utils\ML.cs" />
     <Compile Include="Utils\QueryStringUtil.cs" />
     <Compile Include="Utils\ReflectionExtensions.cs" />
-    <Compile Include="Validation\CompositeValidator.cs" />
+    <Compile Include="Validation\IJavascriptValidation.cs" />
+    <Compile Include="Validation\IPropertyValidator.cs" />
     <Compile Include="Validation\IPropertyValidatorBuilder.cs" />
     <Compile Include="Validation\IValidationRule.cs" />
     <Compile Include="Validation\IValidationRuleBuilder.cs" />

@@ -3,32 +3,43 @@ using TagKid.Framework.Exceptions;
 
 namespace TagKid.Framework.Validation
 {
-    public class PropertyValidator : IValidator
+    class PropertyValidator : IPropertyValidator, IValidator
     {
-        private readonly PropertyInfo[] _propInfoChain;
-        private readonly IValidationRule _rule;
-        private readonly Error _error;
+        public PropertyInfo[] PropertyInfoChain { get;  }
+        public IValidationRule Rule { get; private set; }
+        public Error Error { get; private set; }
 
-        public PropertyValidator(PropertyInfo[] propInfoChain, IValidationRule rule, Error error)
+        public PropertyValidator(PropertyInfo[] propInfoChain)
         {
-            _propInfoChain = propInfoChain;
-            _rule = rule;
-            _error = error;
+            PropertyInfoChain = propInfoChain;
         }
 
-        public ValidationResult Validate(object instance)
+        public PropertyValidator SetRule(IValidationRule rule)
+        {
+            Rule = rule;
+            return this;
+        }
+
+        public PropertyValidator SetError(Error error)
+        {
+            Error = error;
+            return this;
+        }
+        
+
+        ValidationResult IValidator.Validate(object instance)
         {
             var value = instance;
-            foreach (var propInf in _propInfoChain)
+            foreach (var propInf in PropertyInfoChain)
             {
                 value = propInf.GetValue(value);
             }
 
-            if (_rule.Execute(value))
+            if (Rule.Execute(value))
             {
                 return ValidationResult.Successful;
             }
-            return ValidationResult.Failed(_error);
+            return ValidationResult.Failed(Error);
         }
     }
 }

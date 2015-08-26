@@ -1,4 +1,5 @@
-﻿namespace TagKid.Framework.Validation.ValidationRules
+﻿
+namespace TagKid.Framework.Validation.ValidationRules
 {
     public class StringNotEmptyRule : IValidationRule
     {
