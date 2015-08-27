@@ -3,7 +3,7 @@
         <div class="panel-heading pt-xl text-center text-bold">
             <!--<img src="/app/img/logo-single.png" alt="Image" class="center-block img-rounded"/>-->
             <p ng-show="!mode">LOGIN</p>
-            <p ng-show="mode==1">REGISTER NEW ACCOUNT</p>
+            <p ng-show="mode==1">REGISTER</p>
             <p ng-show="mode==2">RESET PASSWORD</p>
         </div>
         <div class="panel-body">
@@ -69,7 +69,7 @@
                     </ul>
                 </div>
                 <a ng-click="toRegistration()" class="btn btn-block btn-info">
-                    Register an Account
+                    Register
                 </a>
                 <div class="text-center mt">
                     <a href="#" ng-click="toRecover()" class="text-muted">I forgot my password!</a>
@@ -107,7 +107,7 @@
                     </div>
                     <button type="submit" class="btn btn-block btn-success mt" ng-click="register()" ng-disabled="registrationMode===1">
                         <spinner style="position: absolute; right: 25px" ng-show="registrationMode===1" size="20"></spinner>
-                        <span ng-show="registrationMode===0">Register Account</span>
+                        <span ng-show="registrationMode===0">Register</span>
                         <span ng-show="registrationMode===1"><i>Registering...</i></span>
                     </button>
                 </form>

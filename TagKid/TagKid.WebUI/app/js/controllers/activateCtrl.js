@@ -1,14 +1,16 @@
 ﻿app.controller("activateCtrl", [
-    "$scope", "$stateParams", "$state", "err", "auth", "dialogService", function ($scope, $stateParams, $state, err, auth, dialogService) {
+    "$scope", "$stateParams", "$state", "auth", function ($scope, $stateParams, $state, auth) {
+        $scope.activating = true;
+
         auth.activateRegistration({
             Id: $stateParams.id,
             Token: $stateParams.token
         }, function() {
-            dialogService.openAuthDialog(function() {
-                $state.go("app.mailbox");
-            });
+            $state.go("app.mailbox");
         }, function(err) {
-            alert(err.ResponseMessage);
+            $scope.error = err.ResponseMessage;
+        }, function() {
+            $scope.activating = false;
         });
     }
 ]);

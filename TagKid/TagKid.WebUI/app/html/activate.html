@@ -1,4 +1,13 @@
-﻿<div class="p center-block">
-    <spinner></spinner>
-    <div class="text-center">Activating account</div>
+﻿<div class="mt-xl p-xl">
+    <div ng-show="activating" class="center-block text-center">
+        <spinner></spinner>
+        <div class="text-center">Activating account...</div>
+    </div>
+
+    <div ng-show="error" class="text-center">
+        <div class="center-block alert alert-danger text-center wd-xl mb-xl">
+            <span ng-bind="error"></span>
+        </div>
+        <a class="mt" href="/">tagkid.com</a>
+    </div>
 </div>

@@ -1,5 +1,4 @@
-﻿using System;
-using TagKid.Core.Domain;
+﻿using TagKid.Core.Domain;
 using TagKid.Core.Models.Messages.Auth;
 using TagKid.Framework.WebApi;
 
