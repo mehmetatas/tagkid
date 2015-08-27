@@ -8,9 +8,10 @@ namespace TagKid.ConsoleApp
         {
             try
             {
-                if (args?.Length > 0 && args[0] == "-postbuild")
+                //args = new[] {@"E:\github\mehmetatas\tagkid\TagKid"};
+                if (args.Length == 1)
                 {
-                    PostBuild.Run();
+                    PostBuild.Run(args[0]);
                 }
             }
             catch (Exception ex)

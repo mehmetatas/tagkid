@@ -36,7 +36,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrapping\Bootstrappers\Bootstrapper.cs" />
+    <Compile Include="Bootstrapping\Bootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\DatabaseBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\ServiceBootstrapper.cs" />
     <Compile Include="Bootstrapping\Bootstrappers\DependencyBootstrapper.cs" />

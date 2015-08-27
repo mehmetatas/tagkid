@@ -50,16 +50,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TagKid.Core\TagKid.Core.csproj">
-      <Project>{98DE4062-5774-4E9F-AD95-D6C6CD77023F}</Project>
-      <Name>TagKid.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TagKid.Framework\TagKid.Framework.csproj">
-      <Project>{C2276BF3-7C94-4EFF-9DEB-B45DBF7845EC}</Project>
-      <Name>TagKid.Framework</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
