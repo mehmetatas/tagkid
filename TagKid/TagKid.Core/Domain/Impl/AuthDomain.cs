@@ -9,7 +9,7 @@ namespace TagKid.Core.Domain.Impl
     public class AuthDomain : IAuthDomain
     {
         // TODO: Move to config
-        private const int RegistrationConfCoedTimeoutDays = 30;
+        private const int RegistrationConfCodeTimeoutDays = 30;
 
         private readonly IUserRepository _userRepo;
         private readonly IConfirmationCodeRepository _confRepo;
@@ -51,7 +51,7 @@ namespace TagKid.Core.Domain.Impl
             var confCode = new ConfirmationCode
             {
                 Code = Guid.NewGuid(),
-                ExpireDate = DateTime.UtcNow.AddDays(RegistrationConfCoedTimeoutDays),
+                ExpireDate = DateTime.UtcNow.AddDays(RegistrationConfCodeTimeoutDays),
                 Reason = ConfirmationReason.Registration,
                 SendDate = DateTime.UtcNow,
                 User = user,
