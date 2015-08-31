@@ -1,5 +1,6 @@
 ﻿using System;
 using TagKid.Core.Exceptions;
+using TagKid.Core.Mail;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Providers;
 using TagKid.Core.Repository;
@@ -14,12 +15,14 @@ namespace TagKid.Core.Domain.Impl
         private readonly IUserRepository _userRepo;
         private readonly IConfirmationCodeRepository _confRepo;
         private readonly ICryptoProvider _crypto;
+        private readonly IMailProvider _mail;
 
-        public AuthDomain(IUserRepository userRepo, IConfirmationCodeRepository confRepo, ICryptoProvider crypto)
+        public AuthDomain(IUserRepository userRepo, IConfirmationCodeRepository confRepo, ICryptoProvider crypto, IMailProvider mail)
         {
             _userRepo = userRepo;
             _confRepo = confRepo;
             _crypto = crypto;
+            _mail = mail;
         }
 
         public void Register(string email, string username, string password)
@@ -57,6 +60,13 @@ namespace TagKid.Core.Domain.Impl
                 User = user,
                 Status = ConfirmationCodeStatus.AwaitingConfirmation
             };
+
+            _mail.SendMail(MailInfo.NewUserActivation(email, new NewUserActivationTemplateData
+            {
+                ConfirmationCode = confCode.Code,
+                ConfirmationCodeId = confCode.Id,
+                Username = username
+            }));
 
             _confRepo.Save(confCode);
         }
