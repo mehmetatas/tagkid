@@ -47,6 +47,7 @@
     <Compile Include="Domain\Impl\PostDomain.cs" />
     <Compile Include="Domain\IPostDomain.cs" />
     <Compile Include="Exceptions\Errors.Auth.cs" />
+    <Compile Include="Exceptions\Errors.cs" />
     <Compile Include="Models\Database\Comment.cs" />
     <Compile Include="Models\Database\ConfirmationCode.cs" />
     <Compile Include="Models\Database\Enums.cs" />

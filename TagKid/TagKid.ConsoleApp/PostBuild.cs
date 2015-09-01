@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -40,13 +41,50 @@ namespace TagKid.ConsoleApp
                 return;
             }
 
+            var errorsType = coreDll.GetType("TagKid.Core.Exceptions.Errors");
+            if (errorsType == null)
+            {
+                Console.WriteLine("Cannot resolve type: TagKid.Core.Exceptions.Errors");
+                return;
+            }
+
             bootstrapperType.GetMethod("StartApp").Invoke(null, null);
 
             var svcConfig = svcConfigType.GetProperty("Current").GetValue(null);
-            
+
             CreateServerJs(solutionDir, svcConfig);
+
+
+
+            CreateErrorsJs(solutionDir, errorsType);
         }
-        
+
+        private static void CreateErrorsJs(string solutionDir, Type errorsType)
+        {
+            Console.WriteLine("Creating errors.js");
+
+            var js = new StringBuilder()
+                .Append("app.service(\"errors\",[\"translate\",function(t){");
+
+
+            var errors = errorsType.GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Select(f => (dynamic)f.GetValue(null));
+
+            foreach (var error in errors)
+            {
+                js.Append($"this.{error.MessageCode}")
+                    .Append("={code:")
+                    .Append(error.Code)
+                    .Append(",getMessage:function(){return ")
+                    .Append($"t.get(\"{error.MessageCode}\",arguments);")
+                    .Append("}};");
+            }
+
+            js.Append("}]);");
+
+            File.WriteAllText(solutionDir + @"\TagKid.WebUI\app\js\services\errors.js", js.ToString());
+        }
+
         private static void CreateServerJs(string solutionDir, dynamic serviceConfig)
         {
             Console.WriteLine("Creating server.js");

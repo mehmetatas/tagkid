@@ -67,6 +67,7 @@
     <Content Include="app\js\app.config.js" />
     <Content Include="app\js\app.constants.js" />
     <Content Include="app\js\app.ctrl.js" />
+    <Content Include="app\js\services\errors.js" />
     <Content Include="app\js\app.init.js" />
     <Content Include="app\js\controllers\activateCtrl.js" />
     <Content Include="app\js\controllers\dialogs\authDialogCtrl.js" />
@@ -82,6 +83,7 @@
     <Content Include="app\js\directives\toggleState.js" />
     <Content Include="app\js\services\clientData.js" />
     <Content Include="app\js\services\server.js" />
+    <Content Include="app\js\services\translate.js" />
     <Content Include="app\js\services\validation.js" />
     <Content Include="app\js\services\dialogService.js" />
     <Content Include="app\js\services\support.js" />

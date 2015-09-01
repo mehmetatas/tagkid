@@ -16,16 +16,11 @@ namespace TagKid.Framework.Exceptions
             MessageCode = messageCode;
         }
 
-        public int Code { get; private set; }
-        public string MessageCode { get; private set; }
+        public int Code { get; }
+        public string MessageCode { get; }
         
-        public override string Message
-        {
-            get
-            {
-                return _message ?? (_message = String.Format(ML.GetValue(MessageCode), _messageArgs));
-            }
-        }
+        public override string Message => 
+            _message ?? (_message = String.Format(ML.GetValue(MessageCode), _messageArgs));
 
         public Error WithArgs(params object[] args)
         {
