@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logging\Impl\" />
-    <Folder Include="Mail\Impl\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DummyOrm\DummyOrm.csproj">

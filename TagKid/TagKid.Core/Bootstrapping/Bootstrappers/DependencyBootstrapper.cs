@@ -1,5 +1,6 @@
 ﻿using TagKid.Core.Domain;
 using TagKid.Core.Domain.Impl;
+using TagKid.Core.Mail;
 using TagKid.Core.Providers;
 using TagKid.Core.Providers.Impl;
 using TagKid.Core.Repository;
@@ -21,28 +22,38 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
     {
         public void Bootstrap(IDependencyContainer container)
         {
+            // Framework "er"s
             container.RegisterSingleton<IJsonSerializer, NewtonsoftJsonSerializer>();
             container.RegisterSingleton<IRouteResolver, RouteResolver>();
             container.RegisterSingleton<IParameterResolver, ParameterResolver>();
             container.RegisterSingleton<IActionInvoker, ActionInvoker>();
             container.RegisterSingleton<IHttpHandler, HttpHandler>();
-            container.RegisterSingleton<IAuthProvider, AuthProvider>();
-            container.RegisterSingleton<ICryptoProvider, CryptoProvider>();
 
+            // Database
             container.RegisterTransient<IUnitOfWork, UnitOfWork>();
             container.RegisterSingleton<IRepository, Framework.UnitOfWork.Impl.Repository>();
             container.RegisterSingleton<IAdoRepository, AdoRepository>();
+
+            // Interceptors
             container.RegisterSingleton<IActionInterceptorBuilder, TagKidActionInterceptorBuilder>();
 
-            container.RegisterSingleton<IPostService, PostService>();
-            container.RegisterSingleton<IPostDomain, PostDomain>();
+            // Providers
+            container.RegisterSingleton<IAuthProvider, AuthProvider>();
+            container.RegisterSingleton<ICryptoProvider, CryptoProvider>();
+            container.RegisterSingleton<IMailProvider, MailProvider>();
 
-            container.RegisterSingleton<IAuthService, AuthService>();
-            container.RegisterSingleton<IAuthDomain, AuthDomain>();
-
+            // Repositories
             container.RegisterSingleton<IPostRepository, PostRepository>();
             container.RegisterSingleton<IUserRepository, UserRepository>();
             container.RegisterSingleton<IConfirmationCodeRepository, ConfirmationCodeRepository>();
+
+            // Auth
+            container.RegisterSingleton<IAuthService, AuthService>();
+            container.RegisterSingleton<IAuthDomain, AuthDomain>();
+
+            // Post
+            container.RegisterSingleton<IPostService, PostService>();
+            container.RegisterSingleton<IPostDomain, PostDomain>();
         }
     }
 }

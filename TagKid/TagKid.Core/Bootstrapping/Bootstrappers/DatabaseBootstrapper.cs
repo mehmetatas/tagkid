@@ -15,18 +15,21 @@ namespace TagKid.Core.Bootstrapping.Bootstrappers
 
         private static IDbFactory InitTableMappings()
         {
-            var builder = Db.Setup(new TagKidDbProvider());
+            return Db.Setup(new TagKidDbProvider())
 
-            builder.Table<Post>()
+                // Tables
+                .Table<Post>()
                 .Table<User>()
                 .Table<Tag>()
                 .Table<PostTag>()
                 .Table<ConfirmationCode>()
                 .Table<Like>()
-                .Table<FollowUser>();
-
-            return builder
+                .Table<FollowUser>()
+                
+                // Relations
                 .ManyToMany<Post, PostTag>(p => p.Tags)
+                
+                // Build
                 .BuildFactory();
         }
     }
