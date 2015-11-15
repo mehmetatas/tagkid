@@ -80,12 +80,14 @@
     <Compile Include="DynamicProxy\IProxyInterceptor.cs" />
     <Compile Include="Exceptions\Error.cs" />
     <Compile Include="Exceptions\Errors.cs" />
+    <Compile Include="Hosting\Http\SimpleHttpListener.cs" />
     <Compile Include="Hosting\IHttpResponse.cs" />
     <Compile Include="Hosting\Impl\HttpRequestHandler.cs" />
     <Compile Include="Hosting\IHttpRequest.cs" />
     <Compile Include="Hosting\IHttpRequestHandler.cs" />
     <Compile Include="Hosting\Owin\OwinHttpRequest.cs" />
     <Compile Include="Hosting\Owin\OwinHttpResponse.cs" />
+    <Compile Include="Hosting\Owin\OwinSpaMiddleware.cs" />
     <Compile Include="Hosting\RouteContext.cs" />
     <Compile Include="Hosting\WebApi\WebApiHttpRequest.cs" />
     <Compile Include="Hosting\WebApi\WebApiHttpResponse.cs" />
@@ -111,7 +113,11 @@
     <Compile Include="Hosting\Owin\IOwinHandler.cs" />
     <Compile Include="Hosting\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork\IAdoRepository.cs" />
+    <Compile Include="UnitOfWork\Impl\AdoRepository.cs" />
+    <Compile Include="UnitOfWork\Impl\Repository.cs" />
     <Compile Include="UnitOfWork\Impl\UnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Utils\Cultures.cs" />
     <Compile Include="Utils\ML.cs" />

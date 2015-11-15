@@ -10,19 +10,14 @@ namespace TagKid.Framework.IoC.Castle
 
         public IDependencyContainer Register(Type serviceType, Type classType, DependencyScope scope = DependencyScope.Transient, object singleton = null)
         {
-            ComponentRegistration<object> registration = null;
+            ComponentRegistration<object> registration;
 
             switch (scope)
             {
                 case DependencyScope.Singleton:
-                    if (singleton != null)
-                    {
-                        registration = Component.For(serviceType).Instance(singleton).LifestyleSingleton();
-                    }
-                    else
-                    {
-                        registration = Component.For(serviceType).ImplementedBy(classType).LifestyleSingleton();
-                    }
+                    registration = singleton == null
+                        ? Component.For(serviceType).ImplementedBy(classType).LifestyleSingleton()
+                        : Component.For(serviceType).Instance(singleton).LifestyleSingleton();
                     break;
                 case DependencyScope.PerThread:
                     registration = Component.For(serviceType).ImplementedBy(classType).LifestylePerThread();
@@ -33,6 +28,8 @@ namespace TagKid.Framework.IoC.Castle
                 case DependencyScope.Transient:
                     registration = Component.For(serviceType).ImplementedBy(classType).LifestyleTransient();
                     break;
+                default:
+                    throw new NotSupportedException("Unsupported dependency scope: " + scope);
             }
 
             _kernel.Register(registration.Named(Guid.NewGuid() + " [" + serviceType + "]"));

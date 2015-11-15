@@ -47,7 +47,7 @@ namespace TagKid.Framework.Hosting.Impl
             var json = result == null
                 ? string.Empty
                 : _json.Serialize(result);
-            
+
             httpResponse.SetContent(json);
         }
     }
