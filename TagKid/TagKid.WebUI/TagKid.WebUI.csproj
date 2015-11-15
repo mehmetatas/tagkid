@@ -84,7 +84,6 @@
     <Content Include="app\js\services\clientData.js" />
     <Content Include="app\js\services\server.js" />
     <Content Include="app\js\services\translate.js" />
-    <Content Include="app\js\services\validation.js" />
     <Content Include="app\js\services\dialogService.js" />
     <Content Include="app\js\services\support.js" />
     <Content Include="app\js\services\tagkid.js" />

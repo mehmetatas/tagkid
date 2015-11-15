@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TagKid.Framework.WebApi.Configuration
+namespace TagKid.Framework.Owin.Configuration
 {
     public class ServiceMapping
     {

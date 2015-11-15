@@ -1,12 +1,11 @@
 using System;
-using System.Net.Http;
-using TagKid.Framework.WebApi.Configuration;
+using TagKid.Framework.Owin.Configuration;
 
-namespace TagKid.Framework.WebApi
+namespace TagKid.Framework.Hosting
 {
     public class RouteContext
     {
-        public HttpRequestMessage Request { get; set; }
+        public IHttpRequest HttpRequest { get; set; }
         public ServiceMapping Service { get; set; }
         public MethodMapping Method { get; set; }
         public string DefaultParameter { get; set; }

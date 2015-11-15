@@ -38,9 +38,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\monospad\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\..\monospad\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -72,6 +80,15 @@
     <Compile Include="DynamicProxy\IProxyInterceptor.cs" />
     <Compile Include="Exceptions\Error.cs" />
     <Compile Include="Exceptions\Errors.cs" />
+    <Compile Include="Hosting\IHttpResponse.cs" />
+    <Compile Include="Hosting\Impl\HttpRequestHandler.cs" />
+    <Compile Include="Hosting\IHttpRequest.cs" />
+    <Compile Include="Hosting\IHttpRequestHandler.cs" />
+    <Compile Include="Hosting\Owin\OwinHttpRequest.cs" />
+    <Compile Include="Hosting\Owin\OwinHttpResponse.cs" />
+    <Compile Include="Hosting\RouteContext.cs" />
+    <Compile Include="Hosting\WebApi\WebApiHttpRequest.cs" />
+    <Compile Include="Hosting\WebApi\WebApiHttpResponse.cs" />
     <Compile Include="IoC\Castle\CastleDependencyContainer.cs" />
     <Compile Include="IoC\DependencyContainer.cs" />
     <Compile Include="IoC\DependencyScope.cs" />
@@ -81,6 +98,18 @@
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Hosting\Configuration\ActionConfigurator.cs" />
+    <Compile Include="Hosting\Configuration\ControllerConfigurator.cs" />
+    <Compile Include="Hosting\Configuration\HttpMethod.cs" />
+    <Compile Include="Hosting\Configuration\MethodMapping.cs" />
+    <Compile Include="Hosting\Configuration\ServiceConfig.cs" />
+    <Compile Include="Hosting\Configuration\ServiceMapping.cs" />
+    <Compile Include="Hosting\Owin\GenericOwinHandler.cs" />
+    <Compile Include="Hosting\Impl\ActionInvoker.cs" />
+    <Compile Include="Hosting\Impl\ParameterResolver.cs" />
+    <Compile Include="Hosting\Impl\RouteResolver.cs" />
+    <Compile Include="Hosting\Owin\IOwinHandler.cs" />
+    <Compile Include="Hosting\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork\Impl\UnitOfWork.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
@@ -88,7 +117,6 @@
     <Compile Include="Utils\ML.cs" />
     <Compile Include="Utils\QueryStringUtil.cs" />
     <Compile Include="Utils\ReflectionExtensions.cs" />
-    <Compile Include="Validation\IJavascriptValidation.cs" />
     <Compile Include="Validation\IPropertyValidator.cs" />
     <Compile Include="Validation\IPropertyValidatorBuilder.cs" />
     <Compile Include="Validation\IValidationRule.cs" />
@@ -123,38 +151,25 @@
     <Compile Include="Validation\ValidationUtils.cs" />
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="Validation\ValidatorBuilderExtensions.cs" />
-    <Compile Include="WebApi\Configuration\ActionConfigurator.cs" />
-    <Compile Include="WebApi\Configuration\ControllerConfigurator.cs" />
-    <Compile Include="WebApi\Configuration\MethodMapping.cs" />
-    <Compile Include="WebApi\Configuration\ServiceConfig.cs" />
-    <Compile Include="WebApi\Configuration\ServiceMapping.cs" />
-    <Compile Include="WebApi\Configuration\HttpMethod.cs" />
-    <Compile Include="WebApi\IActionInterceptor.cs" />
-    <Compile Include="WebApi\IActionInterceptorBuilder.cs" />
-    <Compile Include="WebApi\IActionInvoker.cs" />
-    <Compile Include="WebApi\IHttpHandler.cs" />
-    <Compile Include="WebApi\Impl\ActionInvoker.cs" />
-    <Compile Include="WebApi\Impl\HttpHandler.cs" />
-    <Compile Include="WebApi\GenericWebApiHandler.cs" />
-    <Compile Include="WebApi\Impl\ParameterResolver.cs" />
-    <Compile Include="WebApi\IParameterResolver.cs" />
-    <Compile Include="WebApi\IRouteResolver.cs" />
-    <Compile Include="WebApi\Response.cs" />
-    <Compile Include="WebApi\RouteContext.cs" />
-    <Compile Include="WebApi\Impl\RouteResolver.cs" />
-    <Compile Include="WebApi\WebApi.cs" />
+    <Compile Include="Hosting\IActionInterceptor.cs" />
+    <Compile Include="Hosting\IActionInterceptorBuilder.cs" />
+    <Compile Include="Hosting\IActionInvoker.cs" />
+    <Compile Include="Hosting\WebApi\GenericWebApiHandler.cs" />
+    <Compile Include="Hosting\IParameterResolver.cs" />
+    <Compile Include="Hosting\IRouteResolver.cs" />
+    <Compile Include="Hosting\WebApi\WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logging\Impl\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DummyOrm\DummyOrm.csproj">
-      <Project>{8E5AF9AB-35A2-4500-B560-D1449B0B9D24}</Project>
-      <Name>DummyOrm</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\..\DummyOrm\DummyOrm\DummyOrm.csproj">
+      <Project>{8e5af9ab-35a2-4500-b560-d1449b0b9d24}</Project>
+      <Name>DummyOrm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

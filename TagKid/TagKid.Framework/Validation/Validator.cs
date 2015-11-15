@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace TagKid.Framework.Validation
 {
-    public abstract class Validator<T> : IValidator, IJavascriptValidation
+    public abstract class Validator<T> : IValidator
     {
         private readonly List<IValidator> _validators;
         private readonly IValidationRuleBuilder<T> _ruleBuilder;
@@ -34,12 +33,7 @@ namespace TagKid.Framework.Validation
             }
             return ValidationResult.Successful;
         }
-
-        public string BuildValidationScript(IValidationScriptBuilder scriptBuilder)
-        {
-            return scriptBuilder.Build(_validators.OfType<IPropertyValidator>());
-        }
-
+        
         protected abstract void BuildRules();
     }
 }

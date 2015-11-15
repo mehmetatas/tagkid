@@ -5,8 +5,8 @@ using System.Linq;
 using TagKid.Core.Context;
 using TagKid.Core.Exceptions;
 using TagKid.Core.Models.Database;
+using TagKid.Framework.Hosting;
 using TagKid.Framework.UnitOfWork;
-using TagKid.Framework.WebApi;
 
 namespace TagKid.Core.Providers.Impl
 {

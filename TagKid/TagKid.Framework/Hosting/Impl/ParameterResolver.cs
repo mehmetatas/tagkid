@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using TagKid.Framework.Json;
 using TagKid.Framework.Utils;
 
-namespace TagKid.Framework.WebApi.Impl
+namespace TagKid.Framework.Hosting.Impl
 {
     public class ParameterResolver : IParameterResolver
     {
@@ -49,11 +47,9 @@ namespace TagKid.Framework.WebApi.Impl
 
         private object[] ResolveComplexTypedParameter(RouteContext routeContext, Type complexParamType)
         {
-            var requestBody = routeContext.Request.Content.ReadAsStringAsync().Result;
-
-            var paramValue = String.IsNullOrWhiteSpace(requestBody)
+            var paramValue = string.IsNullOrWhiteSpace(routeContext.HttpRequest.Content)
                 ? ResolveComplexTypedParameterFromQueryString(routeContext, complexParamType)
-                : ResolveComplexTypedParameterFromRequestBody(requestBody, complexParamType);
+                : ResolveComplexTypedParameterFromRequestBody(routeContext.HttpRequest.Content, complexParamType);
 
             return new[] { paramValue };
         }
@@ -61,21 +57,17 @@ namespace TagKid.Framework.WebApi.Impl
         private object ResolveComplexTypedParameterFromQueryString(RouteContext routeContext, Type complexParamType)
         {
             var value = Activator.CreateInstance(complexParamType);
-            var queryStringParams = routeContext.Request.GetQueryNameValuePairs()
-                .Select(p => new { p.Key, p.Value })
-                .ToList();
 
             foreach (var propInf in complexParamType.GetProperties())
             {
-                var queryStringParam = queryStringParams
-                    .FirstOrDefault(qp => String.Equals(qp.Key, propInf.Name, StringComparison.InvariantCultureIgnoreCase));
+                var queryParamValue = routeContext.HttpRequest.GetParam(propInf.Name);
 
-                if (queryStringParam == null)
+                if (string.IsNullOrWhiteSpace(queryParamValue))
                 {
                     continue;
                 }
 
-                propInf.SetValue(value, SafeParse(queryStringParam.Value, propInf.PropertyType));
+                propInf.SetValue(value, SafeParse(queryParamValue, propInf.PropertyType));
             }
 
             return value;
@@ -97,22 +89,17 @@ namespace TagKid.Framework.WebApi.Impl
 
             foreach (var parameter in parameters)
             {
-                var found = false;
-                foreach (var pair in routeContext.Request.GetQueryNameValuePairs())
-                {
-                    if (pair.Key == parameter.Name)
-                    {
-                        parameterValues[parameter.Position] = SafeParse(pair.Value, parameter.ParameterType);
-                        found = true;
-                        break;
-                    }
-                }
+                var queryParamValue = routeContext.HttpRequest.GetParam(parameter.Name);
 
-                if (!found)
+                if (string.IsNullOrWhiteSpace(queryParamValue))
                 {
                     parameterValues[parameter.Position] = parameter.ParameterType.IsValueType
                         ? Activator.CreateInstance(parameter.ParameterType)
                         : null;
+                }
+                else
+                {
+                    parameterValues[parameter.Position] = SafeParse(queryParamValue, parameter.ParameterType);
                 }
             }
 

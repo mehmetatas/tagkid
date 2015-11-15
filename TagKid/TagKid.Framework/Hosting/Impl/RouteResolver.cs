@@ -1,17 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Linq;
 using TagKid.Framework.Exceptions;
-using TagKid.Framework.WebApi.Configuration;
-using HttpMethod = TagKid.Framework.WebApi.Configuration.HttpMethod;
+using TagKid.Framework.Owin.Configuration;
 
-namespace TagKid.Framework.WebApi.Impl
+namespace TagKid.Framework.Hosting.Impl
 {
     public class RouteResolver : IRouteResolver
     {
-        public RouteContext Resolve(HttpRequestMessage request)
+        public RouteContext Resolve(IHttpRequest httpRequest)
         {
-            var segments = request.RequestUri.Segments;
+            var segments = httpRequest.Uri.Segments;
             
             var indexOfApi = -1;
             for (var i = 0; i < segments.Length; i++)
@@ -44,25 +41,6 @@ namespace TagKid.Framework.WebApi.Impl
             {
                 defaultParam = segments[indexOfApi + 3].Trim('/');   
             }
-
-            HttpMethod httpMethod;
-            switch (request.Method.Method)
-            {
-                case "POST":
-                    httpMethod = HttpMethod.Post;
-                    break;
-                case "GET":
-                    httpMethod = HttpMethod.Get;
-                    break;
-                case "PUT":
-                    httpMethod = HttpMethod.Put;
-                    break;
-                case "DELETE":
-                    httpMethod = HttpMethod.Delete;
-                    break;
-                default:
-                    throw new NotSupportedException("Unsupported http method: " + request.Method.Method);
-            }
             
             var service = ServiceConfig.Current.ServiceMappings.SingleOrDefault(s => s.ServiceRoute == serviceRoute);
 
@@ -71,7 +49,7 @@ namespace TagKid.Framework.WebApi.Impl
                 throw Errors.F_RouteResolvingError;
             }
 
-            var method = service.MethodMappings.SingleOrDefault(m => m.MethodRoute == methodRoute && m.HttpMethod == httpMethod);
+            var method = service.MethodMappings.SingleOrDefault(m => m.MethodRoute == methodRoute && m.HttpMethod == httpRequest.Method);
 
             if (method == null)
             {
@@ -82,7 +60,7 @@ namespace TagKid.Framework.WebApi.Impl
             {
                 Service = service,
                 Method = method,
-                Request = request,
+                HttpRequest = httpRequest,
                 DefaultParameter = defaultParam
             };
         }

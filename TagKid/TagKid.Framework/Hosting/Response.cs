@@ -1,6 +1,6 @@
 ﻿using TagKid.Framework.Exceptions;
 
-namespace TagKid.Framework.WebApi
+namespace TagKid.Framework.Hosting
 {
     public class Response
     {

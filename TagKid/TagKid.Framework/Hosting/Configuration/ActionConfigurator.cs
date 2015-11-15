@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 
-namespace TagKid.Framework.WebApi.Configuration
+namespace TagKid.Framework.Owin.Configuration
 {
     public class ActionConfigurator<TService>
     {
@@ -46,7 +44,7 @@ namespace TagKid.Framework.WebApi.Configuration
                 throw new Exception("actionExpression must be MethodCallExpression!");
             }
 
-            if (String.IsNullOrWhiteSpace(actionPath))
+            if (string.IsNullOrWhiteSpace(actionPath))
             {
                 actionPath = methodCallExpression.Method.Name;
             }

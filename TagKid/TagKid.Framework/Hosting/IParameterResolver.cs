@@ -1,5 +1,5 @@
 ﻿
-namespace TagKid.Framework.WebApi
+namespace TagKid.Framework.Hosting
 {
     public interface IParameterResolver
     {

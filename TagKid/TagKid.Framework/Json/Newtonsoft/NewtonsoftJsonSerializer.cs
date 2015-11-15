@@ -55,7 +55,14 @@ namespace TagKid.Framework.Json.Newtonsoft
                     .Cast<MemberInfo>()
                     .ToList();
 
-                _cache.Add(objectType, members);
+                lock (_cache)
+                {
+                    if (_cache.ContainsKey(objectType))
+                    {
+                        return _cache[objectType];
+                    }
+                    _cache.Add(objectType, members);
+                }
 
                 return members;
             }

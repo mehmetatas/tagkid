@@ -3,7 +3,7 @@ using System.Reflection;
 using TagKid.Framework.Exceptions;
 using TagKid.Framework.IoC;
 
-namespace TagKid.Framework.WebApi.Impl
+namespace TagKid.Framework.Hosting.Impl
 {
     public class ActionInvoker : IActionInvoker
     {

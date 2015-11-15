@@ -1,7 +1,9 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 
-namespace TagKid.Framework.WebApi
+namespace TagKid.Framework.Hosting.WebApi
 {
+    [Obsolete("Use TagKid.Framework.Hosting.Owin")]
     public static class WebApi
     {
         public static void Init()

@@ -1,4 +1,4 @@
-﻿app.service("tagkid", ["$http", "err", "clientData", "dialogService", function ($http, err, clientData, dialogService) {
+﻿app.service("tagkid", ["$http", "errors", "clientData", "dialogService", function ($http, err, clientData, dialogService) {
         var send = function (method, controller, action, data, success, error, complete) {
             var token = clientData.token();
 
@@ -22,7 +22,7 @@
                         success(resp);
                     } else if (resp.ResponseCode !== 0) {
                         // No login / Token expired
-                        if (resp.ResponseCode === err.Auth_LoginRequired || resp.ResponseCode === err.Auth_LoginTokenExpired) {
+                        if (resp.ResponseCode === err.Auth_LoginRequired.code || resp.ResponseCode === err.Auth_LoginTokenExpired.code) {
                             dialogService.openAuthDialog(function () {
                                 send(method, controller, action, data, success, error, complete);
                             });
@@ -40,7 +40,7 @@
                 .error(function (resp, status, headers, config) {
                     if (error) {
                         error({
-                            ResponseCode: err.UnknownError,
+                            ResponseCode: err.UnknownError.code,
                             ResponseMessage: "Ooops! Something terribly went wrong :("
                         });
                     }

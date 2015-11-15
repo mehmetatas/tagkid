@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TagKid.Framework.WebApi.Configuration
+namespace TagKid.Framework.Owin.Configuration
 {
     public class ControllerConfigurator
     {
