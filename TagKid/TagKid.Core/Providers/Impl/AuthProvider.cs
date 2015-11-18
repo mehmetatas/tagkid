@@ -1,7 +1,5 @@
 ﻿using DummyOrm.Db;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using TagKid.Core.Context;
 using TagKid.Core.Exceptions;
 using TagKid.Core.Models.Database;
@@ -21,14 +19,10 @@ namespace TagKid.Core.Providers.Impl
 
         public void AuthRoute(RouteContext ctx)
         {
-            var tokenGuid = Guid.Empty;
+            Guid tokenGuid;
 
-            IEnumerable<string> headerValues;
-            if (ctx.Request.Headers.TryGetValues("tagkid-auth-token", out headerValues))
-            {
-                var authToken = headerValues.FirstOrDefault();
-                Guid.TryParse(authToken, out tokenGuid);
-            }
+            var authToken = ctx.HttpRequest.GetHeader("tagkid-auth-token");
+            Guid.TryParse(authToken, out tokenGuid);
 
             if (tokenGuid == Guid.Empty)
             {

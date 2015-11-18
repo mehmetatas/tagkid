@@ -2,8 +2,8 @@
 using TagKid.Core.Models.Messages.Post;
 using TagKid.Core.Service;
 using TagKid.Framework.IoC;
+using TagKid.Framework.Owin.Configuration;
 using TagKid.Framework.Validation;
-using TagKid.Framework.WebApi.Configuration;
 
 namespace TagKid.Core.Bootstrapping.Bootstrappers
 {

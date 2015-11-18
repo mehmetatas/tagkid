@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using TagKid.Framework.Hosting;
 
 namespace TagKid.Framework.Owin.Configuration
 {
@@ -27,6 +28,11 @@ namespace TagKid.Framework.Owin.Configuration
         public ActionConfigurator<TService> ActionFor<TResponse>(Expression<Func<TService, TResponse>> actionExpression, string actionPath, HttpMethod httpMethod)
         {
             return ActionFor((LambdaExpression)actionExpression, actionPath, httpMethod);
+        }
+
+        public ActionConfigurator<TService> ActionFor2<TReq>(Func<TReq, Response> actionExpression, string actionPath, HttpMethod httpMethod)
+        {
+            return this;
         }
 
         public ActionConfigurator<TService> NoAuth()

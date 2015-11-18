@@ -1,7 +1,7 @@
 ﻿using TagKid.Core.Domain;
 using TagKid.Core.Models.Database;
 using TagKid.Core.Models.Messages.Post;
-using TagKid.Framework.WebApi;
+using TagKid.Framework.Hosting;
 
 namespace TagKid.Core.Service.Impl
 {

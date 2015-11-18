@@ -1,7 +1,6 @@
-using TagKid.Core.Models.Messages;
 using TagKid.Core.Providers;
 using TagKid.Framework.Exceptions;
-using TagKid.Framework.WebApi;
+using TagKid.Framework.Hosting;
 
 namespace TagKid.Core.Service.Interceptors
 {

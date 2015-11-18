@@ -1,9 +1,7 @@
-﻿using System;
+﻿using TagKid.Framework.Hosting;
 using TagKid.Framework.IoC;
+using TagKid.Framework.Owin.Configuration;
 using TagKid.Framework.UnitOfWork;
-using TagKid.Framework.Validation;
-using TagKid.Framework.WebApi;
-using TagKid.Framework.WebApi.Configuration;
 
 namespace TagKid.Core.Service.Interceptors
 {

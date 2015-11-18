@@ -1,7 +1,7 @@
 ﻿using TagKid.Core.Bootstrapping.Bootstrappers;
+using TagKid.Framework.Hosting.WebApi;
 using TagKid.Framework.IoC;
 using TagKid.Framework.IoC.Castle;
-using TagKid.Framework.WebApi;
 
 namespace TagKid.Core.Bootstrapping
 {

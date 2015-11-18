@@ -1,5 +1,5 @@
-﻿using TagKid.Framework.Validation;
-using TagKid.Framework.WebApi;
+﻿using TagKid.Framework.Hosting;
+using TagKid.Framework.Validation;
 
 namespace TagKid.Core.Service.Interceptors
 {
